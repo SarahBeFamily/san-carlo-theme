@@ -1,0 +1,363 @@
+.row-casting {
+	padding-top: 3em;
+	background-color: var(--light-gray);
+	flex-wrap: wrap;
+
+	.casting {
+		padding-bottom: 1em;
+
+		&.list {
+			display: flex;
+			flex-wrap: wrap;
+			padding: 0 5% 5% 9.5%;
+
+			@include respond-to($phone-plus) {
+				padding: 0 5% 5% 3.5%;
+			}
+
+			@include respond-to($retina) {
+				padding: 0 5% 5% 11.5%;
+			}
+
+			.cast {
+				display: flex;
+				height: 530px;
+				flex-basis: calc(90% / 2);
+				margin-bottom: 35px;
+
+				@include respond-to($phone-plus) {
+					flex-basis: 100%;
+				}
+
+				@include respond-to($mid-desktop) {
+					flex-basis: calc(90% / 3);
+				}
+
+				@include respond-to($min-wide) {
+					flex-basis: calc(90% / 4);
+				}
+
+				&:nth-child(3) {
+					@include respond-to($mid-desktop) {
+						display: none;
+					}	
+				}
+				
+				&:not(:last-of-type) {
+					margin-right: 2%;
+				}
+
+				.inner {
+					.bio {
+						overflow: auto;
+						max-height: 424px;
+
+						&.hidden {
+							height: 0 !important;
+						}
+
+						p {
+							font-size: max(15px,min(0.9vw,22px)) !important;
+						}
+					}
+				}
+			}
+		}
+
+		&.slide {
+			.cast {
+				height: 530px;
+				display: flex !important;
+
+				@include respond-to($phone-plus) {
+					height: 380px;
+				}
+			}
+
+			.showBio, #showBio, .bio {
+				display: none !important;
+			}
+
+			.ruolo {
+				margin-top: 10px;
+			}
+		}
+
+		.slick-list {
+			@include respond-to($max-tablet) {
+				padding-left: 3% !important;
+			}
+
+			@include respond-to($min-tablet) {
+				padding-left: 10% !important;
+			}
+
+			.slick-slide {
+				@include respond-to($max-tablet) {
+					margin-right: 1% !important;
+				}
+
+				@include respond-to($min-tablet) {
+					margin-right: 3% !important;
+				}
+	
+			}
+		}
+
+		.slick-dots {
+			justify-content: center !important;
+
+			li {
+				height: 5px;
+				display: block;
+				background-color: #D8DBE2;
+				margin-right: 10px;
+				width: 25px;
+				cursor: pointer;
+
+				span {
+					font-size: 0;
+				}
+
+				&.slick-active {
+					background-color: col-alpha('primary', 0.6);
+				}
+			}
+		}
+
+		&.toggle {
+			background-color: var(--light-gray);
+
+			@include respond-to($phone) {
+				padding-left: 20px;
+				padding-right: 20px;
+			}
+		
+			@include respond-to($mid-tablet) {
+				padding-left: calc(5.5vw - 15px);
+				padding-right: calc(5.5vw - 15px);
+			}
+		
+			@include respond-to($mini-desktop) {
+				padding-left: calc(5vw - 15px);
+				padding-right: calc(5vw - 15px);
+			}
+		
+			@include respond-to($small-desktop) {
+				padding-left: calc(5vw - 15px);
+				padding-right: calc(5vw - 15px);
+			}
+		
+			@include respond-to($desktop) {
+				padding-left: calc(8vw - 15px);
+				padding-right: calc(8vw - 15px);
+			}
+		
+			@include respond-to($retina) {
+				padding-left: calc(12vw - 15px);
+				padding-right: calc(12vw - 15px);
+			}
+		
+			@include respond-to($retina2) {
+				padding-left: calc(15vw - 15px);
+				padding-right: calc(15vw - 15px);
+			}
+
+			.el {
+				&.closed {
+					.inner {
+						&::before {
+							content: '+';
+						}
+					}
+
+					.bio {
+						height: 0;
+						margin: 0 48px !important;
+
+						span, p {
+							font-size: 0 !important;
+						}
+					}
+
+					.social-wrap {
+						display: none;
+					}
+				}
+
+				&.opened {
+					.inner {
+						&::before {
+							content: '-';
+						}
+					}
+
+					.bio {
+						height: auto;
+
+						span {
+							font-size: 16px;
+						}
+					}
+				}
+
+				.inner::before {
+					color: var(--primary);
+					font-size: 33px;
+					margin-right: 25px;
+					padding-bottom: 10px;
+					line-height: 0.8;
+					width: 22px;
+					text-align: center;
+				}
+			}
+
+			.cast:last-of-type .inner {
+				border-bottom: 1px solid #ccc;
+			}
+
+			.inner {
+				flex-direction: row !important;
+				flex-wrap: wrap;
+				background-color: var(--light-gray) !important;
+				width: 100%;
+				border-top: 1px solid #ccc;
+				padding: 25px !important;
+
+				@include respond-to($max-tablet) {
+					padding: 20px 0 !important;
+				}
+
+				> .nome {
+					width: 96.2%;
+
+					span {
+						margin-right: 6px;
+					}
+				}
+
+				.nome {
+					flex-direction: row !important;
+				}
+			}
+
+			.showBio, #showBio {
+				display: none !important;
+			}
+
+			.nome-wrap {
+				display: flex;
+
+				.nome {
+					margin-right: 7px;
+				}
+			}
+
+			.nome {
+				cursor: pointer;
+			}
+
+			.bio {
+				border-left: 2px solid var(--primary);
+				padding-left: 20px;
+				flex-basis: 95%;
+				margin: 30px 48px 12px;
+				display: flex;
+
+				@include respond-to($max-tablet) {
+					flex-basis: 100%;
+					margin: 30px 3px 12px;
+				}
+
+				p {
+					flex-basis: 50%;
+
+					@include respond-to($max-tablet) {
+						flex-basis: 100%;
+					}
+				}
+
+				.social-wrap {
+					margin-left: 4%;
+
+					span {
+						text-transform: uppercase;
+					}
+				}
+			}
+
+			.show-cast {
+				padding: 3vw 0 !important;
+			}
+		}
+
+		.cast {
+			> div {
+				background-size: cover;
+				background-repeat: no-repeat;
+				background-position: center;
+				display: flex;
+				flex-wrap: wrap;
+				align-items: flex-end;
+				width: 100%;
+			}
+
+			.inner {
+				background-color: white;
+				padding: 18px 25px;
+				display: flex;
+				flex-direction: column;
+				flex-basis: 80%;
+
+				.nome {
+					color: var(--titles);
+					font-weight: bold;
+					font-size: clamp(24px, 1.1vw, 40px);
+					letter-spacing: 1px;
+					display: flex;
+					flex-direction: column;
+				}
+
+				> .nome-wrap {
+					margin-bottom: 10px;
+				}
+
+				.ruolo {
+					color: var(--titles);
+					letter-spacing: 1px;
+					text-transform: uppercase;
+				}
+			}
+		}
+	}
+
+	.show-cast {
+		flex-basis: 100%;
+		padding: 3vw 9vw 0;
+
+		> a {
+			display: flex;
+			align-items: center;
+
+			&:not(.close) {
+				i {
+					transform: rotate(180deg);
+				}
+			}
+
+			i {
+				margin-left: 11px;
+			}
+		}
+	}
+
+	.showBio {
+		cursor: pointer;
+		color: var(--titles);
+		margin-top: 5px;
+
+		@include respond-to($max-tablet) {
+			padding: 1rem 0;
+		}
+	}
+}

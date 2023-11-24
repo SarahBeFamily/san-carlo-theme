@@ -1,0 +1,232 @@
+header.banner {
+	position: fixed;
+	z-index: 12;
+	background-color: var(--light-gray);
+	width: 100vw;
+	transition: all .55s ease-out;
+
+	&.transparent {
+		background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 100%);
+
+		#logo-light {
+			display: none;
+		}
+
+		.wpml-ls-statics-shortcode_actions > ul > li > a {
+			color: white;
+
+			&:hover {color: white !important;}
+			&.wpml-ls-item-toggle::after {
+				content: url("data:image/svg+xml,%3Csvg width='20px' height='20px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='SVGRepo_bgCarrier' stroke-width='0'%3E%3C/g%3E%3Cg id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'%3E%3C/g%3E%3Cg id='SVGRepo_iconCarrier'%3E%3Cg id='Arrow / Chevron_Down'%3E%3Cpath id='Vector' d='M19 9L12 16L5 9' stroke='#{url-friendly-colour($white)}' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+			}
+
+			ul li ul li a:hover {
+				color: black !important;
+			}
+		}
+	}
+
+	&:not(.transparent) {
+		#logo-dark {
+			display: none;
+		}
+
+		i {
+			filter: brightness(0);
+		}
+	}
+
+	.row {
+		padding: 15px 35px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		position: relative;
+
+		@include respond-to($max-tablet) {
+			padding: 7px;
+		}
+
+		@include respond-to($ipad-large) {
+			padding: 5px 25px 15px;
+			flex-wrap: wrap;
+			align-items: flex-end;
+		}
+
+		@include respond-to($mini-desktop) {
+			padding: 15px 25px;
+		}
+
+		.logo {
+			img {
+				width: 235px;
+				margin-bottom: -10px;
+				height: auto;
+
+				@include respond-to($max-tablet) {
+					width: 138px;
+				}
+
+				@include respond-to($mini-desktop) {
+					width: 200px;
+				}
+
+				@include respond-to($small-desktop) {
+					width: 14vw;
+				}
+			}
+		}
+
+		.col-right {
+			display: flex;
+			// height: 79px;
+			justify-content: flex-end;
+
+			@include respond-to($max-tablet) {
+				align-items: center;
+			}
+
+			@include respond-to($ipad-large) {
+				align-content: flex-end;
+				width: 100%;
+				margin-top: 0 !important;
+			}
+
+			@include respond-to($mini-desktop) {
+				height: 67px;
+			}
+
+			@include respond-to($min-tablet) {
+				flex-direction: column;
+			}
+
+			.top-row {
+				text-align: right;
+				padding: 11px 15px;
+				display: flex;
+				justify-content: flex-end;
+				align-items: center;
+
+				@include respond-to($mini-desktop) {
+					width: 80%;
+					right: 0;
+					position: absolute;
+					top: 10px;
+				}
+
+				i {
+					margin: 0 11px;
+					cursor: pointer;
+					transition: all .25s ease-in;
+
+					@include respond-to($max-tablet) {
+						margin: 0 5px;
+					}
+
+					@include respond-to($mini-desktop) {
+						margin: 0 5px;
+						scale: .7;
+					}
+				}
+
+				.top-nav {
+					width: 100%;
+					display: inline-flex;
+					align-items: center;
+					justify-content: flex-end;
+				}
+			}
+
+			.row-nav {
+				padding: 10px 0 0;
+
+				@include respond-to($max-tablet) {
+					display: none;
+				}
+
+				// @include respond-to($ipad-large) {
+				// 	justify-content: flex-end;
+				// 	display: flex;
+				// 	width: 100%;
+				// }
+			}
+		}
+	}
+
+	.cart-count {
+		position: absolute;
+		background: var(--primary);
+		color: white;
+		text-decoration: none;
+		width: 12px;
+		height: 12px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		font-size: 11px;
+		padding: 10px;
+		font-weight: 600;
+		margin-top: -18px;
+		margin-left: 28px;
+	}
+
+	.lang {
+		display: flex;
+		align-items: center;
+
+		@include respond-to($max-tablet) {
+			width: 52px;
+		}
+	}
+
+	.wpml-ls-statics-shortcode_actions {
+		width: 60px;
+
+		ul li {
+			&:hover ul {
+				border: 0 !important;
+			}
+
+			a {
+				border: 0;
+				background: transparent !important;
+				color: var(--titles);
+				font-size: clamp(16px,1vw,22px);
+				letter-spacing: 1px;
+				border-bottom: 3px solid transparent !important;
+
+				&:hover {
+					border-bottom: 3px solid var(--primary) !important;
+					color: var(--primary);
+
+					&.wpml-ls-item-toggle::after {
+						content: url("data:image/svg+xml,%3Csvg width='20px' height='20px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='SVGRepo_bgCarrier' stroke-width='0'%3E%3C/g%3E%3Cg id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'%3E%3C/g%3E%3Cg id='SVGRepo_iconCarrier'%3E%3Cg id='Arrow / Chevron_Down'%3E%3Cpath id='Vector' d='M19 9L12 16L5 9' stroke='#{url-friendly-colour($primary)}' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+					}
+				}
+
+				&.wpml-ls-item-toggle::after {
+					content: url("data:image/svg+xml,%3Csvg width='20px' height='20px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='SVGRepo_bgCarrier' stroke-width='0'%3E%3C/g%3E%3Cg id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'%3E%3C/g%3E%3Cg id='SVGRepo_iconCarrier'%3E%3Cg id='Arrow / Chevron_Down'%3E%3Cpath id='Vector' d='M19 9L12 16L5 9' stroke='#{url-friendly-colour($titles)}' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+					vertical-align: middle;
+					display: inline-block;
+					border: 0 !important;
+					position: absolute;
+					right: -5px;
+					top: calc(50% - 9px);
+				}
+			}
+
+			.wpml-ls-sub-menu {
+				background: white;
+				text-align: center;
+
+				&.open {
+					@include respond-to($max-mini-desktop) {
+						display: block;
+						visibility: visible;
+					}
+				}
+			}
+		}
+	}
+}

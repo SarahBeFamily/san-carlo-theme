@@ -1,0 +1,423 @@
+$primary: #DF3B3C;
+$titles: #1C1C1C;
+$white: #FFFFFF;
+$text: #857B7B;
+$light-gray: #F5F6F6;
+$gray: #D8DBE2;
+
+:root {
+	--primary: #DF3B3C;
+	--titles: #1C1C1C;
+	--text: #857B7B;
+	--light-gray: #F5F6F6;
+	--gray: #D8DBE2;
+	--textFont: "Inter";
+	--titleFont: "Source Sans Pro";
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+    scroll-snap-type: proximity;
+    scroll-snap-type: y proximity;
+    scroll-snap-points-y: repeat(200px);
+    &.has-scroll-smooth {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+html,
+body {
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color .5s;
+    font-family: var(--textFont);
+    &.loading {
+        opacity: 1;
+    }
+}
+
+/* Page Loader */
+
+.loading::before,
+.loading::after {
+    content: '';
+    position: fixed;
+    z-index: 999;
+}
+
+.loading::before {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.loading::after {
+    top: 50%;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+    margin: -30px 0 0 -30px;
+    border-radius: 50%;
+    opacity: 0.4;
+    background: white;
+    animation: loaderAnim 0.7s linear infinite alternate forwards;
+}
+
+@keyframes loaderAnim {
+    to {
+        opacity: 1;
+        transform: scale3d(0.5, 0.5, 1);
+    }
+}
+
+.admin-bar {
+    header.banner {
+        top: 32px !important;
+    }
+}
+
+#main > div:first-child {
+	padding-top: 10rem;
+
+	@include respond-to($phone-plus) {
+		padding-top: 7rem;
+	}
+}
+
+.grecaptcha-badge {
+    display: none !important;
+}
+
+.sr-only {
+	display: none;
+}
+
+/* global classes */
+
+/**
+ * Add the correct
+ * display in IE 10-
+ */
+
+ [hidden] {
+	display: none !important;
+}
+
+.hidden {
+	display: none !important;
+}
+
+.mobile-hidden {
+	@include respond-to($phone) {
+		display: none !important;
+	}
+}
+
+.mobile-only {
+	@include respond-to($not-mobile) {
+		display: none !important;
+	}
+}
+
+.no-mobile {
+	@include respond-to($phone) {
+		display: none !important;
+	}
+}
+
+.sticky {
+	position: sticky !important;
+	top: 0 !important;
+}
+
+.sticky + section {
+	padding-top: 50px;
+}
+
+.center-content {
+	width: 70%;
+	margin: 32px auto;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+.color {
+	&-primary {
+		color: var(--primary);
+	}
+
+	&-text {
+		color: var(--text);
+	}
+
+	&-titles {
+		color: var(--titles);
+	}
+}
+
+.--light-gray {	background-color: var(--light-gray);}
+.align-center {text-align: center;}
+.align-right {text-align: right;}
+.flex {display: flex;}
+.fwrap {flex-wrap: wrap;}
+.item-center {align-items: center;}
+.content-between {justify-content: space-between;}
+.content-center {justify-content: center;}
+
+.mt0, .mt0 h2 {margin-top: 0;}
+.separatore {
+	height: 2px;
+	display: block;
+	background-color: var(--gray);
+}
+
+
+//map
+$paddings: (
+	// "padding" "1pc" calc(100vw * 0.01),
+	1vw: 1vw,
+	2vw: 2vw,
+	3vw: 3vw,
+	4vw: 4vw,
+	5vw: 5vw,
+	6vw: 6vw,
+	7vw: 7vw,
+	8vw: 8vw,
+	9vw: 9vw,
+	10vw: 10vw,
+);
+//loop
+@each $pad, $value in $paddings {
+    //can't do this: div.first-class.is-style-#{$color}-component
+    //can do this:
+    div.vc_column_container[class*="padding-#{$pad}"] .vc_column-inner {
+        padding: $value;
+    }
+
+	div.vc_column_container[class*="padding-left-#{$pad}"] .vc_column-inner {
+        padding-left: $value;
+    }
+
+	div.vc_column_container[class*="padding-right-#{$pad}"] .vc_column-inner {
+        padding-right: $value;
+    }
+
+	div.vc_column_container[class*="padding-top-#{$pad}"] .vc_column-inner {
+        padding-top: $value;
+    }
+
+	div.vc_column_container[class*="padding-bottom-#{$pad}"] .vc_column-inner {
+        padding-bottom: $value;
+    }
+}
+
+.pad-tb-5 {
+	padding-top: 5%;
+	padding-bottom: 5%;
+}
+
+.pad-b-5 {
+	padding-bottom: 5%;
+}
+
+.pad-t-5 {
+	padding-top: 5%;
+}
+
+.spacer-80 {
+	flex-basis: 100%;
+	height: 80px;
+  }
+
+.parallax {
+	position: relative;
+	min-height: 300px;
+	height: 80vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transform-style: preserve-3d;
+	z-index: -1;
+  
+	// & > div {
+	//   position: absolute;
+	//   top: 0;
+	//   left: 0;
+	//   width: 100%;
+	//   height: 100%;
+	//   z-index: -1;
+	//   pointer-events: none;
+	//   background-position: center;
+	//   background-size: cover;
+	//   filter: contrast(1.2);
+	//   box-shadow: 0px 0px 8px rgb(255 255 255 / 70%);
+	// }
+
+	> .bg-para {
+		transform: translateZ(-10px);
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		background-size: cover;
+		background-position: center;
+		z-index: -1;
+	}
+}
+
+.article-title {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	height: 100vh;
+	padding-bottom: 5%;
+	background-size: cover;
+	background-position: center;
+	padding-left: calc(10vw - 15px);
+	padding-right: calc(10vw - 15px);
+
+	@include respond-to($phone) {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+
+	@include respond-to($mid-tablet) {
+		padding-left: calc(8vw - 15px);
+		padding-right: calc(8vw - 15px);
+	}
+
+	@include respond-to($max-tablet) {
+		height: 52vh;
+	}
+
+	@include respond-to($retina) {
+		padding-left: calc(12vw - 15px);
+		padding-right: calc(12vw - 15px);
+	}
+
+	@include respond-to($retina2) {
+		padding-left: calc(15vw - 15px);
+		padding-right: calc(15vw - 15px);
+	}
+
+	h1 {
+		color: white;
+		font-size: clamp(34px, 5.5vw, 120px) !important;
+		font-weight: 700;
+		margin: 0 0 45px;
+		max-width: 55%;
+
+		@include respond-to($max-tablet) {
+			max-width: 92%;
+			margin-bottom: 0;
+		}
+	}
+}
+
+.simple-title {
+	@extend .article-title;
+	background: var(--light-gray);
+	height: auto;
+	padding-bottom: 1.5%;
+
+	@include respond-to($phone-plus) {
+		padding-top: 5rem !important;
+	}
+
+	@include respond-to($min-phone) {
+		padding-top: 12rem !important;
+	}
+
+	.bf-title-block {
+		display: flex;
+
+		@include respond-to($phone-plus) {
+			flex-wrap: wrap;
+		}
+
+		h1 {
+			flex-basis: 45%;
+
+			@include respond-to($phone-plus) {
+				flex-basis: 100%;
+			}
+		}
+
+		div:first-child {
+			flex-basis: 45%;
+
+			@include respond-to($phone-plus) {
+				flex-basis: 100%;
+			}
+
+			> h1 {
+				flex-basis: 100% !important;
+			}
+		}
+
+		.descr-text {
+			padding-top: 1.5%;
+		}
+	}
+}
+
+body.archive {
+	.simple-title .bf-title-block h1 {
+		flex-basis: 75%;
+	}
+}
+
+[class^="bf-col-"] {
+	@include respond-to($max-tablet) {
+		flex-basis: 100% !important;
+		max-width: 100% !important;
+	}
+}
+
+.bf-col-3 {	flex-basis: 30%;}
+.bf-col-4 {	flex-basis: 40%; max-width: 40%;}
+.bf-col-6 {	flex-basis: 50%;}
+.bf-col-8 {	flex-basis: 60%; max-width: 60%;}
+.bf-col-9 {	flex-basis: 70%;}
+
+#faq-cat {
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+
+		li {
+			a:any-link {
+				text-decoration: none;
+				color: #857B7B;
+			}
+		}
+	}
+}
+
+.page-template-rimborsi {
+	.simple-title .bf-title-block div:first-child {
+		flex-basis: 100%;
+	}
+
+	h1 {
+		max-width: 100%;
+	}
+}

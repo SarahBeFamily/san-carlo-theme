@@ -1,0 +1,528 @@
+# Copyright (C) 2023 Roots
+# This file is distributed under the MIT License.
+msgid ""
+msgstr ""
+"Project-Id-Version: San Carlo Theme 10.5.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/san-carlo-theme\n"
+"POT-Creation-Date: 2023-06-19T19:10:55+02:00\n"
+"PO-Revision-Date: 2023-06-22 14:40+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.3.1\n"
+"X-Domain: san-carlo-theme\n"
+
+
+#. translators: %1$s è la data di inizio e %2$s è la data di fine spettacolo
+#: app/Theme/js_composer/vc_elements/bf-carousel.php:125
+#: app/Theme/js_composer/vc_elements/bf-slider-home.php:97
+#: resources/views/partials/content-single-spettacoli.blade.php:52
+msgid "From %1$s to %2$s"
+msgstr "Dal %1$s al %2$s"
+
+#. translators: %s è la data di inizio spettacolo
+#: app/Theme/js_composer/vc_elements/bf-carousel.php:145
+msgid "From %s"
+msgstr "Dal %s"
+
+#. translators: %s è l'orario dello spettacolo
+#: app/Theme/js_composer/vc_elements/bf-next-events.php:116
+msgid "%s"
+msgstr "Ore %s"
+
+#: app/Theme/js_composer/vc_elements/bf-next-events.php:120
+#: resources/views/partials/content-single-spettacoli.blade.php:235
+msgid "Buy tickets"
+msgstr "Acquista biglietti"
+
+#: resources/views/partials/content-single-spettacoli.blade.php:262
+#: resources/views/partials/content-single-spettacoli.blade.php:271
+msgid "Fees"
+msgstr "Tariffe"
+
+#: app/Theme/js_composer/vc_elements/bf-next-events.php:121
+#: app/Theme/js_composer/vc_elements/bf-slider-home.php:118
+#: resources/views/archive-spettacoli.blade.php:33
+#: resources/views/partials/content-single-spettacoli.blade.php:71
+msgid "Discover more"
+msgstr "Scopri di più"
+
+#: app/Theme/js_composer/vc_elements/bf-next-events.php:133
+msgid "See all upcoming shows"
+msgstr "Vedi tutti i prossimi spettacoli"
+
+#: app/Theme/js_composer/vc_elements/bf-slider-home.php:129
+msgid "Main sponsor"
+msgstr "Main sponsor"
+
+#: app/Theme/js_composer/vc_elements/bf-slider-home.php:159
+msgid "Next"
+msgstr "Next"
+
+#: resources/views/accedi.blade.php:26
+msgid "Warning: Please insert a valid username or password"
+msgstr "Attenzione: Prego inserire un username o mail valida"
+
+#: resources/views/accedi.blade.php:28
+msgid "Warning: Please insert a password"
+msgstr "Attenzione: Prego inserire una password"
+
+#: resources/views/accedi.blade.php:30
+msgid "Warning: Incorrect Password"
+msgstr "Attenzione: Password non corretta"
+
+#: resources/views/accedi.blade.php:32
+msgid "Authentication error: please retry"
+msgstr "Errore autenticazione: si prega si riprovare"
+
+#. translators: %s è il nome utente
+#: resources/views/accedi.blade.php:43
+#: resources/views/woocommerce/myaccount/dashboard.blade.php:33
+msgid "Hello %s,"
+msgstr "Ciao %s,"
+
+#: resources/views/accedi.blade.php:47
+msgid "You are already logged in."
+msgstr "Sei già autenticato."
+
+#: resources/views/accedi.blade.php:53
+#: resources/views/woocommerce/myaccount/dashboard.blade.php:54
+msgid "Logout"
+msgstr "Esci"
+
+#: resources/views/accedi.blade.php:66
+#: resources/views/educational.blade.php:51
+#: resources/views/educational.blade.php:123
+#: resources/views/rimborsi.blade.php:38
+msgid "Email"
+msgstr "Email"
+
+#: resources/views/accedi.blade.php:67
+msgid "Password"
+msgstr "Password"
+
+#: resources/views/accedi.blade.php:68
+msgid "Remember me"
+msgstr "Ricordami al prossimo accesso"
+
+#: resources/views/accedi.blade.php:69
+msgid "Login"
+msgstr "Accedi"
+
+#: resources/views/accedi.blade.php:85
+msgid "Lost Password"
+msgstr "Lost Password"
+
+#: resources/views/accedi.blade.php:86
+msgid "Forgotten Password?"
+msgstr "Password dimenticata?"
+
+#: resources/views/accedi.blade.php:91
+msgid "Don't you have an account yet?"
+msgstr "Non hai ancora un account?"
+
+#: resources/views/accedi.blade.php:91
+msgid "Register"
+msgstr "Registrati"
+
+#. translators: %s è il link di registrazione utente
+#: resources/views/woocommerce/myaccount/form-login.blade.php:56
+msgid "Don't you have an account yet? <a href=\"%s\">Register</a>"
+msgstr "Non hai ancora un account? <a href="%s">Registrati</a>"
+
+#: resources/views/archive-spettacoli.blade.php:14
+msgid "Categories"
+msgstr "Categorie"
+
+#: resources/views/archive-spettacoli.blade.php:16
+msgid "All"
+msgstr "Tutte"
+
+#: resources/views/archive-spettacoli.blade.php:20
+msgid "Calendar"
+msgstr "Calendario"
+
+#: resources/views/archive-spettacoli.blade.php:24
+msgid "Results"
+msgstr "Risultati"
+
+#: resources/views/balletto.blade.php:76
+#: resources/views/partials/content-single-spettacoli.blade.php:139
+msgid "Read Bio"
+msgstr "Leggi Biografia"
+
+#: resources/views/balletto.blade.php:76
+msgid "Close Bio"
+msgstr "Chiudi Biografia"
+
+#: resources/views/balletto.blade.php:81
+#: resources/views/partials/content-single-spettacoli.blade.php:151
+msgid "Follow on"
+msgstr "Segui su"
+
+#: resources/views/balletto.blade.php:99
+#: resources/views/partials/content-single-spettacoli.blade.php:169
+msgid "Show all Cast"
+msgstr "Mostra tutto il Cast"
+
+#: resources/views/news.blade.php:47
+#: resources/views/news.blade.php:84
+#: resources/views/partials/content-search.blade.php:18
+#: resources/views/partials/content-single.blade.php:67
+msgid "Read"
+msgstr "Leggi"
+
+#: resources/views/partials/content-page.blade.php:12
+#: resources/views/partials/content-search.blade.php:15
+msgid "News"
+msgstr "News"
+
+#. translators: %1$s è la data e %2$s è l'orario di inizio spettacolo
+#: resources/views/partials/content-single-spettacoli.blade.php:28
+msgid "%1$s at %2$s"
+msgstr "%1$s ore %2$s"
+
+#: resources/views/partials/content-single-spettacoli.blade.php:225
+msgid "Choose a date"
+msgstr "Scegli una data"
+
+#: resources/views/partials/content-single.blade.php:49
+msgid "You may also be interested in"
+msgstr "Potrebbe interessarti anche"
+
+#: resources/views/partials/entry-meta.blade.php:7
+msgid "By"
+msgstr "Scritto da"
+
+#: resources/views/search.blade.php:9
+msgid "Sorry, no results were found."
+msgstr "Spiacenti, nessun risultato trovato."
+
+#. translators: %s è la query di ricerca
+#: resources/views/partials/page-header.blade.php:36
+msgid "Search results for &#8220;%s&#8221;"
+msgstr "Risultati di ricerca per &#8220;%s&#8221;"
+
+#: resources/views/sections/footer.blade.php:10
+msgid "Newsletter"
+msgstr "Newsletter"
+
+#: resources/views/sections/row-buy.blade.php:11
+msgid "Buy now"
+msgstr "Acquista Ora"
+
+#: resources/views/woocommerce/cart/cart-empty.blade.php:37
+msgid "Return to shows"
+msgstr "Torna agli eventi"
+
+#: resources/views/woocommerce/checkout/review-order.blade.php:23
+#: resources/views/woocommerce/cart/cart.blade.php:31
+msgid "Show"
+msgstr "Spettacolo"
+
+#: resources/views/404.blade.php:8
+msgid "Sorry, but the page you are trying to view does not exist."
+msgstr "Spiacenti, ma la pagina che stai cercando di visitare non esiste."
+
+#: resources/views/partials/page-header.blade.php:17
+msgid "Page not found"
+msgstr "Pagina non trovata"
+
+#: resources/views/rimborsi.blade.php:17
+msgid "Customer data"
+msgstr "Dati spettatore"
+
+#: resources/views/educational.blade.php:30
+msgid "Teacher data"
+msgstr "Dati docente"
+
+#: resources/views/educational.blade.php:35
+#: resources/views/rimborsi.blade.php:22
+msgid "First Name"
+msgstr "Nome"
+
+#: resources/views/educational.blade.php:39
+#: resources/views/rimborsi.blade.php:26
+msgid "Last Name"
+msgstr "Cognome"
+
+#: resources/views/educational.blade.php:43
+#: resources/views/educational.blade.php:115
+#: resources/views/rimborsi.blade.php:30
+msgid "Address, City, Country"
+msgstr "Indirizzo, Città, Nazione"
+
+#: resources/views/educational.blade.php:47
+#: resources/views/educational.blade.php:119
+#: resources/views/rimborsi.blade.php:34
+msgid "Phone (without blank spaces)"
+msgstr "Telefono (senza spazi)"
+
+#: resources/views/rimborsi.blade.php:179
+msgid "The refund request was successfully submitted."
+msgstr "La richiesta di rimborso è stata correttamente inviata."
+
+#: resources/views/rimborsi.blade.php:180
+msgid "There was a problem submitting the form, please try again."
+msgstr "Si è verificato un problema nell'invio del form, si prega di riprovare."
+
+#: resources/views/educational.blade.php:55
+msgid "I am"
+msgstr "Sono"
+
+#: resources/views/educational.blade.php:57
+msgid "Teacher"
+msgstr "Docente"
+
+#: resources/views/educational.blade.php:58
+msgid "Parent"
+msgstr "Genitore"
+
+#: resources/views/educational.blade.php:62
+msgid "Interested in"
+msgstr "Interessi"
+
+#: resources/views/educational.blade.php:66
+msgid "School performances"
+msgstr "Spettacoli scuole"
+
+#: resources/views/educational.blade.php:71
+msgid "Student training"
+msgstr "Formazione studenti"
+
+#: resources/views/educational.blade.php:76
+msgid "Teacher training"
+msgstr "Formazione docenti"
+
+#: resources/views/educational.blade.php:81
+msgid "School InCanto"
+msgstr "Scuola InCanto"
+
+#: resources/views/educational.blade.php:86
+msgid "Guided tours"
+msgstr "Visite Guidate"
+
+#: resources/views/educational.blade.php:91
+msgid "MeMUS"
+msgstr "MeMUS"
+
+#: resources/views/educational.blade.php:96
+msgid "Workshops for children"
+msgstr "Laboratori per bambini"
+
+#: resources/views/educational.blade.php:106
+msgid "School data"
+msgstr "Dati scuola"
+
+#: resources/views/educational.blade.php:111
+msgid "School Name"
+msgstr "Nome scuola"
+
+#: resources/views/educational.blade.php:127
+msgid "C.F."
+msgstr "C.F."
+
+#: resources/views/educational.blade.php:135
+msgid "Show Booking"
+msgstr "Prenotazione Spettacoli"
+
+#: resources/views/rimborsi.blade.php:46
+msgid "Show data"
+msgstr "Dati Spettacolo"
+
+#: resources/views/educational.blade.php:140
+#: resources/views/rimborsi.blade.php:51
+msgid "Show Title"
+msgstr "Titolo Spettacolo"
+
+#: resources/views/educational.blade.php:147
+#: resources/views/educational.blade.php:164
+#: resources/views/rimborsi.blade.php:58
+msgid "Performance date"
+msgstr "Data Spettacolo"
+
+#: resources/views/rimborsi.blade.php:67
+msgid "Ticket's quantity"
+msgstr "Numero Biglietti (quantità)"
+
+#: resources/views/rimborsi.blade.php:71
+msgid "Sector"
+msgstr "Settore"
+
+#: resources/views/partials/content-single-spettacoli.blade.php:279
+#: resources/views/rimborsi.blade.php:73
+msgid "Top Orchestra Stalls GOLD"
+msgstr "Poltronissima ORO"
+
+#: resources/views/rimborsi.blade.php:74
+msgid "Top Orchestra Stalls"
+msgstr "Poltronissima"
+
+#: resources/views/rimborsi.blade.php:75
+msgid "Orchestra Stalls GOLD"
+msgstr "Poltrona ORO"
+
+#: resources/views/rimborsi.blade.php:76
+msgid "Orchestra Stalls"
+msgstr "Poltrona"
+
+#: resources/views/rimborsi.blade.php:77
+msgid "I, II tier central boxes parapet"
+msgstr "Palco I, II fila centrali parapetto"
+
+#: resources/views/rimborsi.blade.php:78
+msgid "I, II tier central boxes behind"
+msgstr "Palco I, II fila centrali dietro"
+
+#: resources/views/rimborsi.blade.php:79
+msgid "Royal Box"
+msgstr "Palco reale"
+
+#: resources/views/rimborsi.blade.php:80
+msgid "I, II tier side boxes parapet"
+msgstr "Palco I, II fila laterali parapetto"
+
+#: resources/views/rimborsi.blade.php:81
+msgid "I, II tier side boxes behind"
+msgstr "Palco I, II fila laterali dietro"
+
+#: resources/views/rimborsi.blade.php:82
+msgid "III, IV tier central boxes parapet"
+msgstr "Palco III, IV fila centrali parapetto"
+
+#: resources/views/rimborsi.blade.php:83
+msgid "III, IV tier central boxes behind"
+msgstr "Palco III, IV fila centrali dietro"
+
+#: resources/views/rimborsi.blade.php:84
+msgid "III, IV tier side boxes parapet"
+msgstr "Palco III, IV fila laterali parapetto"
+
+#: resources/views/rimborsi.blade.php:85
+msgid "III, IV tier side boxes behind"
+msgstr "Palco III, IV fila laterali dietro"
+
+#: resources/views/rimborsi.blade.php:86
+msgid "V, VI tier balconies"
+msgstr "Balconata V e VI fila"
+
+#: resources/views/rimborsi.blade.php:87
+msgid "Listening only seats"
+msgstr "Posti Solo Ascolto"
+
+#: resources/views/rimborsi.blade.php:106
+msgid "Bank Information"
+msgstr "Dati bancari"
+
+#: resources/views/rimborsi.blade.php:111
+msgid "Bank name"
+msgstr "Nome banca"
+
+#: resources/views/rimborsi.blade.php:115
+msgid "IBAN code (without blank spaces)"
+msgstr "Codice IBAN (senza spazi)"
+
+#: resources/views/rimborsi.blade.php:119
+msgid "SWIFT/BIC code (mandatory for international banktransfers)"
+msgstr "Codice SWIFT/BIC (obbligatorio per bonifici internazionali)"
+
+#: resources/views/rimborsi.blade.php:123
+msgid "BSB code (mandatory for international banktransfers)"
+msgstr "Codice BSB (obbligatorio per bonifici internazionali)"
+
+#: resources/views/rimborsi.blade.php:127
+msgid "Grand Total (commissions excluded)"
+msgstr "Importo Totale (commissioni escluse)"
+
+#: resources/views/rimborsi.blade.php:135
+msgid "Upload Tickets"
+msgstr "Carica biglietto/i"
+
+#: resources/views/educational.blade.php:156
+msgid "Optional Alternative Show"
+msgstr "Spettacoli alternativo (opzionale)"
+
+#: resources/views/educational.blade.php:174
+msgid "Number of paying students (net of accompanying teachers)"
+msgstr "Numero studenti paganti (al netto dei D.A.)"
+
+#: resources/views/educational.blade.php:178
+msgid "Number of accompanying teachers (1 for every 15 paying students - any excess will be automatically included in the number of paying students)"
+msgstr "Numero docenti accompagnatori (1 ogni 15 studenti paganti – eventuali eccedenze verranno inserite d’ufficio nel numero di paganti)"
+
+#: resources/views/educational.blade.php:182
+msgid "Number of NON-paying students (Accompanying Teachers with certification)"
+msgstr "Numero studenti NON paganti (D.A. con certificazione)"
+
+#: resources/views/educational.blade.php:186
+msgid "Number of support teachers"
+msgstr "Numero docenti di sostegno"
+
+#: resources/views/educational.blade.php:194
+msgid "Envoice Information"
+msgstr "Informazioni fattura"
+
+#: resources/views/educational.blade.php:199
+msgid "Need for electronic invoice"
+msgstr "Necessità di fattura elettronica"
+
+#: resources/views/educational.blade.php:202
+msgid "No"
+msgstr "No"
+
+#: resources/views/educational.blade.php:203
+msgid "Yes"
+msgstr "Si"
+
+#: resources/views/educational.blade.php:207
+msgid "Unique code"
+msgstr "Codice univoco"
+
+#: resources/views/educational.blade.php:215
+msgid "Upload Files"
+msgstr "Carica Files"
+
+#: resources/views/educational.blade.php:223
+#: resources/views/rimborsi.blade.php:143
+msgid "Each attachment must be in JPG or PDF format and should not be larger than 4MB"
+msgstr "Ogni file deve essere in formato JPG o PDF e non deve avere un peso superiore ai 4MB"
+
+#: resources/views/educational.blade.php:239
+#: resources/views/rimborsi.blade.php:159
+msgid "Declaration of consent"
+msgstr "Dichiarazione del consenso"
+
+#: resources/views/educational.blade.php:245
+#: resources/views/rimborsi.blade.php:165
+msgid "The subscriber hereby declares the consent to the processing of this data to the purposes declared in this Refunding Request Form."
+msgstr "Il sottoscritto accetta le condizioni del trattamento dei propri dati per le finalità amministrative indicate nella presente informativa"
+
+#: resources/views/educational.blade.php:255
+#: resources/views/rimborsi.blade.php:175
+msgid "Submit"
+msgstr "Invia"
+
+#: resources/views/forms/search.blade.php:4
+msgctxt "label"
+msgid "Search for:"
+msgstr "Cerca:"
+
+#: resources/views/forms/search.blade.php:10
+msgctxt "placeholder"
+msgid "Find shows or info"
+msgstr "Trova spettacoli o informazioni"
+
+#: resources/views/woocommerce/myaccount/dashboard.blade.php:38
+msgid "From your account dashboard you can"
+msgstr "Dalla bacheca del tuo account puoi"
+
+#: resources/views/woocommerce/myaccount/dashboard.blade.php:46
+msgid "view your recent orders"
+msgstr "vedere i tuoi ordini recenti"
+
+#: resources/views/woocommerce/myaccount/dashboard.blade.php:49
+msgid "edit your password and account details"
+msgstr "modificare la tua password e i dettagli account"

@@ -1,0 +1,152 @@
+// Stile tabelle prezzi in responsive
+/* Force table to not be like tables anymore */
+.no-more-tables, table {
+	width: 100%;
+	color: var(--text);
+	font-size: clamp(18px, 1.1vw, 24px);
+
+	td {
+		vertical-align: text-top;
+	}
+}
+
+.no-more-tables table,
+.no-more-tables thead,
+.no-more-tables tbody,
+.no-more-tables th,
+.no-more-tables td,
+.no-more-tables tr {
+	@include respond-to($max-tablet) {display: block;}
+}
+/* Hide table headers (but not display: none;, for accessibility) */
+.no-more-tables thead tr {
+	@include respond-to($max-tablet) {
+		position: absolute; top: -9999px; left: -9999px;
+	}
+
+	td {
+		font-weight: bold;
+		text-transform: uppercase;
+
+		@include respond-to($mini-desktop) {
+			font-size: 11px;
+			padding-right: 13px;
+		}
+
+		@include respond-to($small-desktop) {
+			font-size: 11px;
+			padding-right: 13px;
+		}
+
+		@include respond-to($desktop) {
+			font-size: 16px !important;
+		}
+
+		@include respond-to($min-wide-desktop) {
+			font-size: 13px !important;
+			padding-right: 13px;
+		}
+
+		// &.under30,
+		// &.over65 {
+		// 	@include respond-to($min-tablet) {
+		// 		width: 7%;
+		// 	}
+		// }
+
+		// &.intero,
+		// &.full {
+		// 	@include respond-to($min-tablet) {
+		// 		width: 6%;
+		// 	}
+		// }
+	}
+}
+
+.no-more-tables tr { 
+	@include respond-to($max-tablet) {border: 1px solid #ccc;} 
+
+	&:not(:last-child) {
+		td {
+			@include respond-to($min-tablet) {
+				border-bottom: 1px solid #ccc;
+			}
+		}
+	}
+}
+          
+.no-more-tables td {
+	@include respond-to($phone-plus) {
+		padding-left: 0;
+        white-space: normal; text-align: right !important;
+	}
+	@include respond-to($max-tablet) {
+        /* Behave like a "row" */
+        border: none; border-bottom: 1px solid #eee;
+        position: relative; padding: 6px 15px 6px 50%;
+        white-space: normal; text-align:left;
+	}
+
+	@include respond-to($min-tablet) {
+		padding: 8px 0;
+	}
+
+	&.posto {
+		@include respond-to($min-tablet) {
+			padding-right: 13px;
+			width: 30%;
+			font-size: 16px;
+		}
+
+		@include respond-to($desktop) {
+			width: 25% !important;
+		}
+
+		@include respond-to($retina) {
+			width: 22% !important;
+			font-size: 18px !important;
+		}
+	}
+
+	&.prezzo {
+		@include respond-to($min-tablet) {
+			font-size: 16px;
+		}
+
+		@include respond-to($retina) {
+			font-size: 18px !important;
+		}
+	}
+
+	&:first-child {
+		@include respond-to($max-tablet) {
+			background: var(--light-gray);
+			color: var(--titles) !important;
+			font-weight: bold;
+		}
+	}
+	&:before {
+		@include respond-to($phone-plus) { 
+			/* Now like a table header */
+			position: absolute;
+			/* Top/left values mimic padding */
+			top: 6px; left: 4px;
+			width: 70%;
+			padding-right: 10px; white-space: nowrap; text-align:left;
+			font-weight: bold;
+			/* Label the data */
+			content: attr(data-title);
+		}
+		@include respond-to($max-tablet) {
+			/* Now like a table header */
+			position: absolute;
+			/* Top/left values mimic padding */
+			top: 6px; left: 6px;
+			width: 45%;
+			padding-right: 10px; white-space: nowrap; text-align:left;
+			font-weight: bold;
+			/* Label the data */
+			content: attr(data-title);
+		}
+	}
+}

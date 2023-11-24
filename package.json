@@ -1,0 +1,46 @@
+{
+  "name": "san-carlo-theme",
+  "private": true,
+  "browserslist": [
+    "extends @roots/browserslist-config"
+  ],
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "bud dev --browser",
+    "build": "bud build",
+    "clean": "yarn cache clean && npm run build",
+    "rmdir": "node -e \"var fs = require('fs'); process.argv.slice(1).map((fpath) => fs.rmdirSync(fpath, { recursive: true })); process.exit(0);\"",
+    "refresh": "npm run rmdir -- public && npm run build",
+    "translate": "yarn translate:pot && yarn translate:update",
+    "translate:pot": "wp i18n make-pot . ./resources/lang/san-carlo-theme.pot --include=\"app,resources\"",
+    "translate:update": "for filename in ./resources/lang/*.po; do msgmerge -U $filename ./resources/lang/san-carlo-theme.pot; done; rm -f ./resources/lang/*.po~",
+    "translate:compile": "yarn translate:mo && yarn translate:js",
+    "translate:js": "wp i18n make-json ./resources/lang --pretty-print",
+    "translate:mo": "wp i18n make-mo ./resources/lang ./resources/lang"
+  },
+  "devDependencies": {
+    "@roots/bud": "6.8.0",
+    "@roots/bud-purgecss": "6.8.0",
+    "@roots/bud-sass": "6.8.0",
+    "@roots/sage": "6.8.0",
+    "gsap": "^3.11.5",
+    "sass": "^1.58.3",
+    "sass-google-fonts": "^1.0.1"
+  },
+  "volta": {
+    "node": "18.14.2",
+    "yarn": "1.22.19"
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "jquery": "^3.6.3",
+    "slick-carousel": "^1.8.1",
+    "vue": "2.6.14",
+    "vue-loader": "^17.1.1",
+    "vue-template-compiler": "^2.7.14",
+    "vuex": "^4.1.0"
+  }
+}

@@ -1,0 +1,120 @@
+@use "sass:math";
+@use "sass:meta";
+
+@mixin fface($family, $type: '', $weight: 400, $svg: '', $style: normal) {
+	@font-face {
+		font-family: $family;
+		src: url('~@fonts/#{$type}.eot');
+		src: url('~@fonts/#{$type}.eot?#iefix') format('embedded-opentype'),
+		url('~@fonts/#{$type}.woff2') format('woff2'),
+		url('~@fonts/#{$type}.woff') format('woff'),
+		url('~@fonts/#{$type}.ttf') format('truetype'),
+		url('~@fonts/#{$type}.svg##{$svg}') format('svg');
+		font-weight: $weight;
+		font-style: $style;
+	}
+}
+
+// Convent px to rem units
+@function toRem($value) {
+    $remValue: calc($value / 16) + rem;
+    @return $remValue;
+}
+
+/// Get scalable values for resposive
+@function betterClamp($minSize, $maxSize, $minWidth: 1024, $maxWidth: 1920) {
+    // source: https://css-tricks.com/linearly-scale-font-size-with-css-clamp-based-on-the-viewport/
+    // convert to rem
+    $minSize: math.div($minSize, 16);
+    $maxSize: math.div($maxSize, 16);
+    $maxWidth: math.div($maxWidth, 16);
+    $minWidth: math.div($minWidth, 16);
+    // do calculations
+    $slope: math.div(($maxSize - $minSize), ($maxWidth - $minWidth));
+    $yAxisIntersection: -$minWidth * $slope + $minSize;
+    // output as rem
+    $minSize: $minSize * 1rem;
+    $maxSize: $maxSize * 1rem;
+    @return clamp(
+        #{$minSize},
+        #{$yAxisIntersection * 1rem} + #{$slope * 100vw},
+        #{$maxSize}
+    );
+}
+
+// Manage svg icons
+@mixin icons($args...) {
+    @debug meta.keywords($args);
+    // (string: #080, comment: #800, variable: #60b)
+  
+    @each $name, $content in meta.keywords($args) {
+        .btn-icon-#{$name} {
+            &::after {
+                content: $content;
+                margin-left: 10px;
+                display: flex;
+            }
+        }
+
+        .icons-#{$name} {
+            content: $content;
+        }
+    }
+}
+
+/// Convert colours in svg dataurl
+@function url-friendly-colour($colour) {
+    @return '%23' + str-slice('#{$colour}', 2, -1);
+}
+
+// Get RGBA colour with var opacity
+@function col-alpha($color, $alpha) {
+    @if ($color == 'primary') {
+        @return rgba(164, 22, 26, $alpha);
+    }
+
+    @if ($color == 'text') {
+        @return rgba(22, 26, 29, $alpha);
+    }
+
+    @else {
+        @return rgba(255, 255, 255, $alpha);
+    }
+}
+
+
+/// Media Queries
+/// @include respond-to($desktop-wide1) { //code }
+$not-mobile: '(min-width: 640px)';
+$small-phone: '(max-width: 320px)';
+$mid-phone: '(min-width: 320px) and (max-width: 640px)';
+$phone: '(max-width: 640px)';
+$phone-plus: '(max-width: 767px)';
+$min-phone: '(min-width: 767.5px)';
+$small-tablet: '(min-width: 640px) and (max-width: 767px)';
+$small-tablet3: '(min-width: 640.5px) and (max-width: 699px)';
+$small-tablet2: '(min-width: 640.5px) and (max-width: 804px)';
+$small-tablet4: '(min-width: 640.5px) and (max-width: 786px)';
+$mid-tablet: '(min-width: 640px) and (max-width: 1024px)';
+$tablet: '(min-width: 767px) and (max-width: 1024px)';
+$odd-tablet: '(min-width: 766px) and (max-width: 890px)';
+$tablet-pro: '(min-width: 1024px) and (max-width: 1366px) and (orientation: portrait)';
+$ipad-large: '(min-width: 1024px) and (max-width: 1111px)';
+$min-tablet: '(min-width: 1024px)';
+$max-tablet: '(max-width: 1024px)';
+$mini-desktop: '(min-width: 1024px) and (max-width: 1280px)';
+$max-mini-desktop: '(max-width: 1280px)';
+$min-desktop: '(min-width: 1280px)';
+$small-desktop: '(min-width: 1280px) and (max-width: 1440px)';
+$mid-desktop: '(min-width: 1440px) and (max-width: 1600px)';
+$desktop: '(min-width: 1600px) and (max-width: 1920px)';
+$min-wide-desktop: '(min-width: 1440px)';
+$min-wide: '(min-width: 1600px)';
+$max-desktop: '(max-width: 1920px)';
+$retina: '(min-width: 1920px)';
+$retina2: '(min-width: 1919px) and (min-resolution: 2dppx)';
+@mixin respond-to($media) {
+	@media only screen and #{$media} {
+		@content;
+	}
+}

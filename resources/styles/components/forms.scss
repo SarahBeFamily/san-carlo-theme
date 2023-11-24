@@ -1,0 +1,308 @@
+input:not([type="checkbox"],.bf-btn), textarea {
+	-webkit-appearance: none;
+	appearance: none;
+	color: var(--text);
+	border: 0;
+	border-bottom: 2px solid var(--text) !important;
+	border-radius: 0;
+	padding: 18px;
+	max-width: 100%;
+	background: white;
+	box-shadow: 0px 0px 0px -7px rgba(0,0,0,0);
+	font-size: clamp(18px,1vw,20px);
+
+	&:focus {
+		color: var(--titles);
+		border-color: var(--primary);
+		outline: 0;
+		box-shadow: 0px 5px 15px -7px rgba(0,0,0,0.1);
+	}
+}
+
+#contatti,
+#contacts {
+	input:not([type="checkbox"], [type="submit"]), textarea {
+		background: transparent;
+		padding: 18px 0;
+	}
+
+	input[type="submit"] {
+		background-color: var(--primary);
+		color: white;
+		border: 0 !important;
+		width: 190px;
+	}
+
+	textarea {
+		font-family: inherit !important;
+    	width: 98%;
+	}
+}
+
+.half p, .half-b {
+	display: flex;
+	justify-content: space-between;
+}
+
+.half-b {
+	> div, > p {
+		flex-basis: calc(95% / 2);
+	}
+}
+
+.third p {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+
+	label {
+		flex-basis: calc(90% / 3);
+	}
+}
+
+.half, .half-b, .third, .full {
+	p {
+		input, select {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			background: transparent;
+		}
+
+		select {
+			border: 1px solid var(--text);
+			padding: 15px;
+			margin-top: 10px;
+		}
+	}
+}
+
+.wpcf7-list-item label {
+	align-items: center;
+	display: inline-flex;
+}
+
+.scelta-form-cf7 input {
+	width: auto !important;
+}
+
+form {
+	.privacy {
+		@include respond-to($phone-plus) {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.wpcf7-form-control-wrap {
+			@include respond-to($phone-plus) {
+				order: 1;
+			}
+		}
+
+		.bottone {
+			@include respond-to($phone-plus) {
+				order: 2;
+			}
+		}
+	}
+}
+
+.wpcf7-response-output {
+	border: 0 !important;
+	font-weight: bold;
+}
+
+.wpcf7 form.failed .wpcf7-response-output,
+.wpcf7 form.aborted .wpcf7-response-output {
+	color: var(--primary) !important;
+}
+
+.wpcf7 form.success .wpcf7-response-output,
+.wpcf7 form.sent .wpcf7-response-output {
+	color: green !important;
+}
+
+header.banner.transparent #search {
+	@include respond-to($phone-plus) {
+		background: var(--titles) !important;
+	}
+}
+
+#search {
+	width: 100%;
+
+	@include respond-to($phone-plus) {
+		position: absolute;
+		left: 0;
+		padding-bottom: 15px;
+		background-color: var(--light-gray);
+		z-index: 99;
+	}
+
+	input {
+		background: transparent;
+		padding: 0 0 18px;
+		width: 85%;
+	}
+}
+
+#rimborso,
+#prenotazione_scuole {
+	@include respond-to($max-tablet) {
+		width: 100%;
+		margin-top: 30px;
+	}
+
+	@include respond-to($small-desktop) {
+		width: 70vw;
+	}
+
+	@include respond-to($min-wide-desktop) {
+		width: 60vw;
+	}
+
+	.step {
+		margin-bottom: 3rem;
+
+		.header {
+			color: var(--titles);
+			font-weight: bold;
+			text-transform: uppercase;
+			border-bottom: 2px solid var(--titles);
+			line-height: 2;
+		}
+
+		.fields {
+			display: flex;
+			flex-wrap: wrap;
+
+			label {
+				margin-top: 2rem;
+				color: var(--text);
+				position: relative;
+				font-size: clamp(16px, 1vw, 20px);
+
+				@include respond-to($max-tablet) {
+					flex-basis: 100%;
+				}
+
+				@include respond-to($min-tablet) {
+					flex-basis: calc(94% / 2);
+				}
+
+				&:not(:nth-child(2n +2)) {
+					@include respond-to($min-tablet) {
+						margin-right: 6%;
+					}
+				}
+
+				input, select {
+					display: flex;
+					flex-direction: column;
+					width: 100%;
+					background: transparent;
+				}
+
+				select {
+					border: 1px solid var(--text);
+					padding: 15px;
+					margin-top: 10px;
+					color: var(--titles) !important;
+				}
+
+				> span {
+					position: absolute;
+					right: 0;
+					bottom: 10px;
+				}
+			}
+
+			.tickets-wrap,
+			.files-wrap {
+				flex-basis: 100%;
+
+				> div:not(.controls) {
+					display: flex;
+					flex-wrap: wrap;
+				}
+
+				.file label {
+					flex-basis: 100%;
+					margin-right: 0;
+				}
+
+				.controls {
+					margin-top: 2rem;
+					display: flex;
+
+					button, >span {
+						border: 0;
+						background-color: var(--primary);
+						color: white;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						width: 33px;
+						height: 32px;
+						font-size: 28px;
+						cursor: pointer;
+						margin-right: 10px;
+
+						span {
+							padding: 0 6px 3px;
+						}
+					}
+
+					.bf-btn {
+						font-size: 30px;
+						padding: 6px 15px;
+						margin-right: 15px;
+						cursor: pointer;
+					}
+				}
+			}
+		}
+	}
+
+	.finale {
+		.privacy {
+			label {
+				color: var(--text);
+			}
+		}
+
+		.submit {
+			margin: 2rem 0;
+			border: 0;
+			background-color: var(--primary);
+			color: white;
+			cursor: pointer;
+		}
+	}
+
+	#interesse {
+		width: 100% !important;
+		flex-basis: 100%;
+		margin-right: 0 !important;
+
+		> div {
+			display: flex;
+			flex-wrap: wrap;
+
+			label {
+				display: flex;
+				flex-basis: 25% !important;
+				margin-right: 0 !important;
+				align-items: flex-start;
+
+				@include respond-to($max-tablet) {
+					flex-basis: 50% !important;
+				}
+			}
+		}
+
+		input {
+			width: auto !important;
+		}
+	}
+}

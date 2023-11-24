@@ -1,0 +1,84 @@
+.slick-list.draggable {
+    cursor: grab;
+}
+
+.slick-track {
+	display: flex !important;
+}
+
+.slick-dots {
+    display: flex;
+    list-style: none;
+    margin: 60px auto;
+    padding: 0;
+
+	@include respond-to($max-tablet) {
+		margin: 20px auto;
+		max-width: 95vw;
+	}
+
+    li {
+        &.slick-active button {
+            color: var(--titles);
+        }
+
+        button {
+            border: 0;
+            margin: 0 5px;
+            font-size: clamp(16px, 1.5vw, 20px);
+            transition: all 0.3s ease;
+			color: var(--text);
+			background-color: transparent;
+			cursor: pointer;
+        }
+    }
+}
+
+.slick-arrow {
+    cursor: pointer;
+	// background-color: white;
+	display: flex;
+	justify-content: center;
+	padding: 1.2vmax;
+	border-radius: 50%;
+	// border: 1px solid rgba(255,255,255,0.1);
+	position: absolute;
+	top: 50%;
+	z-index: 99;
+	transition: all 0.4s ease-in;
+
+	@include respond-to($phone-plus) {
+		// padding: 11px;
+		top: 35%;
+	}
+    
+    &.prev {
+        transform: scaleX(-1);
+		left: 0;
+
+		@include respond-to($phone-plus) {
+			left: 1%;
+		}
+    }
+
+	&.next {
+		right: 0;
+	}
+
+	&.slick-disabled {
+		opacity: 0;
+	}
+
+	i {
+		scale: 1.4;
+
+		@include respond-to($phone-plus) {
+			scale: 1.2;
+			margin: 0;
+		}
+
+		&::after {
+			margin: 0;
+		}
+	}
+}

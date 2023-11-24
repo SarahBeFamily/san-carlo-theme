@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+    "baseUrl": "resources",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "jsx": "preserve",
+    "paths": {
+      "@fonts/*": ["wp-content/themes/san-carlo-theme/fonts/*"],
+      "@images/*": ["images/*"],
+      "@scripts/*": ["scripts/*"],
+      "@styles/*": ["styles/*"]
+    },
+    "target": "es5",
+    "types": ["@roots/bud", "@roots/sage"]
+  },
+  "include": ["./bud.config.js", "./resources"],
+  "exclude": ["./node_modules", "./public"],
+  "watch": [
+          "app/**/*.php",
+          "resources/views/**/*.php",
+          "resources/styles/*"
+      ]
+}

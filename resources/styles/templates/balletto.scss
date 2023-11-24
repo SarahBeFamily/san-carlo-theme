@@ -1,0 +1,35 @@
+.page-template-balletto {
+	.staff {
+		display: flex;
+		flex-direction: column;
+
+		&:not(:last-of-type) {
+			margin-bottom: 30px;
+		}
+
+		.ruolo {
+			color: var(--text);
+			font-size: clamp(16px, 0.9vw, 20px);
+			line-height: clamp(30px, 2.1vw, 40px);
+			letter-spacing: 1px;
+		}
+
+		.nome {
+			color: var(--titles);
+			font-size: clamp(20px, 1.2vw, 26px);
+		}
+	}
+}
+
+.row-text {
+	.inner {
+		@include respond-to($min-tablet) {
+			column-count: 2;
+			column-gap: 75px;
+		}
+
+		p:first-child {
+			margin-top: 0;
+		}
+	}
+}

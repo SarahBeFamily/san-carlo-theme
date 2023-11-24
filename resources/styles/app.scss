@@ -1,0 +1,28 @@
+@import "~slick-carousel/slick/slick.scss";
+
+@import './global/mixins.scss';
+@import './global/global.scss';
+@import './global/typography.scss';
+
+@import './components/slick.scss';
+@import './components/wpbakery.scss';
+@import './components/menu.scss';
+@import './components/icons.scss';
+@import './components/calendars.scss';
+@import './components/buttons.scss';
+@import './components/casting.scss';
+@import './components/woocommerce.scss';
+@import './components/forms.scss';
+@import './components/tables.scss';
+
+@import './layouts/header.scss';
+@import './layouts/footer.scss';
+@import './layouts/search.scss';
+
+@import './templates/accedi.scss';
+@import './templates/spettacolo.scss';
+@import './templates/balletto.scss';
+@import './templates/educational.scss';
+@import './templates/news.scss';
+@import './templates/amministrazione.scss';
+@import './templates/community.scss';
