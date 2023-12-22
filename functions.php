@@ -927,9 +927,11 @@ function events_en_query_shortcode($atts = [], $content = null) {
         $id = $post->ID;
         $cats = array();
         $terms = get_the_terms( $id, 'categoria-spettacoli' ); 
+        if (is_array($terms) && !empty($terms)):
         foreach($terms as $term) {
             $cats[] = $term->term_id;
         }
+        endif;
 
         $output[] = (object) [
             'id' => $id,

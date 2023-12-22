@@ -235,6 +235,7 @@
 		position: absolute;
 		align-items: center;
 		align-content: flex-end;
+		justify-content: space-between;
 		padding-left: calc(10vw - 15px);
 		padding-right: calc(10vw - 15px);
 
@@ -301,6 +302,24 @@
 
 			@include respond-to($phone-plus) {
 				margin-top: 40px;
+			}
+		}
+
+		.play-video {
+			@include respond-to($not-mobile) {
+				margin-top: -50vh;
+			}
+
+			@include respond-to($phone-plus) {
+				margin-bottom: 14%;
+			}
+
+			img {
+				max-width: 133px;
+
+				@include respond-to($phone-plus) {
+					max-width: 93px;
+				}
 			}
 		}
 	}

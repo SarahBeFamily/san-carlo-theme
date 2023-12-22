@@ -1,4 +1,4 @@
-body:not(.woocommerce-cart) {
+body:not(.woocommerce-cart, .mio-account) {
 	.woocommerce {
 		background-color: var(--light-gray);
 		padding: 16em 0 1em !important;

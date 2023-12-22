@@ -119,7 +119,15 @@
 			year = $(this).hasClass('prev') ? year : year+1;
 		} else if (currentMonth == 1) {
 			newChoice = $(this).hasClass('prev') ? 12 : currentMonth+1;
+			year = $(this).hasClass('prev') ? year-1 : year;
+		} else {
+			newChoice = $(this).hasClass('prev') ? currentMonth-1 : currentMonth+1;
 		}
+
+		month = newChoice.toString().length == 1 ? `0${newChoice.toString()}` : newChoice.toString();
+
+		// console.log(month);
+		ajaxCall(month, year);
 	});
 	
 	// Questa funzione esegue una chiamata AJAX per ottenere il calendario del mese e dell'anno specificati.

@@ -515,6 +515,40 @@ msgctxt "placeholder"
 msgid "Find shows or info"
 msgstr "Trova spettacoli o informazioni"
 
+
+#. translators: %s è il nome utente
+#: resources/views/woocommerce/emails/customer-processing-order.blade.php:33
+#: resources/views/woocommerce/emails/customer-completed-order.blade.php:35
+#: resources/views/woocommerce/emails/customer-invoice.blade.php:35
+msgid "Thank you for shopping at teatrosancarlo.it, %s."
+msgstr "Grazie per aver acquistato su teatrosancarlo.it, %s"
+
+#. translators: %s è il numero di ordine
+#: resources/views/woocommerce/emails/customer-completed-order.blade.php:41
+msgid "Your order #%s is confirmed! Here are the details of your purchase."
+msgstr "Il tuo ordine n. #%s è confermato! Ecco il dettaglio del tuo acquisto."
+
+#: resources/views/woocommerce/emails/email-order-details.blade.php:58
+msgid "Your purchases"
+msgstr "I tuoi acquisti"
+
+#: resources/views/woocommerce/emails/email-order-details.blade.php:92
+msgid "Purchase detail"
+msgstr "Dettaglio acquisti"
+
+#: resources/views/woocommerce/emails/email-order-details.blade.php:97
+msgid "Confirm"
+msgstr "Conferma"
+
+#. translators: %1$s: è il totale dell'ordine. %2$s: è la valuta
+#: resources/views/woocommerce/emails/email-order-details.blade.php:103
+msgid "Cart total: %1$s%2$s"
+msgstr "Totale carrello: %1$s%2$s"
+
+#: resources/views/woocommerce/emails/email-order-details.blade.php:106
+msgid "Print Tickets"
+msgstr "Stampa Biglietti"
+
 #: resources/views/woocommerce/myaccount/dashboard.blade.php:38
 msgid "From your account dashboard you can"
 msgstr "Dalla bacheca del tuo account puoi"

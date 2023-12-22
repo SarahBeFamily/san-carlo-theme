@@ -27,7 +27,12 @@
     </div>
 
     <div class="col">
-      @php(dynamic_sidebar('sidebar-footer-info'))
+      {{-- @php(dynamic_sidebar('sidebar-footer-info')) --}}
+      <section class="widget widget_text">
+        <div class="textwidget">
+          @option('info_footer')
+        </div>
+      </section>
     </div>
   </div>
 

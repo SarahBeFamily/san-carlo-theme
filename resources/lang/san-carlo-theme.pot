@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-10-10T12:54:51+02:00\n"
+"POT-Creation-Date: 2023-12-15T14:42:28+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: san-carlo-theme\n"
@@ -34,24 +34,20 @@ msgstr ""
 msgid "https://roots.io/"
 msgstr ""
 
-#: app/Theme/Calendar/calendar_class.php:257
-#: app/Theme/Calendar/calendar_class.php:263
-#: app/Theme/Calendar/calendar_class.php:308
-#: app/Theme/Calendar/calendar_class.php:314
-#: app/Theme/Calendar/calendar_class_mod2.php:360
-#: app/Theme/Calendar/calendar_class_mod2.php:366
-#: app/Theme/js_composer/vc_elements/bf-next-events.php:120
+#: app/filters.php:15
+msgid "Continua a leggere"
+msgstr ""
+
+#: app/Theme/Calendar/calendar_class.php:182
+#: app/Theme/Calendar/calendar_class.php:188
+#: app/Theme/js_composer/vc_elements/bf-next-events.php:127
 #: resources/views/partials/content-single-spettacoli.blade.php:240
 msgid "Buy tickets"
 msgstr ""
 
-#: app/Theme/Calendar/calendar_class.php:258
-#: app/Theme/Calendar/calendar_class.php:264
-#: app/Theme/Calendar/calendar_class.php:309
-#: app/Theme/Calendar/calendar_class.php:315
-#: app/Theme/Calendar/calendar_class_mod2.php:361
-#: app/Theme/Calendar/calendar_class_mod2.php:367
-#: app/Theme/js_composer/vc_elements/bf-next-events.php:121
+#: app/Theme/Calendar/calendar_class.php:183
+#: app/Theme/Calendar/calendar_class.php:189
+#: app/Theme/js_composer/vc_elements/bf-next-events.php:128
 #: app/Theme/js_composer/vc_elements/bf-slider-home.php:212
 #: app/Theme/js_composer/vc_elements/bf-slider-home.php:240
 #: resources/views/archive-spettacoli.blade.php:39
@@ -59,38 +55,31 @@ msgstr ""
 msgid "Discover more"
 msgstr ""
 
-#: app/Theme/Calendar/calendar_class.php:365
-#: app/Theme/Calendar/calendar_class_mod2.php:420
+#: app/Theme/Calendar/calendar_class.php:240
 msgid "Mon"
 msgstr ""
 
-#: app/Theme/Calendar/calendar_class.php:365
-#: app/Theme/Calendar/calendar_class_mod2.php:420
+#: app/Theme/Calendar/calendar_class.php:240
 msgid "Tue"
 msgstr ""
 
-#: app/Theme/Calendar/calendar_class.php:365
-#: app/Theme/Calendar/calendar_class_mod2.php:420
+#: app/Theme/Calendar/calendar_class.php:240
 msgid "Wed"
 msgstr ""
 
-#: app/Theme/Calendar/calendar_class.php:365
-#: app/Theme/Calendar/calendar_class_mod2.php:420
+#: app/Theme/Calendar/calendar_class.php:240
 msgid "Thu"
 msgstr ""
 
-#: app/Theme/Calendar/calendar_class.php:365
-#: app/Theme/Calendar/calendar_class_mod2.php:420
+#: app/Theme/Calendar/calendar_class.php:240
 msgid "Fri"
 msgstr ""
 
-#: app/Theme/Calendar/calendar_class.php:365
-#: app/Theme/Calendar/calendar_class_mod2.php:420
+#: app/Theme/Calendar/calendar_class.php:240
 msgid "Sat"
 msgstr ""
 
-#: app/Theme/Calendar/calendar_class.php:365
-#: app/Theme/Calendar/calendar_class_mod2.php:420
+#: app/Theme/Calendar/calendar_class.php:240
 msgid "Sun"
 msgstr ""
 
@@ -107,11 +96,11 @@ msgid "From %s"
 msgstr ""
 
 #. translators: %s è l'orario dello spettacolo
-#: app/Theme/js_composer/vc_elements/bf-next-events.php:116
+#: app/Theme/js_composer/vc_elements/bf-next-events.php:123
 msgid "%s"
 msgstr ""
 
-#: app/Theme/js_composer/vc_elements/bf-next-events.php:133
+#: app/Theme/js_composer/vc_elements/bf-next-events.php:140
 msgid "See all upcoming shows"
 msgstr ""
 
@@ -219,19 +208,19 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: resources/views/accedi.blade.php:85
+#: resources/views/accedi.blade.php:87
 msgid "Lost Password"
 msgstr ""
 
-#: resources/views/accedi.blade.php:86
+#: resources/views/accedi.blade.php:88
 msgid "Forgotten Password?"
 msgstr ""
 
-#: resources/views/accedi.blade.php:91
+#: resources/views/accedi.blade.php:93
 msgid "Don't you have an account yet?"
 msgstr ""
 
-#: resources/views/accedi.blade.php:91
+#: resources/views/accedi.blade.php:93
 msgid "Register"
 msgstr ""
 
@@ -444,7 +433,7 @@ msgstr ""
 #: resources/views/news.blade.php:47
 #: resources/views/news.blade.php:84
 #: resources/views/partials/content-search.blade.php:18
-#: resources/views/partials/content-single.blade.php:67
+#: resources/views/partials/content-single.blade.php:69
 msgid "Read"
 msgstr ""
 
@@ -497,7 +486,7 @@ msgstr ""
 msgid "Fees"
 msgstr ""
 
-#: resources/views/partials/content-single.blade.php:49
+#: resources/views/partials/content-single.blade.php:51
 msgid "You may also be interested in"
 msgstr ""
 
@@ -636,6 +625,43 @@ msgstr ""
 
 #: resources/views/sections/row-buy.blade.php:11
 msgid "Buy now"
+msgstr ""
+
+#. translators: %s è il nome utente
+#: resources/views/woocommerce/emails/customer-completed-order.blade.php:35
+#: resources/views/woocommerce/emails/customer-invoice.blade.php:35
+msgid "Thank you for shopping at teatrosancarlo.it, %s."
+msgstr ""
+
+#. translators: %s è il numero di ordine
+#: resources/views/woocommerce/emails/customer-completed-order.blade.php:41
+msgid "Your order #%s is confirmed! Here are the details of your purchase."
+msgstr ""
+
+#: resources/views/woocommerce/emails/email-order-details.blade.php:58
+#: resources/views/woocommerce/emails/email-order-details_edit.blade.php:34
+msgid "Your purchases"
+msgstr ""
+
+#: resources/views/woocommerce/emails/email-order-details.blade.php:92
+#: resources/views/woocommerce/emails/email-order-details_edit.blade.php:48
+msgid "Purchase detail"
+msgstr ""
+
+#: resources/views/woocommerce/emails/email-order-details.blade.php:97
+#: resources/views/woocommerce/emails/email-order-details_edit.blade.php:53
+msgid "Confirm"
+msgstr ""
+
+#. translators: %1$s: è il totale dell'ordine. %2$s: è la valuta
+#: resources/views/woocommerce/emails/email-order-details.blade.php:103
+#: resources/views/woocommerce/emails/email-order-details_edit.blade.php:59
+msgid "Cart total: %1$s%2$s"
+msgstr ""
+
+#: resources/views/woocommerce/emails/email-order-details.blade.php:106
+#: resources/views/woocommerce/emails/email-order-details_edit.blade.php:62
+msgid "Print Tickets"
 msgstr ""
 
 #: resources/views/woocommerce/myaccount/dashboard.blade.php:38

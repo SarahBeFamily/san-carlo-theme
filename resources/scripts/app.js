@@ -1038,6 +1038,16 @@ domReady(async () => {
         $('#filtri li.calendar').removeClass('open');
     });
 
+    if ($('body').hasClass('woocommerce-orders') ) {
+        let buttonOrderView = jQuery( 'a.button.view' ).toArray();
+
+        for (let index = 0; index < buttonOrderView.length; index++) {
+            const element = buttonOrderView[index];
+            let viewOrderUrl = $(element).attr('data-url');
+            $(element).attr('href', viewOrderUrl);
+        }
+    }
+
     (function($) {
         $(document).ajaxComplete(function() {
             if ($('body').hasClass('woocommerce-checkout') || $('body').hasClass('woocommerce-cart')) {

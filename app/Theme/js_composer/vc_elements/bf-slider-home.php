@@ -89,6 +89,13 @@ class BF_Slider_Home extends WPBakeryShortCode {
 							'description'   => 'Inserisci del testo che verrà visualizzato sotto il titolo',
 						),
 						array(
+							'type' => 'textfield',
+							'value' => '',
+							'heading' => 'Inserisci link Video',
+							'param_name' => 'link_video',
+							'admin_label' => true,
+						),
+						array(
 							'type' => 'vc_link',
 							'holder' => '',
 							'class' => 'link_button_slide',
@@ -156,21 +163,20 @@ class BF_Slider_Home extends WPBakeryShortCode {
 			)
 		);
 
-
-
-		$posts = new WP_Query($args);
-		$second_post = $posts->posts[1];
-		$post_count = $posts->post_count; 
-
+		if ($type == 'spettacoli') {
+			$posts = new WP_Query($args);
+			$second_post = $posts->have_posts() ? $posts->posts[1] : array();
+			$post_count = $posts->post_count; 
+		} else
 		if ($type == 'custom') {
 			$posts = vc_param_group_parse_atts( $atts['slide'] );
-			$second_post = $posts[1];
+			$second_post = is_array($posts) && !empty($posts) ? $posts[1] : array();
 			$post_count = count($posts);
 		}
 
 		// $posts = $type == 'custom' && isset($atts['slide']) ? vc_param_group_parse_atts( $atts['slide'] ) : $query;
-		$next_img = $type == 'custom' ? wp_get_attachment_image_src($second_post['featured_img'], 'medium')[0] : get_the_post_thumbnail_url( $second_post, 'medium' );
-		$next_title = $type == 'custom' ? $second_post['title_slide'] : get_the_title( $second_post );
+		$next_img = $type == 'custom' ? wp_get_attachment_image_src($second_post['featured_img'], 'medium')[0] : get_the_post_thumbnail_url( $second_post->ID, 'medium' );
+		$next_title = $type == 'custom' ? $second_post['title_slide'] : get_the_title( $second_post->ID );
 
 		$html  = '';
 		$html .= '<div'.$id.' class="bf-slider-home full '.$extra_class.'">';
@@ -216,8 +222,7 @@ class BF_Slider_Home extends WPBakeryShortCode {
 			}
 			// End spettacoli
 
-			if ($type == 'custom') {
-				// $posts = vc_param_group_parse_atts( $atts['slide'] );
+			if ($type == 'custom' && is_array($posts) && !empty($posts)) {
 
 				foreach ($posts as $i => $post) {
 					$current = $i == 0 ? ' current' : '';
@@ -231,16 +236,23 @@ class BF_Slider_Home extends WPBakeryShortCode {
 					$html .= '<div id="hero-'.$i.'" class="single-slide'.$current.'" preview-img="'.$preview_img[0].'" style="background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0,0,0,0.5) 70%), url('.$featured_img[0].');">';
 
 						$html .= '<div class="info">';
-
 							isset($post['date_slide']) ? $html .= '<span class="date">'. $post['date_slide'] .'</span>' : '';
 
 							$html .= '<span class="title">'. $post['title_slide'] .'</span>';
 							$html .= '<div class="meta"><p>'. $post['text_slide'] .'</p></div>';
+							
 						$html .= '</div>';
 						$html .= '<a class="bf-btn white" href="'.$link_btn.'" title="'. $text_btn .'">'.__('Discover more', 'san-carlo-theme').' <i class="bf-icon right icon-arrow-right"></i></a>';
-
+						
+						if ($post['link_video'] != '') {
+							$html .= '<a class="play-video" href="'.$post['link_video'].'" data-fancybox title="'. $text_btn .'"><img src="'.get_stylesheet_directory_uri() . '/app/Theme/js_composer/Play.png'.'" /></a>';
+						}
+						
 					$html .= '</div>';
 				}
+
+				wp_enqueue_script( 'fancybox', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js', array( 'jquery' ), '3.5.7', true );
+    			wp_enqueue_style( 'fancybox', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css', array(), '3.5.7' );
 			}
 
 			$html .= '</div>'; // close slides wrapper
@@ -295,7 +307,7 @@ class BF_Slider_Home extends WPBakeryShortCode {
 			$html .= '</div>';
 
 		$html .= '</div>';
-		
+
 		return $html;
     }
 }
