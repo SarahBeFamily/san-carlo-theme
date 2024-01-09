@@ -102,7 +102,7 @@ class BF_Next_Events extends WPBakeryShortCode {
 
 					if (!empty($dateStart_array)) {
 						$data_n = $dateStart_array[2];
-						$data_mese = substr($dateMonth, 0, 3);
+						$data_mese = $dateMonth; //substr($dateMonth, 0, 3);
 						$data_Y = $dateStart_array[0];
 					}
 

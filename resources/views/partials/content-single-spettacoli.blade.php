@@ -6,8 +6,8 @@
 
 	$data_end_array = explode('/', $dateEnd);
 	$data_start_array = explode('/', $dateStart);
-	$start = wp_date('d M', strtotime($data_start_array[2].$data_start_array[1].$data_start_array[0]));
-	$end = wp_date('d M', strtotime($data_end_array[2].$data_end_array[1].$data_end_array[0]));
+	$start = wp_date('d F', strtotime($data_start_array[2].$data_start_array[1].$data_start_array[0])); // M tre lettere
+	$end = wp_date('d F', strtotime($data_end_array[2].$data_end_array[1].$data_end_array[0]));
 
 	$dateStart_noY = date('d/m', strtotime($dateStart));
 	$dateEnd_noY = date('d/m', strtotime($data_end_array[2].$data_end_array[1].$data_end_array[0]));
@@ -42,9 +42,9 @@
 	<div class="article-title" style="background-image: linear-gradient(-90deg,rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 140%), url( {{ $image }} );">
 
 		@if($dateStart == $dateEnd)
-			<p class="date color-white">{{wp_date('j M Y', strtotime(str_replace('/','-',$dateStart)))}}</p>
+			<p class="date color-white">{{wp_date('j F Y', strtotime(str_replace('/','-',$dateStart)))}}</p>
 		@else
-			<p class="date color-white">{{wp_date('j M', strtotime(str_replace('/','-',$dateStart)))}} - {{wp_date('j M Y', strtotime(str_replace('/','-',$dateEnd)))}}</p>
+			<p class="date color-white">{{wp_date('j F', strtotime(str_replace('/','-',$dateStart)))}} - {{wp_date('j F Y', strtotime(str_replace('/','-',$dateEnd)))}}</p>
 		@endif
 		<h1 class="spettacolo-title">{!! $title !!}</h1>
 
@@ -54,7 +54,7 @@
 		<div class="meta vc_row wpb_row vc_row-fluid vc_row-bf-default">
 			<div class="inner">
 				@if($start == $end)
-				<span class="cat">{{$cat}}</span> <i class="bf-icon icon-calendar"></i> {{wp_date('j M Y', strtotime(str_replace('/','-',$dateStart)))}}
+				<span class="cat">{{$cat}}</span> <i class="bf-icon icon-calendar"></i> {{wp_date('j F Y', strtotime(str_replace('/','-',$dateStart)))}}
 				@else
 				{{-- translators: %1$s è la data di inizio e %2$s è la data di fine spettacolo --}}
 				<span class="cat">{{$cat}}</span> <i class="bf-icon icon-calendar"></i> @php(printf(__('From %1$s to %2$s', 'san-carlo-theme'), $start, $end))
@@ -259,7 +259,7 @@
 							@set($array_prezzi, array())
 							@set($posti, array())
 							@set($tariffe, $tabella['tariffe_tab'])
-							<pre>{{var_dump($tariffe)}}</pre>
+							{{-- <pre>{{var_dump($tariffe)}}</pre> --}}
 							<table class="acf-dynamic-table no-more-tables">
 								@foreach($tariffe as $i => $fee)
 									
@@ -320,7 +320,7 @@
 				</div> --}}
 			</div>
 
-			@shortcode('[events_by_datetime]')
+			{{-- @shortcode('[events_by_datetime]') --}}
 			
 		</div>
 

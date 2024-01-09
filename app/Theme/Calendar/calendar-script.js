@@ -23,11 +23,21 @@
 	function checkActiveEvent() {
 		// Ottiene il primo evento attivo e i suoi dettagli.
 		let activeEvent = $('.calendar .event.active').first(),
+			moreActiveArray = $('.calendar .event.active'),
 			activeEventDetails = activeEvent.siblings('.dettaglio-evento');
 
 		$('.total-slide').html(activeEventDetails.length);
 		$('#active-slide').attr('max-value', activeEventDetails.length);
 		activeEvent.siblings('.dettaglio-evento:not([index="1"])').hide();
+
+		// Se esistono più eventi attivi (cioè due eventi in mesi diversi), nascondo quello del mese successivo al corrente.
+		for (let i = 0; i < moreActiveArray.length; i++) {
+			let event = moreActiveArray[i];
+
+			if (moreActiveArray.length > 1 && i > 0) {
+				$(event).siblings('.dettaglio-evento').hide();
+			}
+		}
 	}
 
 
