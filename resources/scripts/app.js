@@ -368,6 +368,10 @@ domReady(async () => {
     });
 
 
+    /**
+     * Collegameto alla pagina di acquisto biglietti
+     * @see {@link partials/content-single-spettacoli.blade.php}
+     */
     $('#buyTicket').on('click', function(e) {
         e.preventDefault();
         let select = $('select#date_evento').val();
@@ -836,7 +840,7 @@ domReady(async () => {
             fd.append('action', 'upload_file');
             fd.append('upload_file', 'upload_nonce');
             fd.append('inputID', id);
-
+            fd.append('tipo', 'rimborsi');
 
         fd.append('file', files);
         console.log(files['size'] <= fileMaxSize);
@@ -917,22 +921,23 @@ domReady(async () => {
                     file_remove = response.data.uploads;
 
                 alert(message);
+                $('#rimborso').find('input, textarea, select').val('');
 
-                $.ajax({
-                    type: 'post',
-                    url: AppData.ajax_url,
-                    data: {
-                      action: 'elimina_allegati_rimborsi',
-                      uploads: file_remove,
-                    },
-                    success: function(data) {
-                        console.log('file eliminati');
-                        $('#rimborso').find('input, textarea, select').val('');
-                    },
-                    error: function(error) {
-                      console.log(error)
-                    }
-                });
+                // $.ajax({
+                //     type: 'post',
+                //     url: AppData.ajax_url,
+                //     data: {
+                //       action: 'elimina_allegati_rimborsi',
+                //       uploads: file_remove,
+                //     },
+                //     success: function(data) {
+                //         console.log('file eliminati');
+                //         $('#rimborso').find('input, textarea, select').val('');
+                //     },
+                //     error: function(error) {
+                //       console.log(error)
+                //     }
+                // });
             },
             error: function(error) {
                 console.log(error)

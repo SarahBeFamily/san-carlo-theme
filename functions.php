@@ -488,8 +488,18 @@ add_action( 'rest_api_init', 'create_ACF_meta_in_REST' );
 
 // Custom directory per upload users
 function secure_upload_directory( $param ) {
-    // $folder = get_home_path().'wp-content/uploads/user-files';
     $folder = get_home_path().'wp-content/uploads';  
+  
+    $param['path'] = $folder;
+    $param['url'] = $folder;
+    $param['subdir'] = $folder;
+    $param['basedir'] = $folder;
+    $param['baseurl'] = $folder;
+    return $param;
+}
+
+function secure_upload_directory_rimborsi( $param ) {
+    $folder = get_home_path().'wp-content/uploads/rimborsi';
   
     $param['path'] = $folder;
     $param['url'] = $folder;
@@ -525,7 +535,7 @@ function encrypt_url($string) {
        $result.=$char;
      }
      return $result;
-  }
+}
 
   function upload_file() {
 
@@ -539,6 +549,7 @@ function encrypt_url($string) {
 
     // Nome File (lo modifico per evitare sovrascrizioni)
     $id = $_POST['inputID'];
+    $tipo = isset($_POST['tipo']) ? 'rimborsi' : '';
     $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
     $filename_temp = str_replace('.'.$ext, '', $_FILES['file']['name']);
     $filename = str_replace(' ', '-', $filename_temp.substr(md5(mt_rand()), 0, 7).'.'.$ext);
@@ -548,19 +559,20 @@ function encrypt_url($string) {
     $filesize = $_FILES['file']['size'];
 
     /* Location */
-    // $location = ABSPATH .'wp-content/uploads/user-files/'.$filename;
-    // $url_loc = home_url() .'/wp-content/uploads/user-files/'.$filename;
-    $location = ABSPATH .'wp-content/uploads/'.$filename;
-    $url_loc = home_url() .'/wp-content/uploads/'.$filename;
+    $location = $tipo !== '' ? ABSPATH .'wp-content/uploads/rimborsi/'.$filename : ABSPATH .'wp-content/uploads/'.$filename;
+    $url_loc = $tipo !== '' ? home_url() .'/wp-content/uploads/rimborsi/'.$filename : home_url() .'/wp-content/uploads/'.$filename;
+    // $location = ABSPATH .'wp-content/uploads/'.$filename;
+    // $url_loc = home_url() .'/wp-content/uploads/'.$filename;
 
     $return_arr = array();
 
     /* Upload file */
     $upload_overrides = array('test_form' => false);
+    $secure_dir = $tipo !== '' ? 'secure_upload_directory_rimborsi' : 'secure_upload_directory';
 
-    add_filter('upload_dir', 'secure_upload_directory', 20);
+    add_filter('upload_dir', $secure_dir, 20);
     $movefile = wp_handle_upload( $_FILES['file'], $upload_overrides );
-    remove_filter( 'upload_dir', 'secure_upload_directory' );
+    remove_filter( 'upload_dir', $secure_dir );
     
     $return_arr = array(
         "id" => $id,
@@ -599,11 +611,11 @@ function invia_mail_rimborso() {
 
             if (stripos($obj_name, 'file-') !== false) {
                 if ($obj_val !== '') {
-                    // $tokens = explode('/user-files/', $obj_val);
+                    // $tokens = explode('/rimborsi/', $obj_val);
                     $tokens = explode('/uploads/', $obj_val);
                     $str = trim(end($tokens));
                     $index = intval(str_replace('file-', '', $obj_name));
-                    // $post['uploads'][]['path'] = WP_CONTENT_DIR . '/uploads/user-files/'.$str;
+                    // $post['uploads'][]['path'] = WP_CONTENT_DIR . '/uploads/rimborsi/'.$str;
                     $post['uploads'][]['path'] = WP_CONTENT_DIR . '/uploads/'.$str;
                     $post['uploads'][]['url'] = $obj_val;
                 }
@@ -627,7 +639,7 @@ function invia_mail_rimborso() {
 
     if (!empty($post)) {
         // Recipient
-        $destinatari = get_field('form_rimborsi', 'option') ? explode(',', get_field('form_rimborsi', 'option')) : array('sarah@befamily.it', 'mariachiaratroise@kidea.net');
+        $destinatari = get_field('form_rimborsi', 'option') ? explode(',', get_field('form_rimborsi', 'option')) : array('mariachiaratroise@kidea.net');
         $to = $destinatari;
         
         // Sender 
@@ -732,11 +744,11 @@ function invia_mail_prenotazione() {
 
             if (stripos($obj_name, 'file-') !== false) {
                 if ($obj_val !== '') {
-                    // $tokens = explode('/user-files/', $obj_val);
+                    // $tokens = explode('/rimborsi/', $obj_val);
                     $tokens = explode('/uploads/', $obj_val);
                     $str = trim(end($tokens));
                     $index = intval(str_replace('file-', '', $obj_name));
-                    // $post['uploads'][]['path'] = WP_CONTENT_DIR . '/uploads/user-files/'.$str;
+                    // $post['uploads'][]['path'] = WP_CONTENT_DIR . '/uploads/rimborsi/'.$str;
                     $post['uploads'][]['path'] = WP_CONTENT_DIR . '/uploads/'.$str;
                     $post['uploads'][]['url'] = $obj_val;
                 }

@@ -243,4 +243,44 @@ add_action('widgets_init', function () {
 //     ));
 // });
 
+/**
+ * Add data & image to open graph
+ */
+add_action('wp_head', function() {
+    global $post;
 
+    if (is_post_type_archive( 'spettacoli' )) { 
+        $img_src = get_stylesheet_directory_uri() . '/seoimg/inscena.jpg';
+        echo '<meta property="og:image" content="'.$img_src.'"/>';
+        echo '<meta property="og:image:width" content="1200"/>';
+        echo '<meta property="og:image:height" content="630"/>';
+    }
+    else if(get_post_type() == 'spettacoli') {
+
+        if(has_post_thumbnail($post->ID)) {
+            $img_src = wp_get_attachment_image_src(get_post_thumbnail_id( $post->ID ), 'large')[0];
+        } else {
+            $img_src = get_stylesheet_directory_uri() . '/img/opengraph_image.jpg';
+        }
+
+        $excerpt = get_bloginfo('description');
+
+        if($post->post_excerpt != '') {
+            $excerpt = strip_tags($post->post_excerpt);
+            $excerpt = str_replace("", "'", $excerpt);
+        }
+
+        ?>
+
+    <meta property="og:title" content="<?php echo the_title(); ?>"/>
+    <meta property="og:description" content="<?= $excerpt; ?>"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="<?php echo the_permalink(); ?>"/>
+    <meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
+    <meta property="og:image" content="<?php echo $img_src; ?>"/>
+
+<?php
+    } else {
+        return;
+    }
+}, 5);

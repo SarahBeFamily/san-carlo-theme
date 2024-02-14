@@ -344,6 +344,10 @@ msgstr "Titolo Spettacolo"
 msgid "Performance date"
 msgstr "Data Spettacolo"
 
+#: resources/views/sections/footer.blade.php:60
+msgid "Loading Calendar..."
+msgstr "Calendario in caricamento..."
+
 #: resources/views/rimborsi.blade.php:67
 msgid "Ticket's quantity"
 msgstr "Numero Biglietti (quantità)"
@@ -560,3 +564,7 @@ msgstr "vedere i tuoi ordini recenti"
 #: resources/views/woocommerce/myaccount/dashboard.blade.php:49
 msgid "edit your password and account details"
 msgstr "modificare la tua password e i dettagli account"
+
+#: resources/views/woocommerce/myaccount/form-lost-password.blade.php:29
+msgid "Please enter your username or email address. You will receive a link to create a new password via email."
+msgstr "Inserisci il tuo nome utente o l'indirizzo email. Riceverai tramite email un link per generarne la tua nuova password."

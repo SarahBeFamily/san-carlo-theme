@@ -1,4 +1,4 @@
-# Copyright (C) 2023 Roots
+# Copyright (C) 2024 Roots
 # This file is distributed under the MIT License.
 msgid ""
 msgstr ""
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-12-15T14:42:28+01:00\n"
+"POT-Creation-Date: 2024-01-17T15:42:56+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: san-carlo-theme\n"
@@ -48,8 +48,8 @@ msgstr ""
 #: app/Theme/Calendar/calendar_class.php:183
 #: app/Theme/Calendar/calendar_class.php:189
 #: app/Theme/js_composer/vc_elements/bf-next-events.php:128
-#: app/Theme/js_composer/vc_elements/bf-slider-home.php:212
-#: app/Theme/js_composer/vc_elements/bf-slider-home.php:240
+#: app/Theme/js_composer/vc_elements/bf-slider-home.php:218
+#: app/Theme/js_composer/vc_elements/bf-slider-home.php:245
 #: resources/views/archive-spettacoli.blade.php:39
 #: resources/views/partials/content-single-spettacoli.blade.php:81
 msgid "Discover more"
@@ -85,7 +85,7 @@ msgstr ""
 
 #. translators: %1$s è la data di inizio e %2$s è la data di fine spettacolo
 #: app/Theme/js_composer/vc_elements/bf-carousel.php:125
-#: app/Theme/js_composer/vc_elements/bf-slider-home.php:191
+#: app/Theme/js_composer/vc_elements/bf-slider-home.php:197
 #: resources/views/partials/content-single-spettacoli.blade.php:61
 msgid "From %1$s to %2$s"
 msgstr ""
@@ -104,11 +104,11 @@ msgstr ""
 msgid "See all upcoming shows"
 msgstr ""
 
-#: app/Theme/js_composer/vc_elements/bf-slider-home.php:252
+#: app/Theme/js_composer/vc_elements/bf-slider-home.php:264
 msgid "Main sponsor"
 msgstr ""
 
-#: app/Theme/js_composer/vc_elements/bf-slider-home.php:290
+#: app/Theme/js_composer/vc_elements/bf-slider-home.php:302
 msgid "Next"
 msgstr ""
 
@@ -139,6 +139,10 @@ msgstr ""
 
 #. Template Name of the theme
 msgid "Form Rimborsi"
+msgstr ""
+
+#: resources/views/sections/footer.blade.php:60
+msgid "Loading Calendar..."
 msgstr ""
 
 #. Template Name of the theme
@@ -627,41 +631,46 @@ msgstr ""
 msgid "Buy now"
 msgstr ""
 
+#: resources/views/woocommerce/email-order-details.blade.php:58
+#: resources/views/woocommerce/emails/email-order-details.blade.php:59
+#: resources/views/woocommerce/emails/email-order-details_edit.blade.php:34
+msgid "Your purchases"
+msgstr ""
+
+#: resources/views/woocommerce/email-order-details.blade.php:94
+#: resources/views/woocommerce/emails/email-order-details.blade.php:122
+#: resources/views/woocommerce/emails/email-order-details_edit.blade.php:48
+msgid "Purchase detail"
+msgstr ""
+
+#: resources/views/woocommerce/email-order-details.blade.php:99
+#: resources/views/woocommerce/emails/email-order-details.blade.php:157
+#: resources/views/woocommerce/emails/email-order-details_edit.blade.php:53
+msgid "Confirm"
+msgstr ""
+
+#. translators: %1$s: è il totale dell'ordine. %2$s: è la valuta
+#: resources/views/woocommerce/email-order-details.blade.php:105
+#: resources/views/woocommerce/emails/email-order-details.blade.php:177
+#: resources/views/woocommerce/emails/email-order-details_edit.blade.php:59
+msgid "Cart total: %1$s%2$s"
+msgstr ""
+
+#: resources/views/woocommerce/email-order-details.blade.php:108
+#: resources/views/woocommerce/emails/email-order-details_edit.blade.php:62
+msgid "Print Tickets"
+msgstr ""
+
 #. translators: %s è il nome utente
 #: resources/views/woocommerce/emails/customer-completed-order.blade.php:35
 #: resources/views/woocommerce/emails/customer-invoice.blade.php:35
+#: resources/views/woocommerce/emails/customer-processing-order.blade.php:33
 msgid "Thank you for shopping at teatrosancarlo.it, %s."
 msgstr ""
 
 #. translators: %s è il numero di ordine
 #: resources/views/woocommerce/emails/customer-completed-order.blade.php:41
 msgid "Your order #%s is confirmed! Here are the details of your purchase."
-msgstr ""
-
-#: resources/views/woocommerce/emails/email-order-details.blade.php:58
-#: resources/views/woocommerce/emails/email-order-details_edit.blade.php:34
-msgid "Your purchases"
-msgstr ""
-
-#: resources/views/woocommerce/emails/email-order-details.blade.php:92
-#: resources/views/woocommerce/emails/email-order-details_edit.blade.php:48
-msgid "Purchase detail"
-msgstr ""
-
-#: resources/views/woocommerce/emails/email-order-details.blade.php:97
-#: resources/views/woocommerce/emails/email-order-details_edit.blade.php:53
-msgid "Confirm"
-msgstr ""
-
-#. translators: %1$s: è il totale dell'ordine. %2$s: è la valuta
-#: resources/views/woocommerce/emails/email-order-details.blade.php:103
-#: resources/views/woocommerce/emails/email-order-details_edit.blade.php:59
-msgid "Cart total: %1$s%2$s"
-msgstr ""
-
-#: resources/views/woocommerce/emails/email-order-details.blade.php:106
-#: resources/views/woocommerce/emails/email-order-details_edit.blade.php:62
-msgid "Print Tickets"
 msgstr ""
 
 #: resources/views/woocommerce/myaccount/dashboard.blade.php:38
@@ -679,4 +688,8 @@ msgstr ""
 #. translators: %s è il link di registrazione utente
 #: resources/views/woocommerce/myaccount/form-login.blade.php:56
 msgid "Don't you have an account yet? <a href=\"%s\">Register</a>"
+msgstr ""
+
+#: resources/views/woocommerce/myaccount/form-lost-password.blade.php:29
+msgid "Please enter your username or email address. You will receive a link to create a new password via email."
 msgstr ""

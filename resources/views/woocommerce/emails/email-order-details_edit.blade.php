@@ -30,31 +30,7 @@ $text_align = is_rtl() ? 'right' : 'left';
 	'nome_spettacolo' => 'Turandot',
 	'biglietti' => array('Palco | Palco Ord. | nr. 9 Posto 3 (INTERO) ', 'Palco | Palco Ord. | nr. 9 Posto 4 (RIDOTTO)')
 	))
-@php
-$order_id = $order->get_id();
-$transaction_ids = $order->get_meta('transactionIds',true,'view'); // Get order item meta data (array)
-$totalPrice     = 0;
-$totalQty       = 0;
-$tickets_array = array();
-$tickets_name_array = array();
-if (is_array($transaction_ids) && !empty($transaction_ids)) {
-	foreach($transaction_ids as $transaction_ids_key => $transaction_ids_value){
-		$ticketName = $transaction_ids_value['ticketName'];
-		$zoneId = $transaction_ids_key;
-		$zoneName = $transaction_ids_value['zoneName'];
-		$seatObject = $transaction_ids_value['seatObject'];
 
-		$tickets_name_array[] = $ticketName;
-		$tickets_array[$ticketName][] = array(
-			'zoneId' => $transaction_ids_key,
-			'zoneName' => $zoneName,
-			'seatObject' => $seatObject,
-		);
-	}
-}
-$tickets_name_list = implode(",",$tickets_name_array);
-
-@endphp
 <div class="sezione">
 	<h2>{{ _e('Your purchases', 'san-carlo-theme') }}</h2>
 
@@ -62,32 +38,9 @@ $tickets_name_list = implode(",",$tickets_name_array);
 		<span><img src="@asset('images/pin.png')" alt="Location"> Teatro San Carlo</span>
 		<span><img src="@asset('images/calendar.png')" alt="Data evento"> {{ $order->get_date_created()->format( 'd-m-Y' ) }}</span>
 
-                <?php
-                
-                foreach($tickets_array as $tickets_array_key => $tickets_array_value){
-                    foreach ( $tickets_array_value as $tickets_array_value_k => $tickets_array_value_v ) {
-                        $zoneName   = $tickets_array_value_v[ 'zoneName' ];
-                        if(!empty($seatObject)){
-                            if( array_key_first( $seatObject ) == '0' ) {
-                                $seatObject_new = $seatObject;
-                            } else {
-                                $seatObject_new = array($seatObject);            
-                            }
-                        }
-                        foreach ( $seatObject_new as $seatObject_key => $seatObject_value ) {
-                            $seat_desc      = $seatObject_value[ 'description' ];
-                            $seat_reduction = $seatObject_value[ 'reduction' ];
-                            $reduction_name = $seat_reduction[ 'description' ];
-                            $ticket_string = trim($zoneName).' | '.trim($seat_desc).' ('.trim($reduction_name).') ';
-                            ?>
-                                <span><img src="@asset('images/ticket.png')" alt="Biglietto"> {{ $ticket_string }}</span>
-                            <?php
-                        }
-                    }
-                }
-                
-                ?>
-                
+		@foreach ($acquisto['biglietti'] as $biglietto)
+		<span><img src="@asset('images/ticket.png')" alt="Biglietto"> {{ $biglietto }}</span>
+		@endforeach
 	</div>
 </div>
 
@@ -96,7 +49,7 @@ $tickets_name_list = implode(",",$tickets_name_array);
 
 	<div class="dettagli-ordine">
 		<div id="uno">
-			<span><img src="@asset('images/bag.png')" alt="Spettacolo"> {{ $tickets_name_list }}</span>
+			<span><img src="@asset('images/bag.png')" alt="Spettacolo"> {{ $acquisto['nome_spettacolo'] }}</span>
 			<span><img src="@asset('images/check.png')" alt="Conferma"> {{ _e('Confirm', 'san-carlo-theme') }}</span>
 			<span><img src="@asset('images/user.png')" alt="Cliente"> {{ $utente }}</span>
 		</div>
@@ -106,7 +59,7 @@ $tickets_name_list = implode(",",$tickets_name_array);
 			<span><img src="@asset('images/cart.png')" alt="Carrello"> {!! sprintf(__( 'Cart total: %1$s%2$s', 'san-carlo-theme' ), $order->get_total(), get_woocommerce_currency_symbol($order->get_currency()) ) !!}</span>
 			
 			{{-- Link per la stampa dei biglietti, probabile inserimento array? --}}
-            <a class="bottone" href="{{ site_url() }}/mio-account/view-order/{{ $order_id }}">{{ _e('Print Tickets', 'san-carlo-theme') }}</a>
+			<a class="bottone" href="#">{{ _e('Print Tickets', 'san-carlo-theme') }}</a>
 		</div>
 	</div>
 </div>

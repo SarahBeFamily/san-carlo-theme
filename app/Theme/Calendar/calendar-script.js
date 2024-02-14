@@ -47,7 +47,7 @@
 			activeSlide = parseInt($('#active-slide').val()),
 			maxSlide = parseInt($('#active-slide').attr('max-value'));
 
-			console.log(activeSlide);
+			// console.log(activeSlide);
 
 		if (next == true && activeSlide < maxSlide) {
 			$('.calendar .event.active').siblings(`.dettaglio-evento[index="${activeSlide}"]`).fadeOut();
@@ -139,11 +139,49 @@
 		// console.log(month);
 		ajaxCall(month, year);
 	});
+
+
+	let loadingArray = {},
+		id_var = 0;
+
+	function progressLoading(time, speed = 5) {
+		const animate = () => {
+			time++;
+			let timeInt = parseInt(time);
+			$('#loading-progress .progress-bar').width(`${time}%`);
+			$('#loading-progress .progress-bar').html(`${timeInt}%`);
+		};
+
+		
+		loadingArray[++id_var] = setInterval(intLoading, speed);
+
+		if (time === 0) {
+			$('#loading-progress').removeClass('hidden');
+		}
+		else if (time === 'clear') {
+			for( var id in loadingArray ){
+				clearInterval( loadingArray[id] );
+			}
+			$('#loading-progress').addClass('hidden');
+		}
+
+		function intLoading() {
+			if (time === 100) {
+				for( var id in loadingArray ){
+					clearInterval( loadingArray[id] );
+				}
+				$('#loading-progress').addClass('hidden');
+			} else {
+				animate();
+			}
+		}
+	}
 	
 	// Questa funzione esegue una chiamata AJAX per ottenere il calendario del mese e dell'anno specificati.
 	function ajaxCall(month, year) {
 		// Aggiunge la classe 'loading' al corpo del documento.
 		$('body').addClass('loading');
+		progressLoading(0, 80); // Mostra la barra di caricamento allo 0%
 
 		// Esegue la chiamata AJAX.
 		$.ajax({
@@ -165,7 +203,7 @@
 					// Altrimenti, analizza la risposta come JSON.
 					let resp = xhr.responseText;
 					let jsonp = JSON.parse(resp);
-					console.log(jsonp);
+					// console.log(jsonp);
 
 					// Se esiste un elemento con la classe 'bf-calendar-wrap', sostituisci il suo contenuto con la risposta.
 					if($('.bf-calendar-wrap').length > 0) {
@@ -178,6 +216,7 @@
 					checkActiveEvent();
 					// Rimuove la classe 'loading' dal corpo del documento.
 					$('body').removeClass('loading');
+					progressLoading('clear');
 				}
 			}
 		});

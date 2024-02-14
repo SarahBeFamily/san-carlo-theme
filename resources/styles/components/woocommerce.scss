@@ -36,6 +36,12 @@ body:not(.woocommerce-cart, .mio-account) {
 	}
 }
 
+// body.cart {
+// 	.woo-wrap {
+// 		margin-top: 0!important;
+// 	}
+// }
+
 .woocommerce {
 	background-color: var(--light-gray);
 
@@ -295,7 +301,7 @@ body.woocommerce-cart {
 	}
 
 	.woocommerce-notices-wrapper {
-		margin: 7% auto 0 !important;
+		margin: 3% auto 0 !important;
 		width: 77.2% !important;
 		background-color: white;
 	}
