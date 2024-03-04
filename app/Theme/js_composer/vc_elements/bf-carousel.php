@@ -141,6 +141,7 @@ class BF_Carousel extends WPBakeryShortCode {
 
 						$html .= '<a class="info-wrap" href="'.get_permalink( $post ).'" title="'. get_the_title( $post ) .'">';
 							$html .= '<div class="info">';
+								$html .= isset($cat) ? '<p class="cat">'.$cat.'</p>' : '';
 								/* translators: %s è la data di inizio spettacolo */
 								$html .= '<p class="data">'. sprintf(__('From %s', 'san-carlo-theme'), $data_full).'</p>';
 								$html .= '<div class="col -title">';
@@ -151,7 +152,7 @@ class BF_Carousel extends WPBakeryShortCode {
 								$html .= '</div>';
 							$html .= '</div>';
 							$html .= '<div class="col -buttons">';
-								$html .= isset($cat) ? '<div class="cat">'.$cat.'</div>' : '';
+								// $html .= isset($cat) ? '<div class="cat">'.$cat.'</div>' : '';
 								$html .= '<span class="bf-btn primary icon-only"><i class="bf-icon icon-arrow-right white"></i></span>';
 							$html .= '</div>';
 						$html .= '</a>';

@@ -1047,4 +1047,13 @@ function skip_logout_confirmation() {
     }
     add_shortcode( 'events_by_datetime', 'events_by_datetime_shortcode' );
 
-    
+
+    /**
+     * Add custom button text to WooCommerce checkout page
+     */
+    add_filter( 'woocommerce_order_button_text', 'wc_custom_order_button_text' ); 
+
+    function wc_custom_order_button_text() {
+        return __( 'Pay Securely', 'woocommerce' ); 
+    }
+

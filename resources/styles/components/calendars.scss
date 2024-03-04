@@ -181,7 +181,7 @@
                         width: 100%;
                         margin: 3px 0;
                         color: var(--text);
-                        font-size: max(14px,min(1vw,24px));
+                        font-size: max(14px,min(1vw,24px)) !important;
     
                         i {
                             margin-right: 10px;
@@ -211,6 +211,16 @@
         .button {
             text-decoration: none;
             cursor: pointer;
+
+            &.next {
+                @include respond-to($mini-desktop) {
+                    margin-right: -40px;
+                }
+
+                @include respond-to($small-desktop) {
+                    margin-right: -40px;
+                }
+            }
         }
     }
 }
