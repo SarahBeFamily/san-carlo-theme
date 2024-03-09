@@ -207,8 +207,8 @@ msgid "Search results for &#8220;%s&#8221;"
 msgstr "Risultati di ricerca per &#8220;%s&#8221;"
 
 #: resources/views/sections/footer.blade.php:10
-msgid "Newsletter"
-msgstr "Newsletter"
+msgid "Join our Community!"
+msgstr "Iscriviti alla Community!"
 
 #: resources/views/sections/row-buy.blade.php:11
 msgid "Buy now"

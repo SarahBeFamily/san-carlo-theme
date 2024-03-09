@@ -90,7 +90,7 @@ function categorie_spettacolo_tax()  {
 	);
 	register_taxonomy( 'categoria-spettacoli', 'spettacoli', $args );
 }
-add_action( 'init', 'categorie_spettacolo_tax' );
+add_action( 'init', 'categorie_spettacolo_tax', 1 );
 
 // Categorie Pagine per ordinarle
 function categorie_page_tax()  {

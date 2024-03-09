@@ -91,8 +91,8 @@ add_filter( 'body_class', 'theme_body_classes' );
  */
 
  include __DIR__.'/app/Theme/cpt.php';
- include __DIR__.'/app/Theme/Calendar/calendar_class.php';
  include __DIR__.'/app/Theme/Classes/rest_api.php';
+ include __DIR__.'/app/Theme/Calendar/calendar_class.php';
  include __DIR__.'/app/Theme/walker.php';
  include __DIR__.'/app/Theme/widget.php';
 
@@ -321,8 +321,16 @@ add_shortcode('dynamic_copyright', 'dynamic_copyright_shortcode');
 
 add_filter('login_redirect', 'my_login_redirect', 10, 3);
 function my_login_redirect($redirect_to, $requested_redirect_to, $user) {
-    $redirect_page = get_page_by_title( 'Accedi', '', 'page' );
-    $press_page = get_page_by_title( 'Area stampa', '', 'page' );
+    $query_area_stampa = new \WP_Query([
+        'post_type' => 'page',
+        'post_title' => 'Area stampa',
+    ]);
+    $press_page = $query_area_stampa->posts[0];
+    $query_page = new \WP_Query([
+        'post_type' => 'page',
+        'post_title' => 'Accedi',
+    ]);
+    $redirect_page = $query_page->posts[0];
 
     if (is_wp_error($user)) {
         //Login failed, find out why...
@@ -863,103 +871,108 @@ add_action ( 'wp_ajax_nopriv_invia_mail_prenotazione', 'invia_mail_prenotazione'
 add_action ( 'wp_ajax_invia_mail_prenotazione', 'invia_mail_prenotazione', 10 );
 
 add_filter( 'wpml_pb_shortcode_encode', 'wpml_pb_shortcode_encode_urlencoded_json', 10, 3 );
-	function wpml_pb_shortcode_encode_urlencoded_json( $string, $encoding, $original_string ) {
-		if ( 'urlencoded_json' === $encoding ) {
-			$output = array();
-			foreach ( $original_string as $combined_key => $value ) {
-				$parts = explode( '_', $combined_key );
-				$i = array_pop( $parts );
-				$key = implode( '_', $parts );
-				$output[ $i ][ $key ] = $value;
-			}
-			$string = urlencode( json_encode( $output ) );
-		}
-		return $string;
-	}
+function wpml_pb_shortcode_encode_urlencoded_json( $string, $encoding, $original_string ) {
+    if ( 'urlencoded_json' === $encoding ) {
+        $output = array();
+        foreach ( $original_string as $combined_key => $value ) {
+            $parts = explode( '_', $combined_key );
+            $i = array_pop( $parts );
+            $key = implode( '_', $parts );
+            $output[ $i ][ $key ] = $value;
+        }
+        $string = urlencode( json_encode( $output ) );
+    }
+    return $string;
+}
 	 
-	add_filter( 'wpml_pb_shortcode_decode', 'wpml_pb_shortcode_decode_urlencoded_json', 10, 3 );
-	function wpml_pb_shortcode_decode_urlencoded_json( $string, $encoding, $original_string ) {
-		if ( 'urlencoded_json' === $encoding ) {
-			$rows = json_decode( urldecode( $original_string ), true );
-			$string = array();
-			foreach ( $rows as $i => $row ) {
-				foreach ( $row as $key => $value ) {
-				if ( in_array( $key, array( 'text', 'title', 'features', 'featured_img', 'substring', 'btn_text', 'label', 'value', 'link_button_slide', 'title_slide', 'text_slide', 'date_slide' ) ) ) {
-						$string[ $key . '_' . $i ] = array( 'value' => $value, 'translate' => true );
-					} else {
-						$string[ $key . '_' . $i ] = array( 'value' => $value, 'translate' => false );
-					}
-				}
-			}
-		}
-		return $string;
-	}
+add_filter( 'wpml_pb_shortcode_decode', 'wpml_pb_shortcode_decode_urlencoded_json', 10, 3 );
+function wpml_pb_shortcode_decode_urlencoded_json( $string, $encoding, $original_string ) {
+    if ( 'urlencoded_json' === $encoding ) {
+        $rows = json_decode( urldecode( $original_string ), true );
+        $string = array();
+        foreach ( $rows as $i => $row ) {
+            foreach ( $row as $key => $value ) {
+            if ( in_array( $key, array( 'text', 'title', 'features', 'featured_img', 'substring', 'btn_text', 'label', 'value', 'link_button_slide', 'title_slide', 'text_slide', 'date_slide' ) ) ) {
+                    $string[ $key . '_' . $i ] = array( 'value' => $value, 'translate' => true );
+                } else {
+                    $string[ $key . '_' . $i ] = array( 'value' => $value, 'translate' => false );
+                }
+            }
+        }
+    }
+    return $string;
+}
 
 function events_en_query_shortcode($atts = [], $content = null) {
     $atts = shortcode_atts( array(
         'categoria_spettacoli' => '',
         'data_inizio' => 'now',
         ), $atts, 'events_en' );
-
-    $categoria_spettacoli = $atts['categoria_spettacoli'];
-    $data_inizio = $atts['data_inizio'];
-
-    $tax_query = array();
-    if ($categoria_spettacoli !== '') {
-        $tax_query[] = array(
-            'taxonomy' => 'categoria-spettacoli',
-            'field' => 'term_id',
-            'terms' => $categoria_spettacoli,
-            'operator'   => 'IN',
-        );
-        $tax_query['relation'] = 'AND';
-    }
-
-    $args = array(
-        'post_type' => 'spettacoli',
-        'numberposts' => -1,
-        'orderby' => 'meta_value',
-        'suppress_filters' => false,
-        'meta_query' => array(array(
-               'key' => 'data_inizio',
-               'value' => date('Ymd', strtotime($data_inizio)),
-               'compare' => '>=',
-               'type' => 'DATE',
-        )),
-        'tax_query' => $tax_query
-    );
-
-    // var_dump($atts);
-    // var_dump($args);
-    $query = get_posts($args);
-
+    
     $output = array();
 
-    foreach ($query as $post) {
-        $id = $post->ID;
-        $cats = array();
-        $terms = get_the_terms( $id, 'categoria-spettacoli' ); 
-        if (is_array($terms) && !empty($terms)):
-        foreach($terms as $term) {
-            $cats[] = $term->term_id;
-        }
-        endif;
+    if('icl_language_code' == 'en') {
+        $categoria_spettacoli = $atts['categoria_spettacoli'];
+        $data_inizio = $atts['data_inizio'];
 
-        $output[] = (object) [
-            'id' => $id,
-            'slug' => $post->post_name,
-            'link' => get_permalink($id),
-            'title' => [
-                'rendered' => get_the_title($id)
-            ],
-            'excerpt' => get_the_excerpt( $id ),
-            'categoria-spettacoli' => $cats,
-            'acf' => [
-                'data_inizio' => get_field('data_inizio', $id),
-                'data_fine' => get_field('data_fine', $id),
-                'immagine_verticale' => get_field('immagine_verticale', $id),
-            ]
-        ];
+        $tax_query = array();
+        if ($categoria_spettacoli !== '') {
+            $tax_query[] = array(
+                'taxonomy' => 'categoria-spettacoli',
+                'field' => 'term_id',
+                'terms' => $categoria_spettacoli,
+                'operator'   => 'IN',
+            );
+            $tax_query['relation'] = 'AND';
+        }
+
+        $args = array(
+            'post_type' => 'spettacoli',
+            'post_status' => 'publish',
+            'numberposts' => -1,
+            'orderby' => 'meta_value',
+            'suppress_filters' => false,
+            'meta_query' => array(array(
+                'key' => 'data_inizio',
+                'value' => date('Ymd', strtotime($data_inizio)),
+                'compare' => '>=',
+                'type' => 'DATE',
+            )),
+            'tax_query' => $tax_query
+        );
+
+        // var_dump($atts);
+        // var_dump($args);
+        $query = get_posts($args);
+
+        // $output = array();
+
+        foreach ($query as $post) {
+            $id = $post->ID;
+            $cats = array();
+            $terms = get_the_terms( $id, 'categoria-spettacoli' ); 
+            if (is_array($terms) && !empty($terms)):
+            foreach($terms as $term) {
+                $cats[] = $term->term_id;
+            }
+            endif;
+
+            $output[] = (object) [
+                'id' => $id,
+                'slug' => $post->post_name,
+                'link' => get_permalink($id),
+                'title' => [
+                    'rendered' => get_the_title($id)
+                ],
+                'excerpt' => get_the_excerpt( $id ),
+                'categoria-spettacoli' => $cats,
+                'acf' => [
+                    'data_inizio' => get_field('data_inizio', $id),
+                    'data_fine' => get_field('data_fine', $id),
+                    'immagine_verticale' => get_field('immagine_verticale', $id),
+                ]
+            ];
+        }
     }
 
     return json_encode($output);
@@ -979,81 +992,15 @@ function skip_logout_confirmation() {
         wp_redirect( str_replace( '&amp;', '&', wp_logout_url( home_url() ) ) );
         exit;
       }
-    }
-    add_action( 'template_redirect', 'skip_logout_confirmation' );
+}
+add_action( 'template_redirect', 'skip_logout_confirmation' );
 
 
-    function events_by_datetime_shortcode($atts = [], $content = null) {
-		$args = array(
-            'public' => true,
-            '_builtin' => false,
-            'post_type' => 'spettacoli',
-            'numberposts' => -1,
-            'suppress_filters' => false,
-        );
-        $posts = get_posts($args);
-        $eventi_arr['date'] = array();
-        $pair = array();
+/**
+ * Add custom button text to WooCommerce checkout page
+ */
+add_filter( 'woocommerce_order_button_text', 'wc_custom_order_button_text' ); 
 
-        foreach ($posts as $post) {
-            $spettacolo_data = stcticket_spettacolo_data(get_field('prodotto_relazionato', $post));
-            $evento_date = array();
-
-            $cats = '';
-            foreach (get_the_terms( $post, 'categoria-spettacoli' ) as $cat) {
-                $cats = $cat->name;
-            }
-
-            if (is_array($spettacolo_data['date'])) :
-            foreach ($spettacolo_data['date'] as $dettaglio) {
-                $data_ora_array = explode(' ', $dettaglio['date']);
-                $data = str_replace('-', '/', $data_ora_array[0]); // 16/09/2023
-                $ora = $data_ora_array[1]; // 19:30
-                $today = date('Ymd');
-                $data_array = explode('/', $data);
-                $data_reale = date('Ymd', strtotime($data_array[2].$data_array[1].$data_array[0]));
-
-                if ($data_reale >= $today) {
-                    $evento_date[$data][$post->ID]['ID'] = $post->ID;
-                    $evento_date[$data][$post->ID]['titolo'] = get_the_title( $post );
-                    $evento_date[$data][$post->ID]['cat'] = $cats;
-                    $evento_date[$data][$post->ID]['permalink'] = get_permalink( $post );
-                    $evento_date[$data][$post->ID]['featured_image'] = get_the_post_thumbnail_url( $post, 'medium' );
-                    $evento_date[$data][$post->ID]['featured_vertical'] = get_field( 'immagine_verticale', $post );
-                    $evento_date[$data][$post->ID]['data'] = $data;
-                    $evento_date[$data][$post->ID]['orario'] = $ora;
-                    $evento_date[$data][$post->ID]['location'] = $spettacolo_data['location'];
-                    $evento_date[$data][$post->ID]['ticket_link'] = $dettaglio['url'];
-                }
-
-                foreach ($evento_date as $data => $evento) {
-                    $datachange = explode('/', $data);
-                    $datadef = $datachange[2].'/'.$datachange[1].'/'.$datachange[0];
-                    $pair[$datadef] = $evento;
-                }
-            }
-
-            $eventi_arr['date'] = $pair;
-            ksort($eventi_arr['date']);
-
-            else :
-                echo 'oooooooooooooooooo'.$spettacolo_data['date'];
-            endif;
-        }
-
-        echo '<pre>';
-            var_dump($eventi_arr['date']);
-        echo '</pre>';
-    }
-    add_shortcode( 'events_by_datetime', 'events_by_datetime_shortcode' );
-
-
-    /**
-     * Add custom button text to WooCommerce checkout page
-     */
-    add_filter( 'woocommerce_order_button_text', 'wc_custom_order_button_text' ); 
-
-    function wc_custom_order_button_text() {
-        return __( 'Pay Securely', 'woocommerce' ); 
-    }
-
+function wc_custom_order_button_text() {
+    return __( 'Pay Securely', 'woocommerce' ); 
+}

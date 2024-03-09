@@ -25,6 +25,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<h2>@php esc_html_e( 'Login', 'woocommerce' ); @endphp</h2>
 
+		<p>@php esc_html_e( 'Fill the form with your personal details and create your account. You can modify or cancel the provided information whenever you want entering your personal area.', 'san-carlo-theme' ); @endphp</p>
+
 		<form class="woocommerce-form woocommerce-form-login login" method="post">
 
 			@action( 'woocommerce_login_form_start' )

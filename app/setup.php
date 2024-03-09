@@ -29,7 +29,10 @@ add_action('wp_enqueue_scripts', function () {
         'upload_nonce' => wp_create_nonce('upload_file'),
         'events_en' => do_shortcode( '[events_en]' ),
     ]);
-    wp_enqueue_script('vuejs', get_stylesheet_directory_uri() . '/app/Theme/vue-2.6.11.min.js', [], '2.6.11');
+
+    if (!is_front_page()) {
+        wp_enqueue_script('vuejs', get_stylesheet_directory_uri() . '/app/Theme/vue-2.6.11.min.js', [], '2.6.11');
+    }
 }, 100);
 
 /**
@@ -165,7 +168,12 @@ add_action('after_setup_theme', function () {
  * @return void
  */
 add_action('template_redirect', function () {
-    $redirect_page = get_page_by_title( 'Accedi', '', 'page' );
+
+    $query_page = new \WP_Query([
+        'post_type' => 'page',
+        'post_title' => 'Accedi',
+    ]);
+    $redirect_page = $query_page->posts[0];
     $restricted_role = get_field('accesso');
     $current_user = get_userdata( get_current_user_id() );
 
@@ -284,3 +292,77 @@ add_action('wp_head', function() {
         return;
     }
 }, 5);
+
+/**
+ * Preload Shows data
+ */
+add_action('wp_footer', function() {
+    if (is_front_page()) {
+        $args = array(
+            'public' => true,
+            '_builtin' => false,
+            'post_type' => 'spettacoli',
+            'numberposts' => -1,
+            'suppress_filters' => false,
+        );
+        $posts = get_posts($args);
+        $eventi_arr['date'] = array();
+        $pair = array();
+
+        foreach ($posts as $post) {
+            $spettacolo_data = stcticket_spettacolo_data(get_field('prodotto_relazionato', $post));
+            $evento_date = array();
+
+            $cats = '';
+            foreach (get_the_terms( $post, 'categoria-spettacoli' ) as $cat) {
+                $cats = $cat->name;
+            }
+
+            if (is_array($spettacolo_data['date'])) :
+            foreach ($spettacolo_data['date'] as $dettaglio) {
+                $data_ora_array = explode(' ', $dettaglio['date']);
+                $data = str_replace('-', '/', $data_ora_array[0]); // 16/09/2023
+                $ora = $data_ora_array[1]; // 19:30
+                $today = date('Ymd');
+                $data_array = explode('/', $data);
+                $data_reale = date('Ymd', strtotime($data_array[2].$data_array[1].$data_array[0]));
+
+                if ($data_reale >= $today) {
+                    $evento_date[$data][$post->ID]['ID'] = $post->ID;
+                    $evento_date[$data][$post->ID]['titolo'] = get_the_title( $post );
+                    $evento_date[$data][$post->ID]['cat'] = $cats;
+                    $evento_date[$data][$post->ID]['permalink'] = get_permalink( $post );
+                    $evento_date[$data][$post->ID]['featured_image'] = get_the_post_thumbnail_url( $post, 'large' );
+                    $evento_date[$data][$post->ID]['featured_vertical'] = get_field( 'immagine_verticale', $post );
+                    $evento_date[$data][$post->ID]['data'] = $data;
+                    $evento_date[$data][$post->ID]['orario'] = $ora;
+                    $evento_date[$data][$post->ID]['location'] = $spettacolo_data['location'];
+                    $evento_date[$data][$post->ID]['ticket_link'] = $dettaglio['url'];
+                }
+
+                foreach ($evento_date as $data => $evento) {
+                    $datachange = explode('/', $data);
+                    $datadef = $datachange[2].'/'.$datachange[1].'/'.$datachange[0];
+                    $pair[$datadef] = $evento;
+                }
+            }
+
+            $eventi_arr['date'] = $pair;
+            ksort($eventi_arr['date']);
+
+            endif;
+        }
+
+        if ($eventi_arr['date'] == array())
+            return;
+        
+        // Create new option if not exists
+        if ( !get_option( 'shows_data' ) ) {
+            add_option( 'shows_data', $eventi_arr );
+        } else {
+            update_option( 'shows_data', $eventi_arr );
+        }
+
+        echo '<script>let shows_data = '.json_encode($eventi_arr).'</script>';
+    }
+}, 100);

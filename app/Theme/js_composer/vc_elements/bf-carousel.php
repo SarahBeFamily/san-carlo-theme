@@ -82,6 +82,7 @@ class BF_Carousel extends WPBakeryShortCode {
 
 				$posts = get_posts(array(
 					'post_type' => $post_type,
+					'post_status' => 'publish',
 					'suppress_filters' => false,
 					'numberposts' => -1,
 					'meta_key' => 'data_inizio',

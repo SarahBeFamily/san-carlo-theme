@@ -20,6 +20,7 @@ class Calendar {
     private $currentDate = null;
     private $daysInMonth = 0;
     private $events = [];
+    private $APIevents = [];
 
 
     public function __construct($date = null) {
@@ -27,6 +28,7 @@ class Calendar {
         $this->active_year = $date != null ? date('Y', strtotime($date)) : date('Y');
         $this->active_month = $date != null ? date('m', strtotime($date)) : date('m');
         $this->active_day = $date != null ? date('d', strtotime($date)) : date('d');
+        $this->_createListEvents();
     }
 
     function init() {
@@ -34,6 +36,7 @@ class Calendar {
 
         add_action( 'wp_ajax_calendar_ajax_call', [ $this, 'calendar_ajax_call' ] );
         add_action( 'wp_ajax_nopriv_calendar_ajax_call', [ $this, 'calendar_ajax_call' ] );
+        
     }
 
     function register_routes() {
@@ -63,11 +66,10 @@ class Calendar {
         $year = $_POST['y'];
     
         $calendar = new Calendar();
-    
         $html = $calendar->show($month, $year);
     
         if ( ! check_ajax_referer( 'calendar_nonce', 'nonce' ) )
-            wp_send_json_error();
+            wp_send_json_error( 'Invalid Nonce' );
     
         wp_send_json( $html );
     }
@@ -101,6 +103,22 @@ class Calendar {
 		return wp_date('t', strtotime($year.'-'.$month.'-01'));
 	}
 
+    private function _createListEvents() {
+        // Check if the API is already called
+        if (!empty($this->APIevents))
+            return;
+
+        if ( ! class_exists( 'WP_Site_Health' ) ) {
+            require_once ABSPATH . 'wp-admin/includes/class-wp-site-health.php';
+        }
+        
+        $request = new WP_REST_Request( 'GET', '/wp/v2/events-datetime' );
+        $request->set_query_params( [ 'per_page' => 999 ] );
+        $response = rest_do_request( $request );
+        $server = rest_get_server();
+        $this->APIevents = $server->response_to_data( $response, false );
+    }
+
     private function _addEventToCal($calDay, $calMonth, $calYear, $currentMonth, $lastMonthDay, $ignore) {
 
         $calDay = strlen($calDay) == 1 ? sprintf("%02d", $calDay) : $calDay;
@@ -110,91 +128,88 @@ class Calendar {
         $firstCurrent = '';
         $max_n = 0;
         $today = date('d/m/Y', strtotime('today'));
-        $go = 'ok';
+        $go = 'ok';    
 
-        $request = new WP_REST_Request( 'GET', '/wp/v2/events-datetime' );
-        $request->set_query_params( [ 'per_page' => 999 ] );
-        $response = rest_do_request( $request );
-        $server = rest_get_server();
-        $response = $server->response_to_data( $response, false );            
+        if( !empty($this->APIevents) ) {
+            
+            foreach ($this->APIevents['date'] as $data_array => $events) {
 
-        foreach ($response['date'] as $data_array => $events) {
+                $n = intval(count($events) -1);
+                $data_array_data = date('d/m/Y', strtotime($data_array));
+                $month_position = strpos($data_array, '/'.$calMonth.'/') !== false ? strpos($data_array, $calMonth) : null;
 
-            $n = intval(count($events) -1);
-            $data_array_data = date('d/m/Y', strtotime($data_array));
-            $month_position = strpos($data_array, '/'.$calMonth.'/') !== false ? strpos($data_array, $calMonth) : null;
+                $_toDate = date('d/m/Y', strtotime(str_replace('/', '-', $data_array)));
+                $_toDay = explode('/', $_toDate);
 
-            $_toDate = date('d/m/Y', strtotime(str_replace('/', '-', $data_array)));
-            $_toDay = explode('/', $_toDate);
+                while ($month_position != null) {
+                    $firstCurrent = $go == 'ok' ? $_toDate : $firstCurrent;
+                    $go = 'ko';
+                    break;
+                }
+        
+                $next_event[$data_array]['style'] = 'display:none;';
+                $next_event[$data_array]['class'] = '';
+                $next_event_display = $calData == $firstCurrent ? '' : 'display:none;';
+                $next_event_class = $calData == $firstCurrent ? 'active' : '';
 
-            while ($month_position != null) {
-                $firstCurrent = $go == 'ok' ? $_toDate : $firstCurrent;
-                $go = 'ko';
-                break;
-            }
-    
-            $next_event[$data_array]['style'] = 'display:none;';
-            $next_event[$data_array]['class'] = '';
-            $next_event_display = $calData == $firstCurrent ? '' : 'display:none;';
-            $next_event_class = $calData == $firstCurrent ? 'active' : '';
+                foreach ($events as $event) :
 
-            foreach ($events as $event) :
+                    $data = $event['data'];
 
-                $data = $event['data'];
+                    if($calYear == $_toDay[2] && $calMonth == $_toDay[1]):
+                    if ($calDay == $_toDay[0]) {
 
-                if($calYear == $_toDay[2] && $calMonth == $_toDay[1]):
-                if ($calDay == $_toDay[0]) {
+                        // controllo se i giorni sono a cavallo di 2 mesi
+                        if (is_string($data) && strpos((is_string($data) ? $data : chr($data)),'/') !== false ) {
+                            $dayEvent = strlen($_toDay[0]) == 1 ? sprintf("%02d", $_toDay[0]) : $_toDay[0];
+                            $giorno_evento = strpos($_toDay[0], '0') === 0 ? str_replace('0', '', $_toDay[0]) : $_toDay[0];
+                            // definisco il mese successivo (sempre a 2 cifre)
+                            $nextMonth = strlen($_toDay[1]) == 1 ? sprintf("%02d", $_toDay[1]) : $_toDay[1];
+                            $calDay = strlen($calDay) == 1 ? sprintf("%02d", $calDay) : $calDay;
+                            $calMonth = strlen($calMonth) == 1 ? sprintf("%02d", $calMonth) : $calMonth;
 
-                    // controllo se i giorni sono a cavallo di 2 mesi
-                    if (is_string($data) && strpos((is_string($data) ? $data : chr($data)),'/') !== false ) {
-                        $dayEvent = strlen($_toDay[0]) == 1 ? sprintf("%02d", $_toDay[0]) : $_toDay[0];
-                        $giorno_evento = strpos($_toDay[0], '0') === 0 ? str_replace('0', '', $_toDay[0]) : $_toDay[0];
-                        // definisco il mese successivo (sempre a 2 cifre)
-                        $nextMonth = strlen($_toDay[1]) == 1 ? sprintf("%02d", $_toDay[1]) : $_toDay[1];
-                        $calDay = strlen($calDay) == 1 ? sprintf("%02d", $calDay) : $calDay;
-                        $calMonth = strlen($calMonth) == 1 ? sprintf("%02d", $calMonth) : $calMonth;
+                            if (
+                                date('d/m/Y', strtotime($calData)) === date('d/m/Y', strtotime((int)$_toDay[0] . '/' . (int)$_toDay[1] . '/' . $_toDay[2]))
+                            ) {
+                                $calNextMonthData = $dayEvent.'/'.$nextMonth.'/'.$_toDay[2];
 
-                        if (
-                            date('d/m/Y', strtotime($calData)) === date('d/m/Y', strtotime((int)$_toDay[0] . '/' . (int)$_toDay[1] . '/' . $_toDay[2]))
-                        ) {
-                            $calNextMonthData = $dayEvent.'/'.$nextMonth.'/'.$_toDay[2];
+                                $n++;
 
-                            $n++;
-
-                            $event_code .= '<div class="event '.$event['cat'].' evento-'.$event['ID'].'  '.$next_event_class.'" data-id="evento-'.$event['ID'].'" event-date="'.$event['data'].'">'.$giorno_evento.'</div>';
-                            
-                            // aggiungo il popup visibile al click
-                            $pos = ($n-1) != 0 ? '-'.(($n-1)*100).'%' : '0';
-                            // $pos = $n != 0 ? '-'.($n * 100).'%' : '0';
-                            // $event_code .= '<div class="dettaglio-evento" index="'.$n.'" data-pos="'.$pos.'" data-id="evento-'.$event['ID'].'" event-date="'.$_toDate.'" style="'.$next_event_display.' right:'.$pos.'">';
-                            $event_code .= '<div class="dettaglio-evento" index="'.$n.'" data-pos="'.$pos.'" data-id="evento-'.$event['ID'].'" event-date="'.$event['data'].'" style="'.$next_event_display.'">';
-                                $event_code .= '<div class="inner flex">';
-                                    $event_code .= '<div class="foto" style="background-image:url('.$event['featured_image'].');">';
-                                        $event_code .= '<div class="cal-slide"><span class="current-slide">'.$n.'</span> / <span class="total-slide"></span></div>';
-                                    $event_code .= '</div>';
-                                    $event_code .= '<div class="info">';
-                                        $event_code .= '<p class="title">'.$event['titolo'].'</p>';
-                                        $event_code .= '<div class="pop-orari">';
-                                            $event_code .= '<p><i class="bf-icon icon-calendar"></i> '.$event['data'].'</p>';
-                                            $event_code .= '<p><i class="bf-icon icon-pin"></i> '.$event['location'].'</p>';
-                                            $event_code .= '<p><i class="bf-icon icon-clock"></i> '.$event['orario'].'</p>';
+                                $event_code .= '<div class="event '.$event['cat'].' evento-'.$event['ID'].'  '.$next_event_class.'" data-id="evento-'.$event['ID'].'" event-date="'.$event['data'].'">'.$giorno_evento.'</div>';
+                                
+                                // aggiungo il popup visibile al click
+                                $pos = ($n-1) != 0 ? '-'.(($n-1)*100).'%' : '0';
+                                // $pos = $n != 0 ? '-'.($n * 100).'%' : '0';
+                                // $event_code .= '<div class="dettaglio-evento" index="'.$n.'" data-pos="'.$pos.'" data-id="evento-'.$event['ID'].'" event-date="'.$_toDate.'" style="'.$next_event_display.' right:'.$pos.'">';
+                                $event_code .= '<div class="dettaglio-evento" index="'.$n.'" data-pos="'.$pos.'" data-id="evento-'.$event['ID'].'" event-date="'.$event['data'].'" style="'.$next_event_display.'">';
+                                    $event_code .= '<div class="inner flex">';
+                                        $event_code .= '<div class="foto" style="background-image:url('.$event['featured_image'].');">';
+                                            $event_code .= '<div class="cal-slide"><span class="current-slide">'.$n.'</span> / <span class="total-slide"></span></div>';
                                         $event_code .= '</div>';
+                                        $event_code .= '<div class="info">';
+                                            $event_code .= '<p class="title">'.$event['titolo'].'</p>';
+                                            $event_code .= '<div class="pop-orari">';
+                                                $event_code .= '<p><i class="bf-icon icon-calendar"></i> '.$event['data'].'</p>';
+                                                $event_code .= '<p><i class="bf-icon icon-pin"></i> '.$event['location'].'</p>';
+                                                $event_code .= '<p><i class="bf-icon icon-clock"></i> '.$event['orario'].'</p>';
+                                            $event_code .= '</div>';
+                                            $event_code .= '<a class="bf-btn primary icon-ticket" href="'.$event['ticket_link'].'">'.__('Buy tickets', 'san-carlo-theme').'</a>';
+                                            $event_code .= '<a class="bf-link primary" href="'.$event['permalink'].'">'.__('Discover more', 'san-carlo-theme').'</a>';
+                                        $event_code .= '</div>';
+                                    $event_code .= '</div>';
+                                    /* mobile */
+                                    $event_code .= '<div class="info-mobile">';
                                         $event_code .= '<a class="bf-btn primary icon-ticket" href="'.$event['ticket_link'].'">'.__('Buy tickets', 'san-carlo-theme').'</a>';
                                         $event_code .= '<a class="bf-link primary" href="'.$event['permalink'].'">'.__('Discover more', 'san-carlo-theme').'</a>';
                                     $event_code .= '</div>';
+                    
                                 $event_code .= '</div>';
-                                /* mobile */
-                                $event_code .= '<div class="info-mobile">';
-                                    $event_code .= '<a class="bf-btn primary icon-ticket" href="'.$event['ticket_link'].'">'.__('Buy tickets', 'san-carlo-theme').'</a>';
-                                    $event_code .= '<a class="bf-link primary" href="'.$event['permalink'].'">'.__('Discover more', 'san-carlo-theme').'</a>';
-                                $event_code .= '</div>';
-                
-                            $event_code .= '</div>';
+                            }
                         }
                     }
-                }
-                endif;
-            endforeach;
+                    endif;
+                endforeach;
+            }
         }
 
         return $event_code;
@@ -338,8 +353,7 @@ class Calendar {
         if (isset($_GET['month']) && isset($_GET['y'])) {
 			$month = $_GET['month'];
             $year = $_GET['y']; //(string) get_query_var('y');
-		} else if ((is_null($month) || (string) get_query_var('month') == '0')
-            && (is_null($year) || (string) get_query_var('y') == '0') ) {
+		} else if ((is_null($month) || (string) get_query_var('month') == '0') && (is_null($year) || (string) get_query_var('y') == '0') ) {
 			$month = $this->active_month;
             $year = $this->active_year;
             $day = $this->active_day;

@@ -148,6 +148,7 @@ class BF_Slider_Home extends WPBakeryShortCode {
 		$today = date('Ymd');
 		$args = array(
 			'post_type' => 'spettacoli',
+			'post_status' => 'publish',
 			'numberposts' => 4,
 			'posts_per_page' => 4,
 			'meta_key' => 'data_inizio',

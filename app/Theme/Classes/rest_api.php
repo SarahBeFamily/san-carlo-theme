@@ -28,10 +28,13 @@
 		  $taxonomies = get_taxonomies($args, $output, $operator);
 		  foreach ($taxonomies as $key => $taxonomy_name) {
 			  if($taxonomy_name = $_GET['term']){
-			  $return = get_terms($taxonomy_name);
+				  $return = get_terms($taxonomy_name);
+			  }
 		  }
-		  }
-		  return new WP_REST_Response($return, 200);
+
+		  $result = new WP_REST_Response($return, 200);
+		  $result->set_headers(array('Cache-Control' => 'max-age=3600'));
+		  return $result;
 	  }
   }
   
@@ -55,21 +58,24 @@
 			$args = array(
 				'public' => true,
 				'_builtin' => false,
+				'post_status' => 'publish',
 				'post_type' => 'spettacoli',
 				'numberposts' => -1,
-				'suppress_filters' => false,
+				'suppress_filters' => true,
 			);
 			$posts = get_posts($args);
 			$eventi_arr['date'] = array();
 			$pair = array();
 
 			foreach ($posts as $post) {
-				$spettacolo_data = stcticket_spettacolo_data(get_field('prodotto_relazionato', $post));
+				$prodotto_id = get_field('prodotto_relazionato', $post);
+				$spettacolo_data = stcticket_spettacolo_data($prodotto_id);
 				$evento_date = array();
 
 				$cats = '';
-				foreach (get_the_terms( $post, 'categoria-spettacoli' ) as $cat) {
-					$cats = $cat->name;
+				foreach (get_the_terms( $post->ID, 'categoria-spettacoli' ) as $cat) {
+					if (is_object($cat))
+						$cats = $cat->name;
 				}
 
 				if (is_array($spettacolo_data['date'])) :
@@ -106,7 +112,10 @@
 
 				endif;
 			}
-		  	return new WP_REST_Response($eventi_arr, 200);
+
+			$result = new WP_REST_Response($eventi_arr, 200);
+			$result->set_headers(array('Cache-Control' => 'max-age=3600'));
+		  	return $result;
 	  }
 	 
   }
@@ -130,6 +139,7 @@
 			$args = array(
 				'public' => true,
 				'_builtin' => false,
+				'post_status' => 'publish',
 				'post_type' => 'spettacoli',
 				'numberposts' => -1,
 				'suppress_filters' => false,
@@ -163,7 +173,9 @@
 				$eventi[] = $evento_date;
 			}
 
-		  	return new WP_REST_Response($eventi, 200);
+			$result = new WP_REST_Response($eventi, 200);
+			$result->set_headers(array('Cache-Control' => 'max-age=3600'));
+		  	return $result;
 	  }
 	 
   }
@@ -201,6 +213,7 @@
 
 		$args = array(
 			'post_type' => 'spettacoli',
+			'post_status' => 'publish',
 			'numberposts' => -1,
 			'suppress_filters' => false,
 			'meta_query' => array( 
@@ -263,6 +276,7 @@
         $data = new WP_REST_Response( $output, 200 );   
         $data->header( 'X-WP-Total', $total );   
         $data->header( 'X-WP-TotalPages', $totalPages);
+		$data->set_headers(array('Cache-Control' => 'max-age=3600'));
          
         return $data;
 	  }

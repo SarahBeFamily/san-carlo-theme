@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-01-17T15:42:56+01:00\n"
+"POT-Creation-Date: 2024-03-06T17:00:37+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: san-carlo-theme\n"
@@ -38,60 +38,71 @@ msgstr ""
 msgid "Continua a leggere"
 msgstr ""
 
-#: app/Theme/Calendar/calendar_class.php:182
-#: app/Theme/Calendar/calendar_class.php:188
+#: app/Theme/Calendar/calendar_class.php:196
+#: app/Theme/Calendar/calendar_class.php:202
+#: app/Theme/Classes/calendar_class.php:182
+#: app/Theme/Classes/calendar_class.php:188
 #: app/Theme/js_composer/vc_elements/bf-next-events.php:127
 #: resources/views/partials/content-single-spettacoli.blade.php:240
 msgid "Buy tickets"
 msgstr ""
 
-#: app/Theme/Calendar/calendar_class.php:183
-#: app/Theme/Calendar/calendar_class.php:189
+#: app/Theme/Calendar/calendar_class.php:197
+#: app/Theme/Calendar/calendar_class.php:203
+#: app/Theme/Classes/calendar_class.php:183
+#: app/Theme/Classes/calendar_class.php:189
 #: app/Theme/js_composer/vc_elements/bf-next-events.php:128
-#: app/Theme/js_composer/vc_elements/bf-slider-home.php:218
-#: app/Theme/js_composer/vc_elements/bf-slider-home.php:245
+#: app/Theme/js_composer/vc_elements/bf-slider-home.php:219
+#: app/Theme/js_composer/vc_elements/bf-slider-home.php:246
 #: resources/views/archive-spettacoli.blade.php:39
 #: resources/views/partials/content-single-spettacoli.blade.php:81
 msgid "Discover more"
 msgstr ""
 
-#: app/Theme/Calendar/calendar_class.php:240
+#: app/Theme/Calendar/calendar_class.php:255
+#: app/Theme/Classes/calendar_class.php:240
 msgid "Mon"
 msgstr ""
 
-#: app/Theme/Calendar/calendar_class.php:240
+#: app/Theme/Calendar/calendar_class.php:255
+#: app/Theme/Classes/calendar_class.php:240
 msgid "Tue"
 msgstr ""
 
-#: app/Theme/Calendar/calendar_class.php:240
+#: app/Theme/Calendar/calendar_class.php:255
+#: app/Theme/Classes/calendar_class.php:240
 msgid "Wed"
 msgstr ""
 
-#: app/Theme/Calendar/calendar_class.php:240
+#: app/Theme/Calendar/calendar_class.php:255
+#: app/Theme/Classes/calendar_class.php:240
 msgid "Thu"
 msgstr ""
 
-#: app/Theme/Calendar/calendar_class.php:240
+#: app/Theme/Calendar/calendar_class.php:255
+#: app/Theme/Classes/calendar_class.php:240
 msgid "Fri"
 msgstr ""
 
-#: app/Theme/Calendar/calendar_class.php:240
+#: app/Theme/Calendar/calendar_class.php:255
+#: app/Theme/Classes/calendar_class.php:240
 msgid "Sat"
 msgstr ""
 
-#: app/Theme/Calendar/calendar_class.php:240
+#: app/Theme/Calendar/calendar_class.php:255
+#: app/Theme/Classes/calendar_class.php:240
 msgid "Sun"
 msgstr ""
 
 #. translators: %1$s è la data di inizio e %2$s è la data di fine spettacolo
-#: app/Theme/js_composer/vc_elements/bf-carousel.php:125
-#: app/Theme/js_composer/vc_elements/bf-slider-home.php:197
+#: app/Theme/js_composer/vc_elements/bf-carousel.php:126
+#: app/Theme/js_composer/vc_elements/bf-slider-home.php:198
 #: resources/views/partials/content-single-spettacoli.blade.php:61
 msgid "From %1$s to %2$s"
 msgstr ""
 
 #. translators: %s è la data di inizio spettacolo
-#: app/Theme/js_composer/vc_elements/bf-carousel.php:145
+#: app/Theme/js_composer/vc_elements/bf-carousel.php:147
 msgid "From %s"
 msgstr ""
 
@@ -104,11 +115,11 @@ msgstr ""
 msgid "See all upcoming shows"
 msgstr ""
 
-#: app/Theme/js_composer/vc_elements/bf-slider-home.php:264
+#: app/Theme/js_composer/vc_elements/bf-slider-home.php:265
 msgid "Main sponsor"
 msgstr ""
 
-#: app/Theme/js_composer/vc_elements/bf-slider-home.php:302
+#: app/Theme/js_composer/vc_elements/bf-slider-home.php:303
 msgid "Next"
 msgstr ""
 
@@ -162,69 +173,69 @@ msgstr ""
 msgid "Sorry, but the page you are trying to view does not exist."
 msgstr ""
 
-#: resources/views/accedi.blade.php:26
+#: resources/views/accedi.blade.php:30
 msgid "Warning: Please insert a valid username or password"
 msgstr ""
 
-#: resources/views/accedi.blade.php:28
+#: resources/views/accedi.blade.php:32
 msgid "Warning: Please insert a password"
 msgstr ""
 
-#: resources/views/accedi.blade.php:30
+#: resources/views/accedi.blade.php:34
 msgid "Warning: Incorrect Password"
 msgstr ""
 
-#: resources/views/accedi.blade.php:32
+#: resources/views/accedi.blade.php:36
 msgid "Authentication error: please retry"
 msgstr ""
 
 #. translators: %s è il nome utente
-#: resources/views/accedi.blade.php:43
+#: resources/views/accedi.blade.php:47
 #: resources/views/woocommerce/myaccount/dashboard.blade.php:33
 msgid "Hello %s,"
 msgstr ""
 
-#: resources/views/accedi.blade.php:47
+#: resources/views/accedi.blade.php:51
 msgid "You are already logged in."
 msgstr ""
 
-#: resources/views/accedi.blade.php:53
+#: resources/views/accedi.blade.php:57
 #: resources/views/woocommerce/myaccount/dashboard.blade.php:54
 msgid "Logout"
 msgstr ""
 
-#: resources/views/accedi.blade.php:66
+#: resources/views/accedi.blade.php:70
 #: resources/views/educational.blade.php:51
 #: resources/views/educational.blade.php:123
 #: resources/views/rimborsi.blade.php:38
 msgid "Email"
 msgstr ""
 
-#: resources/views/accedi.blade.php:67
+#: resources/views/accedi.blade.php:71
 msgid "Password"
 msgstr ""
 
-#: resources/views/accedi.blade.php:68
+#: resources/views/accedi.blade.php:72
 msgid "Remember me"
 msgstr ""
 
-#: resources/views/accedi.blade.php:69
+#: resources/views/accedi.blade.php:73
 msgid "Login"
 msgstr ""
 
-#: resources/views/accedi.blade.php:87
+#: resources/views/accedi.blade.php:91
 msgid "Lost Password"
 msgstr ""
 
-#: resources/views/accedi.blade.php:88
+#: resources/views/accedi.blade.php:92
 msgid "Forgotten Password?"
 msgstr ""
 
-#: resources/views/accedi.blade.php:93
+#: resources/views/accedi.blade.php:97
 msgid "Don't you have an account yet?"
 msgstr ""
 
-#: resources/views/accedi.blade.php:93
+#: resources/views/accedi.blade.php:97
 msgid "Register"
 msgstr ""
 
@@ -624,7 +635,7 @@ msgid "Sorry, no results were found."
 msgstr ""
 
 #: resources/views/sections/footer.blade.php:10
-msgid "Newsletter"
+msgid "Join our Community!"
 msgstr ""
 
 #: resources/views/sections/row-buy.blade.php:11

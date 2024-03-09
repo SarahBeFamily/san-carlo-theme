@@ -7,7 +7,7 @@
     <div class="newsletter">
 
       <div class="bf-title-block">
-        <p class="pre-title-text">{{ _e( 'Newsletter', 'san-carlo-theme' ) }}</p>
+        <p class="pre-title-text">{{ _e( 'Join our Community!', 'san-carlo-theme' ) }}</p>
         <p class="bf-title">@option('newsletter_text')</p>
 		  </div>
 
