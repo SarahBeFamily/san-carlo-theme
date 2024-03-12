@@ -21,7 +21,7 @@
 		  // Get taxonomies
 		  $args = array(
 			  'public' => true,
-			  '_builtin' => false
+			  '_builtin' => false,
 		  );
 		  $output = 'names'; // or objects
 		  $operator = 'and'; // 'and' or 'or'
@@ -33,7 +33,7 @@
 		  }
 
 		  $result = new WP_REST_Response($return, 200);
-		  $result->set_headers(array('Cache-Control' => 'max-age=3600'));
+		//   $result->set_headers(array('Cache-Control' => 'max-age=3600'));
 		  return $result;
 	  }
   }
@@ -116,6 +116,115 @@
 			$result = new WP_REST_Response($eventi_arr, 200);
 			$result->set_headers(array('Cache-Control' => 'max-age=3600'));
 		  	return $result;
+	  }
+	 
+  }
+
+  class Array_Spettacoli
+  {
+	  public function __construct()
+	  {
+		  $version = '2';
+		  $namespace = 'wp/v' . $version;
+		  $base = 'spettacoli';
+		  register_rest_route($namespace, '/' . $base, array(
+			  'methods' => 'GET',
+			  'callback' => array($this, 'get_spettacoli'),
+			  'permission_callback' => '__return_true',
+		  ));
+	  }
+  
+	  public function get_spettacoli($object)
+	  {
+		$ids 	  = $object->get_param( 'id' );
+		$cat 	  = $object->get_param( 'categoria_spettacoli' );
+		$per_page = $object->get_param( 'per_page' );
+		$page 	  = $object->get_param( 'page' );
+		$date 	  = $object->get_param( 'data_inizio' ) ? $object->get_param( 'data_inizio' ) : 'now';
+	 
+		$tax_query = array();
+		if (isset($cat)) {
+			$tax_query[] = array(
+				'taxonomy' => 'categoria-spettacoli',
+				'field' => 'term_id',
+				'terms' => $cat,
+				'operator'   => 'IN',
+			);
+			$tax_query['relation'] = 'AND';
+		}
+
+		$args = array(
+			'post_type' => 'spettacoli',
+			'post_status' => 'publish',
+			'numberposts' => -1,
+			'suppress_filters' => false,
+			'meta_query' => array( 
+				'data_inizio__order_by' => array(
+					'key' => 'data_inizio',
+					'value' => date('Ymd', strtotime($date)),
+					'compare' => '>=',
+					'type' => 'DATE',
+				)
+			),
+			'orderby' => array( 'data_inizio__order_by' => 'ASC' ),
+			'tax_query' => $tax_query
+		);
+
+		if (isset($ids)) {
+			$ids = explode(',', $ids);
+			$args['post__in'] = $ids;
+		}
+
+		$query = get_posts($args);
+
+		$output = array();
+
+		foreach ($query as $post) {
+				// Aggiungo i capi acf
+				$acf_fields = get_fields($post->ID);
+				$id = $post->ID;
+				$cats = array();
+				$terms = get_the_terms( $id, 'categoria-spettacoli' ); 
+				foreach($terms as $term) {
+					$cats[] = $term->term_id;
+				}
+
+				$output[] = (object) [
+					'id' => $id,
+					'slug' => basename(get_permalink($id)),
+					'link' => get_permalink($id),
+					'post_status' => $post->post_status,
+					'type' => $post->post_type,
+					'featured_media_url' => get_the_post_thumbnail_url($id, 'full'),
+					// featured media id
+					'featured_media' => get_post_thumbnail_id($id),
+					'title' => [
+						'rendered' => get_the_title($id)
+					],
+					'excerpt' => get_the_excerpt($id),
+					'categoria-spettacoli' => $cats,
+					'acf' => $acf_fields,
+				];
+			}
+
+			$page = $page ? (int) $page : 1;
+			$total = count( $output ); //total items in array    
+			$limit = $per_page ? (int) $per_page : 12; //per page    
+			$totalPages = ceil( $total/ $limit ); //calculate total pages
+			$page = max($page, 1); //get 1 page when $_GET['page'] <= 0
+			$page = min($page, $totalPages); //get last page when $_GET['page'] > $totalPages
+			$offset = ($page - 1) * $limit;
+			if( $offset < 0 ) $offset = 0;
+
+			$output = array_slice( $output, $offset, $limit );
+			$data = new WP_REST_Response( $output, 200 );   
+			$data->set_headers(array(
+				'X-WP-Total' => $total,
+				'X-WP-TotalPages' => $totalPages,
+				'Cache-Control' => 'max-age=3600'
+			));
+			
+			return $data;
 	  }
 	 
   }
@@ -287,7 +396,9 @@
 	  $events_datetime = new Array_Events_By_Datetime;
 	  $vivaticket_events = new Array_Vivaticket_Events;
 	  $events_en = new Get_Events_En;
+	  $spettacoli = new Array_Spettacoli;
   });
+
 
    /**
 	 * Filter spettacoli post type by id

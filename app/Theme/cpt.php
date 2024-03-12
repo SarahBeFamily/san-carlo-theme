@@ -38,6 +38,8 @@ function spettacoli_cpt() {
             'public'              => true,
             'show_ui'             => true,
             'show_in_rest'        => true,
+			'rest_base'          => 'spettacoli',
+        	'rest_controller_class' => 'WP_REST_Posts_Controller',
             'show_in_menu'        => true,
             'show_in_nav_menus'   => true,
             'show_in_admin_bar'   => true,

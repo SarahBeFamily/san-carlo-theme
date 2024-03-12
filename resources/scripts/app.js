@@ -443,7 +443,7 @@ domReady(async () => {
                         console.log(resp);
                         this.pages = resp.headers.get('x-wp-totalpages');
                         this.eventi = resp.data;
-                        console.log(this.eventi)
+                        console.log(this.pages);
 
                         this.nEventi = this.eventi.length;
                         this.createPage(this.pages);
@@ -470,10 +470,7 @@ domReady(async () => {
                 createPage() {
                     let array = [];
                     for (let i = 0; i < this.pages; i++) {
-
-                    array.push({
-                        id: i + 1,
-                    })
+                        array.push({id: i + 1,})
                     }
                     this.pagination = array;
                 },
@@ -491,11 +488,7 @@ domReady(async () => {
 
                         if (id != 'all') {
                             if (this.eventiCats.length > 0) {
-                                if (lang == 'en-US' || lang == 'en-GB') {
-                                    this.queryArray.push(`categoria_spettacoli=${id}`)
-                                } else {
-                                    this.queryArray.push(`categoria-spettacoli=${id}`)
-                                }
+                                this.queryArray.push(`categoria_spettacoli=${id}`)
                             }
                         }
 
@@ -527,8 +520,8 @@ domReady(async () => {
                         }
                     }
 
-                    console.log(this.query)
-                    console.log(this.dateRequest)
+                    // console.log(this.query)
+                    // console.log(this.dateRequest)
                     $('body').addClass('loading');
 
                     await axios.get(this.query)
@@ -545,7 +538,7 @@ domReady(async () => {
                         }
                         else if (type == 'data') {
                             let risposta = resp.data.date;
-                            console.log(risposta);
+                            // console.log(risposta);
 
                             let arrayIds = [];
 
@@ -1053,6 +1046,9 @@ domReady(async () => {
         }
     }
 
+    /**
+     * Fermo lo scroll quando si apre il carrello
+     */
     (function($) {
         $(document).ajaxComplete(function() {
             if ($('body').hasClass('woocommerce-checkout') || $('body').hasClass('woocommerce-cart')) {
