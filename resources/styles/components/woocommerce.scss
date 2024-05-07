@@ -5,6 +5,11 @@ body:not(.woocommerce-cart, .mio-account) {
 	}
 }
 
+.wc-empty-cart-message {
+	width: 80%;
+	margin: 6% auto 0;
+}
+
 .cart-wrap {
 	display: flex;
 	flex-basis: 100%;

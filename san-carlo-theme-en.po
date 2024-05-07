@@ -180,6 +180,10 @@ msgstr "Leggi"
 msgid "News"
 msgstr "News"
 
+#: resources/views/partials/content-search.blade.php:2
+msgid "Page"
+msgstr "Pagina"
+
 #. translators: %1$s è la data e %2$s è l'orario di inizio spettacolo
 #: resources/views/partials/content-single-spettacoli.blade.php:28
 msgid "%1$s at %2$s"

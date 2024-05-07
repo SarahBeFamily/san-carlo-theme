@@ -27,8 +27,8 @@
 			activeEventDetails = activeEvent.siblings('.dettaglio-evento');
 
 		$('.total-slide').html(activeEventDetails.length);
-		$('#active-slide').attr('max-value', activeEventDetails.length);
-		activeEvent.siblings('.dettaglio-evento:not([index="1"])').hide();
+		$('#active-slide').attr('max-value', activeEventDetails.length+1);
+		activeEvent.siblings('.dettaglio-evento:not([index="0"])').hide();
 
 		// Se esistono più eventi attivi (cioè due eventi in mesi diversi), nascondo quello del mese successivo al corrente.
 		for (let i = 0; i < moreActiveArray.length; i++) {
@@ -44,22 +44,25 @@
 
 	$(document).on(clickhandler, '#controls .button', function() {
 		let next = $(this).hasClass('next'),
+			details = $('.calendar .event.active').siblings('.dettaglio-evento'),
+			calSlide = details.find('.cal-slide'),
 			activeSlide = parseInt($('#active-slide').val()),
 			maxSlide = parseInt($('#active-slide').attr('max-value'));
-
-			// console.log(activeSlide);
 
 		if (next == true && activeSlide < maxSlide) {
 			$('.calendar .event.active').siblings(`.dettaglio-evento[index="${activeSlide}"]`).fadeOut();
 			$('.calendar .event.active').siblings(`.dettaglio-evento[index="${activeSlide+1}"]`).fadeIn();
-			activeSlide = activeSlide+1 <= maxSlide ? activeSlide+1 : maxSlide;
+			activeSlide = activeSlide <= maxSlide ? activeSlide+1 : maxSlide;
 			$('#active-slide').val(activeSlide);
 		} else if (next == false && activeSlide > 1) {
 			$('.calendar .event.active').siblings(`.dettaglio-evento[index="${activeSlide}"]`).fadeOut();
 			$('.calendar .event.active').siblings(`.dettaglio-evento[index="${activeSlide-1}"]`).fadeIn();
-			activeSlide = activeSlide-1 >= 1 ? activeSlide-1 : 1;
+			activeSlide = activeSlide >= 1 ? activeSlide-1 : 1;
 			$('#active-slide').val(activeSlide);
 		}
+
+		calSlide.find('.total-slide').html(details.length);
+		calSlide.find('.current-slide').html(activeSlide);
 	});
 
 	$(document).on(clickhandler, '.calendar .event', function() {
@@ -67,6 +70,7 @@
 	   $(this).addClass('active');
 
 		let details = $(this).siblings('.dettaglio-evento'),
+			activeDetails = $('.calendar .event.active').siblings('.dettaglio-evento'),
 			data = $(this).attr("event-date"),
 			id = $(this).attr("data-id"),
 			event_child = $(`.dettaglio-evento[data-id="${id}"][event-date="${data}"]`),
@@ -85,9 +89,10 @@
 				input.val(date).trigger('click');
 			}
 
-			calSlide.find('.total-slide').html(details.length);
+			calSlide.find('.total-slide').html(activeDetails.length);
+			calSlide.find('.current-slide').html(1);
 			$('#active-slide').val(1);
-			$('#active-slide').attr('max-value', details.length);
+			$('#active-slide').attr('max-value', activeDetails.length);
 
 		other_events.fadeOut();
 		event_child.fadeIn();
@@ -193,6 +198,33 @@
 				month: month, // Il mese per il quale ottenere il calendario.
 				y: year // L'anno per il quale ottenere il calendario.
 			},
+			// success: function(response) { // La funzione da eseguire se la richiesta ha successo.
+			// 	let jsonp = JSON.parse(response);
+			// 		console.log(jsonp);
+
+			// 	// Se esiste un elemento con la classe 'bf-calendar-wrap', sostituisci il suo contenuto con la risposta.
+			// 	if($('.bf-calendar-wrap').length > 0) {
+			// 		$('.bf-calendar-wrap').html(jsonp);
+			// 	// Altrimenti, se esiste un elemento con la classe 'bf-calendar-choice', sostituisci il suo contenuto con la risposta.
+			// 	} else if ($('.bf-calendar-choice').length > 0) {
+			// 		$('.bf-calendar-choice').html(jsonp);
+			// 	}
+					
+			// 	checkActiveEvent();
+			// 	// Rimuove la classe 'loading' dal corpo del documento.
+			// 	$('body').removeClass('loading');
+			// 	progressLoading('clear');
+			// },
+			// error: function(xhr, status, error) { // La funzione da eseguire se la richiesta ha un errore.
+			// 	// Stampa un messaggio di errore.
+			// 	console.log('Filter ERROR STATUS: ' + xhr.status);
+			// 	console.log(error);
+			// 	console.log(xhr);
+			// 	alert(xhr.statusText);
+			// 	// Rimuove la classe 'loading' dal corpo del documento.
+			// 	$('body').removeClass('loading');
+			// 	progressLoading('clear');
+			// }
 			complete: function(xhr, status) { // La funzione da eseguire quando la richiesta è completata.
 				// Se c'è un errore o se la risposta è vuota, stampa un messaggio di errore.
 				if (status === 'error' || !xhr.responseText) {

@@ -61,7 +61,7 @@
 				'post_status' => 'publish',
 				'post_type' => 'spettacoli',
 				'numberposts' => -1,
-				'suppress_filters' => true,
+				'suppress_filters' => false,
 			);
 			$posts = get_posts($args);
 			$eventi_arr['date'] = array();
@@ -100,10 +100,10 @@
 						$evento_date[$data][$post->ID]['ticket_link'] = $dettaglio['url'];
 					}
 
-					foreach ($evento_date as $data => $evento) {
-						$datachange = explode('/', $data);
+					foreach ($evento_date[$data] as $evento_id => $evento) {
+						$datachange = explode('/', $evento['data']);
 						$datadef = $datachange[2].'/'.$datachange[1].'/'.$datachange[0];
-						$pair[$datadef] = $evento;
+						$pair[$datadef][$evento_id] = $evento;
 					}
 				}
 
@@ -114,7 +114,7 @@
 			}
 
 			$result = new WP_REST_Response($eventi_arr, 200);
-			$result->set_headers(array('Cache-Control' => 'max-age=3600'));
+			// $result->set_headers(array('Cache-Control' => 'max-age=3600'));
 		  	return $result;
 	  }
 	 
@@ -140,7 +140,10 @@
 		$cat 	  = $object->get_param( 'categoria_spettacoli' );
 		$per_page = $object->get_param( 'per_page' );
 		$page 	  = $object->get_param( 'page' );
-		$date 	  = $object->get_param( 'data_inizio' ) ? $object->get_param( 'data_inizio' ) : 'now';
+		$date 	  = $object->get_param( 'data_inizio' ) ? $object->get_param( 'data_inizio' ) : date('Y') . '0101';
+
+		//data 1 gennaio di quest'anno
+		// $today = date('Y') . '0101';
 	 
 		$tax_query = array();
 		if (isset($cat)) {
@@ -162,6 +165,13 @@
 				'data_inizio__order_by' => array(
 					'key' => 'data_inizio',
 					'value' => date('Ymd', strtotime($date)),
+					'compare' => '>=',
+					'type' => 'DATE',
+				),
+				'relation' => 'AND',
+				'data_fine__order_by' => array(
+					'key' => 'data_fine',
+					'value' => date('Ymd', strtotime('now')),
 					'compare' => '>=',
 					'type' => 'DATE',
 				)

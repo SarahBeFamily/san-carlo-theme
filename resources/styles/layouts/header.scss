@@ -25,6 +25,14 @@ header.banner {
 			display: none;
 		}
 
+		input[type="search"] {
+
+			&::placeholder,
+			&:focus {
+				color: white;
+			}
+		}
+
 		.wpml-ls-statics-shortcode_actions > ul > li > a {
 			color: white;
 

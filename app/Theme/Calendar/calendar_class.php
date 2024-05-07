@@ -174,17 +174,19 @@ class Calendar {
                                 $calNextMonthData = $dayEvent.'/'.$nextMonth.'/'.$_toDay[2];
 
                                 $n++;
+                                $n_event = $n-1;
+                                $current = $n_event+1;
 
-                                $event_code .= '<div class="event '.$event['cat'].' evento-'.$event['ID'].'  '.$next_event_class.'" data-id="evento-'.$event['ID'].'" event-date="'.$event['data'].'">'.$giorno_evento.'</div>';
+                                $event_code .= '<div class="event event-'.$n_event.' '.strtolower(str_replace(' ', '-',$event['cat'])).' evento-'.$event['ID'].'  '.$next_event_class.'" data-id="evento-'.$event['ID'].'" event-date="'.$event['data'].'">'.$giorno_evento.'</div>';
                                 
                                 // aggiungo il popup visibile al click
-                                $pos = ($n-1) != 0 ? '-'.(($n-1)*100).'%' : '0';
+                                $pos = ($n_event-1) != 0 ? '-'.(($n_event-1)*100).'%' : '0';
                                 // $pos = $n != 0 ? '-'.($n * 100).'%' : '0';
                                 // $event_code .= '<div class="dettaglio-evento" index="'.$n.'" data-pos="'.$pos.'" data-id="evento-'.$event['ID'].'" event-date="'.$_toDate.'" style="'.$next_event_display.' right:'.$pos.'">';
-                                $event_code .= '<div class="dettaglio-evento" index="'.$n.'" data-pos="'.$pos.'" data-id="evento-'.$event['ID'].'" event-date="'.$event['data'].'" style="'.$next_event_display.'">';
+                                $event_code .= '<div class="dettaglio-evento" index="'.$n_event.'" data-pos="'.$pos.'" data-id="evento-'.$event['ID'].'" event-date="'.$event['data'].'" style="'.$next_event_display.'">';
                                     $event_code .= '<div class="inner flex">';
                                         $event_code .= '<div class="foto" style="background-image:url('.$event['featured_image'].');">';
-                                            $event_code .= '<div class="cal-slide"><span class="current-slide">'.$n.'</span> / <span class="total-slide"></span></div>';
+                                            $event_code .= '<div class="cal-slide"><span class="current-slide">'.$current.'</span> / <span class="total-slide"></span></div>';
                                         $event_code .= '</div>';
                                         $event_code .= '<div class="info">';
                                             $event_code .= '<p class="title">'.$event['titolo'].'</p>';

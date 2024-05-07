@@ -26,7 +26,7 @@ if ( wc_get_page_id( 'shop' ) > 0 ) : ?>
 
 <div class="vc_row wpb_row vc_row-fluid vc_row-bf-default flex fwrap content-center" style="background-color: var(--light-gray)">
 	<p class="return-to-shop">
-		<a class="button bf-btn wc-backward<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>" href="<?php echo esc_url( get_post_type_archive_link('spettacoli') ); ?>">
+		<a class="button bf-btn wc-backward wp-element-button<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>" href="<?php echo esc_url( get_post_type_archive_link('spettacoli') ); ?>">
 			<?php
 				/**
 				 * Filter "Return To Shop" text.

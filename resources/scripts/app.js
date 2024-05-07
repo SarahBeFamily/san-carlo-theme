@@ -3,10 +3,6 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger.js';
 import 'slick-carousel';
 import $ from 'jquery';
-// import Amministrazione from './amministrazione-trasparente.vue';
-// import Eventi from '../vue-templates/archivio-spettacoli.vue';
-// import { createApp } from 'vue';
-// import Vue from 'vue';
 import axios from 'axios';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -367,19 +363,26 @@ domReady(async () => {
         }
     });
 
+    if ($('body').hasClass('single-spettacoli')) {
+        let primaDataLink = $('#date_evento option:nth-child(2)').val();
 
-    /**
-     * Collegameto alla pagina di acquisto biglietti
-     * @see {@link partials/content-single-spettacoli.blade.php}
-     */
-    $('#buyTicket').on('click', function(e) {
-        e.preventDefault();
-        let select = $('select#date_evento').val();
-
-        if (select != '') {
-            window.location = select;
+        if (primaDataLink != '') {
+            $('.row-buy a.bf-btn').attr('href', primaDataLink);
         }
-    });
+
+        /**
+         * Collegameto alla pagina di acquisto biglietti
+         * @see {@link partials/content-single-spettacoli.blade.php}
+         */
+        $('#buyTicket').on('click', function(e) {
+            e.preventDefault();
+            let select = $('select#date_evento').val();
+
+            if (select != '') {
+                window.location = select;
+            }
+        });
+    }
 
     // Sezione Archivio Spettacoli
     if ($('body').hasClass('post-type-archive-spettacoli')) {
@@ -569,6 +572,7 @@ domReady(async () => {
                                 $('body').removeClass('loading');
                                 $('li.cat').removeClass('open');
                                 $('li.cat ul').removeClass('show');
+                                $('.bf-calendar-choice #close-cal i').trigger('click');
                             })
                             .catch(err => {
                                 // Manage the state of the application if the request
@@ -580,6 +584,7 @@ domReady(async () => {
                             this.eventi = resp.data;
                             window.scrollTo(0, 0); 
                             $('body').removeClass('loading');
+                            $('.bf-calendar-choice #close-cal i').trigger('click');
                         }
 
                         this.nEventi = this.eventi.length;
@@ -1017,17 +1022,6 @@ domReady(async () => {
             }
         }
     });
-
-    // $('.bf-calendar-choice .day_num span').on('click', function() {
-    //     let day = $(this).text(),
-    //         month = $('select#month').val(),
-    //         year = $('a.choose-month').attr('data-year'),
-    //         data = `${year}/${month}/${day}`;
-
-    //     $(this).parent().addClass('actived');
-    //     $(this).parent().siblings().removeClass('actived');
-    //     $('input[name="date_choice"]').val(data).trigger('click');
-    // });
 
     $('.bf-calendar-choice #close-cal').on('click', 'i', function() {
         let cal = $('.bf-calendar-choice');

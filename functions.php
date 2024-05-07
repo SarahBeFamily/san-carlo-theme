@@ -319,45 +319,45 @@ add_shortcode('dynamic_copyright', 'dynamic_copyright_shortcode');
  * @return void
  */
 
-add_filter('login_redirect', 'my_login_redirect', 10, 3);
-function my_login_redirect($redirect_to, $requested_redirect_to, $user) {
-    $query_area_stampa = new \WP_Query([
-        'post_type' => 'page',
-        'post_title' => 'Area stampa',
-    ]);
-    $press_page = $query_area_stampa->posts[0];
-    $query_page = new \WP_Query([
-        'post_type' => 'page',
-        'post_title' => 'Accedi',
-    ]);
-    $redirect_page = $query_page->posts[0];
+// add_filter('login_redirect', 'my_login_redirect', 10, 3);
+// function my_login_redirect($redirect_to, $requested_redirect_to, $user) {
+//     $query_area_stampa = new \WP_Query([
+//         'post_type' => 'page',
+//         'post_title' => 'Area stampa',
+//     ]);
+//     $press_page = $query_area_stampa->posts[0];
+//     $query_page = new \WP_Query([
+//         'post_type' => 'page',
+//         'post_title' => 'Accedi',
+//     ]);
+//     $redirect_page = $query_page->posts[0];
 
-    if (is_wp_error($user)) {
-        //Login failed, find out why...
-        $error_types = array_keys($user->errors);
-        //Error type seems to be empty if none of the fields are filled out
-        $error_type = 'both_empty';
-        //Otherwise just get the first error (as far as I know there
-        //will only ever be one)
-        if (is_array($error_types) && !empty($error_types)) {
-            $error_type = $error_types[0];
-        }
+//     if (is_wp_error($user)) {
+//         //Login failed, find out why...
+//         $error_types = array_keys($user->errors);
+//         //Error type seems to be empty if none of the fields are filled out
+//         $error_type = 'both_empty';
+//         //Otherwise just get the first error (as far as I know there
+//         //will only ever be one)
+//         if (is_array($error_types) && !empty($error_types)) {
+//             $error_type = $error_types[0];
+//         }
 
-        wp_redirect( get_permalink($redirect_page->ID) . "?login=failed&reason=" . $error_type ); 
-        exit;
+//         wp_redirect( get_permalink($redirect_page->ID) . "?login=failed&reason=" . $error_type ); 
+//         exit;
 
-    } else {
-        //Login OK - redirect to another page?
-        if ($_SERVER['HTTP_REFERER'] == get_permalink($press_page->ID))
-            return get_permalink($press_page->ID);
-        else if (in_array('administrator', $user->roles))
-            return admin_url();
-        else if (in_array('press', $user->roles))
-            return get_permalink($press_page->ID);
-        else
-            return home_url();
-    }
-}
+//     } else {
+//         //Login OK - redirect to another page?
+//         if ($_SERVER['HTTP_REFERER'] == get_permalink($press_page->ID))
+//             return get_permalink($press_page->ID);
+//         else if (in_array('administrator', $user->roles))
+//             return admin_url();
+//         else if (in_array('press', $user->roles))
+//             return get_permalink($press_page->ID);
+//         else
+//             return home_url();
+//     }
+// }
 
 /**
  * Hide admin bar for Press role
