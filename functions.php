@@ -1004,3 +1004,534 @@ add_filter( 'woocommerce_order_button_text', 'wc_custom_order_button_text' );
 function wc_custom_order_button_text() {
     return __( 'Pay Securely', 'woocommerce' ); 
 }
+
+//REGISTRAZIONE CHECKBOX//
+
+add_action( 'woocommerce_register_form', 'wtwh_add_registration_privacy_policy', 11 );
+   
+function wtwh_add_registration_privacy_policy() {
+ 
+woocommerce_form_field( 'privacy_policy_reg', array(
+   'type'          => 'checkbox',
+   'class'         => array('form-row privacy'),
+   'label_class'   => array('woocommerce-form__label woocommerce-form__label-for-checkbox checkbox'),
+   'input_class'   => array('woocommerce-form__input woocommerce-form__input-checkbox input-checkbox'),
+   'required'      => true,
+   'label'         => __( "Ho preso visione della ", "woocommerce" ).'<a href="/privacy-policy">'. __( "Privacy Policy", "woocommerce" ).'</a>'. __( " della Fondazione Teatro di San Carlo", "woocommerce" ),
+));
+  
+}
+  
+// Show error if user does not tick
+   
+add_filter( 'woocommerce_registration_errors', 'wtwh_validate_privacy_registration', 10, 3 );
+  
+function wtwh_validate_privacy_registration( $errors, $username, $email ) {
+if ( ! is_checkout() ) {
+    if ( ! (int) isset( $_POST['privacy_policy_reg'] ) ) {
+        $errors->add( 'privacy_policy_reg_error', __( 'Devi accettare la Privacy Policy', 'woocommerce' ) );
+    }
+}
+return $errors;
+}
+
+
+
+// Aggiungi script JavaScript per spostare gli elementi HTML
+add_action('wp_footer', 'move_elements_with_js');
+
+function move_elements_with_js() {
+    ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var privacyPolicyText = document.querySelector('.woocommerce-privacy-policy-text');
+            var privacyRow = document.querySelector('.form-row.privacy');
+            if (privacyPolicyText && privacyRow) {
+                privacyRow.parentNode.insertBefore(privacyPolicyText, privacyRow);
+            }
+        });
+    </script>
+    <?php
+}
+
+
+
+// Aggiungi script JavaScript per inserire il paragrafo
+add_action('wp_footer', 'insert_paragraph_with_js');
+
+function insert_paragraph_with_js() {
+    ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var paragraph = document.createElement('p');
+            var checkboxRow = document.querySelector('.mc4wp-checkbox.mc4wp-checkbox-wp-registration-form');
+            if (paragraph && checkboxRow) {
+                paragraph.innerHTML = '<?php echo esc_html__("Dando il tuo consenso, potrai anche registrarti gratuitamente alla Community del Teatro di San Carlo. Entrando a far parte di questo mondo, riceverai periodicamente newsletter, informazioni su iniziative speciali e promozioni dedicate sugli spettacoli in programma e sarai sempre aggiornato su tutto quello che accade al Teatro San Carlo. Se lo desideri, barra la casella in basso e unisciti a noi!", "woocommerce"); ?>';
+                checkboxRow.parentNode.insertBefore(paragraph, checkboxRow);
+            }
+        });
+    </script>
+    <?php
+}
+//REGISTRAZIONE CHECKBOX//
+
+
+/* FORM EDUCATIONAL NON ELIMINARE */
+
+add_action('wpcf7_init', 'add_acf_fields_to_contact_form');
+
+function add_acf_fields_to_contact_form() {
+    
+	wpcf7_add_form_tag('spettacolo_field', 'render_spettacolo_field_in_contact_form');
+   
+	wpcf7_add_form_tag('spettacolo_1_field', 'render_spettacolo_1_field_in_contact_form');
+    wpcf7_add_form_tag('spettacolo_2_field', 'render_spettacolo_2_field_in_contact_form');
+    wpcf7_add_form_tag('spettacolo_3_field', 'render_spettacolo_3_field_in_contact_form');
+    wpcf7_add_form_tag('orario_1_field', 'render_orario_1_field_in_contact_form');
+    wpcf7_add_form_tag('orario_2_field', 'render_orario_2_field_in_contact_form');
+    wpcf7_add_form_tag('orario_3_field', 'render_orario_3_field_in_contact_form');
+	wpcf7_add_form_tag('orario_4_field', 'render_orario_4_field_in_contact_form');
+	wpcf7_add_form_tag('orario_5_field', 'render_orario_5_field_in_contact_form');
+	wpcf7_add_form_tag('orario_6_field', 'render_orario_6_field_in_contact_form');
+	wpcf7_add_form_tag('orario_7_field', 'render_orario_7_field_in_contact_form');
+	wpcf7_add_form_tag('orario_8_field', 'render_orario_8_field_in_contact_form');
+	wpcf7_add_form_tag('orario_9_field', 'render_orario_9_field_in_contact_form');
+    
+	wpcf7_add_form_tag('data_1_field', 'render_data_1_field_in_contact_form');
+	wpcf7_add_form_tag('data_2_field', 'render_data_2_field_in_contact_form');
+	wpcf7_add_form_tag('data_3_field', 'render_data_3_field_in_contact_form');
+	wpcf7_add_form_tag('data_4_field', 'render_data_4_field_in_contact_form');
+	wpcf7_add_form_tag('data_5_field', 'render_data_5_field_in_contact_form');
+	wpcf7_add_form_tag('data_6_field', 'render_data_6_field_in_contact_form');
+	wpcf7_add_form_tag('data_7_field', 'render_data_7_field_in_contact_form');
+	wpcf7_add_form_tag('data_8_field', 'render_data_8_field_in_contact_form');
+	wpcf7_add_form_tag('data_9_field', 'render_data_9_field_in_contact_form');
+	
+	wpcf7_add_form_tag('data_1_2_field', 'render_data_1_2_field_in_contact_form');
+	wpcf7_add_form_tag('data_2_2_field', 'render_data_2_2_field_in_contact_form');
+	wpcf7_add_form_tag('data_3_2_field', 'render_data_3_2_field_in_contact_form');
+	wpcf7_add_form_tag('data_4_2_field', 'render_data_4_2_field_in_contact_form');
+	wpcf7_add_form_tag('data_5_2_field', 'render_data_5_2_field_in_contact_form');
+	wpcf7_add_form_tag('data_6_2_field', 'render_data_6_2_field_in_contact_form');
+	wpcf7_add_form_tag('data_7_2_field', 'render_data_7_2_field_in_contact_form');
+	wpcf7_add_form_tag('data_8_2_field', 'render_data_8_2_field_in_contact_form');
+	wpcf7_add_form_tag('data_9_2_field', 'render_data_9_2_field_in_contact_form');
+}
+
+
+function render_spettacolo_field_in_contact_form($tag) {
+    
+    $spettacolo_1 = get_field('spettacolo_1');
+    $spettacolo_2 = get_field('spettacolo_2');
+    $spettacolo_3 = get_field('spettacolo_3');
+
+    
+    $spettacoli_options = array(
+        $spettacolo_1,
+        $spettacolo_2,
+        $spettacolo_3
+    );
+
+   
+    $spettacoli_options = array_unique($spettacoli_options);
+
+    
+    $output = '<select name="spettacolo" id="spettacolo">';
+	$counter = 1;
+    foreach ($spettacoli_options as $option) {
+       
+		
+		if ($option) {
+            
+            $name = 'spettacolo_' . $counter;
+            $output .= '<option value="' . esc_attr($option) . '" name="' . esc_attr($name) . '">' . esc_html($option) . '</option>';
+            $counter++; 
+        }
+    }
+	
+    $output .= '</select>';
+
+    return $output;
+}
+
+
+
+	
+	function render_data_1_field_in_contact_form($tag) {
+    $data1 = get_field('prima_data_spettacolo_1');
+    if ($data1) {
+        return '<input id="data_1_field" type="checkbox" name="prima_data_spettacolo_1" value="' . esc_attr($data1) . '">' . esc_html($data1);
+    } else {
+        return '';
+    }
+}
+
+function render_data_2_field_in_contact_form($tag) {
+    $data2 = get_field('seconda_data_spettacolo_1');
+    if ($data2) {
+        return '<input id="data_2_field" type="checkbox" name="seconda_data_spettacolo_1" value="' . esc_attr($data2) . '">' . esc_html($data2);
+    } else {
+        return '';
+    }
+}
+
+
+
+function render_data_3_field_in_contact_form($tag) {
+    $data3 = get_field('terza_data_spettacolo_1');
+    if ($data3) {
+        return '<input id="data_3_field" type="checkbox" name="terza_data_spettacolo_1" value="' . esc_attr($data3) . '">' . esc_html($data3);
+    } else {
+        return '';
+    }
+}
+
+function render_data_4_field_in_contact_form($tag) {
+    $data4 = get_field('prima_data_spettacolo_2');
+    if ($data4) {
+        return '<input id="data_4_field" type="checkbox" name="quarta_data_spettacolo_1" value="' . esc_attr($data4) . '">' . esc_html($data4);
+    } else {
+        return '';
+    }
+}
+
+function render_data_5_field_in_contact_form($tag) {
+    $data5 = get_field('seconda_data_spettacolo_2');
+    if ($data5) {
+        return '<input id="data_5_field" type="checkbox" name="quinta_data_spettacolo_1" value="' . esc_attr($data5) . '">' . esc_html($data5);
+    } else {
+        return '';
+    }
+}
+
+function render_data_6_field_in_contact_form($tag) {
+    $data6 = get_field('terza_data_spettacolo_2');
+    if ($data6) {
+        return '<input id="data_6_field" type="checkbox" name="sesta_data_spettacolo_1" value="' . esc_attr($data6) . '">' . esc_html($data6);
+    } else {
+        return '';
+    }
+}
+
+function render_data_7_field_in_contact_form($tag) {
+    $data7 = get_field('prima_data_spettacolo_3');
+    if ($data7) {
+        return '<input id="data_7_field" type="checkbox" name="settima_data_spettacolo_1" value="' . esc_attr($data7) . '">' . esc_html($data7);
+    } else {
+        return '';
+    }
+}
+function render_data_8_field_in_contact_form($tag) {
+    $data7 = get_field('seconda_data_spettacolo_3');
+    if ($data7) {
+        return '<input id="data_8_field" type="checkbox" name="settima_data_spettacolo_1" value="' . esc_attr($data7) . '">' . esc_html($data7);
+    } else {
+        return '';
+    }
+}
+function render_data_9_field_in_contact_form($tag) {
+    $data7 = get_field('terza_data_spettacolo_3');
+    if ($data7) {
+        return '<input id="data_9_field" type="checkbox" name="settima_data_spettacolo_1" value="' . esc_attr($data7) . '">' . esc_html($data7);
+    } else {
+        return '';
+    }
+}
+
+function render_orario_1_field_in_contact_form($tag) {
+    $orario1 = get_field('orario_spettacolo_1');
+    if ($orario1) {
+        return '<input id="orario_1_field" type="checkbox" name="orario_spettacolo_1" value="' . esc_attr($orario1) . '">' . esc_html($orario1);
+    } else {
+        return '';
+    }
+}
+
+function render_orario_2_field_in_contact_form($tag) {
+    $orario2 = get_field('secondo_orario_spettacolo_1');
+    if ($orario2) {
+        return '<input id="orario_2_field" type="checkbox" name="secondo_orario_spettacolo_1" value="' . esc_attr($orario2) . '">' . esc_html($orario2);
+    } else {
+        return '';
+    }
+}
+
+function render_orario_3_field_in_contact_form($tag) {
+    $orario3 = get_field('terzo_orario_spettacolo_1');
+    if ($orario3) {
+        return '<input id="orario_3_field" type="checkbox" name="terzo_orario_spettacolo_1" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
+    } else {
+        return '';
+    }
+}
+
+
+function render_orario_4_field_in_contact_form($tag) {
+    $orario4 = get_field('primo_orario_spettacolo_2');
+    if ($orario4) {
+        return '<input id="orario_4_field" type="checkbox" name="primo_orario_spettacolo_2" value="' . esc_attr($orario4) . '">' . esc_html($orario4);
+    } else {
+        return '';
+    }
+}
+
+function render_orario_5_field_in_contact_form($tag) {
+    $orario5 = get_field('secondo_orario_spettacolo_2');
+    if ($orario5) {
+        return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_2" value="' . esc_attr($orario5) . '">' . esc_html($orario5);
+    } else {
+        return '';
+    }
+}
+
+function render_orario_6_field_in_contact_form($tag) {
+    $orario6 = get_field('terzo_orario_spettacolo_2');
+    if ($orario6) {
+        return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_2" value="' . esc_attr($orario6) . '">' . esc_html($orario6);
+    } else {
+        return '';
+    }
+}
+function render_orario_7_field_in_contact_form($tag) {
+    $orario7 = get_field('primo_orario_spettacolo_3');
+    if ($orario7) {
+        return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_3" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
+    } else {
+        return '';
+    }
+}
+function render_orario_8_field_in_contact_form($tag) {
+    $orario8 = get_field('secondo_orario_spettacolo_3');
+    if ($orario8) {
+        return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_3" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
+    } else {
+        return '';
+    }
+}
+function render_orario_9_field_in_contact_form($tag) {
+    $orario9 = get_field('terzo_orario_spettacolo_3');
+    if ($orario9) {
+        return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_3" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+    } else {
+        return '';
+    }
+}
+
+
+add_action('wpcf7_init', 'add_acf_fields_to_contact_form2');
+
+function add_acf_fields_to_contact_form2() {
+    
+	wpcf7_add_form_tag('spettacolo_field_2', 'render_spettacolo_field_in_contact_form2');
+  
+	wpcf7_add_form_tag('spettacolo_1_2_field', 'render_spettacolo_1_2_field_in_contact_form');
+    wpcf7_add_form_tag('spettacolo_2_2_field', 'render_spettacolo_2_2_field_in_contact_form');
+    wpcf7_add_form_tag('spettacolo_3_2_field', 'render_spettacolo_3_2_field_in_contact_form');
+    wpcf7_add_form_tag('orario_1_2_field', 'render_orario_1_2_field_in_contact_form');
+    wpcf7_add_form_tag('orario_2_2_field', 'render_orario_2_2_field_in_contact_form');
+    wpcf7_add_form_tag('orario_3_2_field', 'render_orario_3_2_field_in_contact_form');
+	wpcf7_add_form_tag('orario_4_2_field', 'render_orario_4_2_field_in_contact_form');
+	wpcf7_add_form_tag('orario_5_2_field', 'render_orario_5_2_field_in_contact_form');
+	wpcf7_add_form_tag('orario_6_2_field', 'render_orario_6_2_field_in_contact_form');
+	wpcf7_add_form_tag('orario_7_2_field', 'render_orario_7_2_field_in_contact_form');
+	wpcf7_add_form_tag('orario_8_2_field', 'render_orario_8_2_field_in_contact_form');
+	wpcf7_add_form_tag('orario_9_2_field', 'render_orario_9_2_field_in_contact_form');
+}
+
+
+function render_spettacolo_field_in_contact_form2($tag) {
+   
+    $spettacolo_1 = get_field('spettacolo_1_2');
+    $spettacolo_2 = get_field('spettacolo_2_2');
+    $spettacolo_3 = get_field('spettacolo_3_2');
+
+    $spettacoli_options = array(
+        $spettacolo_1,
+        $spettacolo_2,
+        $spettacolo_3
+    );
+
+    $spettacoli_options = array_unique($spettacoli_options);
+
+    
+    $output = '<select name="spettacolo-2" id="spettacolo-2">';
+	$counter = 1;
+    foreach ($spettacoli_options as $option) {
+      
+		if ($option) {
+            
+            $name = 'spettacolo_' . $counter;
+            $output .= '<option value="' . esc_attr($option) . '" name="' . esc_attr($name) . '">' . esc_html($option) . '</option>';
+            $counter++; 
+        }
+    }
+	
+    $output .= '</select>';
+
+    return $output;
+}
+
+
+function render_orario_1_2_field_in_contact_form($tag) {
+    $orario1 = get_field('orario_spettacolo_1_2');
+    if ($orario1) {
+        return '<input id="orario_1_field" type="checkbox" name="orario_spettacolo_1" value="' . esc_attr($orario1) . '">' . esc_html($orario1);
+    } else {
+        return '';
+    }
+}
+
+function render_orario_2_2_field_in_contact_form($tag) {
+    $orario2 = get_field('secondo_orario_spettacolo_1_2');
+    if ($orario2) {
+        return '<input id="orario_2_field" type="checkbox" name="secondo_orario_spettacolo_1" value="' . esc_attr($orario2) . '">' . esc_html($orario2);
+    } else {
+        return '';
+    }
+}
+
+function render_orario_3_2_field_in_contact_form($tag) {
+    $orario3 = get_field('terzo_orario_spettacolo_1_2');
+    if ($orario3) {
+        return '<input id="orario_3_field" type="checkbox" name="terzo_orario_spettacolo_1" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
+    } else {
+        return '';
+    }
+}
+
+
+function render_orario_4_2_field_in_contact_form($tag) {
+    $orario4 = get_field('primo_orario_spettacolo_2_2');
+    if ($orario4) {
+        return '<input id="orario_4_field" type="checkbox" name="primo_orario_spettacolo_2" value="' . esc_attr($orario4) . '">' . esc_html($orario4);
+    } else {
+        return '';
+    }
+}
+
+function render_orario_5_2_field_in_contact_form($tag) {
+    $orario5 = get_field('secondo_orario_spettacolo_2_2');
+    if ($orario5) {
+        return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_2" value="' . esc_attr($orario5) . '">' . esc_html($orario5);
+    } else {
+        return '';
+    }
+}
+
+function render_orario_6_2_field_in_contact_form($tag) {
+    $orario6 = get_field('terzo_orario_spettacolo_2_2');
+    if ($orario6) {
+        return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_2" value="' . esc_attr($orario6) . '">' . esc_html($orario6);
+    } else {
+        return '';
+    }
+}
+function render_orario_7_2_field_in_contact_form($tag) {
+    $orario7 = get_field('primo_orario_spettacolo_3_2');
+    if ($orario7) {
+        return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_3" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
+    } else {
+        return '';
+    }
+}
+function render_orario_8_2_field_in_contact_form($tag) {
+    $orario8 = get_field('secondo_orario_spettacolo_3_2');
+    if ($orario8) {
+        return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_3" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
+    } else {
+        return '';
+    }
+}
+function render_orario_9_2_field_in_contact_form($tag) {
+    $orario9 = get_field('terzo_orario_spettacolo_3_2');
+    if ($orario9) {
+        return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_3" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+    } else {
+        return '';
+    }
+}
+
+	function render_data_1_2_field_in_contact_form($tag) {
+    $data1 = get_field('prima_data_spettacolo_1_2');
+    if ($data1) {
+        return '<input id="data_1_2_field" type="checkbox" name="prima_data_spettacolo_1_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
+    } else {
+        return '';
+    }
+}
+
+	function render_data_2_2_field_in_contact_form($tag) {
+    $data1 = get_field('seconda_data_spettacolo_1_2');
+    if ($data1) {
+        return '<input id="data_2_2_field" type="checkbox" name="seconda_data_spettacolo_1_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
+    } else {
+        return '';
+    }
+}
+
+	function render_data_3_2_field_in_contact_form($tag) {
+    $data1 = get_field('terza_data_spettacolo_1_2');
+    if ($data1) {
+        return '<input id="data_3_2_field" type="checkbox" name="terza_data_spettacolo_1_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
+    } else {
+        return '';
+    }
+}
+
+	function render_data_4_2_field_in_contact_form($tag) {
+    $data1 = get_field('prima_data_spettacolo_2_2');
+    if ($data1) {
+        return '<input id="data_3_2_field" type="checkbox" name="prima_data_spettacolo_2_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
+    } else {
+        return '';
+    }
+}
+
+	function render_data_5_2_field_in_contact_form($tag) {
+    $data1 = get_field('seconda_data_spettacolo_2_2');
+    if ($data1) {
+        return '<input id="data_3_2_field" type="checkbox" name="seconda_data_spettacolo_2_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
+    } else {
+        return '';
+    }
+}
+
+
+	function render_data_6_2_field_in_contact_form($tag) {
+    $data1 = get_field('terza_data_spettacolo_2_2');
+    if ($data1) {
+        return '<input id="data_3_2_field" type="checkbox" name="terza_data_spettacolo_2_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
+    } else {
+        return '';
+    }
+}
+
+
+	function render_data_7_2_field_in_contact_form($tag) {
+    $data1 = get_field('prima_data_spettacolo_3_2');
+    if ($data1) {
+        return '<input id="data_3_2_field" type="checkbox" name="prima_data_spettacolo_3_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
+    } else {
+        return '';
+    }
+}
+
+
+	function render_data_8_2_field_in_contact_form($tag) {
+    $data1 = get_field('seconda_data_spettacolo_3_2');
+    if ($data1) {
+        return '<input id="data_3_2_field" type="checkbox" name="seconda_data_spettacolo_3_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
+    } else {
+        return '';
+    }
+}
+
+
+	function render_data_9_2_field_in_contact_form($tag) {
+    $data1 = get_field('terza_data_spettacolo_3_2');
+    if ($data1) {
+        return '<input id="data_3_2_field" type="checkbox" name="terza_data_spettacolo_3_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
+    } else {
+        return '';
+    }
+}
