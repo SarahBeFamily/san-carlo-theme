@@ -7,11 +7,7 @@
         $transparent = get_field('header_trasparente', $post_id) == true || is_singular('spettacoli') || is_singular('post') || is_front_page(  ) ? 'transparent' : '';
       endif;
     }
-    $query_page = new \WP_Query([
-        'post_type' => 'page',
-        'post_title' => 'Accedi',
-    ]);
-    $accedi = $query_page->posts[0];
+    $accedi = get_page_by_title( 'Accedi', '', 'page' );
 @endphp 
 
 <header class="banner {{$transparent}}">
