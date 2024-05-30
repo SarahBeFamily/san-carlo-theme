@@ -55,6 +55,10 @@ h1,h2,h3,h4, p, .text, body {
 	font-family: 'Inter', sans-serif;
 }
 
+p {
+	font-size: 18px;
+}
+
 h1 {
 	color: <?php echo esc_attr( $base ); ?>;
 	font-size: 32px;

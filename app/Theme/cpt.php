@@ -31,15 +31,13 @@ function spettacoli_cpt() {
             'description'         => '',
             'labels'              => $labels,
             'supports'            => array( 'title', 'editor', 'excerpt', 'thumbnail', 'custom-fields' ),
-            'taxonomies'          => array( 'anno' ),
+            'taxonomies'          => array( 'categoria-spettacoli' ),
             'rewrite'   		  => array( 'slug' => 'spettacoli', 'with_front' => false ), /* Puoi specificare uno slug per gli URL */
             'menu_icon' 		  => 'dashicons-tickets-alt',
             'hierarchical'        => false,
             'public'              => true,
             'show_ui'             => true,
             'show_in_rest'        => true,
-			'rest_base'          => 'spettacoli',
-        	'rest_controller_class' => 'WP_REST_Posts_Controller',
             'show_in_menu'        => true,
             'show_in_nav_menus'   => true,
             'show_in_admin_bar'   => true,
@@ -89,10 +87,11 @@ function categorie_spettacolo_tax()  {
 		'show_in_nav_menus'          => false,
 		'show_tagcloud'              => false,
 		'has_archive'                => true,
+		'rewrite'  					 => ['slug' => 'categoria-spettacoli', 'with_front' => false],
 	);
 	register_taxonomy( 'categoria-spettacoli', 'spettacoli', $args );
 }
-add_action( 'init', 'categorie_spettacolo_tax', 1 );
+add_action( 'init', 'categorie_spettacolo_tax' );
 
 // Categorie Pagine per ordinarle
 function categorie_page_tax()  {

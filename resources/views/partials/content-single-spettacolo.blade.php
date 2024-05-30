@@ -1,5 +1,6 @@
 @php
 
+$my_current_lang = apply_filters( 'wpml_current_language', NULL );
 $spe_id             = get_the_ID();
 $spe_title          = get_the_title();
 $spe_start_date     = get_post_meta( $spe_id, 'spt_startDate', true );
@@ -8,16 +9,18 @@ $curr_start_date    = !empty($spe_start_date) ? explode( "/", $spe_start_date ) 
 $final_start_date   = !empty($curr_start_date) ? $curr_start_date[ 1 ] . '/' . $curr_start_date[ 0 ] . '/' . $curr_start_date[ 2 ] : '';
 $curr_end_date      = !empty($spe_end_date) ? explode( "/", $spe_end_date ) : '';
 $final_end_date     = !empty($curr_end_date) ? $curr_end_date[ 1 ] . '/' . $curr_end_date[ 0 ] . '/' . $curr_end_date[ 2 ] : '';
-$final_start_date   = change_date_time_in_italy(strtotime ( $final_start_date ),'dd MMMM y');
-$final_end_date     = change_date_time_in_italy(strtotime ( $final_end_date ),'dd MMMM y') ;
 $spt_tit_info_title = get_post_meta( $spe_id, 'spt_tit_info_title', true );
 $tit_info_perform   = !empty($spt_tit_info_title[ 'tit_info_perform' ]) ? $spt_tit_info_title[ 'tit_info_perform' ] : '';
 $spt_vcode          = get_post_meta( $spe_id, 'spt_vcode', true );
 $spt_location       = !empty(get_post_meta( $spe_id, 'spt_location', true )) ? get_post_meta( $spe_id, 'spt_location', true ) : 'Teatro San Carlo - NAPOLI';
 $spt_img            = get_the_post_thumbnail_url($spe_id) ? get_the_post_thumbnail_url($spe_id) : plugin_dir_url( __DIR__ ) . 'assets/img/emiliano_test.jpg';
-//echo "<pre>";
-//print_r($spt_tit_info_title['tit_info_perform']);
-//echo "</pre>";
+if($my_current_lang == 'it') {
+    $final_start_date   = change_date_time_in_italy(strtotime ( $final_start_date ),'dd MMMM y');
+    $final_end_date     = change_date_time_in_italy(strtotime ( $final_end_date ),'dd MMMM y') ;
+}else {
+    $final_start_date   = date('dd MMMM y', strtotime ( $final_start_date ));
+    $final_end_date     = date('dd MMMM y', strtotime ( $final_end_date )) ;
+}
 @endphp
 
 <div class="spettacolo-single-wrap">

@@ -15,6 +15,24 @@ msgstr ""
 "X-Generator: Poedit 3.3.1\n"
 "X-Domain: san-carlo-theme\n"
 
+#: app/filters.php:15
+msgid "Continue reading"
+msgstr "Continua a leggere"
+
+#: app/functions.php:707
+#: app/functions.php:849
+msgid "We received your request, thank you"
+msgstr "Grazie, Abbiamo ricevuto la tua richiesta"
+
+#: app/functions.php:712
+#: app/functions.php:855
+msgid "Error sending email"
+msgstr "Errore: mail non inviata"
+
+#: app/functions.php:725
+#: app/functions.php:867
+msgid "Error with data"
+msgstr "Errore dati"
 
 #. translators: %1$s è la data di inizio e %2$s è la data di fine spettacolo
 #: app/Theme/js_composer/vc_elements/bf-carousel.php:125
@@ -109,6 +127,7 @@ msgid "Remember me"
 msgstr "Ricordami al prossimo accesso"
 
 #: resources/views/accedi.blade.php:69
+#: resources/views/sections/header.blade.php:60
 msgid "Login"
 msgstr "Accedi"
 
@@ -180,6 +199,10 @@ msgstr "Leggi"
 msgid "News"
 msgstr "News"
 
+#: resources/views/partials/page-header.blade.php:22
+msgid "Discover our news"
+msgstr "Tutte le nostre news in evidenza"
+
 #: resources/views/partials/content-search.blade.php:2
 msgid "Page"
 msgstr "Pagina"
@@ -214,6 +237,11 @@ msgstr "Risultati di ricerca per &#8220;%s&#8221;"
 msgid "Join our Community!"
 msgstr "Iscriviti alla Community!"
 
+#. translators: %s è il profilo social
+#: resources/views/sections/footer.blade.php:46
+msgid "See our %s profile"
+msgstr "Visita il nostro profilo %s"
+
 #: resources/views/sections/row-buy.blade.php:11
 msgid "Buy now"
 msgstr "Acquista Ora"
@@ -226,6 +254,17 @@ msgstr "Torna agli eventi"
 #: resources/views/woocommerce/cart/cart.blade.php:31
 msgid "Show"
 msgstr "Spettacolo"
+
+#. translators: 1: formatted order total 2: total order items
+#: resources/views/woocommerce/myaccount/orders.blade.php:61
+msgid "%1$s for %2$s show"
+msgid_plural "%1$s for %2$s shows"
+msgstr[0] "%1$s per %2$s spettacolo"
+msgstr[1] "%1$s per %2$s spettacoli"
+
+#: resources/views/woocommerce/myaccount/orders.blade.php:108
+msgid "Browse shows"
+msgstr "Scegli spettacoli"
 
 #: resources/views/404.blade.php:8
 msgid "Sorry, but the page you are trying to view does not exist."

@@ -3,11 +3,7 @@
 --}}
 @php 
 	global $current_user;
-	$query_page = new \WP_Query([
-        'post_type' => 'page',
-        'post_title' => 'Area stampa',
-    ]);
-    $redirect_page = $query_page->posts[0];
+	$redirect_page = get_page_by_title( 'Area stampa', '', 'page' );
 @endphp
 
 @extends('layouts.app')

@@ -15,6 +15,8 @@ define( 'THEMEDOMAIN', 'san-carlo-theme' );
 define( 'THEME_PATH', get_stylesheet_directory_uri() );
 define( 'PUBLIC_PATH', THEME_PATH .'/public/' );
 
+include_once ABSPATH . 'wp-admin/includes/plugin.php';
+
 /**
  * Register the theme assets.
  *
@@ -30,7 +32,7 @@ add_action('wp_enqueue_scripts', function () {
         'events_en' => do_shortcode( '[events_en]' ),
     ]);
 
-    if (!is_front_page()) {
+    if (!is_front_page()) { 
         wp_enqueue_script('vuejs', get_stylesheet_directory_uri() . '/app/Theme/vue-2.6.11.min.js', [], '2.6.11');
     }
 }, 100);
@@ -151,6 +153,9 @@ add_action('after_setup_theme', function () {
     // disable Gutenberg for post types
     add_filter('use_block_editor_for_post_type', '__return_false', 10);
 
+    // disable archive title prefix
+    add_filter('get_the_archive_title_prefix','__return_false');
+
     /**
      * Register new role for press agents
      */
@@ -234,23 +239,6 @@ add_action('widgets_init', function () {
     register_widget( 'bf_buttons_widget' );
 });
 
-// /**
-//  * Add new rest API endpoint for events in english
-//  */
-
-// add_action( 'rest_api_init', function() {
-
-//     register_rest_route( 'events', '/events_en', array(
-//         'methods' => 'GET',
-//         'callback' => function($data) {
-//             $cat = $data->get_param( 'categoria_spettacoli' );
-//             $date = $data->get_param( 'data_inizio' );
-
-//             return json_decode(do_shortcode( '[events_en categoria_spettacoli="'.$cat.'" data_inizio="'.$date.'"]' ));
-//         }
-//     ));
-// });
-
 /**
  * Add data & image to open graph
  */
@@ -292,77 +280,3 @@ add_action('wp_head', function() {
         return;
     }
 }, 5);
-
-/**
- * Preload Shows data
- */
-add_action('wp_footer', function() {
-    if (is_front_page()) {
-        $args = array(
-            'public' => true,
-            '_builtin' => false,
-            'post_type' => 'spettacoli',
-            'numberposts' => -1,
-            'suppress_filters' => false,
-        );
-        $posts = get_posts($args);
-        $eventi_arr['date'] = array();
-        $pair = array();
-
-        foreach ($posts as $post) {
-            $spettacolo_data = stcticket_spettacolo_data(get_field('prodotto_relazionato', $post));
-            $evento_date = array();
-
-            $cats = '';
-            foreach (get_the_terms( $post, 'categoria-spettacoli' ) as $cat) {
-                $cats = $cat->name;
-            }
-
-            if (is_array($spettacolo_data['date'])) :
-            foreach ($spettacolo_data['date'] as $dettaglio) {
-                $data_ora_array = explode(' ', $dettaglio['date']);
-                $data = str_replace('-', '/', $data_ora_array[0]); // 16/09/2023
-                $ora = $data_ora_array[1]; // 19:30
-                $today = date('Ymd');
-                $data_array = explode('/', $data);
-                $data_reale = date('Ymd', strtotime($data_array[2].$data_array[1].$data_array[0]));
-
-                if ($data_reale >= $today) {
-                    $evento_date[$data][$post->ID]['ID'] = $post->ID;
-                    $evento_date[$data][$post->ID]['titolo'] = get_the_title( $post );
-                    $evento_date[$data][$post->ID]['cat'] = $cats;
-                    $evento_date[$data][$post->ID]['permalink'] = get_permalink( $post );
-                    $evento_date[$data][$post->ID]['featured_image'] = get_the_post_thumbnail_url( $post, 'large' );
-                    $evento_date[$data][$post->ID]['featured_vertical'] = get_field( 'immagine_verticale', $post );
-                    $evento_date[$data][$post->ID]['data'] = $data;
-                    $evento_date[$data][$post->ID]['orario'] = $ora;
-                    $evento_date[$data][$post->ID]['location'] = $spettacolo_data['location'];
-                    $evento_date[$data][$post->ID]['ticket_link'] = $dettaglio['url'];
-                }
-
-                foreach ($evento_date as $data => $evento) {
-                    $datachange = explode('/', $data);
-                    $datadef = $datachange[2].'/'.$datachange[1].'/'.$datachange[0];
-                    $pair[$datadef] = $evento;
-                }
-            }
-
-            $eventi_arr['date'] = $pair;
-            ksort($eventi_arr['date']);
-
-            endif;
-        }
-
-        if ($eventi_arr['date'] == array())
-            return;
-        
-        // Create new option if not exists
-        if ( !get_option( 'shows_data' ) ) {
-            add_option( 'shows_data', $eventi_arr );
-        } else {
-            update_option( 'shows_data', $eventi_arr );
-        }
-
-        echo '<script>let shows_data = '.json_encode($eventi_arr).'</script>';
-    }
-}, 100);

@@ -316,7 +316,7 @@ class Calendar {
 		$html =
 			'<div id="calendar" class="header-cal">'.
 				'<div class="month-year">'.
-                    '<select id="month">';
+                    '<select id="month" aria-label="Month">';
                         // '<option value="'.$month.'">'.wp_date('F', strtotime($year . '-' . $month . '-1')).'</option>';
                         for($i=1; $i <= 12; $i++){
                             $selected = $month == $i ? 'selected="selected"' : '';
@@ -325,8 +325,8 @@ class Calendar {
           $html .= '</select>'.
                     '<div class="cal-nav">'.
                         '<a class="choose-month hidden" href="#" data-year="'.$year.'" data-admin="'.$base.'"></a>'.
-                        '<a class="prev"> <i class="bf-icon icon-chevron left"></i></a>'.
-                        '<a class="next"> <i class="bf-icon icon-chevron"></i></a>'.
+                        '<span class="prev"> <i class="bf-icon icon-chevron left"></i></span>'.
+                        '<span class="next"> <i class="bf-icon icon-chevron"></i></span>'.
                     '</div>'.
                 '</div>'.
 			'</div>';

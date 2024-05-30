@@ -2,7 +2,7 @@ import domReady from '@roots/sage/client/dom-ready';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger.js';
 import 'slick-carousel';
-import $ from 'jquery';
+import $, { event } from 'jquery';
 import axios from 'axios';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -68,18 +68,6 @@ domReady(async () => {
         $('.top-nav').removeClass('hidden');
     });
 
-    // if(!$('body').hasClass('spettacolo-prices')) {
-    //     $(document).on('click', 'a[href^="#"]', function(event) {
-    //         event.preventDefault();
-
-    //         if (!$(this).hasClass('wpml-ls-item-toggle')) {
-    //             $('html, body').animate({
-    //                 scrollTop: ($($.attr(this, 'href')).offset().top - 185)
-    //             }, 500);
-    //         }
-    //     });
-    // }
-
     $('.wpml-ls-item-toggle').on('click', function() {
         $(this).siblings('ul').toggleClass('open');
     });
@@ -111,61 +99,64 @@ domReady(async () => {
 
 
   // Main slider in home
-  let hero_slides = gsap.utils.toArray(".bf-slider-home .single-slide"),
-      nSlides = hero_slides.length;
+  // Se sono nella home
+  if ($('body').hasClass('home')) {
+    let hero_slides = gsap.utils.toArray(".bf-slider-home .single-slide"),
+        nSlides = hero_slides.length;
 
-  gsap.set(hero_slides, { xPercent: 100 });
-  gsap.set(hero_slides[0], { xPercent: 0 });
+        gsap.set(hero_slides, { xPercent: 100 });
+        gsap.set(hero_slides[0], { xPercent: 0 });
 
-  function BFSlider(i, prev) {
-      gsap.fromTo(hero_slides[prev],	{xPercent: 0,zIndex: 0},{delay: 0.2,duration: 0.8,xPercent: 0,zIndex: -10});
-      gsap.fromTo(hero_slides[i], { xPercent: 100, zIndex: 10, opacity: 1 }, { duration: 0.8, xPercent: 0, zIndex: 0, opacity: 1 });
-      $(hero_slides[prev]).removeClass('current');
-      $(hero_slides[i]).addClass('current');
+        function BFSlider(i, prev) {
+            gsap.fromTo(hero_slides[prev],	{xPercent: 0,zIndex: 0},{delay: 0.2,duration: 0.8,xPercent: 0,zIndex: -10});
+            gsap.fromTo(hero_slides[i], { xPercent: 100, zIndex: 10, opacity: 1 }, { duration: 0.8, xPercent: 0, zIndex: 0, opacity: 1 });
+            $(hero_slides[prev]).removeClass('current');
+            $(hero_slides[i]).addClass('current');
 
-      let prevImg = i != (nSlides -1) ? $(hero_slides[i+1]).attr('preview-img') : $(hero_slides[0]).attr('preview-img'),
-          title = i != (nSlides -1) ? $(hero_slides[i+1]).find('.info .title').html() : $(hero_slides[0]).find('.info .title').html();
+            let prevImg = i != (nSlides -1) ? $(hero_slides[i+1]).attr('preview-img') : $(hero_slides[0]).attr('preview-img'),
+                title = i != (nSlides -1) ? $(hero_slides[i+1]).find('.info .title').html() : $(hero_slides[0]).find('.info .title').html();
 
-      $('.bf-slider-next-slide .ns-photo').css('background-image', `url(${prevImg})`);
-      $('.bf-slider-next-slide .ns-title').html(title);
-  }
-
-  $('.bf-slider-controls li').on('click', function() {
-      let number = parseInt($(this).attr('data-slide').replace('hero-', '')),
-          currSlide = parseInt($('.bf-slider-home .single-slide.current').attr('id').replace('hero-', ''));
-
-      if (!$(this).hasClass('active')) {
-          $(this).addClass('active');
-          $(this).siblings().removeClass('active');
-      }
-      BFSlider(number, currSlide);
-  });
-
-  $('.bf-slider-nav a').on('click', function() {
-        let currSlide = parseInt($('.bf-slider-home .single-slide.current').attr('id').replace('hero-', ''));
-
-        if ($(this).hasClass('prev')) {
-            if (currSlide == 0) {
-                BFSlider(nSlides -1, currSlide);
-                $(`.bf-slider-controls li[data-slide=hero-${nSlides-1}]`).addClass('active');
-                $(`.bf-slider-controls li:not([data-slide=hero-${nSlides-1}])`).removeClass('active');
-            } else {
-                BFSlider(currSlide -1, currSlide);
-                $(`.bf-slider-controls li[data-slide=hero-${currSlide-1}]`).addClass('active');
-                $(`.bf-slider-controls li:not([data-slide=hero-${currSlide-1}])`).removeClass('active');
-            }
-        } else {
-            if (currSlide == nSlides-1) {
-                BFSlider(0, currSlide);
-                $(`.bf-slider-controls li[data-slide=hero-0]`).addClass('active');
-                $(`.bf-slider-controls li:not([data-slide=hero-0])`).removeClass('active');
-            } else {
-                BFSlider(currSlide +1, currSlide);
-                $(`.bf-slider-controls li[data-slide=hero-${currSlide+1}]`).addClass('active');
-                $(`.bf-slider-controls li:not([data-slide=hero-${currSlide+1}])`).removeClass('active');
-            }
+            $('.bf-slider-next-slide .ns-photo').css('background-image', `url(${prevImg})`);
+            $('.bf-slider-next-slide .ns-title').html(title);
         }
-    });
+
+        $('.bf-slider-controls li').on('click', function() {
+            let number = parseInt($(this).attr('data-slide').replace('hero-', '')),
+                currSlide = parseInt($('.bf-slider-home .single-slide.current').attr('id').replace('hero-', ''));
+
+            if (!$(this).hasClass('active')) {
+                $(this).addClass('active');
+                $(this).siblings().removeClass('active');
+            }
+            BFSlider(number, currSlide);
+        });
+
+        $('.bf-slider-nav .span-nav').on('click', function() {
+            let currSlide = parseInt($('.bf-slider-home .single-slide.current').attr('id').replace('hero-', ''));
+
+            if ($(this).hasClass('prev')) {
+                if (currSlide == 0) {
+                    BFSlider(nSlides -1, currSlide);
+                    $(`.bf-slider-controls li[data-slide=hero-${nSlides-1}]`).addClass('active');
+                    $(`.bf-slider-controls li:not([data-slide=hero-${nSlides-1}])`).removeClass('active');
+                } else {
+                    BFSlider(currSlide -1, currSlide);
+                    $(`.bf-slider-controls li[data-slide=hero-${currSlide-1}]`).addClass('active');
+                    $(`.bf-slider-controls li:not([data-slide=hero-${currSlide-1}])`).removeClass('active');
+                }
+            } else {
+                if (currSlide == nSlides-1) {
+                    BFSlider(0, currSlide);
+                    $(`.bf-slider-controls li[data-slide=hero-0]`).addClass('active');
+                    $(`.bf-slider-controls li:not([data-slide=hero-0])`).removeClass('active');
+                } else {
+                    BFSlider(currSlide +1, currSlide);
+                    $(`.bf-slider-controls li[data-slide=hero-${currSlide+1}]`).addClass('active');
+                    $(`.bf-slider-controls li:not([data-slide=hero-${currSlide+1}])`).removeClass('active');
+                }
+            }
+        });
+    }
 
     $('.bf-carousel').slick({
         dots: true,
@@ -328,22 +319,6 @@ domReady(async () => {
 
     });
 
-    // sticky
-    // const sticky = gsap.timeline({
-    //     scrollTrigger: {
-    //         trigger: '.sticky-wrap',
-    //         start: "top 10%",
-    //         end: "bottom-=5%",
-    //         // markers: true,
-    //         pin: $('.sticky').parent(),
-    //     }
-    // })
-
-    /*new content*/
-
-    // sticky.to('.sticky', {
-    //     y: (mainHeader.height() + 40),
-    // });
     function showPsw() {
         let x = $("#user_pass");
         if (x.type === "password") {
@@ -387,7 +362,12 @@ domReady(async () => {
     // Sezione Archivio Spettacoli
     if ($('body').hasClass('post-type-archive-spettacoli')) {
 
-        let loopEventi = `${AppData.site_url}/wp-json/wp/v2/spettacoli`,
+        let bodyclasses = $('body').attr('class').split(' '),
+            terms = bodyclasses.filter(function(item) {
+                return item.includes('term-');
+            }),
+            cat = $('body').is('[class*=term-]') ? terms[1].replace('term-', '') : 'all',
+            loopEventi = `${AppData.site_url}/wp-json/wp/v2/spettacoli`,
             eventiCat = `${AppData.site_url}/wp-json/wp/v2/all-terms?term=categoria-spettacoli`,
             Eventi_by_date = `${AppData.site_url}/wp-json/wp/v2/events-datetime`,
             loopEvents = `${AppData.site_url}/wp-json/wp/v2/events_en`;
@@ -418,13 +398,17 @@ domReady(async () => {
             }),
             methods: {
                 fetchSpettacoliCats() {
-                    let ac = eventiCat;
-                    if (lang == 'en-US' || lang == 'en-GB') {
+                    let ac = `${eventiCat}&lang=it`;
+                    if (lang !== 'it-IT') {
                         ac = `${eventiCat}&lang=en`;
                     }
+
+                    if (cat !== 'all') {
+                        this.currentCat.cat = cat;
+                    }
+
                     axios.get(ac)
                     .then(resp => {
-                        // console.log(resp);
                         this.eventiCats = resp.data;
                     })
                     .catch(err => {
@@ -436,21 +420,34 @@ domReady(async () => {
                 fetchSpettacoli() {
                     $('body').addClass('loading');
 
-                    let af = `${AppData.site_url}/wp-json/wp/v2/spettacoli?orderby=data_inizio&order=${this.order}&per_page=12&page=${this.currentPage.id}`;
-                    if (lang == 'en-US' || lang == 'en-GB') {
-                        // af = `${loopEvents}?order=${this.order}&per_page=12&page=${this.currentPage.id}`;
-                        af = `${loopEvents}?orderby=data_inizio&order=${this.order}&per_page=12&page=${this.currentPage.id}`;
+                    this.query = `${loopEventi}?orderby=data_inizio&order=${this.order}&per_page=12&page=${this.currentPage.id}`;
+
+                    if (cat !== 'all') {
+                        this.query = `${loopEventi}?categoria_spettacoli=${cat}&orderby=data_inizio&order=${this.order}&per_page=12&page=${this.currentPage.id}`;
+
+                        if (lang !== 'it-IT') {
+                            this.query = `${loopEvents}?categoria_spettacoli=${cat}&orderby=data_inizio&order=${this.order}&per_page=12&page=${this.currentPage.id}`;
+                        }
+                    } else {
+                        if (lang !== 'it-IT') {
+                            this.query = `${loopEvents}?orderby=data_inizio&order=${this.order}&per_page=12&page=${this.currentPage.id}`;
+                        }
                     }
-                    axios.get(af)
+                    
+                    axios.get(this.query)
                     .then(resp => {
-                        console.log(resp);
                         this.pages = resp.headers.get('x-wp-totalpages');
                         this.eventi = resp.data;
-                        console.log(this.pages);
-
                         this.nEventi = this.eventi.length;
-                        this.createPage(this.pages);
-                        $('.ev-container p').remove();
+
+                        if (this.eventi.length == 0) {
+                            let msg = lang !== 'it-IT' ? 'Sorry, no shows found' : 'Spiacenti non sono presenti spettacoli';
+                            $('.ev-container').html(`<p>${msg}</p>`);
+                        } else {
+                            this.createPage(this.pages);
+                            $('.ev-container p').remove();
+                        }
+
                         window.scrollTo(0, 0);
                         $('body').removeClass('loading');
                     })
@@ -462,9 +459,17 @@ domReady(async () => {
                     })
                 },
                 getDate(e) {
-                    this.dateRequest = e.target.value;
-                    console.log(e.target.value);
-                    this.avviaFiltri ('data', e.target.value);
+                    let data_arr = (e.target.value).split('/'),
+                        giorno = parseInt(data_arr[2]),
+                        data = `${data_arr[0]}/${data_arr[1]}/${data_arr[2]}`;
+
+                    // Controllo se il giorno scelto ha solo una cifra
+                    // e aggiungo uno zero davanti
+                    if (giorno < 10) data = `${data_arr[0]}/${data_arr[1]}/0${giorno}`;
+
+                    this.dateRequest = data;
+                    console.log(data);
+                    this.avviaFiltri ('data', data);
                 },
                 onClickPage(page) {
                     this.currentPage.id = page;
@@ -477,9 +482,32 @@ domReady(async () => {
                     }
                     this.pagination = array;
                 },
+                async changeCat(cat_id) {
+                    // Prendo lo slug della categoria
+                    let slug = '',
+                        tax_slug = lang !== 'it-IT' ? 'en/events-category' : 'categoria-spettacoli',
+                        eventiPage = lang !== 'it-IT' ? 'en/events' : 'spettacoli';
+
+                    if (cat_id !== 'all') {
+                        
+                        // Prendo lo slug della categoria
+                        this.eventiCats.map(function(elem){
+                            if (elem.term_id == cat_id) {
+                                slug = elem.slug;
+                            }
+                        });
+
+                        if (slug !== '') {
+                            window.location = `${AppData.site_url}/${tax_slug}/${slug}`;
+                        }
+                    } else {
+                        window.location = `${AppData.site_url}/${eventiPage}`;
+                    }
+                },
                 async avviaFiltri (type, id, page) {
                     this.queryArray = [];
 
+                    // Non è attivo il pagination
                     if (!page) {
                         if (type != 'cat')
                             page = this.currentPage.id;
@@ -487,6 +515,7 @@ domReady(async () => {
                             page = '1';
                     }
 
+                    // Se sto filtrando per categoria
                     if (type == 'cat') {
 
                         if (id != 'all') {
@@ -499,34 +528,37 @@ domReady(async () => {
 
                         let queryString = this.queryArray.join('&');
 
-                        if (lang == 'en-US' || lang == 'en-GB') {
+                        if (lang !== 'it-IT') {
                             this.query = `${loopEvents}?${queryString}`;
                         } else {
                             this.query = `${loopEventi}?${queryString}&acf_format=standard`;
                         }
                     }
 
+                    // Se sto filtrando per data
                     if (type == 'data') {
                         this.query = Eventi_by_date;
                     }
 
+                    // Se sto usando il pagination
                     if (type == 'page') {
 
+                        if (this.currentCat.cat !== '' && this.currentCat.cat !== 'all') {
+                            this.queryArray.push(`categoria_spettacoli=${this.currentCat.cat}`);
+                        }
+                        
                         this.queryArray.push(`orderby=data_inizio&order=${this.order}&per_page=12&page=${page}`)
 
                         let queryString = this.queryArray.join('&');
 
-                        if (lang == 'en-US' || lang == 'en-GB') {
-                            this.query = `${loopEvents}?per_page=12&page=${page}`;
+                        if (lang !== 'it-IT') {
+                            this.query = `${loopEvents}?${queryString}&acf_format=standard`;
                         } else {
                             this.query = `${loopEventi}?${queryString}&acf_format=standard`;
                         }
                     }
 
-                    // console.log(this.query)
-                    // console.log(this.dateRequest)
                     $('body').addClass('loading');
-
                     await axios.get(this.query)
                     .then(resp => {
 
@@ -541,31 +573,25 @@ domReady(async () => {
                         }
                         else if (type == 'data') {
                             let risposta = resp.data.date;
-                            // console.log(risposta);
-
                             let arrayIds = [];
 
                             for (const [key, value] of Object.entries(risposta)) {
-                                // console.log(`${key}: ${value}`);
                                 if ( key == id) {
                                     arrayIds = Object.keys(value).map((key) => [key, value[key]]);
                                 }
                             }
 
-                            // console.log(arrayIds);
-
                             let ids = arrayIds.join(',')
 
                             axios.get(`${loopEventi}?id=${ids}`)
                             .then(resp => {
-
                                 this.pages = resp.headers.get('x-wp-totalpages');
                                 this.createPage(this.pages);
                                 this.eventi = resp.data;
                                 this.nEventi = this.eventi.length;
 
                                 if (this.eventi.length == 0) {
-                                    let msg = lang == 'en-US' || lang == 'en-GB' ? 'Sorry, no shows found on this date' : 'Spiacenti non sono presenti spettacoli per questa data';
+                                    let msg = lang !== 'it-IT' ? 'Sorry, no shows found on this date' : 'Spiacenti non sono presenti spettacoli per questa data';
                                     $('.ev-container').html(`<p>${msg}</p>`);
                                 }
 
@@ -606,8 +632,6 @@ domReady(async () => {
                 this.fetchSpettacoliCats();
             }
         });
-        // app.config.compilerOptions.delimiters = [ '${', '}' ]
-        // app.mount('#archivio');
     }
 
     //Sezione form rimborsi
@@ -920,22 +944,6 @@ domReady(async () => {
 
                 alert(message);
                 $('#rimborso').find('input, textarea, select').val('');
-
-                // $.ajax({
-                //     type: 'post',
-                //     url: AppData.ajax_url,
-                //     data: {
-                //       action: 'elimina_allegati_rimborsi',
-                //       uploads: file_remove,
-                //     },
-                //     success: function(data) {
-                //         console.log('file eliminati');
-                //         $('#rimborso').find('input, textarea, select').val('');
-                //     },
-                //     error: function(error) {
-                //       console.log(error)
-                //     }
-                // });
             },
             error: function(error) {
                 console.log(error)

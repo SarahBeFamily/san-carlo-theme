@@ -1,8 +1,11 @@
 @php
     global $post;
+    $post_id = $post ? $post->ID : '';
     $transparent = '';
     if (!is_search() && !isset($_GET['s'])) {
-      $transparent = get_field('header_trasparente', $post->ID) == true || is_singular('spettacoli') || is_singular('post') || is_front_page(  ) ? 'transparent' : '';
+      if (is_plugin_active('advanced-custom-fields-pro/acf.php')) :
+        $transparent = get_field('header_trasparente', $post_id) == true || is_singular('spettacoli') || is_singular('post') || is_front_page(  ) ? 'transparent' : '';
+      endif;
     }
     $query_page = new \WP_Query([
         'post_type' => 'page',
@@ -58,14 +61,16 @@
         @set($user_link, is_user_logged_in() ? get_permalink($area_utente->ID) : get_permalink($accedi->ID))
         
           <i id="icon-search" class="bf-icon icon-search"></i>
-          <a href="{{$user_link}}"><i class="bf-icon icon-user"></i></a>
+          <a href="{{$user_link}}" aria-label="{{ _e('Login', 'san-carlo-theme') }}"><i class="bf-icon icon-user"></i></a>
           @if (is_user_logged_in() && is_woocommerce_activated())
           <a href="{{wc_get_cart_url()}}">
             <i class="bf-icon icon-cart"></i>
             <span class="cart-count">{{WC()->cart->get_cart_contents_count()}}</span>
           </a>
           @endif
-          <div class="lang">@action('wpml_add_language_selector')</div>
+          {{-- <div class="lang">@action('wpml_add_language_selector')</div> --}}
+          {{-- Aggiunto non da me, forse Emiliano?: --}}
+          {{ custom_language_selector() }}
         </div>
         
       </div>

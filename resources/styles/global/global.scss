@@ -128,10 +128,23 @@ body {
     }
 }
 
+/* hack per nascondere l'admin bar da loggati su mobile */
 .admin-bar {
     header.banner {
-        top: 32px !important;
+		@include respond-to($min-tablet) {
+        	top: 32px !important;
+		}
     }
+}
+
+#wpadminbar {
+	@include respond-to($max-tablet) {
+		display: none !important;
+	}
+}
+
+html.vc_mobile {
+	margin-top: 0 !important;
 }
 
 #main > div:first-child {

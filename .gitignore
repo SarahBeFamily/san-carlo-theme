@@ -2,3 +2,5 @@
 /public
 /vendor
 yarn.lock
+.budfiles/san-carlo-theme/modules.json
+.budfiles/san-carlo-theme/cache/*

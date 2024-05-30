@@ -79,6 +79,10 @@ function theme_body_classes( $classes ) {
 		$classes[] = 'transparent-header';
 	}
 
+    if(is_user_logged_in(  )) {
+        $classes[] = 'logged-in';
+    }
+
 	return $classes;
 }
 add_filter( 'body_class', 'theme_body_classes' );
@@ -95,6 +99,7 @@ add_filter( 'body_class', 'theme_body_classes' );
  include __DIR__.'/app/Theme/Calendar/calendar_class.php';
  include __DIR__.'/app/Theme/walker.php';
  include __DIR__.'/app/Theme/widget.php';
+ include __DIR__.'/app/Theme/functions/spettacoli_functions.php';
 
 
 
@@ -312,52 +317,56 @@ return $output;
 } // <?php echo dynamic_copyright(); //
 add_shortcode('dynamic_copyright', 'dynamic_copyright_shortcode');
 
+/*
+* Redirect wp-login.php to Accedi Template page
+* 
+* @return void
+*/
 
-/**
- * Redirect wp-login.php to Accedi Template page
- * 
- * @return void
- */
+add_filter('login_redirect', 'my_login_redirect', 10, 3);
+function my_login_redirect($redirect_to, $requested_redirect_to, $user) {
+   $query_area_stampa = new \WP_Query([
+       'post_type' => 'page',
+       'post_title' => 'Area stampa',
+       'post_status' => 'publish',
+   ]);
+   $frontpage_id = get_option( 'page_on_front' );
+   $frontpage = get_post($frontpage_id);
+   $press_page = is_array($query_area_stampa->posts) ? $query_area_stampa->posts[0] : $frontpage;
+   $query_page = new \WP_Query([
+       'post_type' => 'page',
+       'post_title' => 'Accedi',
+   ]);
+   $redirect_page = $query_page->posts[0];
 
-// add_filter('login_redirect', 'my_login_redirect', 10, 3);
-// function my_login_redirect($redirect_to, $requested_redirect_to, $user) {
-//     $query_area_stampa = new \WP_Query([
-//         'post_type' => 'page',
-//         'post_title' => 'Area stampa',
-//     ]);
-//     $press_page = $query_area_stampa->posts[0];
-//     $query_page = new \WP_Query([
-//         'post_type' => 'page',
-//         'post_title' => 'Accedi',
-//     ]);
-//     $redirect_page = $query_page->posts[0];
+   if (is_wp_error($user)) {
+       //Login failed, find out why...
+       $error_types = array_keys($user->errors);
+       //Error type seems to be empty if none of the fields are filled out
+       $error_type = 'both_empty';
+       //Otherwise just get the first error (as far as I know there
+       //will only ever be one)
+       if (is_array($error_types) && !empty($error_types)) {
+           $error_type = $error_types[0];
+       }
+       $loginurl = ICL_LANGUAGE_CODE == 'it' ? '/accedi' : '/log-in';
 
-//     if (is_wp_error($user)) {
-//         //Login failed, find out why...
-//         $error_types = array_keys($user->errors);
-//         //Error type seems to be empty if none of the fields are filled out
-//         $error_type = 'both_empty';
-//         //Otherwise just get the first error (as far as I know there
-//         //will only ever be one)
-//         if (is_array($error_types) && !empty($error_types)) {
-//             $error_type = $error_types[0];
-//         }
+       wp_redirect( home_url() . $loginurl."?login=failed&reason=" . $error_type ); 
+       exit;
 
-//         wp_redirect( get_permalink($redirect_page->ID) . "?login=failed&reason=" . $error_type ); 
-//         exit;
+   } else {
+       //Login OK - redirect to another page?
+       if ($_SERVER['HTTP_REFERER'] == get_permalink($press_page->ID))
+           return get_permalink($press_page->ID);
+       else if (in_array('administrator', $user->roles))
+           return admin_url();
+       else if (in_array('press', $user->roles))
+           return get_permalink($press_page->ID);
+       else
+           return home_url();
+   }
+}
 
-//     } else {
-//         //Login OK - redirect to another page?
-//         if ($_SERVER['HTTP_REFERER'] == get_permalink($press_page->ID))
-//             return get_permalink($press_page->ID);
-//         else if (in_array('administrator', $user->roles))
-//             return admin_url();
-//         else if (in_array('press', $user->roles))
-//             return get_permalink($press_page->ID);
-//         else
-//             return home_url();
-//     }
-// }
 
 /**
  * Hide admin bar for Press role
@@ -453,17 +462,6 @@ function get_rest_featured_image( $object, $field_name, $request ) {
     return false;
 }
 
-/* change amount of posts returned by REST API to 100
-function rest_spettacoli_per_page( $args, $request ) {
-    $max = max( (int)$request->get_param( 'per_page' ), 300 );
-    $args['posts_per_page'] = $max;
-
-
-    return $args;
-}
-add_filter( 'rest_spettacoli_query', 'rest_spettacoli_per_page', 10, 2 );
-*/
-
 
 /**
  * Create custom ACF field class for Crop Img field
@@ -493,6 +491,115 @@ function expose_ACF_fields( $object ) {
 
 add_action( 'rest_api_init', 'create_ACF_meta_in_REST' );
 
+/**
+ * Change the main query for news page
+ *
+ * @param [type] $query
+ * @return void
+ */
+function news_query( $query ) {
+    if ( $query->is_home() && $query->is_main_query() ) {
+        $exclude = get_posts( array( 
+            'post_type' => 'post',
+            'fields' => 'ids',
+            'meta_query' => [
+                [
+                    'key' => 'articolo_in_evidenza',
+                    'value' => 1,
+                    'compare' => '='
+                ]
+            ]
+         ) );
+        $query->set('ignore_sticky_posts', 1);
+        $query->set('posts_per_page', 12);
+        $query->set('post__not_in',$exclude);
+    }
+    return $query;
+}
+add_action( 'pre_get_posts', 'news_query' );
+
+/*
+ * Add columns to news post list
+ */
+function add_posts_columns ( $columns ) {
+	return array_merge ( $columns, array ( 
+	  'sticky' => __ ( 'In Evidenza' ),
+	) );
+  }
+  add_filter ( 'manage_post_posts_columns', 'add_posts_columns' );
+
+  function post_sticky_column ( $column, $post_id ) {
+	switch ( $column ) {
+	  case 'sticky':
+		$sticky = get_field ('articolo_in_evidenza', $post_id);
+
+        if ( $sticky == 1 ) {
+          echo 'Si';
+        } else {
+          echo 'No';
+        }
+		
+		break;
+	}
+  }
+  add_action ( 'manage_post_posts_custom_column', 'post_sticky_column', 10, 2 );
+
+
+function sticky_custom_edit_box_pt( $column, $post_type, $taxonomy ){
+    static $printNonce = TRUE;
+    if ( $printNonce ) {
+        $printNonce = FALSE;
+        wp_nonce_field( plugin_basename( __FILE__ ), 'news_edit_nonce' );
+    }
+
+    global $post;
+    $post_id = $post->ID;
+
+    switch ( $column ) {
+        case 'sticky':
+            $sticky = get_field('articolo_in_evidenza', $post_id);
+            $checked = $sticky === true ? ' checked="checked" ' : null;
+
+            $html = '<fieldset class="inline-edit-col-right ">';
+                $html .= '<div class="inline-edit-group wp-clearfix">';
+                    $html .= '<label class="alignleft" for="articolo_in_evidenza">In Evidenza</label>';
+                    $html .= '<input type="checkbox" name="articolo_in_evidenza" id="articolo_in_evidenza"'.$checked.' value="1" />';
+                $html .= '</div>';
+            $html .= '</fieldset>';
+            
+            echo $html;
+          break;
+    }
+}
+add_action( 'quick_edit_custom_box', 'sticky_custom_edit_box_pt', 10, 3 );
+
+// Salva le modifiche al campo custom
+function sticky_update_custom_quickedit_box($post_id) {
+
+    $post_type = get_post_type($post_id);
+    if ( 'post' == $post_type ) {
+        if ( !current_user_can( 'edit_post', $post_id ) )
+            return $post_id;
+    }
+
+    if ( isset( $_REQUEST['articolo_in_evidenza'] ) ) {
+        update_post_meta($post_id, 'articolo_in_evidenza', TRUE);
+    } else {
+        update_post_meta($post_id, 'articolo_in_evidenza', FALSE);
+    }
+    return;
+}
+add_action( 'save_post', 'sticky_update_custom_quickedit_box' );
+
+/*
+ * Add Sortable columns for news
+ */
+
+ function kd_post_sortable( $columns ) {
+	$columns['sticky'] = 'sticky';
+	return $columns;
+}
+add_filter('manage_edit-post_sortable_columns', 'kd_post_sortable' );
 
 // Custom directory per upload users
 function secure_upload_directory( $param ) {
@@ -647,7 +754,7 @@ function invia_mail_rimborso() {
 
     if (!empty($post)) {
         // Recipient
-        $destinatari = get_field('form_rimborsi', 'option') ? explode(',', get_field('form_rimborsi', 'option')) : array('mariachiaratroise@kidea.net');
+        $destinatari = get_field('form_rimborsi', 'option') ? explode(',', get_field('form_rimborsi', 'option')) : array('teamweb@kidea.net');
         $to = $destinatari;
         
         // Sender 
@@ -995,6 +1102,33 @@ function skip_logout_confirmation() {
 }
 add_action( 'template_redirect', 'skip_logout_confirmation' );
 
+/**
+ * Redirect no logged user after password reset to login page
+ *
+ * @return void
+ */
+function redirect_no_logged() {
+    $body_classes = get_body_class();
+    
+    if (isset($_GET['password-reset']) && !in_array('logged-in', $body_classes)) {
+        wp_redirect( home_url().'/accedi' );
+        exit();
+    }
+}
+add_action('template_redirect', 'redirect_no_logged');
+
+/**
+ * Redirect to home page if user try to access author page
+ *
+ * @return void
+ */
+function disable_author_page() {
+    if ( is_author() ) {
+        wp_redirect( home_url() );
+    }
+}
+add_action( 'template_redirect', 'disable_author_page' );
+
 
 /**
  * Add custom button text to WooCommerce checkout page
@@ -1154,10 +1288,7 @@ function render_spettacolo_field_in_contact_form($tag) {
     return $output;
 }
 
-
-
-	
-	function render_data_1_field_in_contact_form($tag) {
+function render_data_1_field_in_contact_form($tag) {
     $data1 = get_field('prima_data_spettacolo_1');
     if ($data1) {
         return '<input id="data_1_field" type="checkbox" name="prima_data_spettacolo_1" value="' . esc_attr($data1) . '">' . esc_html($data1);
@@ -1174,8 +1305,6 @@ function render_data_2_field_in_contact_form($tag) {
         return '';
     }
 }
-
-
 
 function render_data_3_field_in_contact_form($tag) {
     $data3 = get_field('terza_data_spettacolo_1');

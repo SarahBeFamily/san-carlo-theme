@@ -4,6 +4,7 @@
 @set($title2, is_archive('spettacoli') && get_field('titolo_pagina_spettacoli_ed_eventi', 'options') ? get_field('titolo_pagina_spettacoli_ed_eventi', 'options') : $title)
 @set($titolo, get_field('title') ? get_field('title') : $title2)
 @set($descr, get_field('description') == true ? 'true' : 'false')
+@set($descr_text, get_field('descr_text'))
 @set($title_accent, is_archive() ? 'titles' : get_field('title_accent'))
 @set($terms_array, get_the_terms(get_the_ID(), 'categoria-pagina') )
 @set($terms, array())
@@ -11,6 +12,21 @@
 
 @if (isset($terms_array) && !empty($terms_array))
 @foreach ($terms_array as $term) @php $terms[] = $term->slug @endphp @endforeach
+@endif
+
+@if (is_tax('categoria-spettacoli'))
+  @set($titolo, get_the_archive_title())
+  @set($title_accent, 'titles')
+  @set($descr, 'true')
+  @set($descr_text, term_description())
+@endif
+
+
+@if (is_home())
+  @set($titolo, __('News', 'san-carlo-theme'))
+  @set($title_accent, 'titles')
+  @set($descr, 'true')
+  @set($descr_text, __('Discover our news', 'san-carlo-theme'))
 @endif
 
 @if (is_404())

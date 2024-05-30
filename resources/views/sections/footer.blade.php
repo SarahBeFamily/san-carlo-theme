@@ -1,8 +1,11 @@
-@php global $post @endphp
+@php 
+  global $post;
+  $post_id = $post ? $post->ID : '';
+ @endphp
 
 <footer class="main-footer">
 
-  @if ( get_field('newsletter_footer', $post->ID) == true || is_singular('spettacoli'))
+  @if ( get_field('newsletter_footer', $post_id) == true || is_singular('spettacoli'))
 
     <div class="newsletter">
 
@@ -42,7 +45,9 @@
 
     <div class="social-wrap">
       @options('social', 'options')
-        <a href="@sub('link')" class="social @sub('tipo_social')">
+        {{-- translators: %s è il profilo social --}}
+        @set($aria_label, sprintf(__('See our %s profile', 'san-carlo-theme'), strtolower(get_sub_field('tipo_social'))))
+        <a href="@sub('link')" class="social @sub('tipo_social')" aria-label="{{ $aria_label }}">
           <i class="bf-icon white @sub('tipo_social')"></i>
         </a>
       @endoptions

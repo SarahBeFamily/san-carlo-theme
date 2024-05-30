@@ -1,4 +1,6 @@
-.page-template-accedi {
+.page-template-accedi,
+.mio-account .woocommerce,
+.my-account .woocommerce {
 	background-color: var(--light-gray);
 
 	.template-container {
@@ -6,6 +8,36 @@
 			background-color: white;
 			margin: 1% 10% 6%;
 			padding: 3% 0 4%;
+
+			@include respond-to($phone-plus) {
+				margin: 1% 3% 6%;
+			}
+		}
+
+		.inner-cont-account {
+			background-color: white;
+			margin: 14% 10% 6%;
+			padding: 1% 0 4%;
+
+			@include respond-to($phone-plus) {
+				margin: 1% 3% 6%;
+			}
+
+			.bf-icon, h2 {
+				display: none;
+			}
+
+			form {
+				@include respond-to($max-tablet) {
+					flex-direction: column;
+				}
+			}
+
+			.form-accesso {
+				@include respond-to($phone-plus) {
+					padding: 0;
+				}
+			}
 		}
 	}
 
@@ -45,10 +77,12 @@
 		}
 	}
 
-	#loginform {
+	#loginform,
+	.woocommerce-form {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-between;
+		border: 0 !important;
 
 		p {
 			flex-basis: calc(97% / 2);

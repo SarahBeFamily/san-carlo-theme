@@ -1,3 +1,4 @@
+@php(locate_template( 'taxonomy-categoria-spettacoli.php', true ))
 @extends('layouts.app')
 
 @section('content')
@@ -5,10 +6,6 @@
 @include('partials.page-header')
 
 @php($calendar = new Calendar())
-
-{{-- <pre>
-	{{var_dump(json_decode(do_shortcode( '[events_en categoria_spettacoli="52"]')))}}
-</pre> --}}
 
 <div class="bf-calendar-choice">{!! $calendar->show() !!}</div>
 
@@ -18,8 +15,8 @@
 			<ul id="filtri">
 				<li class="cat"><span>@php(_e('Categories', 'san-carlo-theme'))</span>
 					<ul>
-						<li v-on:click="avviaFiltri('cat', 'all')">@php(_e('All', 'san-carlo-theme'))</li>
-						<li v-for="cat, i in eventiCats" :class="{ active: currentCat.cat == cat.term_id ? currentCat.isActive : false }" v-model="currentCat" :id="cat.term_id" v-on:click="avviaFiltri('cat', cat.term_id)">${cat.name}</li>
+						<li v-on:click="changeCat('all')">@php(_e('All', 'san-carlo-theme'))</li>
+						<li v-for="cat, i in eventiCats" :class="{ active: currentCat.cat == cat.term_id ? currentCat.isActive : false }" v-model="currentCat" :id="cat.term_id" v-on:click="changeCat(cat.term_id)">${cat.name}</li>
 					</ul>
 				</li>
 				<li class="calendar"><span>@php(_e('Calendar', 'san-carlo-theme'))</span></li>

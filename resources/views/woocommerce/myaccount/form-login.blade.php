@@ -20,12 +20,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 @endphp
 
+@if (is_account_page())
+<div class="template-container">
+	<div class="inner-cont-account">
+		{{-- @include('partials.content-page') --}}
+		
+		<div class="form-accesso vc_row wpb_row vc_row-fluid vc_row-bf-default">
+			
+			<div class="inner">
+@endif
+
 @action( 'woocommerce_before_customer_login_form' )
 
 
 		<h2>@php esc_html_e( 'Login', 'woocommerce' ); @endphp</h2>
-
-		<p>@php esc_html_e( 'Fill the form with your personal details and create your account. You can modify or cancel the provided information whenever you want entering your personal area.', 'san-carlo-theme' ); @endphp</p>
 
 		<form class="woocommerce-form woocommerce-form-login login" method="post">
 
@@ -76,5 +84,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</div>
 
 </div>
+
+@if (is_account_page())
+	</div>
+</div>
+@endif
 
 @action( 'woocommerce_after_customer_login_form' )

@@ -91,6 +91,10 @@
 	}
 }
 
-.woocommerce-Button.button.wp-element-button {
+.woocommerce-Button.button,
+.woocommerce-button {
 	@extend .bf-btn;
+	background-color: var(--primary) !important;
+	color: white !important;
+	border: 0;
 }

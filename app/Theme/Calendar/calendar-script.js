@@ -198,33 +198,6 @@
 				month: month, // Il mese per il quale ottenere il calendario.
 				y: year // L'anno per il quale ottenere il calendario.
 			},
-			// success: function(response) { // La funzione da eseguire se la richiesta ha successo.
-			// 	let jsonp = JSON.parse(response);
-			// 		console.log(jsonp);
-
-			// 	// Se esiste un elemento con la classe 'bf-calendar-wrap', sostituisci il suo contenuto con la risposta.
-			// 	if($('.bf-calendar-wrap').length > 0) {
-			// 		$('.bf-calendar-wrap').html(jsonp);
-			// 	// Altrimenti, se esiste un elemento con la classe 'bf-calendar-choice', sostituisci il suo contenuto con la risposta.
-			// 	} else if ($('.bf-calendar-choice').length > 0) {
-			// 		$('.bf-calendar-choice').html(jsonp);
-			// 	}
-					
-			// 	checkActiveEvent();
-			// 	// Rimuove la classe 'loading' dal corpo del documento.
-			// 	$('body').removeClass('loading');
-			// 	progressLoading('clear');
-			// },
-			// error: function(xhr, status, error) { // La funzione da eseguire se la richiesta ha un errore.
-			// 	// Stampa un messaggio di errore.
-			// 	console.log('Filter ERROR STATUS: ' + xhr.status);
-			// 	console.log(error);
-			// 	console.log(xhr);
-			// 	alert(xhr.statusText);
-			// 	// Rimuove la classe 'loading' dal corpo del documento.
-			// 	$('body').removeClass('loading');
-			// 	progressLoading('clear');
-			// }
 			complete: function(xhr, status) { // La funzione da eseguire quando la richiesta è completata.
 				// Se c'è un errore o se la risposta è vuota, stampa un messaggio di errore.
 				if (status === 'error' || !xhr.responseText) {
@@ -235,7 +208,6 @@
 					// Altrimenti, analizza la risposta come JSON.
 					let resp = xhr.responseText;
 					let jsonp = JSON.parse(resp);
-					// console.log(jsonp);
 
 					// Se esiste un elemento con la classe 'bf-calendar-wrap', sostituisci il suo contenuto con la risposta.
 					if($('.bf-calendar-wrap').length > 0) {

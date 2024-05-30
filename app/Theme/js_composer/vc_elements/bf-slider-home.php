@@ -268,12 +268,13 @@ class BF_Slider_Home extends WPBakeryShortCode {
 					if ($post_count > 1) {
 
 						$html .= '<div class="bf-slider-nav">';
-						$html .= '<a class="prev"><i class="bf-icon icon-arrow-right titles"></i></a>';
-						$html .= '<a class="next"><i class="bf-icon icon-arrow-right titles"></i></a>';
+						$html .= '<span class="span-nav prev"><i class="bf-icon icon-arrow-right titles"></i></span>';
+						$html .= '<span class="span-nav next"><i class="bf-icon icon-arrow-right titles"></i></span>';
 						$html .= '</div>';
 
-						$html .= '<ul class="bf-slider-controls bullets">
-									<span>01</span>';
+						$html .= '<div class="bf-slider-controls">';
+							$html .= '<span>01</span>';
+							$html .= '<ul class="bf-slider-controls bullets">';
 
 							if ($type == 'spettacoli' && $posts->have_posts()) {
 								while($posts->have_posts(  )) : $posts->the_post(  );
@@ -289,8 +290,9 @@ class BF_Slider_Home extends WPBakeryShortCode {
 								endforeach;
 							}
 
-						$html .= '<span>0'.$post_count.'</span>
-								</ul>';
+							$html .= '</ul>';
+							$html .= '<span>0'.$post_count.'</span>';
+						$html .= '</div>';
 					}
 
 				$html .= '</div>';

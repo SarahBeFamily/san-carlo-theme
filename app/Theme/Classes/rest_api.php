@@ -68,8 +68,8 @@
 			$pair = array();
 
 			foreach ($posts as $post) {
-				$prodotto_id = get_field('prodotto_relazionato', $post);
-				$spettacolo_data = stcticket_spettacolo_data($prodotto_id);
+				$prodotto_id = is_plugin_active('advanced-custom-fields-pro/acf.php') ? get_field('prodotto_relazionato', $post) : '';
+				$spettacolo_data = is_plugin_active('stc-tickets/stc-tickets.php') ? stcticket_spettacolo_data($prodotto_id) : [];
 				$evento_date = array();
 
 				$cats = '';
@@ -78,7 +78,7 @@
 						$cats = $cat->name;
 				}
 
-				if (is_array($spettacolo_data['date'])) :
+				if (isset($spettacolo_data['date']) && is_array($spettacolo_data['date'])) :
 				foreach ($spettacolo_data['date'] as $dettaglio) {
 					$data_ora_array = explode(' ', $dettaglio['date']);
 					$data = str_replace('-', '/', $data_ora_array[0]); // 16/09/2023
@@ -93,18 +93,20 @@
 						$evento_date[$data][$post->ID]['cat'] = $cats;
 						$evento_date[$data][$post->ID]['permalink'] = get_permalink( $post );
 						$evento_date[$data][$post->ID]['featured_image'] = get_the_post_thumbnail_url( $post, 'large' );
-						$evento_date[$data][$post->ID]['featured_vertical'] = get_field( 'immagine_verticale', $post );
+						$evento_date[$data][$post->ID]['featured_vertical'] = is_plugin_active('advanced-custom-fields-pro/acf.php') ? get_field( 'immagine_verticale', $post ) : '';
 						$evento_date[$data][$post->ID]['data'] = $data;
 						$evento_date[$data][$post->ID]['orario'] = $ora;
 						$evento_date[$data][$post->ID]['location'] = $spettacolo_data['location'];
 						$evento_date[$data][$post->ID]['ticket_link'] = $dettaglio['url'];
 					}
 
+					if (isset($evento_date[$data]) && is_array($evento_date[$data])) :
 					foreach ($evento_date[$data] as $evento_id => $evento) {
 						$datachange = explode('/', $evento['data']);
 						$datadef = $datachange[2].'/'.$datachange[1].'/'.$datachange[0];
 						$pair[$datadef][$evento_id] = $evento;
 					}
+					endif;
 				}
 
 				$eventi_arr['date'] = $pair;
@@ -267,7 +269,8 @@
 			$eventi = array();
 
 			foreach ($posts as $post) {
-				$spettacolo_data = stcticket_spettacolo_data(get_field('prodotto_relazionato', $post));
+				$spettacolo_id = is_plugin_active('advanced-custom-fields-pro/acf.php') ? get_field('prodotto_relazionato', $post) : '';
+				$spettacolo_data = is_plugin_active('stc-tickets/stc-tickets.php') ? stcticket_spettacolo_data($spettacolo_id) : [];				$day_field = is_array($spettacolo_data['date']) ? $spettacolo_data['date'] : '';
 				$day_field = is_array($spettacolo_data['date']) ? $spettacolo_data['date'] : '';
 				$options = array();
 
@@ -285,7 +288,7 @@
 				$evento_date['titolo'] = get_the_title( $post );
 				$evento_date['permalink'] = get_permalink( $post );
 				$evento_date['featured_image'] = get_the_post_thumbnail_url( $post, 'medium' );
-				$evento_date['featured_vertical'] = get_field( 'immagine_verticale', $post );
+				$evento_date['featured_vertical'] = is_plugin_active('advanced-custom-fields-pro/acf.php') ? get_field( 'immagine_verticale', $post ) : '';
 				$evento_date['date'] = $options;
 				$evento_date['location'] = $spettacolo_data['location'];
 
@@ -374,9 +377,9 @@
 					'excerpt' => get_the_excerpt( $eng_id ),
 					'categoria-spettacoli' => $cats,
 					'acf' => [
-						'data_inizio' => get_field('data_inizio', $id),
-						'data_fine' => get_field('data_fine', $id),
-						'immagine_verticale' => get_field('immagine_verticale', $id),
+						'data_inizio' => is_plugin_active('advanced-custom-fields-pro/acf.php') ? get_field('data_inizio', $id) : '',
+						'data_fine' => is_plugin_active('advanced-custom-fields-pro/acf.php') ? get_field('data_fine', $id) : '',
+						'immagine_verticale' => is_plugin_active('advanced-custom-fields-pro/acf.php') ? get_field('immagine_verticale', $id) : '',
 					],
 				];
 			}
@@ -392,11 +395,14 @@
 		if( $offset < 0 ) $offset = 0;
 
 		$output = array_slice( $output, $offset, $limit );
-        $data = new WP_REST_Response( $output, 200 );   
-        $data->header( 'X-WP-Total', $total );   
-        $data->header( 'X-WP-TotalPages', $totalPages);
-		$data->set_headers(array('Cache-Control' => 'max-age=3600'));
-         
+        // aggiungo gli headers
+		$data = new WP_REST_Response( $output, 200 );
+		$data->set_headers(array(
+			'X-WP-Total' => $total,
+			'X-WP-TotalPages' => $totalPages,
+			'Cache-Control' => 'max-age=3600'
+		));
+		
         return $data;
 	  }
   }
