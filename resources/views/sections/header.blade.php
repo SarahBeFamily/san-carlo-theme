@@ -66,7 +66,10 @@
           @endif
           {{-- <div class="lang">@action('wpml_add_language_selector')</div> --}}
           {{-- Aggiunto non da me, forse Emiliano?: --}}
-          {{ custom_language_selector() }}
+          @if(is_plugin_active('sitepress-multilingual-cms/sitepress.php') && function_exists('custom_language_selector'))
+            {{-- <div class="lang">@action('wpml_add_language_selector')</div> --}}
+            {{ custom_language_selector() }}
+          @endif
         </div>
         
       </div>

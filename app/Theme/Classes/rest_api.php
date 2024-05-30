@@ -69,7 +69,7 @@
 
 			foreach ($posts as $post) {
 				$prodotto_id = is_plugin_active('advanced-custom-fields-pro/acf.php') ? get_field('prodotto_relazionato', $post) : '';
-				$spettacolo_data = is_plugin_active('stc-tickets/stc-tickets.php') ? stcticket_spettacolo_data($prodotto_id) : [];
+				$spettacolo_data = is_plugin_active('stc-tickets/stc-tickets.php') && function_exists('stcticket_spettacolo_data') ? stcticket_spettacolo_data($prodotto_id) : [];
 				$evento_date = array();
 
 				$cats = '';

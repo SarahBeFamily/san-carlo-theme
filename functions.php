@@ -101,7 +101,10 @@ add_filter( 'body_class', 'theme_body_classes' );
  include __DIR__.'/app/Theme/widget.php';
  include __DIR__.'/app/Theme/functions/spettacoli_functions.php';
 
-
+// Check if constant is defined
+if ( ! defined( 'ICL_LANGUAGE_CODE' ) ) {
+    define( 'ICL_LANGUAGE_CODE', 'it' );
+}
 
 // Before VC Init
 add_action( 'vc_before_init', 'vc_before_init_actions' );

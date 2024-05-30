@@ -66,8 +66,14 @@ function add_vivaticket_column_content($column, $post_id)
 		$vivaticket_id = get_post_meta($post_id, 'prodotto_relazionato', true);
 		
 		if ($vivaticket_id !== '') {
-			$vivaticket = stcticket_spettacolo_data($vivaticket_id);
-			echo $vivaticket['titolo'];
+			$vivaticket = is_plugin_active('stc-tickets/stc-tickets.php') && function_exists('stcticket_spettacolo_data') ? stcticket_spettacolo_data($vivaticket_id) : null;
+			
+			if ($vivaticket === null) {
+				echo 'Prodotto non trovato';
+			} else {
+				echo $vivaticket['titolo'];
+			}
+			
 		} else {
 			echo 'Nessun prodotto relazionato';
 		}

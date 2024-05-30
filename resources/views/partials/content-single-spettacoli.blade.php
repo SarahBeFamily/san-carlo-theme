@@ -13,8 +13,8 @@
 	$dateEnd_noY = date('d/m', strtotime($data_end_array[2].$data_end_array[1].$data_end_array[0]));
 	$category = get_the_terms( $id, 'categoria-spettacoli' );
 
-	$spettacolo_data = stcticket_spettacolo_data(get_field('prodotto_relazionato'));
-	$day_field = is_array($spettacolo_data['date']) ? $spettacolo_data['date'] : '';
+	$spettacolo_data = is_plugin_active('stc-tickets/stc-tickets.php') && function_exists('stcticket_spettacolo_data') ? stcticket_spettacolo_data(get_field('prodotto_relazionato')) : '';
+	$day_field = is_array($spettacolo_data) && is_array($spettacolo_data['date']) ? $spettacolo_data['date'] : '';
 	$options = array();
 
 	foreach ($category as $term) {
