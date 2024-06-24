@@ -58,14 +58,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<button type="submit" class="woocommerce-button button woocommerce-form-login__submit @php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); @endphp" name="login" value="@php esc_attr_e( 'Log in', 'woocommerce' ); @endphp">@php esc_html_e( 'Log in', 'woocommerce' ); @endphp</button>
 			</p>
 			<p class="woocommerce-LostPassword lost_password">
-				<a href="@php echo esc_url( wp_lostpassword_url() ); @endphp">@php esc_html_e( 'Lost your password?', 'woocommerce' ); @endphp</a>
+				<a href="lost-password">@php esc_html_e( 'Lost your password?', 'woocommerce' ); @endphp</a>
 			</p>
 
 			<p>
 				{{-- translators: %s è il link di registrazione utente --}}
-				@php sprintf( __('Don\'t you have an account yet? <a href="%s">Register</a>', 'san-carlo-theme'),
-					home_url('/user-registration');
-			 	 ); @endphp
+				@php echo sprintf( __('Don\'t you have an account yet? <a href="%s">Register</a>', 'san-carlo-theme'),
+					home_url('/user-registration')
+			 	 ) @endphp
 			</p>
 
 			@action( 'woocommerce_login_form_end' )

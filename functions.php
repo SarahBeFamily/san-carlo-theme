@@ -1132,6 +1132,46 @@ function disable_author_page() {
 }
 add_action( 'template_redirect', 'disable_author_page' );
 
+/**
+ * Add registration date column in user list
+ */
+function add_user_columns($column) {
+    $column['registration_date'] = 'Data Registrazione';
+    return $column;
+}
+add_filter('manage_users_columns', 'add_user_columns');
+
+function add_user_column_content($val, $column_name, $user_id) {
+    if ($column_name == 'registration_date') {
+        $user = get_userdata($user_id);
+        $date = $user->user_registered;
+        return date('d/m/Y H:i:s', strtotime($date));
+    }
+    return $val;
+}
+add_filter('manage_users_custom_column', 'add_user_column_content', 10, 3);
+
+/**
+ * Add sortable registration date column in user list
+ */
+add_filter( 'manage_users_sortable_columns', 'bf_make_registered_column_sortable' );
+function bf_make_registered_column_sortable( $columns ) {
+	return wp_parse_args( array( 'registration_date' => 'registered' ), $columns );
+}
+
+/**
+ * Change initial order in admin user list
+ *
+ */
+function change_user_order($query) {
+    if ( is_admin() && $query->is_main_query() && 'users' == $query->query['post_type'] ) {
+        $registered = ( ! empty( $_GET['orderby'] ) && 'registered' == $_GET['orderby'] ) ? 'registered' : 'registered';
+        $query->set( 'orderby', $registered );
+        $query->set( 'order', 'DESC' );
+    }
+}
+add_action('pre_get_posts', 'change_user_order');
+
 
 /**
  * Add custom button text to WooCommerce checkout page
