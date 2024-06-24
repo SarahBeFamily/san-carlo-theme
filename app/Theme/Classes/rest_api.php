@@ -73,10 +73,13 @@
 				$evento_date = array();
 
 				$cats = '';
-				foreach (get_the_terms( $post->ID, 'categoria-spettacoli' ) as $cat) {
+				$categoria_spettacoli = get_the_terms( $post->ID, 'categoria-spettacoli' );
+				if (is_array($categoria_spettacoli) && !empty($categoria_spettacoli)) :
+				foreach ($categoria_spettacoli as $cat) {
 					if (is_object($cat))
 						$cats = $cat->name;
 				}
+				endif;
 
 				if (isset($spettacolo_data['date']) && is_array($spettacolo_data['date'])) :
 				foreach ($spettacolo_data['date'] as $dettaglio) {
