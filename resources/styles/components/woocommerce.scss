@@ -11,6 +11,13 @@ body:not(.woocommerce-cart, .mio-account, .my-account) {
 	}
 }
 
+.messaggio-popup-block {
+	background: var(--primary);
+	padding: 16px;
+	color: white;
+	font-weight: 500;
+}
+
 .wc-empty-cart-message {
 	width: 80%;
 	margin: 6% auto 0;

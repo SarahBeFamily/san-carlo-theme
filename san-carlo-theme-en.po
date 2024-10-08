@@ -611,3 +611,7 @@ msgstr "modificare la tua password e i dettagli account"
 #: resources/views/woocommerce/myaccount/form-lost-password.blade.php:29
 msgid "Please enter your username or email address. You will receive a link to create a new password via email."
 msgstr "Inserisci il tuo nome utente o l'indirizzo email. Riceverai tramite email un link per generarne la tua nuova password."
+
+#: resources/views/woocommerce/myaccount/view-order.blade.php:25
+msgid "WARNING: If you use Mozilla or Safari, in case of problems with tickets download or printing, please check the popup blocking settings in your browser"
+msgstr "ATTENZIONE: Se usi Mozilla o Safari e hai difficoltà con il download o la stampa dei biglietti, verifica le impostazioni del blocco popup del tuo browser"

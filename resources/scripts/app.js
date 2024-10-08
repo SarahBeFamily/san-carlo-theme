@@ -673,10 +673,10 @@ domReady(async () => {
             }),
             methods: {
                 fetchSpettacoliAnnullati() {
-                    axios.get(`${AppData.site_url}/wp-json/wp/v2/spettacoli?annullato=true&per_page=100`)
+                    axios.get(`${AppData.site_url}/wp-json/wp/v2/annullati`)
                     .then(resp => {
                         this.shows = resp.data;
-                        console.log(this.shows)
+                        // console.log(this.shows)
                     })
                     .catch(err => {
                         // Manage the state of the application if the request
@@ -687,16 +687,15 @@ domReady(async () => {
                 fetchShowId() {
                     let select = document.querySelector(`#show-name`).value;
                     let option = document.querySelector(`option[value="${select}"]`).getAttribute('id');
-                    console.log(option);
+                    // console.log(option);
                     this.show_id = option;
                     this.fetchDate(option);
                 },
                 fetchDate(id) {
-                    axios.get(`${AppData.site_url}/wp-json/wp/v2/spettacoli?id=${id}`)
+                    axios.get(`${AppData.site_url}/wp-json/wp/v2/all-events?id=${id}`)
                     .then(resp => {
-                        // console.log(resp.data[0].acf.date_annullate);
-                        this.date = resp.data[0].acf.date_annullate;
-                        console.log(this.date)
+                        let event = (Object.values(resp.data))[0];
+                        this.date = event.acf.date_annullate;
                     })
                     .catch(err => {
                         // Manage the state of the application if the request

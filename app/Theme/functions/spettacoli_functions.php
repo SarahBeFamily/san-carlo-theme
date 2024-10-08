@@ -79,3 +79,82 @@ function add_vivaticket_column_content($column, $post_id)
 		}
 	}
 }
+
+/**
+ * Save dates in meta for spettacoli when saving post
+ */
+function save_spettacoli_meta( $post_id ) {
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+    if ( ! current_user_can( 'edit_post', $post_id ) ) return;
+
+    $post = get_post($post_id);
+    if ($post->post_type == 'spettacoli') {
+        $spettacolo_VT = get_field('prodotto_relazionato', $post_id);
+        $spettacolo_data = is_plugin_active('stc-tickets/stc-tickets.php') && function_exists('stcticket_spettacolo_data') ? stcticket_spettacolo_data($spettacolo_VT) : '';
+        $date = array();
+
+        $cats = '';
+        $terms = get_the_terms( $post_id, 'spettacoli_cat' );
+        if ( $terms && ! is_wp_error( $terms ) ) {
+            $cats = join( ", ", array_map( function( $t ) { return $t->name; }, $terms ) );
+        }
+
+        if (isset($spettacolo_data['date']) && is_array($spettacolo_data['date'])) :
+            foreach ($spettacolo_data['date'] as $dettaglio) {
+                $data_ora_array = explode(' ', $dettaglio['date']);
+				$data = date('Y/m/d', strtotime($data_ora_array[0])); // 2023/09/16
+                $ticket = isset($dettaglio['url']) ? $dettaglio['url'] : '';
+                $location = isset($spettacolo_data['location']) ? $spettacolo_data['location'] : '';
+
+                $date[$data][$post_id]['ID'] = $post_id;
+                $date[$data][$post_id]['titolo'] = get_the_title( $post_id );
+                $date[$data][$post_id]['cat'] = $cats;
+                $date[$data][$post_id]['permalink'] = get_permalink( $post_id );
+                $date[$data][$post_id]['featured_image'] = get_the_post_thumbnail_url( $post_id, 'large' );
+                $date[$data][$post_id]['featured_vertical'] = is_plugin_active('advanced-custom-fields-pro/acf.php') ? get_field( 'immagine_verticale', $post_id ) : '';
+                $date[$data][$post_id]['data'] = date('d/m/Y', strtotime($data_ora_array[0])); // 16/09/2023
+                $date[$data][$post_id]['orario'] = $data_ora_array[1];
+                $date[$data][$post_id]['location'] = $location;
+                $date[$data][$post_id]['ticket_link'] = $ticket;
+            }
+        endif;
+        
+        if ( ! empty( $date ) && $spettacolo_data !== '' ) {
+            update_post_meta( $post_id, 'spettacolo_date', $date );
+			
+        } 
+        // Test fake dates
+        // else {
+        //     $data = '2024/05/31';
+        //     $ora = '19:30';
+        //     $ticket = '';
+        //     $location = 'Teatro di San Carlo';
+        //     $cats = 'Musica';
+
+        //     $date[$data][$post_id]['ID'] = $post_id;
+        //     $date[$data][$post_id]['titolo'] = get_the_title( $post_id );
+        //     $date[$data][$post_id]['cat'] = $cats;
+        //     $date[$data][$post_id]['permalink'] = get_permalink( $post_id );
+        //     $date[$data][$post_id]['featured_image'] = get_the_post_thumbnail_url( $post_id, 'large' );
+        //     $date[$data][$post_id]['featured_vertical'] = is_plugin_active('advanced-custom-fields-pro/acf.php') ? get_field( 'immagine_verticale', $post_id ) : '';
+        //     $date[$data][$post_id]['data'] = date('d/m/Y', strtotime($data)); // 16/09/2023
+        //     $date[$data][$post_id]['orario'] = $ora;
+        //     $date[$data][$post_id]['location'] = $location;
+        //     $date[$data][$post_id]['ticket_link'] = $ticket;
+
+        //     update_post_meta( $post_id, 'spettacolo_date', $date );
+        // }
+    }
+}
+add_action( 'save_post', 'save_spettacoli_meta' );
+
+// Var dump dell'ordine nel riepilogo in backoffice
+// add_action( 'woocommerce_admin_order_data_after_order_details', 'custom_woocommerce_admin_order_data_after_order_details', 10, 1 );
+
+function custom_woocommerce_admin_order_data_after_order_details( $order ){
+    // Order meta data
+    $ordermeta = get_post_meta( $order->get_id() );
+    echo '<pre>';
+    var_dump($ordermeta);
+    echo '</pre>';
+}

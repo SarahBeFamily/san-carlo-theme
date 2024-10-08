@@ -51,6 +51,11 @@
                 width: 68%;
             }
 
+            &.past .bf-btn.primary.icon-ticket {
+                opacity: 0;
+                pointer-events: none;
+            }
+
             .inner {
                 @include respond-to($max-tablet) {
                     align-items: flex-start;

@@ -146,6 +146,9 @@ class BF_Slider_Home extends WPBakeryShortCode {
 		$id = $id_elem ? ' id="'.$id_elem.'" ' : '';
 
 		$today = date('Ymd');
+		$end = date('Ymd', strtotime('+10 days'));
+
+		$meta_query = array();
 		$args = array(
 			'post_type' => 'spettacoli',
 			'numberposts' => 4,
@@ -154,29 +157,45 @@ class BF_Slider_Home extends WPBakeryShortCode {
 			'orderby' => 'meta_value',
 			'order' => 'ASC',
 			'suppress_filters' => false,
-			'meta_query' => array(
-				array(
-					'key'  => 'data_inizio',
-					'compare'   => '>=',
-					'value'     => $today,
-				),
-			)
 		);
 
 		if ($type == 'spettacoli') {
+			// $posts = array();
+			$args['meta_query'] = array(
+				array(
+					'key'  => 'data_fine',
+					'compare'   => '>=',
+					'value'     => $today,
+					'type'      => 'DATE',
+				),
+			);
+			$args['meta_key'] = 'data_inizio';
+			$args['orderby'] = 'meta_value';
+			$args['order'] = 'ASC';
+
 			$posts = new WP_Query($args);
+			
+			// foreach ($spettacoli->posts as $spettacolo) {
+			// 	if (count($posts) < 5) {
+			// 		$posts[] = $spettacolo;
+			// 	}
+			// }
 			$second_post = $posts->have_posts() ? $posts->posts[1] : array();
+			$image = is_object($second_post) ? get_the_post_thumbnail_url( $second_post->ID, 'medium' ) : '';
+			$title = is_object($second_post) ? get_the_title( $second_post->ID ) : '';
 			$post_count = $posts->post_count; 
 		} else
 		if ($type == 'custom') {
 			$posts = vc_param_group_parse_atts( $atts['slide'] );
 			$second_post = is_array($posts) && !empty($posts) ? $posts[1] : array();
+			$image = is_array($second_post) && !empty($second_post) && isset($second_post['featured_img']) ? wp_get_attachment_image_src($second_post['featured_img'], 'medium')[0] : '';
+			$title = is_array($second_post) && !empty($second_post) && isset($second_post['title_slide']) ? $second_post['title_slide'] : '';
 			$post_count = count($posts);
 		}
 
 		// $posts = $type == 'custom' && isset($atts['slide']) ? vc_param_group_parse_atts( $atts['slide'] ) : $query;
-		$next_img = $type == 'custom' ? wp_get_attachment_image_src($second_post['featured_img'], 'medium')[0] : get_the_post_thumbnail_url( $second_post->ID, 'medium' );
-		$next_title = $type == 'custom' ? $second_post['title_slide'] : get_the_title( $second_post->ID );
+		$next_img = $image;
+		$next_title = $title;
 
 		$html  = '';
 		$html .= '<div'.$id.' class="bf-slider-home full '.$extra_class.'">';
@@ -229,9 +248,9 @@ class BF_Slider_Home extends WPBakeryShortCode {
 					$featured_img = wp_get_attachment_image_src($post['featured_img'], 'full');
 					$preview_img = wp_get_attachment_image_src($post['featured_img'], 'medium');
 
-					$link  		= vc_build_link( $post['link'] );
-					$text_btn 	= esc_html($link['title']);
-					$link_btn   = esc_url( $link['url'] );
+					$link  		= isset($post['link']) ? vc_build_link( $post['link'] ) : '';
+					$text_btn 	= $link != '' ? esc_html($link['title']) : '';
+					$link_btn   = $link != '' ? esc_url( $link['url'] ) : '';
 
 					$html .= '<div id="hero-'.$i.'" class="single-slide'.$current.'" preview-img="'.$preview_img[0].'" style="background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0,0,0,0.5) 70%), url('.$featured_img[0].');">';
 
@@ -242,9 +261,12 @@ class BF_Slider_Home extends WPBakeryShortCode {
 							$html .= '<div class="meta"><p>'. $post['text_slide'] .'</p></div>';
 							
 						$html .= '</div>';
-						$html .= '<a class="bf-btn white" href="'.$link_btn.'" title="'. $text_btn .'">'.__('Discover more', 'san-carlo-theme').' <i class="bf-icon right icon-arrow-right"></i></a>';
+
+						if ($link != '') {
+							$html .= '<a class="bf-btn white" href="'.$link_btn.'" title="'. $text_btn .'">'.__('Discover more', 'san-carlo-theme').' <i class="bf-icon right icon-arrow-right"></i></a>';
+						}
 						
-						if ($post['link_video'] != '') {
+						if (isset($post['link_video']) && $post['link_video'] != '') {
 							$html .= '<a class="play-video" href="'.$post['link_video'].'" data-fancybox title="'. $text_btn .'"><img src="'.get_stylesheet_directory_uri() . '/app/Theme/js_composer/Play.png'.'" /></a>';
 						}
 						

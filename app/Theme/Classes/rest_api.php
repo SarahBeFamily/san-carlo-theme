@@ -81,6 +81,17 @@
 				}
 				endif;
 
+				// Aggiungo le date precedenti se esistono
+				$past_dates = get_post_meta($post->ID, 'spettacolo_date', true);
+				if (isset($past_dates) && is_array($past_dates) && !empty($past_dates)) {
+					foreach ($past_dates as $data => $evento) {
+						$data = date('Y/m/d', strtotime($data));
+						// $datachange = explode('/', $data);
+						// $datadef = $datachange[0].'/'.$datachange[1].'/'.$datachange[2];
+						$pair[$data] = $evento;
+					}
+				}
+
 				if (isset($spettacolo_data['date']) && is_array($spettacolo_data['date'])) :
 				foreach ($spettacolo_data['date'] as $dettaglio) {
 					$data_ora_array = explode(' ', $dettaglio['date']);
@@ -90,7 +101,8 @@
 					$data_array = explode('/', $data);
 					$data_reale = date('Ymd', strtotime($data_array[2].$data_array[1].$data_array[0]));
 
-					if ($data_reale >= $today) {
+					// if ($data_reale >= $today) {
+					if ($data_reale) {
 						$evento_date[$data][$post->ID]['ID'] = $post->ID;
 						$evento_date[$data][$post->ID]['titolo'] = get_the_title( $post );
 						$evento_date[$data][$post->ID]['cat'] = $cats;
@@ -305,7 +317,14 @@
 	 
   }
 
-  class Get_Events_En {
+  /**
+   * Get all published events in english in date order
+   * 
+   * @param array $object
+   * @return WP_REST_Response
+   */
+  class Get_Events_En 
+  {
 	public function __construct()
 	  {
 		  $version = '2';
@@ -409,6 +428,137 @@
         return $data;
 	  }
   }
+
+  /**
+   * Get all published events which are cancelled
+   * 
+   * @param array $object
+   * @return WP_REST_Response
+   */
+  class Get_Annullati {
+	public function __construct()
+	  {
+		  $version = '2';
+		  $namespace = 'wp/v' . $version;
+		  $base = 'annullati';
+		  register_rest_route($namespace, '/' . $base, array(
+			  'methods' => 'GET',
+			  'callback' => array($this, 'annullati'),
+			  'permission_callback' => '__return_true',
+		  ));
+	  }
+
+	public function annullati($object) {
+		$per_page = $object->get_param( 'per_page' );
+		$page = $object->get_param( 'page' );
+		$date = $object->get_param( 'data_inizio' ) ? $object->get_param( 'data_inizio' ) : 'now';
+
+		$args = array(
+			'post_type' => 'spettacoli',
+			'post_status' => 'publish',
+			'numberposts' => -1,
+			'suppress_filters' => false,
+			'meta_query' => array( 
+				'annullato' => array(
+					'key' => 'annullato',
+					'value' => '1',
+					'compare' => '=',
+				)
+			),
+			'orderby' => array( 'data_inizio__order_by' => 'ASC' ),
+		);
+
+		$query = get_posts($args);
+		$output = array();
+		foreach ($query as $post) {
+			// Aggiungo i capi acf
+			$acf_fields = get_fields($post->ID);
+			$id = $post->ID;
+
+			$output[] = (object) [
+				'id' => $id,
+				'slug' => basename(get_permalink($id)),
+				'link' => get_permalink($id),
+				'post_status' => $post->post_status,
+				'type' => $post->post_type,
+				'featured_media_url' => get_the_post_thumbnail_url($id, 'full'),
+				// featured media id
+				'featured_media' => get_post_thumbnail_id($id),
+				'title' => [
+					'rendered' => get_the_title($id)
+				],
+				'excerpt' => get_the_excerpt($id),
+				'acf' => $acf_fields,
+			];
+		}
+
+		return new WP_REST_Response( $output, 200 );
+	  }
+  }
+
+  /**
+   * Get all published events despite the date
+   * 
+   * @param array $object
+   * @return WP_REST_Response
+   */
+  class Get_All_Events {
+	public function __construct()
+	  {
+		  $version = '2';
+		  $namespace = 'wp/v' . $version;
+		  $base = 'all-events';
+		  register_rest_route($namespace, '/' . $base, array(
+			  'methods' => 'GET',
+			  'callback' => array($this, 'all_events'),
+			  'permission_callback' => '__return_true',
+		  ));
+	  }
+
+	public function all_events($object) {
+		$args = array(
+			'post_type' => 'spettacoli',
+			'post_status' => 'publish',
+			'numberposts' => -1,
+			'suppress_filters' => false,
+			'orderby' => array( 'data_inizio__order_by' => 'ASC' ),
+		);
+
+		$query = get_posts($args);
+		$output = array();
+		foreach ($query as $post) {
+			// Aggiungo i capi acf
+			$acf_fields = get_fields($post->ID);
+			$id = $post->ID;
+
+			$output[] = (object) [
+				'id' => $id,
+				'slug' => basename(get_permalink($id)),
+				'link' => get_permalink($id),
+				'post_status' => $post->post_status,
+				'type' => $post->post_type,
+				'featured_media_url' => get_the_post_thumbnail_url($id, 'full'),
+				// featured media id
+				'featured_media' => get_post_thumbnail_id($id),
+				'title' => [
+					'rendered' => get_the_title($id)
+				],
+				'excerpt' => get_the_excerpt($id),
+				'acf' => $acf_fields,
+			];
+		}
+
+		if (null !== ($object->get_param('id'))) {
+			$ids = explode(',', $object->get_param('id'));
+			$output = array_filter($output, function($item) use ($ids) {
+				return in_array($item->id, $ids);
+			});
+		}
+
+		return new WP_REST_Response( $output, 200 );
+	  }
+  }
+		
   
   add_action('rest_api_init', function () {
 	  $all_terms = new all_terms;
@@ -416,6 +566,8 @@
 	  $vivaticket_events = new Array_Vivaticket_Events;
 	  $events_en = new Get_Events_En;
 	  $spettacoli = new Array_Spettacoli;
+	  $annullati = new Get_Annullati;
+	  $all_events = new Get_All_Events;
   });
 
 
@@ -431,7 +583,7 @@
 		if(isset($params['id'])){
 			$args['post__in'] = explode(',', $params['id']);
 		}
-		return $args; 
+		return $args;
 	}   
 	// add the filter 
-	add_filter( "rest_spettacoli_query", 'filter_rest_spettacoli_query', 10, 2 ); 
+	add_filter( "rest_spettacoli_query", 'filter_rest_spettacoli_query', 10, 2 );

@@ -125,42 +125,93 @@ class Calendar {
         $calMonth = strlen($calMonth) == 1 ? sprintf("%02d", $calMonth) : $calMonth;
         $calData = $calDay.'/'.$calMonth.'/'.$calYear;
         $event_code = '';
-        $firstCurrent = '';
+        $firstCurrent = [];
+        $secondCurrent = [];
         $max_n = 0;
         $today = date('d/m/Y', strtotime('today'));
-        $go = 'ok';    
+        $go = 'ok';
 
         if( !empty($this->APIevents) ) {
-            
             foreach ($this->APIevents['date'] as $data_array => $events) {
 
                 $n = intval(count($events) -1);
                 $data_array_data = date('d/m/Y', strtotime($data_array));
-                $month_position = strpos($data_array, '/'.$calMonth.'/') !== false ? strpos($data_array, $calMonth) : null;
+                $month_position = strpos($data_array, '/'.$calMonth.'/');
 
                 $_toDate = date('d/m/Y', strtotime(str_replace('/', '-', $data_array)));
                 $_toDay = explode('/', $_toDate);
 
-                while ($month_position != null) {
-                    $firstCurrent = $go == 'ok' ? $_toDate : $firstCurrent;
-                    $go = 'ko';
-                    break;
+                // while ($month_position != null) {
+                //     $firstCurrent = $go == 'ok' ? $_toDate : $firstCurrent;
+                //     $go = 'ko';
+                //     break;
+                // }
+                $data_arr = explode('/', $data_array);
+                $data_arr_data = date('Y-m-d', strtotime($data_arr[0].'-'.$data_arr[1].'-'. $data_arr[2]));
+
+                // se il mese corrente coincide con quello del calendario
+                if($month_position !== false) {
+                    while ($month_position !== false) {
+                        if($data_arr_data >= date('Y-m-d', strtotime('today'))) {
+                            $firstCurrent[] = date('d/m/Y', strtotime($data_arr_data));
+                        }
+                        $go = 'ko';
+                        break;
+                    }
+                } else {
+                    while ($month_position == false) {
+                        // cerco la prima data disponibile del mese del calendario
+                        $data_first_event = array_keys($this->APIevents['date']);
+    
+                        // cerco il mese tra le date disponibili
+                        $data_first_event = array_filter($data_first_event, function($value) use ($calMonth) {
+                            return strpos($value, '/'.$calMonth.'/') !== false;
+                        });
+    
+                        // prendo la prima data disponibile
+                        $data_first_event = array_shift($data_first_event);
+                        $data_first_event = date('d/m/Y', strtotime(str_replace('/', '-', $data_first_event)));
+                        // $data_first_event = explode('/', $data_first_event);
+    
+                        if($go == 'ok') {
+                            $firstCurrent[] = $data_first_event;
+                            $secondCurrent[] = $data_first_event;
+                        }
+                        $go = 'ko';
+                        break;
+                    }
                 }
-        
+                
+                // echo '<pre>';
+                // var_dump($data_array);
+                // echo '</pre>';
+
                 $next_event[$data_array]['style'] = 'display:none;';
                 $next_event[$data_array]['class'] = '';
-                $next_event_display = $calData == $firstCurrent ? '' : 'display:none;';
-                $next_event_class = $calData == $firstCurrent ? 'active' : '';
+
+                $ActiveEvent = '';
+                if ($calMonth == date('m', strtotime('today'))) {
+                    if (count($firstCurrent) > 1) {
+                        $ActiveEvent = $firstCurrent[1];
+                    }
+                } else {
+                    $ActiveEvent = !empty($secondCurrent) ? $secondCurrent[0] : '';
+                }
+
+                $next_event_display = $calData == $ActiveEvent ? '' : 'display:none;';
+                $next_event_class = $calData == $ActiveEvent ? 'active' : '';
 
                 foreach ($events as $event) :
 
-                    $data = $event['data'];
+                    $eventDataArray = explode('/', $event['data']);
+                    $data = $eventDataArray[2].'-'.$eventDataArray[1].'-'. $eventDataArray[0];
+                    $status = date('Y-m-d', strtotime($data)) < date('Y-m-d', strtotime('today')) ? 'past' : 'future';
 
                     if($calYear == $_toDay[2] && $calMonth == $_toDay[1]):
                     if ($calDay == $_toDay[0]) {
 
                         // controllo se i giorni sono a cavallo di 2 mesi
-                        if (is_string($data) && strpos((is_string($data) ? $data : chr($data)),'/') !== false ) {
+                        if (is_string($event['data']) && strpos((is_string($event['data']) ? $event['data'] : chr($event['data'])),'/') !== false ) {
                             $dayEvent = strlen($_toDay[0]) == 1 ? sprintf("%02d", $_toDay[0]) : $_toDay[0];
                             $giorno_evento = strpos($_toDay[0], '0') === 0 ? str_replace('0', '', $_toDay[0]) : $_toDay[0];
                             // definisco il mese successivo (sempre a 2 cifre)
@@ -181,9 +232,10 @@ class Calendar {
                                 
                                 // aggiungo il popup visibile al click
                                 $pos = ($n_event-1) != 0 ? '-'.(($n_event-1)*100).'%' : '0';
+                                $hide_link = $event['ticket_link'] == '' ? 'style="opacity: 0;"' : '';
                                 // $pos = $n != 0 ? '-'.($n * 100).'%' : '0';
                                 // $event_code .= '<div class="dettaglio-evento" index="'.$n.'" data-pos="'.$pos.'" data-id="evento-'.$event['ID'].'" event-date="'.$_toDate.'" style="'.$next_event_display.' right:'.$pos.'">';
-                                $event_code .= '<div class="dettaglio-evento" index="'.$n_event.'" data-pos="'.$pos.'" data-id="evento-'.$event['ID'].'" event-date="'.$event['data'].'" style="'.$next_event_display.'">';
+                                $event_code .= '<div class="dettaglio-evento '.$status.'" index="'.$n_event.'" data-pos="'.$pos.'" data-id="evento-'.$event['ID'].'" event-date="'.$event['data'].'" style="'.$next_event_display.'">';
                                     $event_code .= '<div class="inner flex">';
                                         $event_code .= '<div class="foto" style="background-image:url('.$event['featured_image'].');">';
                                             $event_code .= '<div class="cal-slide"><span class="current-slide">'.$current.'</span> / <span class="total-slide"></span></div>';
@@ -195,14 +247,14 @@ class Calendar {
                                                 $event_code .= '<p><i class="bf-icon icon-pin"></i> '.$event['location'].'</p>';
                                                 $event_code .= '<p><i class="bf-icon icon-clock"></i> '.$event['orario'].'</p>';
                                             $event_code .= '</div>';
-                                            $event_code .= '<a class="bf-btn primary icon-ticket" href="'.$event['ticket_link'].'">'.__('Buy tickets', 'san-carlo-theme').'</a>';
+                                            $event_code .= '<a class="bf-btn primary icon-ticket" '.$hide_link.' href="'.$event['ticket_link'].'">'.__('Buy tickets', 'san-carlo-theme').'</a>';
                                             $event_code .= '<a class="bf-link primary" href="'.$event['permalink'].'">'.__('Discover more', 'san-carlo-theme').'</a>';
                                         $event_code .= '</div>';
                                     $event_code .= '</div>';
                                     /* mobile */
                                     $event_code .= '<div class="info-mobile">';
-                                        $event_code .= '<a class="bf-btn primary icon-ticket" href="'.$event['ticket_link'].'">'.__('Buy tickets', 'san-carlo-theme').'</a>';
-                                        $event_code .= '<a class="bf-link primary" href="'.$event['permalink'].'">'.__('Discover more', 'san-carlo-theme').'</a>';
+                                    $event_code .= '<a class="bf-btn primary icon-ticket" '.$hide_link.' href="'.$event['ticket_link'].'">'.__('Buy tickets', 'san-carlo-theme').'</a>';
+                                    $event_code .= '<a class="bf-link primary" href="'.$event['permalink'].'">'.__('Discover more', 'san-carlo-theme').'</a>';
                                     $event_code .= '</div>';
                     
                                 $event_code .= '</div>';
@@ -281,12 +333,12 @@ class Calendar {
                     '</div>';
         }
 
-        for ($i = 1; $i <= ($maxNum - $numDays - $firstDayOfWeek); $i++) {
-            $html .= '<div class="day_num ignore">
-                    <span>'. $i .'</span>'.
-                        $this->_addEventToCal($i, (intval($month)+1), $year, $month, $lastMonthDay, false).
-                    '</div>';
-        }
+        // for ($i = 1; $i <= ($maxNum - $numDays - $firstDayOfWeek); $i++) {
+        //     $html .= '<div class="day_num ignore">
+        //             <span>'. $i .'</span>'.
+        //                 $this->_addEventToCal($i, (intval($month)+1), $year, $month, $lastMonthDay, true).
+        //             '</div>';
+        // }
         $html .= '</div>';
 		return $html;
 	}

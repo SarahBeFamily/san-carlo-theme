@@ -133,6 +133,7 @@ footer.main-footer {
 				transition: all .35s ease;
 				border: 0;
 				padding-right: 90px;
+				appearance: none;
 
 				&:disabled {
 					cursor: not-allowed !important;
@@ -149,6 +150,7 @@ footer.main-footer {
 			display: flex;
 			justify-content: space-between;
 			padding: 5% 0;
+			align-items: center;
 
 			@include respond-to($phone-plus) {
 				flex-wrap: wrap;
