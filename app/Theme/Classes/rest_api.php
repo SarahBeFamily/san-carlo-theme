@@ -64,31 +64,35 @@
 				'suppress_filters' => false,
 			);
 			$posts = get_posts($args);
-			$eventi_arr['date'] = array();
 			$pair = array();
+			$earr = array();
+			$past = array();
 
 			foreach ($posts as $post) {
 				$prodotto_id = is_plugin_active('advanced-custom-fields-pro/acf.php') ? get_field('prodotto_relazionato', $post) : '';
 				$spettacolo_data = is_plugin_active('stc-tickets/stc-tickets.php') && function_exists('stcticket_spettacolo_data') ? stcticket_spettacolo_data($prodotto_id) : [];
-				$evento_date = array();
 
 				$cats = '';
-				$categoria_spettacoli = get_the_terms( $post->ID, 'categoria-spettacoli' );
-				if (is_array($categoria_spettacoli) && !empty($categoria_spettacoli)) :
-				foreach ($categoria_spettacoli as $cat) {
-					if (is_object($cat))
-						$cats = $cat->name;
+				$terms = get_the_terms( $post->ID, 'categoria-spettacoli' );
+				if ( $terms && ! is_wp_error( $terms ) ) {
+					$cats = join( ", ", array_map( function( $t ) { return $t->name; }, $terms ) );
 				}
-				endif;
-
 				// Aggiungo le date precedenti se esistono
 				$past_dates = get_post_meta($post->ID, 'spettacolo_date', true);
 				if (isset($past_dates) && is_array($past_dates) && !empty($past_dates)) {
-					foreach ($past_dates as $data => $evento) {
-						$data = date('Y/m/d', strtotime($data));
-						// $datachange = explode('/', $data);
-						// $datadef = $datachange[0].'/'.$datachange[1].'/'.$datachange[2];
-						$pair[$data] = $evento;
+					foreach ($past_dates as $key => $value) {
+						$evento = $value[$post->ID];
+						$data = date('Y/m/d', strtotime($key));
+						$past['date'][$data][$post->ID]['ID'] = $post->ID;
+						$past['date'][$data][$post->ID]['titolo'] = get_the_title( $post );
+						$past['date'][$data][$post->ID]['cat'] = $cats;
+						$past['date'][$data][$post->ID]['permalink'] = get_permalink( $post );
+						$past['date'][$data][$post->ID]['featured_image'] = get_the_post_thumbnail_url( $post, 'large' );
+						$past['date'][$data][$post->ID]['featured_vertical'] = is_plugin_active('advanced-custom-fields-pro/acf.php') ? get_field( 'immagine_verticale', $post ) : '';
+						$past['date'][$data][$post->ID]['data'] = $evento['data'];
+						$past['date'][$data][$post->ID]['orario'] = $evento['orario'];
+						$past['date'][$data][$post->ID]['location'] = $evento['location'];
+						$past['date'][$data][$post->ID]['ticket_link'] = $evento['ticket_link'];
 					}
 				}
 
@@ -96,41 +100,29 @@
 				foreach ($spettacolo_data['date'] as $dettaglio) {
 					$data_ora_array = explode(' ', $dettaglio['date']);
 					$data = str_replace('-', '/', $data_ora_array[0]); // 16/09/2023
+					$datadef = date('Y/m/d', strtotime($data_ora_array[0]));
 					$ora = $data_ora_array[1]; // 19:30
-					$today = date('Ymd');
-					$data_array = explode('/', $data);
-					$data_reale = date('Ymd', strtotime($data_array[2].$data_array[1].$data_array[0]));
 
-					// if ($data_reale >= $today) {
-					if ($data_reale) {
-						$evento_date[$data][$post->ID]['ID'] = $post->ID;
-						$evento_date[$data][$post->ID]['titolo'] = get_the_title( $post );
-						$evento_date[$data][$post->ID]['cat'] = $cats;
-						$evento_date[$data][$post->ID]['permalink'] = get_permalink( $post );
-						$evento_date[$data][$post->ID]['featured_image'] = get_the_post_thumbnail_url( $post, 'large' );
-						$evento_date[$data][$post->ID]['featured_vertical'] = is_plugin_active('advanced-custom-fields-pro/acf.php') ? get_field( 'immagine_verticale', $post ) : '';
-						$evento_date[$data][$post->ID]['data'] = $data;
-						$evento_date[$data][$post->ID]['orario'] = $ora;
-						$evento_date[$data][$post->ID]['location'] = $spettacolo_data['location'];
-						$evento_date[$data][$post->ID]['ticket_link'] = $dettaglio['url'];
-					}
-
-					if (isset($evento_date[$data]) && is_array($evento_date[$data])) :
-					foreach ($evento_date[$data] as $evento_id => $evento) {
-						$datachange = explode('/', $evento['data']);
-						$datadef = $datachange[2].'/'.$datachange[1].'/'.$datachange[0];
-						$pair[$datadef][$evento_id] = $evento;
-					}
-					endif;
+					$pair['date'][$datadef][$post->ID]['ID'] = $post->ID;
+					$pair['date'][$datadef][$post->ID]['titolo'] = get_the_title( $post );
+					$pair['date'][$datadef][$post->ID]['cat'] = $cats;
+					$pair['date'][$datadef][$post->ID]['permalink'] = get_permalink( $post );
+					$pair['date'][$datadef][$post->ID]['featured_image'] = get_the_post_thumbnail_url( $post, 'large' );
+					$pair['date'][$datadef][$post->ID]['featured_vertical'] = is_plugin_active('advanced-custom-fields-pro/acf.php') ? get_field( 'immagine_verticale', $post ) : '';
+					$pair['date'][$datadef][$post->ID]['data'] = $data;
+					$pair['date'][$datadef][$post->ID]['dataa'] = $datadef;
+					$pair['date'][$datadef][$post->ID]['orario'] = $ora;
+					$pair['date'][$datadef][$post->ID]['location'] = $spettacolo_data['location'];
+					$pair['date'][$datadef][$post->ID]['ticket_link'] = $dettaglio['url'];
 				}
-
-				$eventi_arr['date'] = $pair;
-				ksort($eventi_arr['date']);
-
 				endif;
 			}
 
-			$result = new WP_REST_Response($eventi_arr, 200);
+			// merge past and future events and sort by date
+			$output = $pair + $past;
+			ksort($output['date']);
+
+			$result = new WP_REST_Response($output, 200);
 			// $result->set_headers(array('Cache-Control' => 'max-age=3600'));
 		  	return $result;
 	  }
