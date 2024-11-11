@@ -1258,260 +1258,29 @@ function insert_paragraph_with_js() {
 /* FORM EDUCATIONAL NON ELIMINARE */
 
 add_action('wpcf7_init', 'add_acf_fields_to_contact_form');
-
-/* prima scelta */
 function add_acf_fields_to_contact_form() {
-    
-	wpcf7_add_form_tag('spettacolo_field', 'render_spettacolo_field_in_contact_form');
-   
-	wpcf7_add_form_tag('spettacolo_1_field', 'render_spettacolo_1_field_in_contact_form');
-    wpcf7_add_form_tag('spettacolo_2_field', 'render_spettacolo_2_field_in_contact_form');
-    wpcf7_add_form_tag('spettacolo_3_field', 'render_spettacolo_3_field_in_contact_form');
-    wpcf7_add_form_tag('spettacolo_4_field', 'render_spettacolo_4_field_in_contact_form');
-    wpcf7_add_form_tag('spettacolo_5_field', 'render_spettacolo_5_field_in_contact_form');
-    wpcf7_add_form_tag('spettacolo_6_field', 'render_spettacolo_6_field_in_contact_form');
-    wpcf7_add_form_tag('spettacolo_7_field', 'render_spettacolo_7_field_in_contact_form');
-    wpcf7_add_form_tag('spettacolo_8_field', 'render_spettacolo_8_field_in_contact_form');
-    wpcf7_add_form_tag('spettacolo_9_field', 'render_spettacolo_9_field_in_contact_form');
-    wpcf7_add_form_tag('spettacolo_10_field', 'render_spettacolo_10_field_in_contact_form');
-    wpcf7_add_form_tag('spettacolo_11_field', 'render_spettacolo_11_field_in_contact_form');
-    
-    
-    /* PRIMA SCELTA - DATA PRIMO SPETTACOLO */
-	wpcf7_add_form_tag('data_1_field', 'render_data_1_field_in_contact_form');
-	wpcf7_add_form_tag('data_2_field', 'render_data_2_field_in_contact_form');
-	wpcf7_add_form_tag('data_3_field', 'render_data_3_field_in_contact_form');
-    
-    /* date aggiunte per il primo spettacolo */
-    wpcf7_add_form_tag('d_4_1_field', 'render_d_4_1_field_in_contact_form');
-    wpcf7_add_form_tag('d_5_1_field', 'render_d_5_1_field_in_contact_form');
-    wpcf7_add_form_tag('d_6_1_field', 'render_d_6_1_field_in_contact_form');
-    wpcf7_add_form_tag('d_7_1_field', 'render_d_7_1_field_in_contact_form');
-    wpcf7_add_form_tag('d_8_1_field', 'render_d_8_1_field_in_contact_form');
-    wpcf7_add_form_tag('d_9_1_field', 'render_d_9_1_field_in_contact_form');
-    wpcf7_add_form_tag('d_10_1_field', 'render_d_10_1_field_in_contact_form');
-    wpcf7_add_form_tag('d_11_1_field', 'render_d_11_1_field_in_contact_form');
-    
-    /* PRIMA SCELTA - DATA SECONDO SPETTACOLO */
-	wpcf7_add_form_tag('data_4_field', 'render_data_4_field_in_contact_form');
-	wpcf7_add_form_tag('data_5_field', 'render_data_5_field_in_contact_form');
-	wpcf7_add_form_tag('data_6_field', 'render_data_6_field_in_contact_form');
-    
-    /* date aggiunte per il secondo spettacolo */
-    wpcf7_add_form_tag('d_4_2_field', 'render_d_4_2_field_in_contact_form');
-    wpcf7_add_form_tag('d_5_2_field', 'render_d_5_2_field_in_contact_form');
-    wpcf7_add_form_tag('d_6_2_field', 'render_d_6_2_field_in_contact_form');
-    wpcf7_add_form_tag('d_7_2_field', 'render_d_7_2_field_in_contact_form');
-    wpcf7_add_form_tag('d_8_2_field', 'render_d_8_2_field_in_contact_form');
-    wpcf7_add_form_tag('d_9_2_field', 'render_d_9_2_field_in_contact_form');
-    wpcf7_add_form_tag('d_10_2_field', 'render_d_10_2_field_in_contact_form');
-    wpcf7_add_form_tag('d_11_2_field', 'render_d_11_2_field_in_contact_form');
-    
-    /* PRIMA SCELTA - DATA TERZO SPETTACOLO */
-	wpcf7_add_form_tag('data_7_field', 'render_data_7_field_in_contact_form');
-	wpcf7_add_form_tag('data_8_field', 'render_data_8_field_in_contact_form');
-	wpcf7_add_form_tag('data_9_field', 'render_data_9_field_in_contact_form');
-    
-    /* date aggiunte per il terzo spettacolo */
-    wpcf7_add_form_tag('d_4_3_field', 'render_d_4_3_field_in_contact_form');
-    wpcf7_add_form_tag('d_5_3_field', 'render_d_5_3_field_in_contact_form');
-    wpcf7_add_form_tag('d_6_3_field', 'render_d_6_3_field_in_contact_form');
-    wpcf7_add_form_tag('d_7_3_field', 'render_d_7_3_field_in_contact_form');
-    wpcf7_add_form_tag('d_8_3_field', 'render_d_8_3_field_in_contact_form');
-    wpcf7_add_form_tag('d_9_3_field', 'render_d_9_3_field_in_contact_form');
-    wpcf7_add_form_tag('d_10_3_field', 'render_d_10_3_field_in_contact_form');
-    wpcf7_add_form_tag('d_11_3_field', 'render_d_11_3_field_in_contact_form');
-    
-    /* PRIMA SCELTA - DATA QUARTO SPETTACOLO */
-    wpcf7_add_form_tag('data_10_field', 'render_data_10_field_in_contact_form');
-	wpcf7_add_form_tag('data_11_field', 'render_data_11_field_in_contact_form');
-	wpcf7_add_form_tag('data_12_field', 'render_data_12_field_in_contact_form');
-    
-    /* date aggiunte per il quarto spettacolo */
-    wpcf7_add_form_tag('d_4_4_field', 'render_d_4_4_field_in_contact_form');
-    wpcf7_add_form_tag('d_5_4_field', 'render_d_5_4_field_in_contact_form');
-    wpcf7_add_form_tag('d_6_4_field', 'render_d_6_4_field_in_contact_form');
-    wpcf7_add_form_tag('d_7_4_field', 'render_d_7_4_field_in_contact_form');
-    wpcf7_add_form_tag('d_8_4_field', 'render_d_8_4_field_in_contact_form');
-    wpcf7_add_form_tag('d_9_4_field', 'render_d_9_4_field_in_contact_form');
-    wpcf7_add_form_tag('d_10_4_field', 'render_d_10_4_field_in_contact_form');
-    wpcf7_add_form_tag('d_11_4_field', 'render_d_11_4_field_in_contact_form');
-    
-    /* PRIMA SCELTA - DATA QUINTO SPETTACOLO */
-	wpcf7_add_form_tag('data_13_field', 'render_data_13_field_in_contact_form');
-	wpcf7_add_form_tag('data_14_field', 'render_data_14_field_in_contact_form');
-	wpcf7_add_form_tag('data_15_field', 'render_data_15_field_in_contact_form');
-    
-    /* PRIMA SCELTA - DATA SESTO SPETTACOLO */
-	wpcf7_add_form_tag('data_16_field', 'render_data_16_field_in_contact_form');
-	wpcf7_add_form_tag('data_17_field', 'render_data_17_field_in_contact_form');
-	wpcf7_add_form_tag('data_18_field', 'render_data_18_field_in_contact_form');
-    
-     /* PRIMA SCELTA - DATA SETTIMO SPETTACOLO */
-	wpcf7_add_form_tag('data_19_field', 'render_data_19_field_in_contact_form');
-	wpcf7_add_form_tag('data_20_field', 'render_data_20_field_in_contact_form');
-	wpcf7_add_form_tag('data_21_field', 'render_data_21_field_in_contact_form');
-    
-     /* PRIMA SCELTA - DATA OTTAVO SPETTACOLO */
-	wpcf7_add_form_tag('data_22_field', 'render_data_22_field_in_contact_form');
-	wpcf7_add_form_tag('data_23_field', 'render_data_23_field_in_contact_form');
-	wpcf7_add_form_tag('data_24_field', 'render_data_24_field_in_contact_form');
-    
-     /* PRIMA SCELTA - DATA NONO SPETTACOLO */
-	wpcf7_add_form_tag('data_25_field', 'render_data_25_field_in_contact_form');
-	wpcf7_add_form_tag('data_26_field', 'render_data_26_field_in_contact_form');
-	wpcf7_add_form_tag('data_27_field', 'render_data_27_field_in_contact_form');
-    
-     /* PRIMA SCELTA - DATA DECIMO SPETTACOLO */
-	wpcf7_add_form_tag('data_28_field', 'render_data_28_field_in_contact_form');
-	wpcf7_add_form_tag('data_29_field', 'render_data_29_field_in_contact_form');
-	wpcf7_add_form_tag('data_30_field', 'render_data_30_field_in_contact_form');
-    
-    
-     /* PRIMA SCELTA - DATA UNDIESIMO SPETTACOLO */
-	wpcf7_add_form_tag('data_31_field', 'render_data_31_field_in_contact_form');
-	wpcf7_add_form_tag('data_32_field', 'render_data_32_field_in_contact_form');
-	wpcf7_add_form_tag('data_33_field', 'render_data_33_field_in_contact_form');
-    
-    
-    
-    
-    
-    
-    /* PRIMA SCELTA - ORARIO PRIMO SPETTACOLO */
-    wpcf7_add_form_tag('orario_1_field', 'render_orario_1_field_in_contact_form');
-    wpcf7_add_form_tag('orario_2_field', 'render_orario_2_field_in_contact_form');
-    wpcf7_add_form_tag('orario_3_field', 'render_orario_3_field_in_contact_form');
-    wpcf7_add_form_tag('o_4_1_field', 'render_o_4_1_field_in_contact_form');
-    wpcf7_add_form_tag('o_4_2_field', 'render_o_4_2_field_in_contact_form');
-    wpcf7_add_form_tag('o_4_3_field', 'render_o_4_3_field_in_contact_form');
-    wpcf7_add_form_tag('o_4_4_field', 'render_o_4_4_field_in_contact_form');
-    
-    /* PRIMA SCELTA - ORARIO SECONDO SPETTACOLO */
-	wpcf7_add_form_tag('orario_4_field', 'render_orario_4_field_in_contact_form');
-	wpcf7_add_form_tag('orario_5_field', 'render_orario_5_field_in_contact_form');
-	wpcf7_add_form_tag('orario_6_field', 'render_orario_6_field_in_contact_form');
-    
-    
-    
-    /* PRIMA SCELTA - ORARIO TERZO SPETTACOLO */
-	wpcf7_add_form_tag('orario_7_field', 'render_orario_7_field_in_contact_form');
-	wpcf7_add_form_tag('orario_8_field', 'render_orario_8_field_in_contact_form');
-	wpcf7_add_form_tag('orario_9_field', 'render_orario_9_field_in_contact_form');
-    
-    /* PRIMA SCELTA - ORARIO QUARTO SPETTACOLO */
-    wpcf7_add_form_tag('orario_10_field', 'render_orario_10_field_in_contact_form');
-    wpcf7_add_form_tag('orario_11_field', 'render_orario_11_field_in_contact_form');
-    wpcf7_add_form_tag('orario_12_field', 'render_orario_12_field_in_contact_form');
-    
-    /* PRIMA SCELTA - ORARIO QUINTO SPETTACOLO */
-	wpcf7_add_form_tag('orario_13_field', 'render_orario_13_field_in_contact_form');
-	wpcf7_add_form_tag('orario_14_field', 'render_orario_14_field_in_contact_form');
-	wpcf7_add_form_tag('orario_15_field', 'render_orario_15_field_in_contact_form');
-    /* quarto orario aggiunto */
-    wpcf7_add_form_tag('o_4_5_field', 'render_o_4_5_field_in_contact_form');
-    
-    /* PRIMA SCELTA - ORARIO SESTO SPETTACOLO */
-	wpcf7_add_form_tag('orario_16_field', 'render_orario_16_field_in_contact_form');
-	wpcf7_add_form_tag('orario_17_field', 'render_orario_17_field_in_contact_form');
-	wpcf7_add_form_tag('orario_18_field', 'render_orario_18_field_in_contact_form');
-    
-    /* quarto orario aggiunto */
-    wpcf7_add_form_tag('o_4_6_field', 'render_o_4_6_field_in_contact_form');
-    
-    /* PRIMA SCELTA - ORARIO SETTIMO SPETTACOLO */
-	wpcf7_add_form_tag('orario_19_field', 'render_orario_19_field_in_contact_form');
-	wpcf7_add_form_tag('orario_20_field', 'render_orario_20_field_in_contact_form');
-	wpcf7_add_form_tag('orario_21_field', 'render_orario_21_field_in_contact_form');
-    
-    /* quarto orario aggiunto */
-    wpcf7_add_form_tag('o_4_7_field', 'render_o_4_7_field_in_contact_form');
-    
-    /* PRIMA SCELTA - ORARIO OTTAVO SPETTACOLO */
-	wpcf7_add_form_tag('orario_22_field', 'render_orario_22_field_in_contact_form');
-	wpcf7_add_form_tag('orario_23_field', 'render_orario_23_field_in_contact_form');
-	wpcf7_add_form_tag('orario_24_field', 'render_orario_24_field_in_contact_form');
-    
-    /* quarto orario aggiunto */
-    wpcf7_add_form_tag('o_4_8_field', 'render_o_4_8_field_in_contact_form');
-    
-    /* PRIMA SCELTA - ORARIO NONO SPETTACOLO */
-	wpcf7_add_form_tag('orario_25_field', 'render_orario_25_field_in_contact_form');
-	wpcf7_add_form_tag('orario_26_field', 'render_orario_26_field_in_contact_form');
-	wpcf7_add_form_tag('orario_27_field', 'render_orario_27_field_in_contact_form');
-    
-    /* quarto orario aggiunto */
-    wpcf7_add_form_tag('o_4_9_field', 'render_o_4_9_field_in_contact_form');
-    
-    
-    /* PRIMA SCELTA - ORARIO DECIMO SPETTACOLO */
-	wpcf7_add_form_tag('orario_28_field', 'render_orario_28_field_in_contact_form');
-	wpcf7_add_form_tag('orario_29_field', 'render_orario_29_field_in_contact_form');
-	wpcf7_add_form_tag('orario_30_field', 'render_orario_30_field_in_contact_form');
-    
-    /* quarto orario aggiunto */
-    wpcf7_add_form_tag('o_4_10_field', 'render_o_4_10_field_in_contact_form');
-    
-    
-    /* PRIMA SCELTA - ORARIO UNDICESIMO SPETTACOLO */
-	wpcf7_add_form_tag('orario_31_field', 'render_orario_31_field_in_contact_form');
-	wpcf7_add_form_tag('orario_32_field', 'render_orario_32_field_in_contact_form');
-	wpcf7_add_form_tag('orario_33_field', 'render_orario_33_field_in_contact_form');
-    
-    /* quarto orario aggiunto */
-    wpcf7_add_form_tag('o_4_11_field', 'render_o_4_11_field_in_contact_form');
-    
-    
-    
-	
-	
-
+    wpcf7_add_form_tag('spettacolo_field', 'render_spettacolo_field_in_contact_form', array( 'name-attr' => true ));
+    wpcf7_add_form_tag('dates_field', 'render_dates_field_in_contact_form', array( 'name-attr' => true ));
+    wpcf7_add_form_tag('hours_field', 'render_hours_field_in_contact_form', array( 'name-attr' => true ));
 }
 
-
+// Campo nome spettacolo
 function render_spettacolo_field_in_contact_form($tag) {
-    
-    $spettacolo_1 = get_field('spettacolo_1');
-    $spettacolo_2 = get_field('spettacolo_2');
-    $spettacolo_3 = get_field('spettacolo_3');
-    $spettacolo_4 = get_field('spettacolo_4');
-    $spettacolo_5 = get_field('spettacolo_5');
-    $spettacolo_6 = get_field('spettacolo_6');
-    $spettacolo_7 = get_field('spettacolo_7');
-    $spettacolo_8 = get_field('spettacolo_8');
-    $spettacolo_9 = get_field('spettacolo_9');
-    $spettacolo_10 = get_field('spettacolo_10');
-    $spettacolo_11 = get_field('spettacolo_11');
+    // Prendo il repeater di ACF
+    $spettacoli_options = get_field('spettacoli_scuole');
+    $name = $tag->name == 'prima-scelta' ? 'spettacolo_prima_scelta' : 'spettacolo_seconda_scelta';
+    $spettacolo_id = $tag->name == 'prima-scelta' ? 'spettacolo_select-1' : 'spettacolo_select-2';
 
-    
-    $spettacoli_options = array(
-        $spettacolo_1,
-        $spettacolo_2,
-        $spettacolo_3,
-        $spettacolo_4,
-        $spettacolo_5,
-        $spettacolo_6,
-        $spettacolo_7,
-        $spettacolo_8,
-        $spettacolo_9,
-        $spettacolo_10,
-        $spettacolo_11
-    );
-
-   
-    $spettacoli_options = array_unique($spettacoli_options);
-
-    
-    $output = '<select name="spettacolo" id="spettacolo">';
-	$counter = 1;
-    foreach ($spettacoli_options as $option) {
-       
-		
-		if ($option) {
-            
-            $name = 'spettacolo_' . $counter;
-            $output .= '<option value="' . esc_attr($option) . '" name="' . esc_attr($name) . '">' . esc_html($option) . '</option>';
-            $counter++; 
+    $output = '<select name="'.esc_attr($name).'" id="'.$spettacolo_id.'" class="select_spettacolo">';
+	// $counter = 1;
+    if ($spettacoli_options) {
+        foreach ($spettacoli_options as $ns => $option) {
+            // if ($option) {
+                $value = $option['nome_spettacolo'];
+                // $name = 'spettacolo_prima_scelta'; //'spettacolo_' . $counter;
+                $output .= '<option value="'.esc_attr($value).'" id="spettacolo-'.($ns+1).'">'.esc_html($value).'</option>';
+                // $counter++; 
+            // }
         }
     }
 	
@@ -1520,953 +1289,1228 @@ function render_spettacolo_field_in_contact_form($tag) {
     return $output;
 }
 
-/* PRIMA SCELTA - SPETTACOLO 1 */
+// Campo date spettacolo
+function render_dates_field_in_contact_form($tag) {
+    // Prendo il repeater di ACF
+    $spettacoli  = get_field('spettacoli_scuole');
+    $name        = $tag->name == 'prima-scelta' ? 'date_spettacolo_prima_scelta' : 'date_spettacolo_seconda_scelta';
+    $name_hidden = $tag->name == 'prima-scelta' ? 'data_spettacolo_prima_scelta' : 'data_spettacolo_seconda_scelta';
 
-function render_data_1_field_in_contact_form($tag) {
-    $data1 = get_field('prima_data_spettacolo_1');
-    if ($data1) {
-        return '<input id="data_1_field" type="checkbox" name="prima_data_spettacolo_1" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
+    $output = '';
 
-function render_data_2_field_in_contact_form($tag) {
-    $data2 = get_field('seconda_data_spettacolo_1');
-    if ($data2) {
-        return '<input id="data_2_field" type="checkbox" name="seconda_data_spettacolo_1" value="' . esc_attr($data2) . '">' . esc_html($data2);
-    } else {
-        return '';
-    }
-}
+    if ($spettacoli) {
+        foreach ($spettacoli as $ns => $spettacolo) {
+            $date = $spettacolo['date'];
+            $first = $ns === 0 ? '' : ' hidden';
 
-function render_data_3_field_in_contact_form($tag) {
-    $data3 = get_field('terza_data_spettacolo_1');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="terza_data_spettacolo_1" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
+            $output .= '<div class="date-wrapper '.$tag->name.$first.'" id="date_'.($ns+1).'_wrapper">';
 
-/* date aggiuntive primo spettacolo */
-function render_d_4_1_field_in_contact_form($tag) {
-    $data3 = get_field('quarta_data_spettacolo_1');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="quarta_data_spettacolo_1" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
+            // Inserisco tutte le date in un campo radio
+            foreach ($date as $n => $d) {
+                $value = $d['data'];
+                $checked = $n === 0 ? 'checked' : '';
+                $data_name = 'data_'.($n+1).'_spettacolo_'.($ns+1).'_field_'.$tag->name;
+
+                $output .= '<label for="'.$data_name.'">';
+                $output .= '<input id="'.$data_name.'" class="data-'.($n+1).'" name="date_spettacolo_'.($ns+1).'_'.$tag->name.'" type="radio" value="'.esc_attr($value).'" '.$checked.' form="none">';
+                $output .= esc_html($value).'</label>';
+            }
+
+            $output .= '</div>';
+        }
+
+        // Aggiungo un campo hidden che sarà quello definitivo della scelta
+        $output .= '<input type="hidden" name="'.esc_attr($name_hidden).'" id="'.esc_attr($name_hidden).'" value="">';
     }
-}
-function render_d_5_1_field_in_contact_form($tag) {
-    $data3 = get_field('quinta_data_spettacolo_1');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="quinta_data_spettacolo_1" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
-function render_d_6_1_field_in_contact_form($tag) {
-    $data3 = get_field('sesta_data_spettacolo_1');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="sesta_data_spettacolo_1" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
-function render_d_7_1_field_in_contact_form($tag) {
-    $data3 = get_field('settima_data_spettacolo_1');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="settima_data_spettacolo_1" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
-function render_d_8_1_field_in_contact_form($tag) {
-    $data3 = get_field('ottava_data_spettacolo_1');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="ottava_data_spettacolo_1" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
-function render_d_9_1_field_in_contact_form($tag) {
-    $data3 = get_field('nona_data_spettacolo_1');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="nona_data_spettacolo_1" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
-function render_d_10_1_field_in_contact_form($tag) {
-    $data3 = get_field('decima_data_spettacolo_1');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="decima_data_spettacolo_1" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
-function render_d_11_1_field_in_contact_form($tag) {
-    $data3 = get_field('undicesima_data_spettacolo_1');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="undicesima_data_spettacolo_1" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
+
+    return $output;
 }
 
-/* PRIMA SCELTA - SPETTACOLO 2 */
+// Campo orari spettacolo
+function render_hours_field_in_contact_form($tag) {
+    // Prendo il repeater di ACF
+    $spettacoli  = get_field('spettacoli_scuole');
+    $name        = $tag->name == 'prima-scelta' ? 'ora_spettacolo_prima_scelta' : 'ora_spettacolo_seconda_scelta';
+    $name_hidden = $tag->name == 'prima-scelta' ? 'orario_spettacolo_prima_scelta' : 'orario_spettacolo_seconda_scelta';
 
-function render_data_4_field_in_contact_form($tag) {
-    $data4 = get_field('prima_data_spettacolo_2');
-    if ($data4) {
-        return '<input id="data_4_field" type="checkbox" name="prima_data_spettacolo_2" value="' . esc_attr($data4) . '">' . esc_html($data4);
-    } else {
-        return '';
-    }
-}
+    $output = '';
 
-function render_data_5_field_in_contact_form($tag) {
-    $data5 = get_field('seconda_data_spettacolo_2');
-    if ($data5) {
-        return '<input id="data_5_field" type="checkbox" name="seconda_data_spettacolo_2" value="' . esc_attr($data5) . '">' . esc_html($data5);
-    } else {
-        return '';
-    }
-}
+    if ($spettacoli) {
+        foreach ($spettacoli as $ns => $spettacolo) {
+            $titolo_attr = trim(str_replace(' ', '_', strtolower($spettacolo['nome_spettacolo'])));
+            $date = $spettacolo['date'];
 
-function render_data_6_field_in_contact_form($tag) {
-    $data6 = get_field('terza_data_spettacolo_2');
-    if ($data6) {
-        return '<input id="data_6_field" type="checkbox" name="terza_data_spettacolo_2" value="' . esc_attr($data6) . '">' . esc_html($data6);
-    } else {
-        return '';
-    }
-}
+            // Inserisco tutti gli orari in un campo radio
+            foreach ($date as $nd => $d) {
+                $value = $d['data'];
+                $orari_array = explode(', ', $d['orari']);
+                $first = $ns === 0 && $nd === 0 ? '' : ' hidden';
 
+                $output .= '<div class="orari-wrapper orari-wrapper-spettacolo-'.($ns+1).' orari-wrapper-data-'.($nd+1).' '.$tag->name.$first.'" id="orari_'.($nd+1).'_spettacolo_'.($ns+1).'_wrapper">';
 
-/* date aggiuntive spettacolo 2 */
-function render_d_4_2_field_in_contact_form($tag) {
-    $data3 = get_field('quarta_data_spettacolo_2');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="quarta_data_spettacolo_2" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
+                foreach ($orari_array as $no => $value) {
+                    $checked = $no === 0 ? 'checked' : '';
+                    $orario_name = 'ora_'.($no+1).'_data_'.($nd+1).'_spettacolo_'.($ns+1).'_field_'.$tag->name;
+
+                    $output .= '<label for="'.$orario_name.'">';
+                    $output .= '<input id="'.$orario_name.'" class="ora-'.($no+1).'" name="orari_spettacolo_'.($ns+1).'_field_'.$tag->name.'" type="radio" value="'.esc_attr($value).'" '.$checked.' form="none">';
+                    $output .= esc_html($value).'</label>';
+                }
+
+                $output .= '</div>';
+            }
+        }
+
+        // Aggiungo un campo hidden che sarà quello definitivo della scelta
+        $output .= '<input type="hidden" name="'.esc_attr($name_hidden).'" id="'.esc_attr($name_hidden).'" value="">';
     }
-}
-function render_d_5_2_field_in_contact_form($tag) {
-    $data3 = get_field('quinta_data_spettacolo_2');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="quinta_data_spettacolo_2" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
-function render_d_6_2_field_in_contact_form($tag) {
-    $data3 = get_field('sesta_data_spettacolo_2');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="sesta_data_spettacolo_2" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
-function render_d_7_2_field_in_contact_form($tag) {
-    $data3 = get_field('settima_data_spettacolo_2');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="settima_data_spettacolo_2" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
-function render_d_8_2_field_in_contact_form($tag) {
-    $data3 = get_field('ottava_data_spettacolo_2');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="ottava_data_spettacolo_2" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
-function render_d_9_2_field_in_contact_form($tag) {
-    $data3 = get_field('nona_data_spettacolo_2');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="nona_data_spettacolo_2" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
-function render_d_10_2_field_in_contact_form($tag) {
-    $data3 = get_field('decima_data_spettacolo_2');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="decima_data_spettacolo_2" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
-function render_d_11_2_field_in_contact_form($tag) {
-    $data3 = get_field('undicesima_data_spettacolo_2');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="undicesima_data_spettacolo_2" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
+    return $output;
 }
 
+/* prima scelta */
+// function add_acf_fields_to_contact_form() {
+    
+// 	wpcf7_add_form_tag('spettacolo_field', 'render_spettacolo_field_in_contact_form');
+// 	wpcf7_add_form_tag('spettacolo_1_field', 'render_spettacolo_1_field_in_contact_form');
+//     wpcf7_add_form_tag('spettacolo_2_field', 'render_spettacolo_2_field_in_contact_form');
+//     wpcf7_add_form_tag('spettacolo_3_field', 'render_spettacolo_3_field_in_contact_form');
+//     wpcf7_add_form_tag('spettacolo_4_field', 'render_spettacolo_4_field_in_contact_form');
+//     wpcf7_add_form_tag('spettacolo_5_field', 'render_spettacolo_5_field_in_contact_form');
+//     wpcf7_add_form_tag('spettacolo_6_field', 'render_spettacolo_6_field_in_contact_form');
+//     wpcf7_add_form_tag('spettacolo_7_field', 'render_spettacolo_7_field_in_contact_form');
+//     wpcf7_add_form_tag('spettacolo_8_field', 'render_spettacolo_8_field_in_contact_form');
+//     wpcf7_add_form_tag('spettacolo_9_field', 'render_spettacolo_9_field_in_contact_form');
+//     wpcf7_add_form_tag('spettacolo_10_field', 'render_spettacolo_10_field_in_contact_form');
+//     wpcf7_add_form_tag('spettacolo_11_field', 'render_spettacolo_11_field_in_contact_form');
+    
+    
+//     /* PRIMA SCELTA - DATA PRIMO SPETTACOLO */
+// 	wpcf7_add_form_tag('data_1_field', 'render_data_1_field_in_contact_form');
+// 	wpcf7_add_form_tag('data_2_field', 'render_data_2_field_in_contact_form');
+// 	wpcf7_add_form_tag('data_3_field', 'render_data_3_field_in_contact_form');
+    
+//     /* date aggiunte per il primo spettacolo */
+//     wpcf7_add_form_tag('d_4_1_field', 'render_d_4_1_field_in_contact_form');
+//     wpcf7_add_form_tag('d_5_1_field', 'render_d_5_1_field_in_contact_form');
+//     wpcf7_add_form_tag('d_6_1_field', 'render_d_6_1_field_in_contact_form');
+//     wpcf7_add_form_tag('d_7_1_field', 'render_d_7_1_field_in_contact_form');
+//     wpcf7_add_form_tag('d_8_1_field', 'render_d_8_1_field_in_contact_form');
+//     wpcf7_add_form_tag('d_9_1_field', 'render_d_9_1_field_in_contact_form');
+//     wpcf7_add_form_tag('d_10_1_field', 'render_d_10_1_field_in_contact_form');
+//     wpcf7_add_form_tag('d_11_1_field', 'render_d_11_1_field_in_contact_form');
+    
+//     /* PRIMA SCELTA - DATA SECONDO SPETTACOLO */
+// 	wpcf7_add_form_tag('data_4_field', 'render_data_4_field_in_contact_form');
+// 	wpcf7_add_form_tag('data_5_field', 'render_data_5_field_in_contact_form');
+// 	wpcf7_add_form_tag('data_6_field', 'render_data_6_field_in_contact_form');
+    
+//     /* date aggiunte per il secondo spettacolo */
+//     wpcf7_add_form_tag('d_4_2_field', 'render_d_4_2_field_in_contact_form');
+//     wpcf7_add_form_tag('d_5_2_field', 'render_d_5_2_field_in_contact_form');
+//     wpcf7_add_form_tag('d_6_2_field', 'render_d_6_2_field_in_contact_form');
+//     wpcf7_add_form_tag('d_7_2_field', 'render_d_7_2_field_in_contact_form');
+//     wpcf7_add_form_tag('d_8_2_field', 'render_d_8_2_field_in_contact_form');
+//     wpcf7_add_form_tag('d_9_2_field', 'render_d_9_2_field_in_contact_form');
+//     wpcf7_add_form_tag('d_10_2_field', 'render_d_10_2_field_in_contact_form');
+//     wpcf7_add_form_tag('d_11_2_field', 'render_d_11_2_field_in_contact_form');
+    
+//     /* PRIMA SCELTA - DATA TERZO SPETTACOLO */
+// 	wpcf7_add_form_tag('data_7_field', 'render_data_7_field_in_contact_form');
+// 	wpcf7_add_form_tag('data_8_field', 'render_data_8_field_in_contact_form');
+// 	wpcf7_add_form_tag('data_9_field', 'render_data_9_field_in_contact_form');
+    
+//     /* date aggiunte per il terzo spettacolo */
+//     wpcf7_add_form_tag('d_4_3_field', 'render_d_4_3_field_in_contact_form');
+//     wpcf7_add_form_tag('d_5_3_field', 'render_d_5_3_field_in_contact_form');
+//     wpcf7_add_form_tag('d_6_3_field', 'render_d_6_3_field_in_contact_form');
+//     wpcf7_add_form_tag('d_7_3_field', 'render_d_7_3_field_in_contact_form');
+//     wpcf7_add_form_tag('d_8_3_field', 'render_d_8_3_field_in_contact_form');
+//     wpcf7_add_form_tag('d_9_3_field', 'render_d_9_3_field_in_contact_form');
+//     wpcf7_add_form_tag('d_10_3_field', 'render_d_10_3_field_in_contact_form');
+//     wpcf7_add_form_tag('d_11_3_field', 'render_d_11_3_field_in_contact_form');
+    
+//     /* PRIMA SCELTA - DATA QUARTO SPETTACOLO */
+//     wpcf7_add_form_tag('data_10_field', 'render_data_10_field_in_contact_form');
+// 	wpcf7_add_form_tag('data_11_field', 'render_data_11_field_in_contact_form');
+// 	wpcf7_add_form_tag('data_12_field', 'render_data_12_field_in_contact_form');
+    
+//     /* date aggiunte per il quarto spettacolo */
+//     wpcf7_add_form_tag('d_4_4_field', 'render_d_4_4_field_in_contact_form');
+//     wpcf7_add_form_tag('d_5_4_field', 'render_d_5_4_field_in_contact_form');
+//     wpcf7_add_form_tag('d_6_4_field', 'render_d_6_4_field_in_contact_form');
+//     wpcf7_add_form_tag('d_7_4_field', 'render_d_7_4_field_in_contact_form');
+//     wpcf7_add_form_tag('d_8_4_field', 'render_d_8_4_field_in_contact_form');
+//     wpcf7_add_form_tag('d_9_4_field', 'render_d_9_4_field_in_contact_form');
+//     wpcf7_add_form_tag('d_10_4_field', 'render_d_10_4_field_in_contact_form');
+//     wpcf7_add_form_tag('d_11_4_field', 'render_d_11_4_field_in_contact_form');
+    
+//     /* PRIMA SCELTA - DATA QUINTO SPETTACOLO */
+// 	wpcf7_add_form_tag('data_13_field', 'render_data_13_field_in_contact_form');
+// 	wpcf7_add_form_tag('data_14_field', 'render_data_14_field_in_contact_form');
+// 	wpcf7_add_form_tag('data_15_field', 'render_data_15_field_in_contact_form');
+    
+//     /* PRIMA SCELTA - DATA SESTO SPETTACOLO */
+// 	wpcf7_add_form_tag('data_16_field', 'render_data_16_field_in_contact_form');
+// 	wpcf7_add_form_tag('data_17_field', 'render_data_17_field_in_contact_form');
+// 	wpcf7_add_form_tag('data_18_field', 'render_data_18_field_in_contact_form');
+    
+//      /* PRIMA SCELTA - DATA SETTIMO SPETTACOLO */
+// 	wpcf7_add_form_tag('data_19_field', 'render_data_19_field_in_contact_form');
+// 	wpcf7_add_form_tag('data_20_field', 'render_data_20_field_in_contact_form');
+// 	wpcf7_add_form_tag('data_21_field', 'render_data_21_field_in_contact_form');
+    
+//      /* PRIMA SCELTA - DATA OTTAVO SPETTACOLO */
+// 	wpcf7_add_form_tag('data_22_field', 'render_data_22_field_in_contact_form');
+// 	wpcf7_add_form_tag('data_23_field', 'render_data_23_field_in_contact_form');
+// 	wpcf7_add_form_tag('data_24_field', 'render_data_24_field_in_contact_form');
+    
+//      /* PRIMA SCELTA - DATA NONO SPETTACOLO */
+// 	wpcf7_add_form_tag('data_25_field', 'render_data_25_field_in_contact_form');
+// 	wpcf7_add_form_tag('data_26_field', 'render_data_26_field_in_contact_form');
+// 	wpcf7_add_form_tag('data_27_field', 'render_data_27_field_in_contact_form');
+    
+//      /* PRIMA SCELTA - DATA DECIMO SPETTACOLO */
+// 	wpcf7_add_form_tag('data_28_field', 'render_data_28_field_in_contact_form');
+// 	wpcf7_add_form_tag('data_29_field', 'render_data_29_field_in_contact_form');
+// 	wpcf7_add_form_tag('data_30_field', 'render_data_30_field_in_contact_form');
+    
+    
+//      /* PRIMA SCELTA - DATA UNDIESIMO SPETTACOLO */
+// 	wpcf7_add_form_tag('data_31_field', 'render_data_31_field_in_contact_form');
+// 	wpcf7_add_form_tag('data_32_field', 'render_data_32_field_in_contact_form');
+// 	wpcf7_add_form_tag('data_33_field', 'render_data_33_field_in_contact_form');
+    
 
-/* PRIMA SCELTA - SPETTACOLO 3 */
-
-function render_data_7_field_in_contact_form($tag) {
-    $data7 = get_field('prima_data_spettacolo_3');
-    if ($data7) {
-        return '<input id="data_7_field" type="checkbox" name="prima_data_spettacolo_3" value="' . esc_attr($data7) . '">' . esc_html($data7);
-    } else {
-        return '';
-    }
-}
-function render_data_8_field_in_contact_form($tag) {
-    $data7 = get_field('seconda_data_spettacolo_3');
-    if ($data7) {
-        return '<input id="data_8_field" type="checkbox" name="seconda_data_spettacolo_3" value="' . esc_attr($data7) . '">' . esc_html($data7);
-    } else {
-        return '';
-    }
-}
-function render_data_9_field_in_contact_form($tag) {
-    $data7 = get_field('terza_data_spettacolo_3');
-    if ($data7) {
-        return '<input id="data_9_field" type="checkbox" name="terza_data_spettacolo_3" value="' . esc_attr($data7) . '">' . esc_html($data7);
-    } else {
-        return '';
-    }
-}
-
-/* date aggiuntive spettacolo 3 */
-function render_d_4_3_field_in_contact_form($tag) {
-    $data3 = get_field('quarta_data_spettacolo_3');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="quarta_data_spettacolo_3" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
-function render_d_5_3_field_in_contact_form($tag) {
-    $data3 = get_field('quinta_data_spettacolo_3');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="quinta_data_spettacolo_3" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
-function render_d_6_3_field_in_contact_form($tag) {
-    $data3 = get_field('sesta_data_spettacolo_3');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="sesta_data_spettacolo_3" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
-function render_d_7_3_field_in_contact_form($tag) {
-    $data3 = get_field('settima_data_spettacolo_3');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="settima_data_spettacolo_3" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
-function render_d_8_3_field_in_contact_form($tag) {
-    $data3 = get_field('ottava_data_spettacolo_3');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="ottava_data_spettacolo_3" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
-function render_d_9_3_field_in_contact_form($tag) {
-    $data3 = get_field('nona_data_spettacolo_3');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="nona_data_spettacolo_3" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
-function render_d_10_3_field_in_contact_form($tag) {
-    $data3 = get_field('decima_data_spettacolo_3');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="decima_data_spettacolo_3" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
-function render_d_11_3_field_in_contact_form($tag) {
-    $data3 = get_field('undicesima_data_spettacolo_3');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="undicesima_data_spettacolo_3" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
-
-/* orari spettacolo 1 */
-
-function render_orario_1_field_in_contact_form($tag) {
-    $orario1 = get_field('orario_spettacolo_1');
-    if ($orario1) {
-        return '<input id="orario_1_field" type="checkbox" name="orario_spettacolo_1" value="' . esc_attr($orario1) . '">' . esc_html($orario1);
-    } else {
-        return '';
-    }
-}
-
-function render_orario_2_field_in_contact_form($tag) {
-    $orario2 = get_field('secondo_orario_spettacolo_1');
-    if ($orario2) {
-        return '<input id="orario_2_field" type="checkbox" name="secondo_orario_spettacolo_1" value="' . esc_attr($orario2) . '">' . esc_html($orario2);
-    } else {
-        return '';
-    }
-}
-
-function render_orario_3_field_in_contact_form($tag) {
-    $orario3 = get_field('terzo_orario_spettacolo_1');
-    if ($orario3) {
-        return '<input id="orario_3_field" type="checkbox" name="terzo_orario_spettacolo_1" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
-    } else {
-        return '';
-    }
-}
-
-function render_o_4_1_field_in_contact_form($tag) {
-    $orario3 = get_field('quarto_orario_spettacolo_1');
-    if ($orario3) {
-        return '<input id="orario_4_1_field" type="checkbox" name="quarto_orario_spettacolo_1" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
-    } else {
-        return '';
-    }
-}
-function render_o_4_2_field_in_contact_form($tag) {
-    $orario3 = get_field('quarto_orario_spettacolo_2');
-    if ($orario3) {
-        return '<input id="orario_4_2_field" type="checkbox" name="quarto_orario_spettacolo_2" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
-    } else {
-        return '';
-    }
-}
-function render_o_4_3_field_in_contact_form($tag) {
-    $orario3 = get_field('quarto_orario_spettacolo_3');
-    if ($orario3) {
-        return '<input id="orario_4_3_field" type="checkbox" name="quarto_orario_spettacolo_3" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
-    } else {
-        return '';
-    }
-}
-function render_o_4_4_field_in_contact_form($tag) {
-    $orario3 = get_field('quarto_orario_spettacolo_4');
-    if ($orario3) {
-        return '<input id="orario_4_4_field" type="checkbox" name="quarto_orario_spettacolo_4" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
-    } else {
-        return '';
-    }
-}
-
-function render_o_4_5_field_in_contact_form($tag) {
-    $orario3 = get_field('quarto_orario_spettacolo_5');
-    if ($orario3) {
-        return '<input id="orario_4_5_field" type="checkbox" name="quarto_orario_spettacolo_5" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
-    } else {
-        return '';
-    }
-}
-
-function render_o_4_6_field_in_contact_form($tag) {
-    $orario3 = get_field('quarto_orario_spettacolo_5');
-    if ($orario3) {
-        return '<input id="orario_4_6_field" type="checkbox" name="quarto_orario_spettacolo_6" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
-    } else {
-        return '';
-    }
-}
-
-function render_o_4_7_field_in_contact_form($tag) {
-    $orario3 = get_field('quarto_orario_spettacolo_7');
-    if ($orario3) {
-        return '<input id="orario_4_7_field" type="checkbox" name="quarto_orario_spettacolo_7" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
-    } else {
-        return '';
-    }
-}
-
-function render_o_4_8_field_in_contact_form($tag) {
-    $orario3 = get_field('quarto_orario_spettacolo_8');
-    if ($orario3) {
-        return '<input id="orario_4_8_field" type="checkbox" name="quarto_orario_spettacolo_8" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
-    } else {
-        return '';
-    }
-}
-
-function render_o_4_9_field_in_contact_form($tag) {
-    $orario3 = get_field('quarto_orario_spettacolo_9');
-    if ($orario3) {
-        return '<input id="orario_4_9_field" type="checkbox" name="quarto_orario_spettacolo_9" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
-    } else {
-        return '';
-    }
-}
-
-function render_o_4_10_field_in_contact_form($tag) {
-    $orario3 = get_field('quarto_orario_spettacolo_10');
-    if ($orario3) {
-        return '<input id="orario_4_10_field" type="checkbox" name="quarto_orario_spettacolo_10" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
-    } else {
-        return '';
-    }
-}
-
-function render_o_4_11_field_in_contact_form($tag) {
-    $orario3 = get_field('quarto_orario_spettacolo_11');
-    if ($orario3) {
-        return '<input id="orario_4_11_field" type="checkbox" name="quarto_orario_spettacolo_11" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
-    } else {
-        return '';
-    }
-}
-
-function render_orario_4_field_in_contact_form($tag) {
-    $orario4 = get_field('primo_orario_spettacolo_2');
-    if ($orario4) {
-        return '<input id="orario_4_field" type="checkbox" name="primo_orario_spettacolo_2" value="' . esc_attr($orario4) . '">' . esc_html($orario4);
-    } else {
-        return '';
-    }
-}
-
-function render_orario_5_field_in_contact_form($tag) {
-    $orario5 = get_field('secondo_orario_spettacolo_2');
-    if ($orario5) {
-        return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_2" value="' . esc_attr($orario5) . '">' . esc_html($orario5);
-    } else {
-        return '';
-    }
-}
-
-function render_orario_6_field_in_contact_form($tag) {
-    $orario6 = get_field('terzo_orario_spettacolo_2');
-    if ($orario6) {
-        return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_2" value="' . esc_attr($orario6) . '">' . esc_html($orario6);
-    } else {
-        return '';
-    }
-}
-function render_orario_7_field_in_contact_form($tag) {
-    $orario7 = get_field('primo_orario_spettacolo_3');
-    if ($orario7) {
-        return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_3" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
-    } else {
-        return '';
-    }
-}
-function render_orario_8_field_in_contact_form($tag) {
-    $orario8 = get_field('secondo_orario_spettacolo_3');
-    if ($orario8) {
-        return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_3" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
-    } else {
-        return '';
-    }
-}
-function render_orario_9_field_in_contact_form($tag) {
-    $orario9 = get_field('terzo_orario_spettacolo_3');
-    if ($orario9) {
-        return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_3" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
-    } else {
-        return '';
-    }
-}
+//     /* PRIMA SCELTA - ORARIO PRIMO SPETTACOLO */
+//     wpcf7_add_form_tag('orario_1_field', 'render_orario_1_field_in_contact_form');
+//     wpcf7_add_form_tag('orario_2_field', 'render_orario_2_field_in_contact_form');
+//     wpcf7_add_form_tag('orario_3_field', 'render_orario_3_field_in_contact_form');
+//     wpcf7_add_form_tag('o_4_1_field', 'render_o_4_1_field_in_contact_form');
+//     wpcf7_add_form_tag('o_4_2_field', 'render_o_4_2_field_in_contact_form');
+//     wpcf7_add_form_tag('o_4_3_field', 'render_o_4_3_field_in_contact_form');
+//     wpcf7_add_form_tag('o_4_4_field', 'render_o_4_4_field_in_contact_form');
+    
+//     /* PRIMA SCELTA - ORARIO SECONDO SPETTACOLO */
+// 	wpcf7_add_form_tag('orario_4_field', 'render_orario_4_field_in_contact_form');
+// 	wpcf7_add_form_tag('orario_5_field', 'render_orario_5_field_in_contact_form');
+// 	wpcf7_add_form_tag('orario_6_field', 'render_orario_6_field_in_contact_form');
+    
+    
+    
+//     /* PRIMA SCELTA - ORARIO TERZO SPETTACOLO */
+// 	wpcf7_add_form_tag('orario_7_field', 'render_orario_7_field_in_contact_form');
+// 	wpcf7_add_form_tag('orario_8_field', 'render_orario_8_field_in_contact_form');
+// 	wpcf7_add_form_tag('orario_9_field', 'render_orario_9_field_in_contact_form');
+    
+//     /* PRIMA SCELTA - ORARIO QUARTO SPETTACOLO */
+//     wpcf7_add_form_tag('orario_10_field', 'render_orario_10_field_in_contact_form');
+//     wpcf7_add_form_tag('orario_11_field', 'render_orario_11_field_in_contact_form');
+//     wpcf7_add_form_tag('orario_12_field', 'render_orario_12_field_in_contact_form');
+    
+//     /* PRIMA SCELTA - ORARIO QUINTO SPETTACOLO */
+// 	wpcf7_add_form_tag('orario_13_field', 'render_orario_13_field_in_contact_form');
+// 	wpcf7_add_form_tag('orario_14_field', 'render_orario_14_field_in_contact_form');
+// 	wpcf7_add_form_tag('orario_15_field', 'render_orario_15_field_in_contact_form');
+//     /* quarto orario aggiunto */
+//     wpcf7_add_form_tag('o_4_5_field', 'render_o_4_5_field_in_contact_form');
+    
+//     /* PRIMA SCELTA - ORARIO SESTO SPETTACOLO */
+// 	wpcf7_add_form_tag('orario_16_field', 'render_orario_16_field_in_contact_form');
+// 	wpcf7_add_form_tag('orario_17_field', 'render_orario_17_field_in_contact_form');
+// 	wpcf7_add_form_tag('orario_18_field', 'render_orario_18_field_in_contact_form');
+    
+//     /* quarto orario aggiunto */
+//     wpcf7_add_form_tag('o_4_6_field', 'render_o_4_6_field_in_contact_form');
+    
+//     /* PRIMA SCELTA - ORARIO SETTIMO SPETTACOLO */
+// 	wpcf7_add_form_tag('orario_19_field', 'render_orario_19_field_in_contact_form');
+// 	wpcf7_add_form_tag('orario_20_field', 'render_orario_20_field_in_contact_form');
+// 	wpcf7_add_form_tag('orario_21_field', 'render_orario_21_field_in_contact_form');
+    
+//     /* quarto orario aggiunto */
+//     wpcf7_add_form_tag('o_4_7_field', 'render_o_4_7_field_in_contact_form');
+    
+//     /* PRIMA SCELTA - ORARIO OTTAVO SPETTACOLO */
+// 	wpcf7_add_form_tag('orario_22_field', 'render_orario_22_field_in_contact_form');
+// 	wpcf7_add_form_tag('orario_23_field', 'render_orario_23_field_in_contact_form');
+// 	wpcf7_add_form_tag('orario_24_field', 'render_orario_24_field_in_contact_form');
+    
+//     /* quarto orario aggiunto */
+//     wpcf7_add_form_tag('o_4_8_field', 'render_o_4_8_field_in_contact_form');
+    
+//     /* PRIMA SCELTA - ORARIO NONO SPETTACOLO */
+// 	wpcf7_add_form_tag('orario_25_field', 'render_orario_25_field_in_contact_form');
+// 	wpcf7_add_form_tag('orario_26_field', 'render_orario_26_field_in_contact_form');
+// 	wpcf7_add_form_tag('orario_27_field', 'render_orario_27_field_in_contact_form');
+    
+//     /* quarto orario aggiunto */
+//     wpcf7_add_form_tag('o_4_9_field', 'render_o_4_9_field_in_contact_form');
+    
+    
+//     /* PRIMA SCELTA - ORARIO DECIMO SPETTACOLO */
+// 	wpcf7_add_form_tag('orario_28_field', 'render_orario_28_field_in_contact_form');
+// 	wpcf7_add_form_tag('orario_29_field', 'render_orario_29_field_in_contact_form');
+// 	wpcf7_add_form_tag('orario_30_field', 'render_orario_30_field_in_contact_form');
+    
+//     /* quarto orario aggiunto */
+//     wpcf7_add_form_tag('o_4_10_field', 'render_o_4_10_field_in_contact_form');
+    
+    
+//     /* PRIMA SCELTA - ORARIO UNDICESIMO SPETTACOLO */
+// 	wpcf7_add_form_tag('orario_31_field', 'render_orario_31_field_in_contact_form');
+// 	wpcf7_add_form_tag('orario_32_field', 'render_orario_32_field_in_contact_form');
+// 	wpcf7_add_form_tag('orario_33_field', 'render_orario_33_field_in_contact_form');
+    
+//     /* quarto orario aggiunto */
+//     wpcf7_add_form_tag('o_4_11_field', 'render_o_4_11_field_in_contact_form');
+// }
 
 
-/* PRIMA SCELTA - SPETTACOLO 4 */
+// function render_data_1_field_in_contact_form($tag) {
+//     $data1 = get_field('prima_data_spettacolo_1');
+//     if ($data1) {
+//         return '<input id="data_1_field" type="checkbox" name="prima_data_spettacolo_1" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+
+// function render_data_2_field_in_contact_form($tag) {
+//     $data2 = get_field('seconda_data_spettacolo_1');
+//     if ($data2) {
+//         return '<input id="data_2_field" type="checkbox" name="seconda_data_spettacolo_1" value="' . esc_attr($data2) . '">' . esc_html($data2);
+//     } else {
+//         return '';
+//     }
+// }
+
+// function render_data_3_field_in_contact_form($tag) {
+//     $data3 = get_field('terza_data_spettacolo_1');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="terza_data_spettacolo_1" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+
+// /* date aggiuntive primo spettacolo */
+// function render_d_4_1_field_in_contact_form($tag) {
+//     $data3 = get_field('quarta_data_spettacolo_1');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="quarta_data_spettacolo_1" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_5_1_field_in_contact_form($tag) {
+//     $data3 = get_field('quinta_data_spettacolo_1');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="quinta_data_spettacolo_1" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_6_1_field_in_contact_form($tag) {
+//     $data3 = get_field('sesta_data_spettacolo_1');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="sesta_data_spettacolo_1" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_7_1_field_in_contact_form($tag) {
+//     $data3 = get_field('settima_data_spettacolo_1');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="settima_data_spettacolo_1" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_8_1_field_in_contact_form($tag) {
+//     $data3 = get_field('ottava_data_spettacolo_1');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="ottava_data_spettacolo_1" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_9_1_field_in_contact_form($tag) {
+//     $data3 = get_field('nona_data_spettacolo_1');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="nona_data_spettacolo_1" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_10_1_field_in_contact_form($tag) {
+//     $data3 = get_field('decima_data_spettacolo_1');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="decima_data_spettacolo_1" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_11_1_field_in_contact_form($tag) {
+//     $data3 = get_field('undicesima_data_spettacolo_1');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="undicesima_data_spettacolo_1" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+
+// /* PRIMA SCELTA - SPETTACOLO 2 */
+
+// function render_data_4_field_in_contact_form($tag) {
+//     $data4 = get_field('prima_data_spettacolo_2');
+//     if ($data4) {
+//         return '<input id="data_4_field" type="checkbox" name="prima_data_spettacolo_2" value="' . esc_attr($data4) . '">' . esc_html($data4);
+//     } else {
+//         return '';
+//     }
+// }
+
+// function render_data_5_field_in_contact_form($tag) {
+//     $data5 = get_field('seconda_data_spettacolo_2');
+//     if ($data5) {
+//         return '<input id="data_5_field" type="checkbox" name="seconda_data_spettacolo_2" value="' . esc_attr($data5) . '">' . esc_html($data5);
+//     } else {
+//         return '';
+//     }
+// }
+
+// function render_data_6_field_in_contact_form($tag) {
+//     $data6 = get_field('terza_data_spettacolo_2');
+//     if ($data6) {
+//         return '<input id="data_6_field" type="checkbox" name="terza_data_spettacolo_2" value="' . esc_attr($data6) . '">' . esc_html($data6);
+//     } else {
+//         return '';
+//     }
+// }
 
 
-function render_data_10_field_in_contact_form($tag) {
-    $data1 = get_field('prima_data_spettacolo_4');
-    if ($data1) {
-        return '<input id="data_1_field" type="checkbox" name="prima_data_spettacolo_4" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-
-function render_data_11_field_in_contact_form($tag) {
-    $data2 = get_field('seconda_data_spettacolo_4');
-    if ($data2) {
-        return '<input id="data_2_field" type="checkbox" name="seconda_data_spettacolo_4" value="' . esc_attr($data2) . '">' . esc_html($data2);
-    } else {
-        return '';
-    }
-}
-
-function render_data_12_field_in_contact_form($tag) {
-    $data3 = get_field('terza_data_spettacolo_4');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="terza_data_spettacolo_4" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
-/* date aggiuntive spettacolo 4 */
-function render_d_4_4_field_in_contact_form($tag) {
-    $data3 = get_field('quarta_data_spettacolo_4');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="quarta_data_spettacolo_4" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
-function render_d_5_4_field_in_contact_form($tag) {
-    $data3 = get_field('quinta_data_spettacolo_4');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="quinta_data_spettacolo_4" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
-function render_d_6_4_field_in_contact_form($tag) {
-    $data3 = get_field('sesta_data_spettacolo_4');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="sesta_data_spettacolo_4" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
-function render_d_7_4_field_in_contact_form($tag) {
-    $data3 = get_field('settima_data_spettacolo_4');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="settima_data_spettacolo_4" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
-function render_d_8_4_field_in_contact_form($tag) {
-    $data3 = get_field('ottava_data_spettacolo_4');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="ottava_data_spettacolo_4" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
-function render_d_9_4_field_in_contact_form($tag) {
-    $data3 = get_field('nona_data_spettacolo_4');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="nona_data_spettacolo_4" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
-function render_d_10_4_field_in_contact_form($tag) {
-    $data3 = get_field('decima_data_spettacolo_4');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="decima_data_spettacolo_4" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
-function render_d_11_4_field_in_contact_form($tag) {
-    $data3 = get_field('undicesima_data_spettacolo_4');
-    if ($data3) {
-        return '<input id="data_3_field" type="checkbox" name="undicesima_data_spettacolo_4" value="' . esc_attr($data3) . '">' . esc_html($data3);
-    } else {
-        return '';
-    }
-}
+// /* date aggiuntive spettacolo 2 */
+// function render_d_4_2_field_in_contact_form($tag) {
+//     $data3 = get_field('quarta_data_spettacolo_2');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="quarta_data_spettacolo_2" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_5_2_field_in_contact_form($tag) {
+//     $data3 = get_field('quinta_data_spettacolo_2');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="quinta_data_spettacolo_2" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_6_2_field_in_contact_form($tag) {
+//     $data3 = get_field('sesta_data_spettacolo_2');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="sesta_data_spettacolo_2" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_7_2_field_in_contact_form($tag) {
+//     $data3 = get_field('settima_data_spettacolo_2');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="settima_data_spettacolo_2" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_8_2_field_in_contact_form($tag) {
+//     $data3 = get_field('ottava_data_spettacolo_2');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="ottava_data_spettacolo_2" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_9_2_field_in_contact_form($tag) {
+//     $data3 = get_field('nona_data_spettacolo_2');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="nona_data_spettacolo_2" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_10_2_field_in_contact_form($tag) {
+//     $data3 = get_field('decima_data_spettacolo_2');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="decima_data_spettacolo_2" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_11_2_field_in_contact_form($tag) {
+//     $data3 = get_field('undicesima_data_spettacolo_2');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="undicesima_data_spettacolo_2" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
 
 
-/* PRIMA SCELTA - SPETTACOLO 5 */
+// /* PRIMA SCELTA - SPETTACOLO 3 */
 
-function render_data_13_field_in_contact_form($tag) {
-    $data4 = get_field('prima_data_spettacolo_5');
-    if ($data4) {
-        return '<input id="data_4_field" type="checkbox" name="prima_data_spettacolo_5" value="' . esc_attr($data4) . '">' . esc_html($data4);
-    } else {
-        return '';
-    }
-}
+// function render_data_7_field_in_contact_form($tag) {
+//     $data7 = get_field('prima_data_spettacolo_3');
+//     if ($data7) {
+//         return '<input id="data_7_field" type="checkbox" name="prima_data_spettacolo_3" value="' . esc_attr($data7) . '">' . esc_html($data7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_data_8_field_in_contact_form($tag) {
+//     $data7 = get_field('seconda_data_spettacolo_3');
+//     if ($data7) {
+//         return '<input id="data_8_field" type="checkbox" name="seconda_data_spettacolo_3" value="' . esc_attr($data7) . '">' . esc_html($data7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_data_9_field_in_contact_form($tag) {
+//     $data7 = get_field('terza_data_spettacolo_3');
+//     if ($data7) {
+//         return '<input id="data_9_field" type="checkbox" name="terza_data_spettacolo_3" value="' . esc_attr($data7) . '">' . esc_html($data7);
+//     } else {
+//         return '';
+//     }
+// }
 
-function render_data_14_field_in_contact_form($tag) {
-    $data5 = get_field('seconda_data_spettacolo_5');
-    if ($data5) {
-        return '<input id="data_5_field" type="checkbox" name="seconda_data_spettacolo_5" value="' . esc_attr($data5) . '">' . esc_html($data5);
-    } else {
-        return '';
-    }
-}
+// /* date aggiuntive spettacolo 3 */
+// function render_d_4_3_field_in_contact_form($tag) {
+//     $data3 = get_field('quarta_data_spettacolo_3');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="quarta_data_spettacolo_3" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_5_3_field_in_contact_form($tag) {
+//     $data3 = get_field('quinta_data_spettacolo_3');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="quinta_data_spettacolo_3" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_6_3_field_in_contact_form($tag) {
+//     $data3 = get_field('sesta_data_spettacolo_3');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="sesta_data_spettacolo_3" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_7_3_field_in_contact_form($tag) {
+//     $data3 = get_field('settima_data_spettacolo_3');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="settima_data_spettacolo_3" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_8_3_field_in_contact_form($tag) {
+//     $data3 = get_field('ottava_data_spettacolo_3');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="ottava_data_spettacolo_3" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_9_3_field_in_contact_form($tag) {
+//     $data3 = get_field('nona_data_spettacolo_3');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="nona_data_spettacolo_3" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_10_3_field_in_contact_form($tag) {
+//     $data3 = get_field('decima_data_spettacolo_3');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="decima_data_spettacolo_3" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_11_3_field_in_contact_form($tag) {
+//     $data3 = get_field('undicesima_data_spettacolo_3');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="undicesima_data_spettacolo_3" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
 
-function render_data_15_field_in_contact_form($tag) {
-    $data6 = get_field('terza_data_spettacolo_5');
-    if ($data6) {
-        return '<input id="data_6_field" type="checkbox" name="terza_data_spettacolo_5" value="' . esc_attr($data6) . '">' . esc_html($data6);
-    } else {
-        return '';
-    }
-}
+// /* orari spettacolo 1 */
 
-function render_data_16_field_in_contact_form($tag) {
-    $data7 = get_field('prima_data_spettacolo_6');
-    if ($data7) {
-        return '<input id="data_7_field" type="checkbox" name="prima_data_spettacolo_6" value="' . esc_attr($data7) . '">' . esc_html($data7);
-    } else {
-        return '';
-    }
-}
-function render_data_17_field_in_contact_form($tag) {
-    $data7 = get_field('seconda_data_spettacolo_6');
-    if ($data7) {
-        return '<input id="data_8_field" type="checkbox" name="seconda_data_spettacolo_6" value="' . esc_attr($data7) . '">' . esc_html($data7);
-    } else {
-        return '';
-    }
-}
-function render_data_18_field_in_contact_form($tag) {
-    $data7 = get_field('terza_data_spettacolo_6');
-    if ($data7) {
-        return '<input id="data_9_field" type="checkbox" name="terza_data_spettacolo_6" value="' . esc_attr($data7) . '">' . esc_html($data7);
-    } else {
-        return '';
-    }
-}
+// function render_orario_1_field_in_contact_form($tag) {
+//     $orario1 = get_field('orario_spettacolo_1');
+//     if ($orario1) {
+//         return '<input id="orario_1_field" type="checkbox" name="orario_spettacolo_1" value="' . esc_attr($orario1) . '">' . esc_html($orario1);
+//     } else {
+//         return '';
+//     }
+// }
 
-function render_orario_10_field_in_contact_form($tag) {
-    $orario1 = get_field('primo_orario_spettacolo_4');
-    if ($orario1) {
-        return '<input id="orario_1_field" type="checkbox" name="orario_spettacolo_4" value="' . esc_attr($orario1) . '">' . esc_html($orario1);
-    } else {
-        return '';
-    }
-}
+// function render_orario_2_field_in_contact_form($tag) {
+//     $orario2 = get_field('secondo_orario_spettacolo_1');
+//     if ($orario2) {
+//         return '<input id="orario_2_field" type="checkbox" name="secondo_orario_spettacolo_1" value="' . esc_attr($orario2) . '">' . esc_html($orario2);
+//     } else {
+//         return '';
+//     }
+// }
 
-function render_orario_11_field_in_contact_form($tag) {
-    $orario2 = get_field('secondo_orario_spettacolo_4');
-    if ($orario2) {
-        return '<input id="orario_2_field" type="checkbox" name="secondo_orario_spettacolo_4" value="' . esc_attr($orario2) . '">' . esc_html($orario2);
-    } else {
-        return '';
-    }
-}
+// function render_orario_3_field_in_contact_form($tag) {
+//     $orario3 = get_field('terzo_orario_spettacolo_1');
+//     if ($orario3) {
+//         return '<input id="orario_3_field" type="checkbox" name="terzo_orario_spettacolo_1" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
+//     } else {
+//         return '';
+//     }
+// }
 
-function render_orario_12_field_in_contact_form($tag) {
-    $orario3 = get_field('terzo_orario_spettacolo_4');
-    if ($orario3) {
-        return '<input id="orario_3_field" type="checkbox" name="terzo_orario_spettacolo_4" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
-    } else {
-        return '';
-    }
-}
+// function render_o_4_1_field_in_contact_form($tag) {
+//     $orario3 = get_field('quarto_orario_spettacolo_1');
+//     if ($orario3) {
+//         return '<input id="orario_4_1_field" type="checkbox" name="quarto_orario_spettacolo_1" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_o_4_2_field_in_contact_form($tag) {
+//     $orario3 = get_field('quarto_orario_spettacolo_2');
+//     if ($orario3) {
+//         return '<input id="orario_4_2_field" type="checkbox" name="quarto_orario_spettacolo_2" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_o_4_3_field_in_contact_form($tag) {
+//     $orario3 = get_field('quarto_orario_spettacolo_3');
+//     if ($orario3) {
+//         return '<input id="orario_4_3_field" type="checkbox" name="quarto_orario_spettacolo_3" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_o_4_4_field_in_contact_form($tag) {
+//     $orario3 = get_field('quarto_orario_spettacolo_4');
+//     if ($orario3) {
+//         return '<input id="orario_4_4_field" type="checkbox" name="quarto_orario_spettacolo_4" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
+//     } else {
+//         return '';
+//     }
+// }
+
+// function render_o_4_5_field_in_contact_form($tag) {
+//     $orario3 = get_field('quarto_orario_spettacolo_5');
+//     if ($orario3) {
+//         return '<input id="orario_4_5_field" type="checkbox" name="quarto_orario_spettacolo_5" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
+//     } else {
+//         return '';
+//     }
+// }
+
+// function render_o_4_6_field_in_contact_form($tag) {
+//     $orario3 = get_field('quarto_orario_spettacolo_5');
+//     if ($orario3) {
+//         return '<input id="orario_4_6_field" type="checkbox" name="quarto_orario_spettacolo_6" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
+//     } else {
+//         return '';
+//     }
+// }
+
+// function render_o_4_7_field_in_contact_form($tag) {
+//     $orario3 = get_field('quarto_orario_spettacolo_7');
+//     if ($orario3) {
+//         return '<input id="orario_4_7_field" type="checkbox" name="quarto_orario_spettacolo_7" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
+//     } else {
+//         return '';
+//     }
+// }
+
+// function render_o_4_8_field_in_contact_form($tag) {
+//     $orario3 = get_field('quarto_orario_spettacolo_8');
+//     if ($orario3) {
+//         return '<input id="orario_4_8_field" type="checkbox" name="quarto_orario_spettacolo_8" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
+//     } else {
+//         return '';
+//     }
+// }
+
+// function render_o_4_9_field_in_contact_form($tag) {
+//     $orario3 = get_field('quarto_orario_spettacolo_9');
+//     if ($orario3) {
+//         return '<input id="orario_4_9_field" type="checkbox" name="quarto_orario_spettacolo_9" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
+//     } else {
+//         return '';
+//     }
+// }
+
+// function render_o_4_10_field_in_contact_form($tag) {
+//     $orario3 = get_field('quarto_orario_spettacolo_10');
+//     if ($orario3) {
+//         return '<input id="orario_4_10_field" type="checkbox" name="quarto_orario_spettacolo_10" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
+//     } else {
+//         return '';
+//     }
+// }
+
+// function render_o_4_11_field_in_contact_form($tag) {
+//     $orario3 = get_field('quarto_orario_spettacolo_11');
+//     if ($orario3) {
+//         return '<input id="orario_4_11_field" type="checkbox" name="quarto_orario_spettacolo_11" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
+//     } else {
+//         return '';
+//     }
+// }
+
+// function render_orario_4_field_in_contact_form($tag) {
+//     $orario4 = get_field('primo_orario_spettacolo_2');
+//     if ($orario4) {
+//         return '<input id="orario_4_field" type="checkbox" name="primo_orario_spettacolo_2" value="' . esc_attr($orario4) . '">' . esc_html($orario4);
+//     } else {
+//         return '';
+//     }
+// }
+
+// function render_orario_5_field_in_contact_form($tag) {
+//     $orario5 = get_field('secondo_orario_spettacolo_2');
+//     if ($orario5) {
+//         return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_2" value="' . esc_attr($orario5) . '">' . esc_html($orario5);
+//     } else {
+//         return '';
+//     }
+// }
+
+// function render_orario_6_field_in_contact_form($tag) {
+//     $orario6 = get_field('terzo_orario_spettacolo_2');
+//     if ($orario6) {
+//         return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_2" value="' . esc_attr($orario6) . '">' . esc_html($orario6);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_7_field_in_contact_form($tag) {
+//     $orario7 = get_field('primo_orario_spettacolo_3');
+//     if ($orario7) {
+//         return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_3" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_8_field_in_contact_form($tag) {
+//     $orario8 = get_field('secondo_orario_spettacolo_3');
+//     if ($orario8) {
+//         return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_3" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_9_field_in_contact_form($tag) {
+//     $orario9 = get_field('terzo_orario_spettacolo_3');
+//     if ($orario9) {
+//         return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_3" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+//     } else {
+//         return '';
+//     }
+// }
 
 
-function render_orario_13_field_in_contact_form($tag) {
-    $orario4 = get_field('primo_orario_spettacolo_5');
-    if ($orario4) {
-        return '<input id="orario_4_field" type="checkbox" name="primo_orario_spettacolo_5" value="' . esc_attr($orario4) . '">' . esc_html($orario4);
-    } else {
-        return '';
-    }
-}
+// /* PRIMA SCELTA - SPETTACOLO 4 */
 
-function render_orario_14_field_in_contact_form($tag) {
-    $orario5 = get_field('secondo_orario_spettacolo_5');
-    if ($orario5) {
-        return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_5" value="' . esc_attr($orario5) . '">' . esc_html($orario5);
-    } else {
-        return '';
-    }
-}
 
-function render_orario_15_field_in_contact_form($tag) {
-    $orario6 = get_field('terzo_orario_spettacolo_5');
-    if ($orario6) {
-        return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_5" value="' . esc_attr($orario6) . '">' . esc_html($orario6);
-    } else {
-        return '';
-    }
-}
-function render_orario_16_field_in_contact_form($tag) {
-    $orario7 = get_field('primo_orario_spettacolo_6');
-    if ($orario7) {
-        return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_6" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
-    } else {
-        return '';
-    }
-}
-function render_orario_17_field_in_contact_form($tag) {
-    $orario8 = get_field('secondo_orario_spettacolo_6');
-    if ($orario8) {
-        return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_6" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
-    } else {
-        return '';
-    }
-}
-function render_orario_18_field_in_contact_form($tag) {
-    $orario9 = get_field('terzo_orario_spettacolo_6');
-    if ($orario9) {
-        return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_6" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
-    } else {
-        return '';
-    }
-}
-/* SPETTACOLO 7 */
+// function render_data_10_field_in_contact_form($tag) {
+//     $data1 = get_field('prima_data_spettacolo_4');
+//     if ($data1) {
+//         return '<input id="data_1_field" type="checkbox" name="prima_data_spettacolo_4" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
 
-function render_data_19_field_in_contact_form($tag) {
-    $data7 = get_field('prima_data_spettacolo_7');
-    if ($data7) {
-        return '<input id="data_7_field" type="checkbox" name="prima_data_spettacolo_7" value="' . esc_attr($data7) . '">' . esc_html($data7);
-    } else {
-        return '';
-    }
-}
-function render_data_20_field_in_contact_form($tag) {
-    $data7 = get_field('seconda_data_spettacolo_7');
-    if ($data7) {
-        return '<input id="data_8_field" type="checkbox" name="seconda_data_spettacolo_7" value="' . esc_attr($data7) . '">' . esc_html($data7);
-    } else {
-        return '';
-    }
-}
-function render_data_21_field_in_contact_form($tag) {
-    $data7 = get_field('terza_data_spettacolo_7');
-    if ($data7) {
-        return '<input id="data_9_field" type="checkbox" name="terza_data_spettacolo_7" value="' . esc_attr($data7) . '">' . esc_html($data7);
-    } else {
-        return '';
-    }
-}
+// function render_data_11_field_in_contact_form($tag) {
+//     $data2 = get_field('seconda_data_spettacolo_4');
+//     if ($data2) {
+//         return '<input id="data_2_field" type="checkbox" name="seconda_data_spettacolo_4" value="' . esc_attr($data2) . '">' . esc_html($data2);
+//     } else {
+//         return '';
+//     }
+// }
 
-function render_orario_19_field_in_contact_form($tag) {
-    $orario7 = get_field('primo_orario_spettacolo_7');
-    if ($orario7) {
-        return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_7" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
-    } else {
-        return '';
-    }
-}
-function render_orario_20_field_in_contact_form($tag) {
-    $orario8 = get_field('secondo_orario_spettacolo_7');
-    if ($orario8) {
-        return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_7" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
-    } else {
-        return '';
-    }
-}
-function render_orario_21_field_in_contact_form($tag) {
-    $orario9 = get_field('terzo_orario_spettacolo_7');
-    if ($orario9) {
-        return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_7" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
-    } else {
-        return '';
-    }
-}
-/* SPETTACOLO 8 */
+// function render_data_12_field_in_contact_form($tag) {
+//     $data3 = get_field('terza_data_spettacolo_4');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="terza_data_spettacolo_4" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// /* date aggiuntive spettacolo 4 */
+// function render_d_4_4_field_in_contact_form($tag) {
+//     $data3 = get_field('quarta_data_spettacolo_4');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="quarta_data_spettacolo_4" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_5_4_field_in_contact_form($tag) {
+//     $data3 = get_field('quinta_data_spettacolo_4');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="quinta_data_spettacolo_4" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_6_4_field_in_contact_form($tag) {
+//     $data3 = get_field('sesta_data_spettacolo_4');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="sesta_data_spettacolo_4" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_7_4_field_in_contact_form($tag) {
+//     $data3 = get_field('settima_data_spettacolo_4');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="settima_data_spettacolo_4" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_8_4_field_in_contact_form($tag) {
+//     $data3 = get_field('ottava_data_spettacolo_4');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="ottava_data_spettacolo_4" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_9_4_field_in_contact_form($tag) {
+//     $data3 = get_field('nona_data_spettacolo_4');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="nona_data_spettacolo_4" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_10_4_field_in_contact_form($tag) {
+//     $data3 = get_field('decima_data_spettacolo_4');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="decima_data_spettacolo_4" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_11_4_field_in_contact_form($tag) {
+//     $data3 = get_field('undicesima_data_spettacolo_4');
+//     if ($data3) {
+//         return '<input id="data_3_field" type="checkbox" name="undicesima_data_spettacolo_4" value="' . esc_attr($data3) . '">' . esc_html($data3);
+//     } else {
+//         return '';
+//     }
+// }
 
-function render_data_22_field_in_contact_form($tag) {
-    $data7 = get_field('prima_data_spettacolo_8');
-    if ($data7) {
-        return '<input id="data_7_field" type="checkbox" name="prima_data_spettacolo_8" value="' . esc_attr($data7) . '">' . esc_html($data7);
-    } else {
-        return '';
-    }
-}
-function render_data_23_field_in_contact_form($tag) {
-    $data7 = get_field('seconda_data_spettacolo_8');
-    if ($data7) {
-        return '<input id="data_8_field" type="checkbox" name="seconda_data_spettacolo_8" value="' . esc_attr($data7) . '">' . esc_html($data7);
-    } else {
-        return '';
-    }
-}
-function render_data_24_field_in_contact_form($tag) {
-    $data7 = get_field('terza_data_spettacolo_8');
-    if ($data7) {
-        return '<input id="data_9_field" type="checkbox" name="terza_data_spettacolo_8" value="' . esc_attr($data7) . '">' . esc_html($data7);
-    } else {
-        return '';
-    }
-}
 
-function render_orario_22_field_in_contact_form($tag) {
-    $orario7 = get_field('primo_orario_spettacolo_8');
-    if ($orario7) {
-        return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_8" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
-    } else {
-        return '';
-    }
-}
-function render_orario_23_field_in_contact_form($tag) {
-    $orario8 = get_field('secondo_orario_spettacolo_8');
-    if ($orario8) {
-        return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_8" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
-    } else {
-        return '';
-    }
-}
-function render_orario_24_field_in_contact_form($tag) {
-    $orario9 = get_field('terzo_orario_spettacolo_8');
-    if ($orario9) {
-        return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_8" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
-    } else {
-        return '';
-    }
-}
-/* SPETTACOLO 9 */
+// /* PRIMA SCELTA - SPETTACOLO 5 */
 
-function render_data_25_field_in_contact_form($tag) {
-    $data7 = get_field('prima_data_spettacolo_9');
-    if ($data7) {
-        return '<input id="data_7_field" type="checkbox" name="prima_data_spettacolo_9" value="' . esc_attr($data7) . '">' . esc_html($data7);
-    } else {
-        return '';
-    }
-}
-function render_data_26_field_in_contact_form($tag) {
-    $data7 = get_field('seconda_data_spettacolo_9');
-    if ($data7) {
-        return '<input id="data_8_field" type="checkbox" name="seconda_data_spettacolo_9" value="' . esc_attr($data7) . '">' . esc_html($data7);
-    } else {
-        return '';
-    }
-}
-function render_data_27_field_in_contact_form($tag) {
-    $data7 = get_field('terza_data_spettacolo_9');
-    if ($data7) {
-        return '<input id="data_9_field" type="checkbox" name="terza_data_spettacolo_9" value="' . esc_attr($data7) . '">' . esc_html($data7);
-    } else {
-        return '';
-    }
-}
+// function render_data_13_field_in_contact_form($tag) {
+//     $data4 = get_field('prima_data_spettacolo_5');
+//     if ($data4) {
+//         return '<input id="data_4_field" type="checkbox" name="prima_data_spettacolo_5" value="' . esc_attr($data4) . '">' . esc_html($data4);
+//     } else {
+//         return '';
+//     }
+// }
 
-function render_orario_25_field_in_contact_form($tag) {
-    $orario7 = get_field('primo_orario_spettacolo_9');
-    if ($orario7) {
-        return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_9" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
-    } else {
-        return '';
-    }
-}
-function render_orario_26_field_in_contact_form($tag) {
-    $orario8 = get_field('secondo_orario_spettacolo_9');
-    if ($orario8) {
-        return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_9" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
-    } else {
-        return '';
-    }
-}
-function render_orario_27_field_in_contact_form($tag) {
-    $orario9 = get_field('terzo_orario_spettacolo_9');
-    if ($orario9) {
-        return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_9" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
-    } else {
-        return '';
-    }
-}
+// function render_data_14_field_in_contact_form($tag) {
+//     $data5 = get_field('seconda_data_spettacolo_5');
+//     if ($data5) {
+//         return '<input id="data_5_field" type="checkbox" name="seconda_data_spettacolo_5" value="' . esc_attr($data5) . '">' . esc_html($data5);
+//     } else {
+//         return '';
+//     }
+// }
 
-/* SPETTACOLO 10 */
+// function render_data_15_field_in_contact_form($tag) {
+//     $data6 = get_field('terza_data_spettacolo_5');
+//     if ($data6) {
+//         return '<input id="data_6_field" type="checkbox" name="terza_data_spettacolo_5" value="' . esc_attr($data6) . '">' . esc_html($data6);
+//     } else {
+//         return '';
+//     }
+// }
 
-function render_data_28_field_in_contact_form($tag) {
-    $data7 = get_field('prima_data_spettacolo_10');
-    if ($data7) {
-        return '<input id="data_7_field" type="checkbox" name="prima_data_spettacolo_10" value="' . esc_attr($data7) . '">' . esc_html($data7);
-    } else {
-        return '';
-    }
-}
-function render_data_29_field_in_contact_form($tag) {
-    $data7 = get_field('seconda_data_spettacolo_10');
-    if ($data7) {
-        return '<input id="data_8_field" type="checkbox" name="seconda_data_spettacolo_10" value="' . esc_attr($data7) . '">' . esc_html($data7);
-    } else {
-        return '';
-    }
-}
-function render_data_30_field_in_contact_form($tag) {
-    $data7 = get_field('terza_data_spettacolo_10');
-    if ($data7) {
-        return '<input id="data_9_field" type="checkbox" name="terza_data_spettacolo_10" value="' . esc_attr($data7) . '">' . esc_html($data7);
-    } else {
-        return '';
-    }
-}
+// function render_data_16_field_in_contact_form($tag) {
+//     $data7 = get_field('prima_data_spettacolo_6');
+//     if ($data7) {
+//         return '<input id="data_7_field" type="checkbox" name="prima_data_spettacolo_6" value="' . esc_attr($data7) . '">' . esc_html($data7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_data_17_field_in_contact_form($tag) {
+//     $data7 = get_field('seconda_data_spettacolo_6');
+//     if ($data7) {
+//         return '<input id="data_8_field" type="checkbox" name="seconda_data_spettacolo_6" value="' . esc_attr($data7) . '">' . esc_html($data7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_data_18_field_in_contact_form($tag) {
+//     $data7 = get_field('terza_data_spettacolo_6');
+//     if ($data7) {
+//         return '<input id="data_9_field" type="checkbox" name="terza_data_spettacolo_6" value="' . esc_attr($data7) . '">' . esc_html($data7);
+//     } else {
+//         return '';
+//     }
+// }
 
-function render_orario_28_field_in_contact_form($tag) {
-    $orario7 = get_field('primo_orario_spettacolo_10');
-    if ($orario7) {
-        return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_10" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
-    } else {
-        return '';
-    }
-}
-function render_orario_29_field_in_contact_form($tag) {
-    $orario8 = get_field('secondo_orario_spettacolo_10');
-    if ($orario8) {
-        return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_10" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
-    } else {
-        return '';
-    }
-}
-function render_orario_30_field_in_contact_form($tag) {
-    $orario9 = get_field('terzo_orario_spettacolo_10');
-    if ($orario9) {
-        return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_10" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
-    } else {
-        return '';
-    }
-}
+// function render_orario_10_field_in_contact_form($tag) {
+//     $orario1 = get_field('primo_orario_spettacolo_4');
+//     if ($orario1) {
+//         return '<input id="orario_1_field" type="checkbox" name="orario_spettacolo_4" value="' . esc_attr($orario1) . '">' . esc_html($orario1);
+//     } else {
+//         return '';
+//     }
+// }
 
-/* SPETTACOLO 11 */
+// function render_orario_11_field_in_contact_form($tag) {
+//     $orario2 = get_field('secondo_orario_spettacolo_4');
+//     if ($orario2) {
+//         return '<input id="orario_2_field" type="checkbox" name="secondo_orario_spettacolo_4" value="' . esc_attr($orario2) . '">' . esc_html($orario2);
+//     } else {
+//         return '';
+//     }
+// }
 
-function render_data_31_field_in_contact_form($tag) {
-    $data7 = get_field('prima_data_spettacolo_11');
-    if ($data7) {
-        return '<input id="data_7_field" type="checkbox" name="prima_data_spettacolo_11" value="' . esc_attr($data7) . '">' . esc_html($data7);
-    } else {
-        return '';
-    }
-}
-function render_data_32_field_in_contact_form($tag) {
-    $data7 = get_field('seconda_data_spettacolo_11');
-    if ($data7) {
-        return '<input id="data_8_field" type="checkbox" name="seconda_data_spettacolo_11" value="' . esc_attr($data7) . '">' . esc_html($data7);
-    } else {
-        return '';
-    }
-}
-function render_data_33_field_in_contact_form($tag) {
-    $data7 = get_field('terza_data_spettacolo_11');
-    if ($data7) {
-        return '<input id="data_9_field" type="checkbox" name="terza_data_spettacolo_11" value="' . esc_attr($data7) . '">' . esc_html($data7);
-    } else {
-        return '';
-    }
-}
+// function render_orario_12_field_in_contact_form($tag) {
+//     $orario3 = get_field('terzo_orario_spettacolo_4');
+//     if ($orario3) {
+//         return '<input id="orario_3_field" type="checkbox" name="terzo_orario_spettacolo_4" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
+//     } else {
+//         return '';
+//     }
+// }
 
-function render_orario_31_field_in_contact_form($tag) {
-    $orario7 = get_field('primo_orario_spettacolo_11');
-    if ($orario7) {
-        return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_11" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
-    } else {
-        return '';
-    }
-}
-function render_orario_32_field_in_contact_form($tag) {
-    $orario8 = get_field('secondo_orario_spettacolo_11');
-    if ($orario8) {
-        return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_11" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
-    } else {
-        return '';
-    }
-}
-function render_orario_33_field_in_contact_form($tag) {
-    $orario9 = get_field('terzo_orario_spettacolo_11');
-    if ($orario9) {
-        return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_11" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
-    } else {
-        return '';
-    }
-}
+
+// function render_orario_13_field_in_contact_form($tag) {
+//     $orario4 = get_field('primo_orario_spettacolo_5');
+//     if ($orario4) {
+//         return '<input id="orario_4_field" type="checkbox" name="primo_orario_spettacolo_5" value="' . esc_attr($orario4) . '">' . esc_html($orario4);
+//     } else {
+//         return '';
+//     }
+// }
+
+// function render_orario_14_field_in_contact_form($tag) {
+//     $orario5 = get_field('secondo_orario_spettacolo_5');
+//     if ($orario5) {
+//         return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_5" value="' . esc_attr($orario5) . '">' . esc_html($orario5);
+//     } else {
+//         return '';
+//     }
+// }
+
+// function render_orario_15_field_in_contact_form($tag) {
+//     $orario6 = get_field('terzo_orario_spettacolo_5');
+//     if ($orario6) {
+//         return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_5" value="' . esc_attr($orario6) . '">' . esc_html($orario6);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_16_field_in_contact_form($tag) {
+//     $orario7 = get_field('primo_orario_spettacolo_6');
+//     if ($orario7) {
+//         return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_6" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_17_field_in_contact_form($tag) {
+//     $orario8 = get_field('secondo_orario_spettacolo_6');
+//     if ($orario8) {
+//         return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_6" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_18_field_in_contact_form($tag) {
+//     $orario9 = get_field('terzo_orario_spettacolo_6');
+//     if ($orario9) {
+//         return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_6" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+//     } else {
+//         return '';
+//     }
+// }
+// /* SPETTACOLO 7 */
+
+// function render_data_19_field_in_contact_form($tag) {
+//     $data7 = get_field('prima_data_spettacolo_7');
+//     if ($data7) {
+//         return '<input id="data_7_field" type="checkbox" name="prima_data_spettacolo_7" value="' . esc_attr($data7) . '">' . esc_html($data7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_data_20_field_in_contact_form($tag) {
+//     $data7 = get_field('seconda_data_spettacolo_7');
+//     if ($data7) {
+//         return '<input id="data_8_field" type="checkbox" name="seconda_data_spettacolo_7" value="' . esc_attr($data7) . '">' . esc_html($data7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_data_21_field_in_contact_form($tag) {
+//     $data7 = get_field('terza_data_spettacolo_7');
+//     if ($data7) {
+//         return '<input id="data_9_field" type="checkbox" name="terza_data_spettacolo_7" value="' . esc_attr($data7) . '">' . esc_html($data7);
+//     } else {
+//         return '';
+//     }
+// }
+
+// function render_orario_19_field_in_contact_form($tag) {
+//     $orario7 = get_field('primo_orario_spettacolo_7');
+//     if ($orario7) {
+//         return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_7" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_20_field_in_contact_form($tag) {
+//     $orario8 = get_field('secondo_orario_spettacolo_7');
+//     if ($orario8) {
+//         return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_7" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_21_field_in_contact_form($tag) {
+//     $orario9 = get_field('terzo_orario_spettacolo_7');
+//     if ($orario9) {
+//         return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_7" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+//     } else {
+//         return '';
+//     }
+// }
+// /* SPETTACOLO 8 */
+
+// function render_data_22_field_in_contact_form($tag) {
+//     $data7 = get_field('prima_data_spettacolo_8');
+//     if ($data7) {
+//         return '<input id="data_7_field" type="checkbox" name="prima_data_spettacolo_8" value="' . esc_attr($data7) . '">' . esc_html($data7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_data_23_field_in_contact_form($tag) {
+//     $data7 = get_field('seconda_data_spettacolo_8');
+//     if ($data7) {
+//         return '<input id="data_8_field" type="checkbox" name="seconda_data_spettacolo_8" value="' . esc_attr($data7) . '">' . esc_html($data7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_data_24_field_in_contact_form($tag) {
+//     $data7 = get_field('terza_data_spettacolo_8');
+//     if ($data7) {
+//         return '<input id="data_9_field" type="checkbox" name="terza_data_spettacolo_8" value="' . esc_attr($data7) . '">' . esc_html($data7);
+//     } else {
+//         return '';
+//     }
+// }
+
+// function render_orario_22_field_in_contact_form($tag) {
+//     $orario7 = get_field('primo_orario_spettacolo_8');
+//     if ($orario7) {
+//         return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_8" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_23_field_in_contact_form($tag) {
+//     $orario8 = get_field('secondo_orario_spettacolo_8');
+//     if ($orario8) {
+//         return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_8" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_24_field_in_contact_form($tag) {
+//     $orario9 = get_field('terzo_orario_spettacolo_8');
+//     if ($orario9) {
+//         return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_8" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+//     } else {
+//         return '';
+//     }
+// }
+// /* SPETTACOLO 9 */
+
+// function render_data_25_field_in_contact_form($tag) {
+//     $data7 = get_field('prima_data_spettacolo_9');
+//     if ($data7) {
+//         return '<input id="data_7_field" type="checkbox" name="prima_data_spettacolo_9" value="' . esc_attr($data7) . '">' . esc_html($data7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_data_26_field_in_contact_form($tag) {
+//     $data7 = get_field('seconda_data_spettacolo_9');
+//     if ($data7) {
+//         return '<input id="data_8_field" type="checkbox" name="seconda_data_spettacolo_9" value="' . esc_attr($data7) . '">' . esc_html($data7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_data_27_field_in_contact_form($tag) {
+//     $data7 = get_field('terza_data_spettacolo_9');
+//     if ($data7) {
+//         return '<input id="data_9_field" type="checkbox" name="terza_data_spettacolo_9" value="' . esc_attr($data7) . '">' . esc_html($data7);
+//     } else {
+//         return '';
+//     }
+// }
+
+// function render_orario_25_field_in_contact_form($tag) {
+//     $orario7 = get_field('primo_orario_spettacolo_9');
+//     if ($orario7) {
+//         return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_9" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_26_field_in_contact_form($tag) {
+//     $orario8 = get_field('secondo_orario_spettacolo_9');
+//     if ($orario8) {
+//         return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_9" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_27_field_in_contact_form($tag) {
+//     $orario9 = get_field('terzo_orario_spettacolo_9');
+//     if ($orario9) {
+//         return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_9" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+//     } else {
+//         return '';
+//     }
+// }
+
+// /* SPETTACOLO 10 */
+
+// function render_data_28_field_in_contact_form($tag) {
+//     $data7 = get_field('prima_data_spettacolo_10');
+//     if ($data7) {
+//         return '<input id="data_7_field" type="checkbox" name="prima_data_spettacolo_10" value="' . esc_attr($data7) . '">' . esc_html($data7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_data_29_field_in_contact_form($tag) {
+//     $data7 = get_field('seconda_data_spettacolo_10');
+//     if ($data7) {
+//         return '<input id="data_8_field" type="checkbox" name="seconda_data_spettacolo_10" value="' . esc_attr($data7) . '">' . esc_html($data7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_data_30_field_in_contact_form($tag) {
+//     $data7 = get_field('terza_data_spettacolo_10');
+//     if ($data7) {
+//         return '<input id="data_9_field" type="checkbox" name="terza_data_spettacolo_10" value="' . esc_attr($data7) . '">' . esc_html($data7);
+//     } else {
+//         return '';
+//     }
+// }
+
+// function render_orario_28_field_in_contact_form($tag) {
+//     $orario7 = get_field('primo_orario_spettacolo_10');
+//     if ($orario7) {
+//         return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_10" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_29_field_in_contact_form($tag) {
+//     $orario8 = get_field('secondo_orario_spettacolo_10');
+//     if ($orario8) {
+//         return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_10" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_30_field_in_contact_form($tag) {
+//     $orario9 = get_field('terzo_orario_spettacolo_10');
+//     if ($orario9) {
+//         return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_10" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+//     } else {
+//         return '';
+//     }
+// }
+
+// /* SPETTACOLO 11 */
+
+// function render_data_31_field_in_contact_form($tag) {
+//     $data7 = get_field('prima_data_spettacolo_11');
+//     if ($data7) {
+//         return '<input id="data_7_field" type="checkbox" name="prima_data_spettacolo_11" value="' . esc_attr($data7) . '">' . esc_html($data7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_data_32_field_in_contact_form($tag) {
+//     $data7 = get_field('seconda_data_spettacolo_11');
+//     if ($data7) {
+//         return '<input id="data_8_field" type="checkbox" name="seconda_data_spettacolo_11" value="' . esc_attr($data7) . '">' . esc_html($data7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_data_33_field_in_contact_form($tag) {
+//     $data7 = get_field('terza_data_spettacolo_11');
+//     if ($data7) {
+//         return '<input id="data_9_field" type="checkbox" name="terza_data_spettacolo_11" value="' . esc_attr($data7) . '">' . esc_html($data7);
+//     } else {
+//         return '';
+//     }
+// }
+
+// function render_orario_31_field_in_contact_form($tag) {
+//     $orario7 = get_field('primo_orario_spettacolo_11');
+//     if ($orario7) {
+//         return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_11" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_32_field_in_contact_form($tag) {
+//     $orario8 = get_field('secondo_orario_spettacolo_11');
+//     if ($orario8) {
+//         return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_11" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_33_field_in_contact_form($tag) {
+//     $orario9 = get_field('terzo_orario_spettacolo_11');
+//     if ($orario9) {
+//         return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_11" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+//     } else {
+//         return '';
+//     }
+// }
 
 
 /* seconda scelta */
@@ -2570,1065 +2614,1065 @@ function add_acf_fields_to_contact_form2() {
 	wpcf7_add_form_tag('orario_32_2_field', 'render_orario_32_2_field_in_contact_form');
 	wpcf7_add_form_tag('orario_33_2_field', 'render_orario_33_2_field_in_contact_form');
     
-    /* date e orari aggiuntivi seconda scelta */
-    wpcf7_add_form_tag('o_4_1_2_field', 'render_o_4_1_2_field_in_contact_form'); /* quarto orario_primo spettacolo_seconda scelta */
-    wpcf7_add_form_tag('o_4_2_2_field', 'render_o_4_2_2_field_in_contact_form'); /* quarto orario_secondo spettacolo_seconda scelta */
-    wpcf7_add_form_tag('o_4_3_2_field', 'render_o_4_3_2_field_in_contact_form');
-    wpcf7_add_form_tag('o_4_4_2_field', 'render_o_4_4_2_field_in_contact_form');
-    wpcf7_add_form_tag('o_4_5_2_field', 'render_o_4_5_2_field_in_contact_form');
-    wpcf7_add_form_tag('o_4_6_2_field', 'render_o_4_6_2_field_in_contact_form');
-    wpcf7_add_form_tag('o_4_7_2_field', 'render_o_4_7_2_field_in_contact_form');
-    wpcf7_add_form_tag('o_4_8_2_field', 'render_o_4_8_2_field_in_contact_form');
-    wpcf7_add_form_tag('o_4_9_2_field', 'render_o_4_9_2_field_in_contact_form');
-    wpcf7_add_form_tag('o_4_10_2_field', 'render_o_4_10_2_field_in_contact_form');
-    wpcf7_add_form_tag('o_4_11_2_field', 'render_o_4_11_2_field_in_contact_form');
+//     /* date e orari aggiuntivi seconda scelta */
+//     wpcf7_add_form_tag('o_4_1_2_field', 'render_o_4_1_2_field_in_contact_form'); /* quarto orario_primo spettacolo_seconda scelta */
+//     wpcf7_add_form_tag('o_4_2_2_field', 'render_o_4_2_2_field_in_contact_form'); /* quarto orario_secondo spettacolo_seconda scelta */
+//     wpcf7_add_form_tag('o_4_3_2_field', 'render_o_4_3_2_field_in_contact_form');
+//     wpcf7_add_form_tag('o_4_4_2_field', 'render_o_4_4_2_field_in_contact_form');
+//     wpcf7_add_form_tag('o_4_5_2_field', 'render_o_4_5_2_field_in_contact_form');
+//     wpcf7_add_form_tag('o_4_6_2_field', 'render_o_4_6_2_field_in_contact_form');
+//     wpcf7_add_form_tag('o_4_7_2_field', 'render_o_4_7_2_field_in_contact_form');
+//     wpcf7_add_form_tag('o_4_8_2_field', 'render_o_4_8_2_field_in_contact_form');
+//     wpcf7_add_form_tag('o_4_9_2_field', 'render_o_4_9_2_field_in_contact_form');
+//     wpcf7_add_form_tag('o_4_10_2_field', 'render_o_4_10_2_field_in_contact_form');
+//     wpcf7_add_form_tag('o_4_11_2_field', 'render_o_4_11_2_field_in_contact_form');
     
-    /* date aggiuntive - primo spettacolo - seconda scelta */
-    wpcf7_add_form_tag('d_4_1_2_field', 'render_d_4_1_2_field_in_contact_form'); /* quarta data_primo spettacolo_seconda scelta */
-    wpcf7_add_form_tag('d_5_1_2_field', 'render_d_5_1_2_field_in_contact_form'); /* quinta data_primo spettacolo_seconda scelta */
-    wpcf7_add_form_tag('d_6_1_2_field', 'render_d_6_1_2_field_in_contact_form'); /* sesta data_primo spettacolo_seconda scelta */
-    wpcf7_add_form_tag('d_7_1_2_field', 'render_d_7_1_2_field_in_contact_form');
-    wpcf7_add_form_tag('d_8_1_2_field', 'render_d_8_1_2_field_in_contact_form');
-    wpcf7_add_form_tag('d_9_1_2_field', 'render_d_9_1_2_field_in_contact_form');
-    wpcf7_add_form_tag('d_10_1_2_field', 'render_d_10_1_2_field_in_contact_form');
-    wpcf7_add_form_tag('d_11_1_2_field', 'render_d_11_1_2_field_in_contact_form');
+//     /* date aggiuntive - primo spettacolo - seconda scelta */
+//     wpcf7_add_form_tag('d_4_1_2_field', 'render_d_4_1_2_field_in_contact_form'); /* quarta data_primo spettacolo_seconda scelta */
+//     wpcf7_add_form_tag('d_5_1_2_field', 'render_d_5_1_2_field_in_contact_form'); /* quinta data_primo spettacolo_seconda scelta */
+//     wpcf7_add_form_tag('d_6_1_2_field', 'render_d_6_1_2_field_in_contact_form'); /* sesta data_primo spettacolo_seconda scelta */
+//     wpcf7_add_form_tag('d_7_1_2_field', 'render_d_7_1_2_field_in_contact_form');
+//     wpcf7_add_form_tag('d_8_1_2_field', 'render_d_8_1_2_field_in_contact_form');
+//     wpcf7_add_form_tag('d_9_1_2_field', 'render_d_9_1_2_field_in_contact_form');
+//     wpcf7_add_form_tag('d_10_1_2_field', 'render_d_10_1_2_field_in_contact_form');
+//     wpcf7_add_form_tag('d_11_1_2_field', 'render_d_11_1_2_field_in_contact_form');
     
-    /* date aggiuntive - secondo spettacolo - seconda scelta */
-    wpcf7_add_form_tag('d_4_2_2_field', 'render_d_4_2_2_field_in_contact_form'); /* quarta data_secondo spettacolo_seconda scelta */
-    wpcf7_add_form_tag('d_5_2_2_field', 'render_d_5_2_2_field_in_contact_form'); /* quinta data_secondo spettacolo_seconda scelta */
-    wpcf7_add_form_tag('d_6_2_2_field', 'render_d_6_2_2_field_in_contact_form'); /* sesta data_secondo spettacolo_seconda scelta */
-    wpcf7_add_form_tag('d_7_2_2_field', 'render_d_7_2_2_field_in_contact_form');
-    wpcf7_add_form_tag('d_8_2_2_field', 'render_d_8_2_2_field_in_contact_form');
-    wpcf7_add_form_tag('d_9_2_2_field', 'render_d_9_2_2_field_in_contact_form');
-    wpcf7_add_form_tag('d_10_2_2_field', 'render_d_10_2_2_field_in_contact_form');
-    wpcf7_add_form_tag('d_11_2_2_field', 'render_d_11_2_2_field_in_contact_form');
+//     /* date aggiuntive - secondo spettacolo - seconda scelta */
+//     wpcf7_add_form_tag('d_4_2_2_field', 'render_d_4_2_2_field_in_contact_form'); /* quarta data_secondo spettacolo_seconda scelta */
+//     wpcf7_add_form_tag('d_5_2_2_field', 'render_d_5_2_2_field_in_contact_form'); /* quinta data_secondo spettacolo_seconda scelta */
+//     wpcf7_add_form_tag('d_6_2_2_field', 'render_d_6_2_2_field_in_contact_form'); /* sesta data_secondo spettacolo_seconda scelta */
+//     wpcf7_add_form_tag('d_7_2_2_field', 'render_d_7_2_2_field_in_contact_form');
+//     wpcf7_add_form_tag('d_8_2_2_field', 'render_d_8_2_2_field_in_contact_form');
+//     wpcf7_add_form_tag('d_9_2_2_field', 'render_d_9_2_2_field_in_contact_form');
+//     wpcf7_add_form_tag('d_10_2_2_field', 'render_d_10_2_2_field_in_contact_form');
+//     wpcf7_add_form_tag('d_11_2_2_field', 'render_d_11_2_2_field_in_contact_form');
     
-    /* date aggiuntive - terzo spettacolo - seconda scelta */
-    wpcf7_add_form_tag('d_4_3_2_field', 'render_d_4_3_2_field_in_contact_form'); /* quarta data_terzo spettacolo_seconda scelta */
-    wpcf7_add_form_tag('d_5_3_2_field', 'render_d_5_3_2_field_in_contact_form'); /* quinta data_terzo spettacolo_seconda scelta */
-    wpcf7_add_form_tag('d_6_3_2_field', 'render_d_6_3_2_field_in_contact_form'); /* sesta data_terzo spettacolo_seconda scelta */
-    wpcf7_add_form_tag('d_7_3_2_field', 'render_d_7_3_2_field_in_contact_form');
-    wpcf7_add_form_tag('d_8_3_2_field', 'render_d_8_3_2_field_in_contact_form');
-    wpcf7_add_form_tag('d_9_3_2_field', 'render_d_9_3_2_field_in_contact_form');
-    wpcf7_add_form_tag('d_10_3_2_field', 'render_d_10_3_2_field_in_contact_form');
-    wpcf7_add_form_tag('d_11_3_2_field', 'render_d_11_3_2_field_in_contact_form');
+//     /* date aggiuntive - terzo spettacolo - seconda scelta */
+//     wpcf7_add_form_tag('d_4_3_2_field', 'render_d_4_3_2_field_in_contact_form'); /* quarta data_terzo spettacolo_seconda scelta */
+//     wpcf7_add_form_tag('d_5_3_2_field', 'render_d_5_3_2_field_in_contact_form'); /* quinta data_terzo spettacolo_seconda scelta */
+//     wpcf7_add_form_tag('d_6_3_2_field', 'render_d_6_3_2_field_in_contact_form'); /* sesta data_terzo spettacolo_seconda scelta */
+//     wpcf7_add_form_tag('d_7_3_2_field', 'render_d_7_3_2_field_in_contact_form');
+//     wpcf7_add_form_tag('d_8_3_2_field', 'render_d_8_3_2_field_in_contact_form');
+//     wpcf7_add_form_tag('d_9_3_2_field', 'render_d_9_3_2_field_in_contact_form');
+//     wpcf7_add_form_tag('d_10_3_2_field', 'render_d_10_3_2_field_in_contact_form');
+//     wpcf7_add_form_tag('d_11_3_2_field', 'render_d_11_3_2_field_in_contact_form');
     
-    /* date aggiuntive - quarto spettacolo - seconda scelta */
-    wpcf7_add_form_tag('d_4_4_2_field', 'render_d_4_4_2_field_in_contact_form'); /* quarta data_quarto spettacolo_seconda scelta */
-    wpcf7_add_form_tag('d_5_4_2_field', 'render_d_5_4_2_field_in_contact_form'); /* quinta data_quarto spettacolo_seconda scelta */
-    wpcf7_add_form_tag('d_6_4_2_field', 'render_d_6_4_2_field_in_contact_form'); /* sesta data_quarto spettacolo_seconda scelta */
-    wpcf7_add_form_tag('d_7_4_2_field', 'render_d_7_4_2_field_in_contact_form');
-    wpcf7_add_form_tag('d_8_4_2_field', 'render_d_8_4_2_field_in_contact_form');
-    wpcf7_add_form_tag('d_9_4_2_field', 'render_d_9_4_2_field_in_contact_form');
-    wpcf7_add_form_tag('d_10_4_2_field', 'render_d_10_4_2_field_in_contact_form');
-    wpcf7_add_form_tag('d_11_4_2_field', 'render_d_11_4_2_field_in_contact_form');
+//     /* date aggiuntive - quarto spettacolo - seconda scelta */
+//     wpcf7_add_form_tag('d_4_4_2_field', 'render_d_4_4_2_field_in_contact_form'); /* quarta data_quarto spettacolo_seconda scelta */
+//     wpcf7_add_form_tag('d_5_4_2_field', 'render_d_5_4_2_field_in_contact_form'); /* quinta data_quarto spettacolo_seconda scelta */
+//     wpcf7_add_form_tag('d_6_4_2_field', 'render_d_6_4_2_field_in_contact_form'); /* sesta data_quarto spettacolo_seconda scelta */
+//     wpcf7_add_form_tag('d_7_4_2_field', 'render_d_7_4_2_field_in_contact_form');
+//     wpcf7_add_form_tag('d_8_4_2_field', 'render_d_8_4_2_field_in_contact_form');
+//     wpcf7_add_form_tag('d_9_4_2_field', 'render_d_9_4_2_field_in_contact_form');
+//     wpcf7_add_form_tag('d_10_4_2_field', 'render_d_10_4_2_field_in_contact_form');
+//     wpcf7_add_form_tag('d_11_4_2_field', 'render_d_11_4_2_field_in_contact_form');
 
-}
+// }
 
 
-function render_spettacolo_field_in_contact_form2($tag) {
+// function render_spettacolo_field_in_contact_form2($tag) {
    
-    $spettacolo_1 = get_field('spettacolo_1_2');
-    $spettacolo_2 = get_field('spettacolo_2_2');
-    $spettacolo_3 = get_field('spettacolo_3_3');
-    $spettacolo_4 = get_field('spettacolo_4_4');
-    $spettacolo_5 = get_field('spettacolo_5_5');
-    $spettacolo_6 = get_field('spettacolo_6_6');
-    $spettacolo_7 = get_field('spettacolo_7_7');
-    $spettacolo_8 = get_field('spettacolo_8_8');
-    $spettacolo_9 = get_field('spettacolo_9_9');
-    $spettacolo_10 = get_field('spettacolo_10_10');
-    $spettacolo_11 = get_field('spettacolo_11_11');
+//     $spettacolo_1 = get_field('spettacolo_1_2');
+//     $spettacolo_2 = get_field('spettacolo_2_2');
+//     $spettacolo_3 = get_field('spettacolo_3_3');
+//     $spettacolo_4 = get_field('spettacolo_4_4');
+//     $spettacolo_5 = get_field('spettacolo_5_5');
+//     $spettacolo_6 = get_field('spettacolo_6_6');
+//     $spettacolo_7 = get_field('spettacolo_7_7');
+//     $spettacolo_8 = get_field('spettacolo_8_8');
+//     $spettacolo_9 = get_field('spettacolo_9_9');
+//     $spettacolo_10 = get_field('spettacolo_10_10');
+//     $spettacolo_11 = get_field('spettacolo_11_11');
 
-    $spettacoli_options = array(
-        $spettacolo_1,
-        $spettacolo_2,
-        $spettacolo_3,
-        $spettacolo_4,
-        $spettacolo_5,
-        $spettacolo_6,
-        $spettacolo_7,
-        $spettacolo_8,
-        $spettacolo_9,
-        $spettacolo_10,
-        $spettacolo_11
-    );
+//     $spettacoli_options = array(
+//         $spettacolo_1,
+//         $spettacolo_2,
+//         $spettacolo_3,
+//         $spettacolo_4,
+//         $spettacolo_5,
+//         $spettacolo_6,
+//         $spettacolo_7,
+//         $spettacolo_8,
+//         $spettacolo_9,
+//         $spettacolo_10,
+//         $spettacolo_11
+//     );
 
-    $spettacoli_options = array_unique($spettacoli_options);
+//     $spettacoli_options = array_unique($spettacoli_options);
 
     
-    $output = '<select name="spettacolo-2" id="spettacolo-2">';
-	$counter = 1;
-    foreach ($spettacoli_options as $option) {
+//     $output = '<select name="spettacolo-2" id="spettacolo-2">';
+// 	$counter = 1;
+//     foreach ($spettacoli_options as $option) {
       
-		if ($option) {
+// 		if ($option) {
             
-            $name = 'spettacolo_' . $counter;
-            $output .= '<option value="' . esc_attr($option) . '" name="' . esc_attr($name) . '">' . esc_html($option) . '</option>';
-            $counter++; 
-        }
-    }
+//             $name = 'spettacolo_' . $counter;
+//             $output .= '<option value="' . esc_attr($option) . '" name="' . esc_attr($name) . '">' . esc_html($option) . '</option>';
+//             $counter++; 
+//         }
+//     }
 	
-    $output .= '</select>';
-
-    return $output;
-}
-
-
-function render_orario_1_2_field_in_contact_form($tag) {
-    $orario1 = get_field('orario_spettacolo_1_2');
-    if ($orario1) {
-        return '<input id="orario_1_field" type="checkbox" name="orario_spettacolo_1_2" value="' . esc_attr($orario1) . '">' . esc_html($orario1);
-    } else {
-        return '';
-    }
-}
-
-function render_orario_2_2_field_in_contact_form($tag) {
-    $orario2 = get_field('secondo_orario_spettacolo_1_2');
-    if ($orario2) {
-        return '<input id="orario_2_field" type="checkbox" name="secondo_orario_spettacolo_1_2" value="' . esc_attr($orario2) . '">' . esc_html($orario2);
-    } else {
-        return '';
-    }
-}
-
-function render_orario_3_2_field_in_contact_form($tag) {
-    $orario3 = get_field('terzo_orario_spettacolo_1_2');
-    if ($orario3) {
-        return '<input id="orario_3_field" type="checkbox" name="terzo_orario_spettacolo_1_2" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
-    } else {
-        return '';
-    }
-}
-
-
-function render_orario_4_2_field_in_contact_form($tag) {
-    $orario4 = get_field('primo_orario_spettacolo_2_2');
-    if ($orario4) {
-        return '<input id="orario_4_field" type="checkbox" name="primo_orario_spettacolo_2_2" value="' . esc_attr($orario4) . '">' . esc_html($orario4);
-    } else {
-        return '';
-    }
-}
-
-function render_orario_5_2_field_in_contact_form($tag) {
-    $orario5 = get_field('secondo_orario_spettacolo_2_2');
-    if ($orario5) {
-        return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_2_2" value="' . esc_attr($orario5) . '">' . esc_html($orario5);
-    } else {
-        return '';
-    }
-}
-
-function render_orario_6_2_field_in_contact_form($tag) {
-    $orario6 = get_field('terzo_orario_spettacolo_2_2');
-    if ($orario6) {
-        return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_2_2" value="' . esc_attr($orario6) . '">' . esc_html($orario6);
-    } else {
-        return '';
-    }
-}
-function render_orario_7_2_field_in_contact_form($tag) {
-    $orario7 = get_field('primo_orario_spettacolo_3_2');
-    if ($orario7) {
-        return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_3_2" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
-    } else {
-        return '';
-    }
-}
-function render_orario_8_2_field_in_contact_form($tag) {
-    $orario8 = get_field('secondo_orario_spettacolo_3_2');
-    if ($orario8) {
-        return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_3_2" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
-    } else {
-        return '';
-    }
-}
-function render_orario_9_2_field_in_contact_form($tag) {
-    $orario9 = get_field('terzo_orario_spettacolo_3_2');
-    if ($orario9) {
-        return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_3_2" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
-    } else {
-        return '';
-    }
-}
-
-	function render_data_1_2_field_in_contact_form($tag) {
-    $data1 = get_field('prima_data_spettacolo_1_2');
-    if ($data1) {
-        return '<input id="data_1_2_field" type="checkbox" name="prima_data_spettacolo_1_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-
-	function render_data_2_2_field_in_contact_form($tag) {
-    $data1 = get_field('seconda_data_spettacolo_1_2');
-    if ($data1) {
-        return '<input id="data_2_2_field" type="checkbox" name="seconda_data_spettacolo_1_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-
-	function render_data_3_2_field_in_contact_form($tag) {
-    $data1 = get_field('terza_data_spettacolo_1_2');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="terza_data_spettacolo_1_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-
-	function render_data_4_2_field_in_contact_form($tag) {
-    $data1 = get_field('prima_data_spettacolo_2_2');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="prima_data_spettacolo_2_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-
-	function render_data_5_2_field_in_contact_form($tag) {
-    $data1 = get_field('seconda_data_spettacolo_2_2');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="seconda_data_spettacolo_2_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-
-
-	function render_data_6_2_field_in_contact_form($tag) {
-    $data1 = get_field('terza_data_spettacolo_2_2');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="terza_data_spettacolo_2_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-
-
-	function render_data_7_2_field_in_contact_form($tag) {
-    $data1 = get_field('prima_data_spettacolo_3_2');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="prima_data_spettacolo_3_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-
-
-	function render_data_8_2_field_in_contact_form($tag) {
-    $data1 = get_field('seconda_data_spettacolo_3_2');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="seconda_data_spettacolo_3_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-
-
-	function render_data_9_2_field_in_contact_form($tag) {
-    $data1 = get_field('terza_data_spettacolo_3_2');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="terza_data_spettacolo_3_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-
-
-/* DATA E ORARIO SPETTACOLO 4 - seconda scelta */
-function render_data_10_2_field_in_contact_form($tag) {
-    $data1 = get_field('prima_data_spettacolo_4_4');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="prima_data_spettacolo_4_4" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-
-
-	function render_data_11_2_field_in_contact_form($tag) {
-    $data1 = get_field('seconda_data_spettacolo_4_4');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="seconda_data_spettacolo_4_4" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-
-
-	function render_data_12_2_field_in_contact_form($tag) {
-    $data1 = get_field('terza_data_spettacolo_4_4');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="terza_data_spettacolo_4_4" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_orario_10_2_field_in_contact_form($tag) {
-    $orario7 = get_field('primo_orario_spettacolo_4_4');
-    if ($orario7) {
-        return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_4_4" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
-    } else {
-        return '';
-    }
-}
-function render_orario_11_2_field_in_contact_form($tag) {
-    $orario8 = get_field('secondo_orario_spettacolo_4_4');
-    if ($orario8) {
-        return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_4_4" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
-    } else {
-        return '';
-    }
-}
-function render_orario_12_2_field_in_contact_form($tag) {
-    $orario9 = get_field('terzo_orario_spettacolo_4_4');
-    if ($orario9) {
-        return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_4_4" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
-    } else {
-        return '';
-    }
-}
-
-/* DATA E ORARIO SPETTACOLO 5 - seconda scelta */
-function render_data_13_2_field_in_contact_form($tag) {
-    $data1 = get_field('prima_data_spettacolo_5_5');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="prima_data_spettacolo_5_5" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-
-
-	function render_data_14_2_field_in_contact_form($tag) {
-    $data1 = get_field('seconda_data_spettacolo_5_5');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="seconda_data_spettacolo_5_5" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-
-
-	function render_data_15_2_field_in_contact_form($tag) {
-    $data1 = get_field('terza_data_spettacolo_5_5');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="terza_data_spettacolo_5_5" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_orario_13_2_field_in_contact_form($tag) {
-    $orario7 = get_field('primo_orario_spettacolo_5_5');
-    if ($orario7) {
-        return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_5_5" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
-    } else {
-        return '';
-    }
-}
-function render_orario_14_2_field_in_contact_form($tag) {
-    $orario8 = get_field('secondo_orario_spettacolo_5_5');
-    if ($orario8) {
-        return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_5_5" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
-    } else {
-        return '';
-    }
-}
-function render_orario_15_2_field_in_contact_form($tag) {
-    $orario9 = get_field('terzo_orario_spettacolo_5_5');
-    if ($orario9) {
-        return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_5_5" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
-    } else {
-        return '';
-    }
-}
-
-
-/* DATA E ORARIO SPETTACOLO 6 - seconda scelta */
-function render_data_16_2_field_in_contact_form($tag) {
-    $data1 = get_field('prima_data_spettacolo_6_6');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="prima_data_spettacolo_6_6" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-
-
-	function render_data_17_2_field_in_contact_form($tag) {
-    $data1 = get_field('seconda_data_spettacolo_6_6');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="seconda_data_spettacolo_6_6" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-
-
-	function render_data_18_2_field_in_contact_form($tag) {
-    $data1 = get_field('terza_data_spettacolo_6_6');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="terza_data_spettacolo_6_6" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_orario_16_2_field_in_contact_form($tag) {
-    $orario7 = get_field('primo_orario_spettacolo_6_6');
-    if ($orario7) {
-        return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_6_6" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
-    } else {
-        return '';
-    }
-}
-function render_orario_17_2_field_in_contact_form($tag) {
-    $orario8 = get_field('secondo_orario_spettacolo_6_6');
-    if ($orario8) {
-        return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_6_6" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
-    } else {
-        return '';
-    }
-}
-function render_orario_18_2_field_in_contact_form($tag) {
-    $orario9 = get_field('terzo_orario_spettacolo_6_6');
-    if ($orario9) {
-        return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_6_6" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
-    } else {
-        return '';
-    }
-}
-/* DATA E ORARIO SPETTACOLO 7 - seconda scelta */
-function render_data_19_2_field_in_contact_form($tag) {
-    $data1 = get_field('prima_data_spettacolo_7_7');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="prima_data_spettacolo_7_7" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-
-
-	function render_data_20_2_field_in_contact_form($tag) {
-    $data1 = get_field('seconda_data_spettacolo_7_7');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="seconda_data_spettacolo_7_7" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-
-
-	function render_data_21_2_field_in_contact_form($tag) {
-    $data1 = get_field('terza_data_spettacolo_7_7');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="terza_data_spettacolo_7_7" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_orario_19_2_field_in_contact_form($tag) {
-    $orario7 = get_field('primo_orario_spettacolo_7_7');
-    if ($orario7) {
-        return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_7_7" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
-    } else {
-        return '';
-    }
-}
-function render_orario_20_2_field_in_contact_form($tag) {
-    $orario8 = get_field('secondo_orario_spettacolo_7_7');
-    if ($orario8) {
-        return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_7_7" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
-    } else {
-        return '';
-    }
-}
-function render_orario_21_2_field_in_contact_form($tag) {
-    $orario9 = get_field('terzo_orario_spettacolo_7_7');
-    if ($orario9) {
-        return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_7_7" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
-    } else {
-        return '';
-    }
-}
-/* DATA E ORARIO SPETTACOLO 8 - seconda scelta */
-function render_data_22_2_field_in_contact_form($tag) {
-    $data1 = get_field('prima_data_spettacolo_8_8');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="prima_data_spettacolo_8_8" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-
-
-	function render_data_23_2_field_in_contact_form($tag) {
-    $data1 = get_field('seconda_data_spettacolo_8_8');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="seconda_data_spettacolo_8_8" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-
-
-	function render_data_24_2_field_in_contact_form($tag) {
-    $data1 = get_field('terza_data_spettacolo_8_8');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="terza_data_spettacolo_8_8" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_orario_22_2_field_in_contact_form($tag) {
-    $orario7 = get_field('primo_orario_spettacolo_8_8');
-    if ($orario7) {
-        return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_8_8" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
-    } else {
-        return '';
-    }
-}
-function render_orario_23_2_field_in_contact_form($tag) {
-    $orario8 = get_field('secondo_orario_spettacolo_8_8');
-    if ($orario8) {
-        return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_8_8" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
-    } else {
-        return '';
-    }
-}
-function render_orario_24_2_field_in_contact_form($tag) {
-    $orario9 = get_field('terzo_orario_spettacolo_8_8');
-    if ($orario9) {
-        return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_8_8" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
-    } else {
-        return '';
-    }
-}
-/* DATA E ORARIO SPETTACOLO 9 - seconda scelta */
-function render_data_25_2_field_in_contact_form($tag) {
-    $data1 = get_field('prima_data_spettacolo_9_9');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="prima_data_spettacolo_9_9" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-
-
-	function render_data_26_2_field_in_contact_form($tag) {
-    $data1 = get_field('seconda_data_spettacolo_9_9');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="seconda_data_spettacolo_9_9" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-
-
-	function render_data_27_2_field_in_contact_form($tag) {
-    $data1 = get_field('terza_data_spettacolo_9_9');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="terza_data_spettacolo_9_9" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_orario_25_2_field_in_contact_form($tag) {
-    $orario7 = get_field('primo_orario_spettacolo_9_9');
-    if ($orario7) {
-        return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_9_9" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
-    } else {
-        return '';
-    }
-}
-function render_orario_26_2_field_in_contact_form($tag) {
-    $orario8 = get_field('secondo_orario_spettacolo_9_9');
-    if ($orario8) {
-        return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_9_9" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
-    } else {
-        return '';
-    }
-}
-function render_orario_27_2_field_in_contact_form($tag) {
-    $orario9 = get_field('terzo_orario_spettacolo_9_9');
-    if ($orario9) {
-        return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_9_9" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
-    } else {
-        return '';
-    }
-}
-/* DATA E ORARIO SPETTACOLO 10 - seconda scelta */
-function render_data_28_2_field_in_contact_form($tag) {
-    $data1 = get_field('prima_data_spettacolo_10_10');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="prima_data_spettacolo_10_10" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-
-
-	function render_data_29_2_field_in_contact_form($tag) {
-    $data1 = get_field('seconda_data_spettacolo_10_10');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="seconda_data_spettacolo_10_10" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-
-
-	function render_data_30_2_field_in_contact_form($tag) {
-    $data1 = get_field('terza_data_spettacolo_10_10');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="terza_data_spettacolo_10_10" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_orario_28_2_field_in_contact_form($tag) {
-    $orario7 = get_field('primo_orario_spettacolo_10_10');
-    if ($orario7) {
-        return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_10_10" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
-    } else {
-        return '';
-    }
-}
-function render_orario_29_2_field_in_contact_form($tag) {
-    $orario8 = get_field('secondo_orario_spettacolo_10_10');
-    if ($orario8) {
-        return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_10_10" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
-    } else {
-        return '';
-    }
-}
-function render_orario_30_2_field_in_contact_form($tag) {
-    $orario9 = get_field('terzo_orario_spettacolo_10_10');
-    if ($orario9) {
-        return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_10_10" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
-    } else {
-        return '';
-    }
-}
-/* DATA E ORARIO SPETTACOLO 11 - seconda scelta */
-function render_data_31_2_field_in_contact_form($tag) {
-    $data1 = get_field('prima_data_spettacolo_11_11');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="prima_data_spettacolo_11_11" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-
-
-	function render_data_32_2_field_in_contact_form($tag) {
-    $data1 = get_field('seconda_data_spettacolo_11_11');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="seconda_data_spettacolo_11_11" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-
-
-	function render_data_33_2_field_in_contact_form($tag) {
-    $data1 = get_field('terza_data_spettacolo_11_11');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="terza_data_spettacolo_11_11" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_orario_31_2_field_in_contact_form($tag) {
-    $orario7 = get_field('primo_orario_spettacolo_11_11');
-    if ($orario7) {
-        return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_11_11" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
-    } else {
-        return '';
-    }
-}
-function render_orario_32_2_field_in_contact_form($tag) {
-    $orario8 = get_field('secondo_orario_spettacolo_11_11');
-    if ($orario8) {
-        return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_11_11" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
-    } else {
-        return '';
-    }
-}
-function render_orario_33_2_field_in_contact_form($tag) {
-    $orario9 = get_field('terzo_orario_spettacolo_11_11');
-    if ($orario9) {
-        return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_11_11" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
-    } else {
-        return '';
-    }
-}
-
-/* DATE E ORARI AGGIUNTIVI SECONDA SCELTA */
-
-/* spettacolo 1 */
-function render_d_4_1_2_field_in_contact_form($tag) {
-    $data1 = get_field('quarta_data_spettacolo_1_1');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="quarta_data_spettacolo_1_1" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_d_5_1_2_field_in_contact_form($tag) {
-    $data1 = get_field('quinta_data_spettacolo_1_1');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="quinta_data_spettacolo_1_1" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_d_6_1_2_field_in_contact_form($tag) {
-    $data1 = get_field('sesta_data_spettacolo_1_1');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="sesta_data_spettacolo_1_1" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_d_7_1_2_field_in_contact_form($tag) {
-    $data1 = get_field('settima_data_spettacolo_1_1');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="settima_data_spettacolo_1_1" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_d_8_1_2_field_in_contact_form($tag) {
-    $data1 = get_field('ottava_data_spettacolo_1_1');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="ottava_data_spettacolo_1_1" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_d_9_1_2_field_in_contact_form($tag) {
-    $data1 = get_field('nona_data_spettacolo_1_1');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="nona_data_spettacolo_1_1" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_d_10_1_2_field_in_contact_form($tag) {
-    $data1 = get_field('decima_data_spettacolo_1_1');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="decima_data_spettacolo_1_1" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_d_11_1_2_field_in_contact_form($tag) {
-    $data1 = get_field('undicesima_data_spettacolo_1_1');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="undicesima_data_spettacolo_1_1" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-
-/* spettacolo 2 */
-function render_d_4_2_2_field_in_contact_form($tag) {
-    $data1 = get_field('quarta_data_spettacolo_2_2');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="quarta_data_spettacolo_2_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_d_5_2_2_field_in_contact_form($tag) {
-    $data1 = get_field('quinta_data_spettacolo_2_2');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="quinta_data_spettacolo_2_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_d_6_2_2_field_in_contact_form($tag) {
-    $data1 = get_field('sesta_data_spettacolo_2_2');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="sesta_data_spettacolo_2_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_d_7_2_2_field_in_contact_form($tag) {
-    $data1 = get_field('settima_data_spettacolo_2_2');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="settima_data_spettacolo_2_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_d_8_2_2_field_in_contact_form($tag) {
-    $data1 = get_field('ottava_data_spettacolo_2_2');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="ottava_data_spettacolo_2_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_d_9_2_2_field_in_contact_form($tag) {
-    $data1 = get_field('nona_data_spettacolo_2_2');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="nona_data_spettacolo_2_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_d_10_2_2_field_in_contact_form($tag) {
-    $data1 = get_field('decima_data_spettacolo_2_2');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="decima_data_spettacolo_2_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_d_11_2_2_field_in_contact_form($tag) {
-    $data1 = get_field('undicesima_data_spettacolo_2_2');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="undicesima_data_spettacolo_2_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-/* spettacolo 3 */
-function render_d_4_3_2_field_in_contact_form($tag) {
-    $data1 = get_field('quarta_data_spettacolo_3_3');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="quarta_data_spettacolo_3_3" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_d_5_3_2_field_in_contact_form($tag) {
-    $data1 = get_field('quinta_data_spettacolo_3_3');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="quinta_data_spettacolo_3_3" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_d_6_3_2_field_in_contact_form($tag) {
-    $data1 = get_field('sesta_data_spettacolo_3_3');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="sesta_data_spettacolo_3_3" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_d_7_3_2_field_in_contact_form($tag) {
-    $data1 = get_field('settima_data_spettacolo_3_3');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="settima_data_spettacolo_3_3" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_d_8_3_2_field_in_contact_form($tag) {
-    $data1 = get_field('ottava_data_spettacolo_3_3');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="ottava_data_spettacolo_3_3" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_d_9_3_2_field_in_contact_form($tag) {
-    $data1 = get_field('nona_data_spettacolo_3_3');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="nona_data_spettacolo_3_3" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_d_10_3_2_field_in_contact_form($tag) {
-    $data1 = get_field('decima_data_spettacolo_3_3');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="decima_data_spettacolo_3_3" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_d_11_3_2_field_in_contact_form($tag) {
-    $data1 = get_field('undicesima_data_spettacolo_3_3');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="undicesima_data_spettacolo_3_3" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-
-/* spettacolo 4 */
-function render_d_4_4_2_field_in_contact_form($tag) {
-    $data1 = get_field('quarta_data_spettacolo_4_4');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="quarta_data_spettacolo_4_4" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_d_5_4_2_field_in_contact_form($tag) {
-    $data1 = get_field('quinta_data_spettacolo_4_4');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="quinta_data_spettacolo_4_4" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_d_6_4_2_field_in_contact_form($tag) {
-    $data1 = get_field('sesta_data_spettacolo_4_4');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="sesta_data_spettacolo_4_4" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_d_7_4_2_field_in_contact_form($tag) {
-    $data1 = get_field('settima_data_spettacolo_4_4');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="settima_data_spettacolo_4_4" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_d_8_4_2_field_in_contact_form($tag) {
-    $data1 = get_field('ottava_data_spettacolo_4_4');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="ottava_data_spettacolo_4_4" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_d_9_4_2_field_in_contact_form($tag) {
-    $data1 = get_field('nona_data_spettacolo_4_4');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="nona_data_spettacolo_4_4" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_d_10_4_2_field_in_contact_form($tag) {
-    $data1 = get_field('decima_data_spettacolo_4_4');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="decima_data_spettacolo_4_4" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-function render_d_11_4_2_field_in_contact_form($tag) {
-    $data1 = get_field('undicesima_data_spettacolo_4_4');
-    if ($data1) {
-        return '<input id="data_3_2_field" type="checkbox" name="undicesima_data_spettacolo_4_4" value="' . esc_attr($data1) . '">' . esc_html($data1);
-    } else {
-        return '';
-    }
-}
-/* 4 orario aggiuntivo seconda scelta */
-
-    function render_o_4_1_2_field_in_contact_form($tag) {
-    $orario9 = get_field('quarto_orario_spettacolo_1_1');
-    if ($orario9) {
-        return '<input id="o_4_1_2_field" type="checkbox" name="quarto_orario_spettacolo_1_1" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
-    } else {
-        return '';
-    }
-}
-function render_o_4_2_2_field_in_contact_form($tag) {
-    $orario9 = get_field('quarto_orario_spettacolo_2_2');
-    if ($orario9) {
-        return '<input id="o_4_1_2_field" type="checkbox" name="quarto_orario_spettacolo_2_2" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
-    } else {
-        return '';
-    }
-}
+//     $output .= '</select>';
+
+//     return $output;
+// }
+
+
+// function render_orario_1_2_field_in_contact_form($tag) {
+//     $orario1 = get_field('orario_spettacolo_1_2');
+//     if ($orario1) {
+//         return '<input id="orario_1_field" type="checkbox" name="orario_spettacolo_1_2" value="' . esc_attr($orario1) . '">' . esc_html($orario1);
+//     } else {
+//         return '';
+//     }
+// }
+
+// function render_orario_2_2_field_in_contact_form($tag) {
+//     $orario2 = get_field('secondo_orario_spettacolo_1_2');
+//     if ($orario2) {
+//         return '<input id="orario_2_field" type="checkbox" name="secondo_orario_spettacolo_1_2" value="' . esc_attr($orario2) . '">' . esc_html($orario2);
+//     } else {
+//         return '';
+//     }
+// }
+
+// function render_orario_3_2_field_in_contact_form($tag) {
+//     $orario3 = get_field('terzo_orario_spettacolo_1_2');
+//     if ($orario3) {
+//         return '<input id="orario_3_field" type="checkbox" name="terzo_orario_spettacolo_1_2" value="' . esc_attr($orario3) . '">' . esc_html($orario3);
+//     } else {
+//         return '';
+//     }
+// }
+
+
+// function render_orario_4_2_field_in_contact_form($tag) {
+//     $orario4 = get_field('primo_orario_spettacolo_2_2');
+//     if ($orario4) {
+//         return '<input id="orario_4_field" type="checkbox" name="primo_orario_spettacolo_2_2" value="' . esc_attr($orario4) . '">' . esc_html($orario4);
+//     } else {
+//         return '';
+//     }
+// }
+
+// function render_orario_5_2_field_in_contact_form($tag) {
+//     $orario5 = get_field('secondo_orario_spettacolo_2_2');
+//     if ($orario5) {
+//         return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_2_2" value="' . esc_attr($orario5) . '">' . esc_html($orario5);
+//     } else {
+//         return '';
+//     }
+// }
+
+// function render_orario_6_2_field_in_contact_form($tag) {
+//     $orario6 = get_field('terzo_orario_spettacolo_2_2');
+//     if ($orario6) {
+//         return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_2_2" value="' . esc_attr($orario6) . '">' . esc_html($orario6);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_7_2_field_in_contact_form($tag) {
+//     $orario7 = get_field('primo_orario_spettacolo_3_2');
+//     if ($orario7) {
+//         return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_3_2" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_8_2_field_in_contact_form($tag) {
+//     $orario8 = get_field('secondo_orario_spettacolo_3_2');
+//     if ($orario8) {
+//         return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_3_2" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_9_2_field_in_contact_form($tag) {
+//     $orario9 = get_field('terzo_orario_spettacolo_3_2');
+//     if ($orario9) {
+//         return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_3_2" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+//     } else {
+//         return '';
+//     }
+// }
+
+// 	function render_data_1_2_field_in_contact_form($tag) {
+//     $data1 = get_field('prima_data_spettacolo_1_2');
+//     if ($data1) {
+//         return '<input id="data_1_2_field" type="checkbox" name="prima_data_spettacolo_1_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+
+// 	function render_data_2_2_field_in_contact_form($tag) {
+//     $data1 = get_field('seconda_data_spettacolo_1_2');
+//     if ($data1) {
+//         return '<input id="data_2_2_field" type="checkbox" name="seconda_data_spettacolo_1_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+
+// 	function render_data_3_2_field_in_contact_form($tag) {
+//     $data1 = get_field('terza_data_spettacolo_1_2');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="terza_data_spettacolo_1_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+
+// 	function render_data_4_2_field_in_contact_form($tag) {
+//     $data1 = get_field('prima_data_spettacolo_2_2');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="prima_data_spettacolo_2_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+
+// 	function render_data_5_2_field_in_contact_form($tag) {
+//     $data1 = get_field('seconda_data_spettacolo_2_2');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="seconda_data_spettacolo_2_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+
+
+// 	function render_data_6_2_field_in_contact_form($tag) {
+//     $data1 = get_field('terza_data_spettacolo_2_2');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="terza_data_spettacolo_2_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+
+
+// 	function render_data_7_2_field_in_contact_form($tag) {
+//     $data1 = get_field('prima_data_spettacolo_3_2');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="prima_data_spettacolo_3_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+
+
+// 	function render_data_8_2_field_in_contact_form($tag) {
+//     $data1 = get_field('seconda_data_spettacolo_3_2');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="seconda_data_spettacolo_3_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+
+
+// 	function render_data_9_2_field_in_contact_form($tag) {
+//     $data1 = get_field('terza_data_spettacolo_3_2');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="terza_data_spettacolo_3_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+
+
+// /* DATA E ORARIO SPETTACOLO 4 - seconda scelta */
+// function render_data_10_2_field_in_contact_form($tag) {
+//     $data1 = get_field('prima_data_spettacolo_4_4');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="prima_data_spettacolo_4_4" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+
+
+// 	function render_data_11_2_field_in_contact_form($tag) {
+//     $data1 = get_field('seconda_data_spettacolo_4_4');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="seconda_data_spettacolo_4_4" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+
+
+// 	function render_data_12_2_field_in_contact_form($tag) {
+//     $data1 = get_field('terza_data_spettacolo_4_4');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="terza_data_spettacolo_4_4" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_10_2_field_in_contact_form($tag) {
+//     $orario7 = get_field('primo_orario_spettacolo_4_4');
+//     if ($orario7) {
+//         return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_4_4" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_11_2_field_in_contact_form($tag) {
+//     $orario8 = get_field('secondo_orario_spettacolo_4_4');
+//     if ($orario8) {
+//         return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_4_4" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_12_2_field_in_contact_form($tag) {
+//     $orario9 = get_field('terzo_orario_spettacolo_4_4');
+//     if ($orario9) {
+//         return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_4_4" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+//     } else {
+//         return '';
+//     }
+// }
+
+// /* DATA E ORARIO SPETTACOLO 5 - seconda scelta */
+// function render_data_13_2_field_in_contact_form($tag) {
+//     $data1 = get_field('prima_data_spettacolo_5_5');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="prima_data_spettacolo_5_5" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+
+
+// 	function render_data_14_2_field_in_contact_form($tag) {
+//     $data1 = get_field('seconda_data_spettacolo_5_5');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="seconda_data_spettacolo_5_5" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+
+
+// 	function render_data_15_2_field_in_contact_form($tag) {
+//     $data1 = get_field('terza_data_spettacolo_5_5');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="terza_data_spettacolo_5_5" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_13_2_field_in_contact_form($tag) {
+//     $orario7 = get_field('primo_orario_spettacolo_5_5');
+//     if ($orario7) {
+//         return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_5_5" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_14_2_field_in_contact_form($tag) {
+//     $orario8 = get_field('secondo_orario_spettacolo_5_5');
+//     if ($orario8) {
+//         return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_5_5" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_15_2_field_in_contact_form($tag) {
+//     $orario9 = get_field('terzo_orario_spettacolo_5_5');
+//     if ($orario9) {
+//         return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_5_5" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+//     } else {
+//         return '';
+//     }
+// }
+
+
+// /* DATA E ORARIO SPETTACOLO 6 - seconda scelta */
+// function render_data_16_2_field_in_contact_form($tag) {
+//     $data1 = get_field('prima_data_spettacolo_6_6');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="prima_data_spettacolo_6_6" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+
+
+// 	function render_data_17_2_field_in_contact_form($tag) {
+//     $data1 = get_field('seconda_data_spettacolo_6_6');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="seconda_data_spettacolo_6_6" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+
+
+// 	function render_data_18_2_field_in_contact_form($tag) {
+//     $data1 = get_field('terza_data_spettacolo_6_6');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="terza_data_spettacolo_6_6" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_16_2_field_in_contact_form($tag) {
+//     $orario7 = get_field('primo_orario_spettacolo_6_6');
+//     if ($orario7) {
+//         return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_6_6" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_17_2_field_in_contact_form($tag) {
+//     $orario8 = get_field('secondo_orario_spettacolo_6_6');
+//     if ($orario8) {
+//         return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_6_6" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_18_2_field_in_contact_form($tag) {
+//     $orario9 = get_field('terzo_orario_spettacolo_6_6');
+//     if ($orario9) {
+//         return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_6_6" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+//     } else {
+//         return '';
+//     }
+// }
+// /* DATA E ORARIO SPETTACOLO 7 - seconda scelta */
+// function render_data_19_2_field_in_contact_form($tag) {
+//     $data1 = get_field('prima_data_spettacolo_7_7');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="prima_data_spettacolo_7_7" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+
+
+// 	function render_data_20_2_field_in_contact_form($tag) {
+//     $data1 = get_field('seconda_data_spettacolo_7_7');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="seconda_data_spettacolo_7_7" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+
+
+// 	function render_data_21_2_field_in_contact_form($tag) {
+//     $data1 = get_field('terza_data_spettacolo_7_7');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="terza_data_spettacolo_7_7" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_19_2_field_in_contact_form($tag) {
+//     $orario7 = get_field('primo_orario_spettacolo_7_7');
+//     if ($orario7) {
+//         return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_7_7" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_20_2_field_in_contact_form($tag) {
+//     $orario8 = get_field('secondo_orario_spettacolo_7_7');
+//     if ($orario8) {
+//         return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_7_7" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_21_2_field_in_contact_form($tag) {
+//     $orario9 = get_field('terzo_orario_spettacolo_7_7');
+//     if ($orario9) {
+//         return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_7_7" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+//     } else {
+//         return '';
+//     }
+// }
+// /* DATA E ORARIO SPETTACOLO 8 - seconda scelta */
+// function render_data_22_2_field_in_contact_form($tag) {
+//     $data1 = get_field('prima_data_spettacolo_8_8');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="prima_data_spettacolo_8_8" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+
+
+// 	function render_data_23_2_field_in_contact_form($tag) {
+//     $data1 = get_field('seconda_data_spettacolo_8_8');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="seconda_data_spettacolo_8_8" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+
+
+// 	function render_data_24_2_field_in_contact_form($tag) {
+//     $data1 = get_field('terza_data_spettacolo_8_8');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="terza_data_spettacolo_8_8" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_22_2_field_in_contact_form($tag) {
+//     $orario7 = get_field('primo_orario_spettacolo_8_8');
+//     if ($orario7) {
+//         return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_8_8" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_23_2_field_in_contact_form($tag) {
+//     $orario8 = get_field('secondo_orario_spettacolo_8_8');
+//     if ($orario8) {
+//         return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_8_8" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_24_2_field_in_contact_form($tag) {
+//     $orario9 = get_field('terzo_orario_spettacolo_8_8');
+//     if ($orario9) {
+//         return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_8_8" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+//     } else {
+//         return '';
+//     }
+// }
+// /* DATA E ORARIO SPETTACOLO 9 - seconda scelta */
+// function render_data_25_2_field_in_contact_form($tag) {
+//     $data1 = get_field('prima_data_spettacolo_9_9');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="prima_data_spettacolo_9_9" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+
+
+// 	function render_data_26_2_field_in_contact_form($tag) {
+//     $data1 = get_field('seconda_data_spettacolo_9_9');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="seconda_data_spettacolo_9_9" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+
+
+// 	function render_data_27_2_field_in_contact_form($tag) {
+//     $data1 = get_field('terza_data_spettacolo_9_9');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="terza_data_spettacolo_9_9" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_25_2_field_in_contact_form($tag) {
+//     $orario7 = get_field('primo_orario_spettacolo_9_9');
+//     if ($orario7) {
+//         return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_9_9" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_26_2_field_in_contact_form($tag) {
+//     $orario8 = get_field('secondo_orario_spettacolo_9_9');
+//     if ($orario8) {
+//         return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_9_9" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_27_2_field_in_contact_form($tag) {
+//     $orario9 = get_field('terzo_orario_spettacolo_9_9');
+//     if ($orario9) {
+//         return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_9_9" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+//     } else {
+//         return '';
+//     }
+// }
+// /* DATA E ORARIO SPETTACOLO 10 - seconda scelta */
+// function render_data_28_2_field_in_contact_form($tag) {
+//     $data1 = get_field('prima_data_spettacolo_10_10');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="prima_data_spettacolo_10_10" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+
+
+// 	function render_data_29_2_field_in_contact_form($tag) {
+//     $data1 = get_field('seconda_data_spettacolo_10_10');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="seconda_data_spettacolo_10_10" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+
+
+// 	function render_data_30_2_field_in_contact_form($tag) {
+//     $data1 = get_field('terza_data_spettacolo_10_10');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="terza_data_spettacolo_10_10" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_28_2_field_in_contact_form($tag) {
+//     $orario7 = get_field('primo_orario_spettacolo_10_10');
+//     if ($orario7) {
+//         return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_10_10" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_29_2_field_in_contact_form($tag) {
+//     $orario8 = get_field('secondo_orario_spettacolo_10_10');
+//     if ($orario8) {
+//         return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_10_10" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_30_2_field_in_contact_form($tag) {
+//     $orario9 = get_field('terzo_orario_spettacolo_10_10');
+//     if ($orario9) {
+//         return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_10_10" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+//     } else {
+//         return '';
+//     }
+// }
+// /* DATA E ORARIO SPETTACOLO 11 - seconda scelta */
+// function render_data_31_2_field_in_contact_form($tag) {
+//     $data1 = get_field('prima_data_spettacolo_11_11');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="prima_data_spettacolo_11_11" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+
+
+// 	function render_data_32_2_field_in_contact_form($tag) {
+//     $data1 = get_field('seconda_data_spettacolo_11_11');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="seconda_data_spettacolo_11_11" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+
+
+// 	function render_data_33_2_field_in_contact_form($tag) {
+//     $data1 = get_field('terza_data_spettacolo_11_11');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="terza_data_spettacolo_11_11" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_31_2_field_in_contact_form($tag) {
+//     $orario7 = get_field('primo_orario_spettacolo_11_11');
+//     if ($orario7) {
+//         return '<input id="orario_5_field" type="checkbox" name="primo_orario_spettacolo_11_11" value="' . esc_attr($orario7) . '">' . esc_html($orario7);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_32_2_field_in_contact_form($tag) {
+//     $orario8 = get_field('secondo_orario_spettacolo_11_11');
+//     if ($orario8) {
+//         return '<input id="orario_5_field" type="checkbox" name="secondo_orario_spettacolo_11_11" value="' . esc_attr($orario8) . '">' . esc_html($orario8);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_orario_33_2_field_in_contact_form($tag) {
+//     $orario9 = get_field('terzo_orario_spettacolo_11_11');
+//     if ($orario9) {
+//         return '<input id="orario_5_field" type="checkbox" name="terzo_orario_spettacolo_11_11" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+//     } else {
+//         return '';
+//     }
+// }
+
+// /* DATE E ORARI AGGIUNTIVI SECONDA SCELTA */
+
+// /* spettacolo 1 */
+// function render_d_4_1_2_field_in_contact_form($tag) {
+//     $data1 = get_field('quarta_data_spettacolo_1_1');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="quarta_data_spettacolo_1_1" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_5_1_2_field_in_contact_form($tag) {
+//     $data1 = get_field('quinta_data_spettacolo_1_1');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="quinta_data_spettacolo_1_1" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_6_1_2_field_in_contact_form($tag) {
+//     $data1 = get_field('sesta_data_spettacolo_1_1');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="sesta_data_spettacolo_1_1" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_7_1_2_field_in_contact_form($tag) {
+//     $data1 = get_field('settima_data_spettacolo_1_1');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="settima_data_spettacolo_1_1" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_8_1_2_field_in_contact_form($tag) {
+//     $data1 = get_field('ottava_data_spettacolo_1_1');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="ottava_data_spettacolo_1_1" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_9_1_2_field_in_contact_form($tag) {
+//     $data1 = get_field('nona_data_spettacolo_1_1');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="nona_data_spettacolo_1_1" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_10_1_2_field_in_contact_form($tag) {
+//     $data1 = get_field('decima_data_spettacolo_1_1');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="decima_data_spettacolo_1_1" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_11_1_2_field_in_contact_form($tag) {
+//     $data1 = get_field('undicesima_data_spettacolo_1_1');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="undicesima_data_spettacolo_1_1" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+
+// /* spettacolo 2 */
+// function render_d_4_2_2_field_in_contact_form($tag) {
+//     $data1 = get_field('quarta_data_spettacolo_2_2');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="quarta_data_spettacolo_2_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_5_2_2_field_in_contact_form($tag) {
+//     $data1 = get_field('quinta_data_spettacolo_2_2');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="quinta_data_spettacolo_2_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_6_2_2_field_in_contact_form($tag) {
+//     $data1 = get_field('sesta_data_spettacolo_2_2');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="sesta_data_spettacolo_2_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_7_2_2_field_in_contact_form($tag) {
+//     $data1 = get_field('settima_data_spettacolo_2_2');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="settima_data_spettacolo_2_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_8_2_2_field_in_contact_form($tag) {
+//     $data1 = get_field('ottava_data_spettacolo_2_2');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="ottava_data_spettacolo_2_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_9_2_2_field_in_contact_form($tag) {
+//     $data1 = get_field('nona_data_spettacolo_2_2');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="nona_data_spettacolo_2_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_10_2_2_field_in_contact_form($tag) {
+//     $data1 = get_field('decima_data_spettacolo_2_2');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="decima_data_spettacolo_2_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_11_2_2_field_in_contact_form($tag) {
+//     $data1 = get_field('undicesima_data_spettacolo_2_2');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="undicesima_data_spettacolo_2_2" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// /* spettacolo 3 */
+// function render_d_4_3_2_field_in_contact_form($tag) {
+//     $data1 = get_field('quarta_data_spettacolo_3_3');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="quarta_data_spettacolo_3_3" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_5_3_2_field_in_contact_form($tag) {
+//     $data1 = get_field('quinta_data_spettacolo_3_3');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="quinta_data_spettacolo_3_3" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_6_3_2_field_in_contact_form($tag) {
+//     $data1 = get_field('sesta_data_spettacolo_3_3');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="sesta_data_spettacolo_3_3" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_7_3_2_field_in_contact_form($tag) {
+//     $data1 = get_field('settima_data_spettacolo_3_3');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="settima_data_spettacolo_3_3" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_8_3_2_field_in_contact_form($tag) {
+//     $data1 = get_field('ottava_data_spettacolo_3_3');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="ottava_data_spettacolo_3_3" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_9_3_2_field_in_contact_form($tag) {
+//     $data1 = get_field('nona_data_spettacolo_3_3');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="nona_data_spettacolo_3_3" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_10_3_2_field_in_contact_form($tag) {
+//     $data1 = get_field('decima_data_spettacolo_3_3');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="decima_data_spettacolo_3_3" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_11_3_2_field_in_contact_form($tag) {
+//     $data1 = get_field('undicesima_data_spettacolo_3_3');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="undicesima_data_spettacolo_3_3" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+
+// /* spettacolo 4 */
+// function render_d_4_4_2_field_in_contact_form($tag) {
+//     $data1 = get_field('quarta_data_spettacolo_4_4');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="quarta_data_spettacolo_4_4" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_5_4_2_field_in_contact_form($tag) {
+//     $data1 = get_field('quinta_data_spettacolo_4_4');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="quinta_data_spettacolo_4_4" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_6_4_2_field_in_contact_form($tag) {
+//     $data1 = get_field('sesta_data_spettacolo_4_4');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="sesta_data_spettacolo_4_4" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_7_4_2_field_in_contact_form($tag) {
+//     $data1 = get_field('settima_data_spettacolo_4_4');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="settima_data_spettacolo_4_4" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_8_4_2_field_in_contact_form($tag) {
+//     $data1 = get_field('ottava_data_spettacolo_4_4');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="ottava_data_spettacolo_4_4" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_9_4_2_field_in_contact_form($tag) {
+//     $data1 = get_field('nona_data_spettacolo_4_4');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="nona_data_spettacolo_4_4" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_10_4_2_field_in_contact_form($tag) {
+//     $data1 = get_field('decima_data_spettacolo_4_4');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="decima_data_spettacolo_4_4" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_d_11_4_2_field_in_contact_form($tag) {
+//     $data1 = get_field('undicesima_data_spettacolo_4_4');
+//     if ($data1) {
+//         return '<input id="data_3_2_field" type="checkbox" name="undicesima_data_spettacolo_4_4" value="' . esc_attr($data1) . '">' . esc_html($data1);
+//     } else {
+//         return '';
+//     }
+// }
+// /* 4 orario aggiuntivo seconda scelta */
+
+//     function render_o_4_1_2_field_in_contact_form($tag) {
+//     $orario9 = get_field('quarto_orario_spettacolo_1_1');
+//     if ($orario9) {
+//         return '<input id="o_4_1_2_field" type="checkbox" name="quarto_orario_spettacolo_1_1" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_o_4_2_2_field_in_contact_form($tag) {
+//     $orario9 = get_field('quarto_orario_spettacolo_2_2');
+//     if ($orario9) {
+//         return '<input id="o_4_1_2_field" type="checkbox" name="quarto_orario_spettacolo_2_2" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+//     } else {
+//         return '';
+//     }
+// }
     
-function render_o_4_3_2_field_in_contact_form($tag) {
-    $orario9 = get_field('quarto_orario_spettacolo_3_3');
-    if ($orario9) {
-        return '<input id="o_4_1_2_field" type="checkbox" name="quarto_orario_spettacolo_3_3" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
-    } else {
-        return '';
-    }
-}
+// function render_o_4_3_2_field_in_contact_form($tag) {
+//     $orario9 = get_field('quarto_orario_spettacolo_3_3');
+//     if ($orario9) {
+//         return '<input id="o_4_1_2_field" type="checkbox" name="quarto_orario_spettacolo_3_3" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+//     } else {
+//         return '';
+//     }
+// }
 
-function render_o_4_4_2_field_in_contact_form($tag) {
-    $orario9 = get_field('quarto_orario_spettacolo_4_4');
-    if ($orario9) {
-        return '<input id="o_4_1_2_field" type="checkbox" name="quarto_orario_spettacolo_4_4" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
-    } else {
-        return '';
-    }
-}
+// function render_o_4_4_2_field_in_contact_form($tag) {
+//     $orario9 = get_field('quarto_orario_spettacolo_4_4');
+//     if ($orario9) {
+//         return '<input id="o_4_1_2_field" type="checkbox" name="quarto_orario_spettacolo_4_4" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+//     } else {
+//         return '';
+//     }
+// }
     
-function render_o_4_5_2_field_in_contact_form($tag) {
-    $orario9 = get_field('quarto_orario_spettacolo_5_5');
-    if ($orario9) {
-        return '<input id="o_4_5_2_field" type="checkbox" name="quarto_orario_spettacolo_5_5" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
-    } else {
-        return '';
-    }
-}
+// function render_o_4_5_2_field_in_contact_form($tag) {
+//     $orario9 = get_field('quarto_orario_spettacolo_5_5');
+//     if ($orario9) {
+//         return '<input id="o_4_5_2_field" type="checkbox" name="quarto_orario_spettacolo_5_5" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+//     } else {
+//         return '';
+//     }
+// }
 
-function render_o_4_6_2_field_in_contact_form($tag) {
-    $orario9 = get_field('quarto_orario_spettacolo_6_6');
-    if ($orario9) {
-        return '<input id="o_4_6_2_field" type="checkbox" name="quarto_orario_spettacolo_6_6" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
-    } else {
-        return '';
-    }
-}
+// function render_o_4_6_2_field_in_contact_form($tag) {
+//     $orario9 = get_field('quarto_orario_spettacolo_6_6');
+//     if ($orario9) {
+//         return '<input id="o_4_6_2_field" type="checkbox" name="quarto_orario_spettacolo_6_6" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+//     } else {
+//         return '';
+//     }
+// }
 
-function render_o_4_7_2_field_in_contact_form($tag) {
-    $orario9 = get_field('quarto_orario_spettacolo_7_7');
-    if ($orario9) {
-        return '<input id="o_4_7_2_field" type="checkbox" name="quarto_orario_spettacolo_7_7" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
-    } else {
-        return '';
-    }
-}
+// function render_o_4_7_2_field_in_contact_form($tag) {
+//     $orario9 = get_field('quarto_orario_spettacolo_7_7');
+//     if ($orario9) {
+//         return '<input id="o_4_7_2_field" type="checkbox" name="quarto_orario_spettacolo_7_7" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+//     } else {
+//         return '';
+//     }
+// }
 
-function render_o_4_8_2_field_in_contact_form($tag) {
-    $orario9 = get_field('quarto_orario_spettacolo_8_8');
-    if ($orario9) {
-        return '<input id="o_4_8_2_field" type="checkbox" name="quarto_orario_spettacolo_8_8" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
-    } else {
-        return '';
-    }
-}
-function render_o_4_9_2_field_in_contact_form($tag) {
-    $orario9 = get_field('quarto_orario_spettacolo_9_9');
-    if ($orario9) {
-        return '<input id="o_4_9_2_field" type="checkbox" name="quarto_orario_spettacolo_9_9" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
-    } else {
-        return '';
-    }
-}
+// function render_o_4_8_2_field_in_contact_form($tag) {
+//     $orario9 = get_field('quarto_orario_spettacolo_8_8');
+//     if ($orario9) {
+//         return '<input id="o_4_8_2_field" type="checkbox" name="quarto_orario_spettacolo_8_8" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+//     } else {
+//         return '';
+//     }
+// }
+// function render_o_4_9_2_field_in_contact_form($tag) {
+//     $orario9 = get_field('quarto_orario_spettacolo_9_9');
+//     if ($orario9) {
+//         return '<input id="o_4_9_2_field" type="checkbox" name="quarto_orario_spettacolo_9_9" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+//     } else {
+//         return '';
+//     }
+// }
 
-function render_o_4_10_2_field_in_contact_form($tag) {
-    $orario9 = get_field('quarto_orario_spettacolo_10_10');
-    if ($orario9) {
-        return '<input id="o_4_10_2_field" type="checkbox" name="quarto_orario_spettacolo_10_10" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
-    } else {
-        return '';
-    }
-}
+// function render_o_4_10_2_field_in_contact_form($tag) {
+//     $orario9 = get_field('quarto_orario_spettacolo_10_10');
+//     if ($orario9) {
+//         return '<input id="o_4_10_2_field" type="checkbox" name="quarto_orario_spettacolo_10_10" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+//     } else {
+//         return '';
+//     }
+// }
 
-function render_o_4_11_2_field_in_contact_form($tag) {
-    $orario9 = get_field('quarto_orario_spettacolo_11_11');
-    if ($orario9) {
-        return '<input id="o_4_11_2_field" type="checkbox" name="quarto_orario_spettacolo_11_11" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
-    } else {
-        return '';
-    }
+// function render_o_4_11_2_field_in_contact_form($tag) {
+//     $orario9 = get_field('quarto_orario_spettacolo_11_11');
+//     if ($orario9) {
+//         return '<input id="o_4_11_2_field" type="checkbox" name="quarto_orario_spettacolo_11_11" value="' . esc_attr($orario9) . '">' . esc_html($orario9);
+//     } else {
+//         return '';
+//     }
 }
 
     

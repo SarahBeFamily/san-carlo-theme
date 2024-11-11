@@ -5,6 +5,12 @@ body:not(.woocommerce-cart, .mio-account, .my-account) {
 	}
 }
 
+.wm-100 {
+	@include respond-to($max-tablet) {
+		flex-basis: 100%;
+	}
+}
+
 .woocommerce {
 	@include respond-to($phone-plus) {
 		padding-top: 18%;

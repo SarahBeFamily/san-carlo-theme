@@ -32,23 +32,52 @@ $totalPrice     = 0;
 $totalQty       = 0;
 $tickets_array = array();
 $tickets_name_array = array();
-if (is_array($transaction_ids) && !empty($transaction_ids)) {
-	foreach($transaction_ids as $transaction_ids_key => $transaction_ids_value){
-		$ticketName = $transaction_ids_value['ticketName'];
-		$zoneId = $transaction_ids_key;
-		$zoneName = $transaction_ids_value['zoneName'];
-		$seatObject = $transaction_ids_value['seatObject'];
+$seatObject = array();
+// echo "<pre>";
+// print_r($transaction_ids);
+// echo "</pre>";
 
-		$tickets_name_array[] = $ticketName;
-		$tickets_array[$ticketName][] = array(
-			'zoneId' => $transaction_ids_key,
-			'zoneName' => $zoneName,
-			'seatObject' => $seatObject,
-		);
-	}
+if (is_array($transaction_ids) && !empty($transaction_ids)) {
+    foreach($transaction_ids as $transaction_ids_key => $transaction_ids_value){
+        $zoneId = $transaction_ids_key;
+        if( ! isset( $transaction_ids_value[ 'subscription_seat' ] ) ) {
+            $ticketName = $transaction_ids_value['ticketName'];
+            $zoneName = $transaction_ids_value['zoneName'];
+            $seatObject = $transaction_ids_value['seatObject'];
+
+            if(!empty($ticketName)){
+                $tickets_name_array[] = $ticketName;
+            }
+            $tickets_array[$ticketName][] = array(
+                    'zoneId' => $transaction_ids_key,
+                    'zoneName' => $zoneName,
+                    'seatObject' => $seatObject,
+            );
+        } else {
+            foreach ( $transaction_ids_value[ 'subscription_seat' ] as $subscription_seat_key => $subscription_seat_value ) {
+                $ticketName     = $subscription_seat_value[ 'ticketName' ];
+                $zoneName       = $subscription_seat_value[ 'zoneName' ];
+                $seatObject     = $subscription_seat_value[ 'seatObject' ];
+                $subscription   = $subscription_seat_value[ 'subscription' ];
+                $transaction_id = $subscription_seat_value[ 'transaction_id' ];
+
+                if(!empty($ticketName)){
+                    $tickets_name_array[] = $ticketName;
+                }
+                $tickets_array[$ticketName][] = array(
+                        'zoneId' => $transaction_ids_key,
+                        'zoneName' => $zoneName,
+                        'seatObject' => $seatObject,
+                );
+            }
+        }     
+    }
 }
 $tickets_name_list = implode(",",$tickets_name_array);
 
+// echo "<pre>";
+// print_r($tickets_array);
+// echo "</pre>";
 @endphp
 <div class="sezione">
 
@@ -77,35 +106,40 @@ $tickets_name_list = implode(",",$tickets_name_array);
 				</td>
 			</tr>
 
-            <?php
-                foreach($tickets_array as $tickets_array_key => $tickets_array_value){
-                    foreach ( $tickets_array_value as $tickets_array_value_k => $tickets_array_value_v ) {
-                        $zoneName   = $tickets_array_value_v[ 'zoneName' ];
-                        if(!empty($seatObject)){
-                            if( array_key_first( $seatObject ) == '0' ) {
-                                $seatObject_new = $seatObject;
-                            } else {
-                                $seatObject_new = array($seatObject);            
-                            }
-                        }
-                        foreach ( $seatObject_new as $seatObject_key => $seatObject_value ) {
-                            $seat_desc      = $seatObject_value[ 'description' ];
-                            $seat_reduction = $seatObject_value[ 'reduction' ];
-                            $reduction_name = $seat_reduction[ 'description' ];
-                            $ticket_string = trim($zoneName).' | '.trim($seat_desc).' ('.trim($reduction_name).') ';
-                            ?>
-                                <tr>
-									<td style="padding-bottom: 0;">
-										<img src="@asset('images/ticket.png')" alt="Biglietto" width="24" height="24" class="icona"> 
-										<!--[if (gte mso 9)|(IE)]><span style="color: white">s</span><![endif]-->
-										<span>{{ $ticket_string }}</span>
-									</td>
-								</tr>
-                            <?php
-                        }
-                    }
-                }
-            ?>
+            
+                @foreach($tickets_array as $ticketName => $ticketArray)
+                    @foreach ( $ticketArray as $ticketArray_key => $ticketArray_value )
+                        @set($zoneName, $ticketArray_value[ 'zoneName' ])
+						@set($ticketSeatObject, $ticketArray_value[ 'seatObject' ])
+						@set($seatObject_new, [])
+
+                        @if(is_array($ticketSeatObject) && !empty($ticketSeatObject))
+                            @if( array_key_first( $ticketSeatObject ) == '0' )
+                                @set($seatObject_new, $ticketSeatObject)
+                            @else
+                                @set($seatObject_new, array($ticketSeatObject))            
+                            @endif
+                        @endif
+                        
+						@if(!empty($seatObject_new))
+						@foreach ( $seatObject_new as $seatObject_key => $seatObject_value )
+                            @set($seat_desc, 	  $seatObject_value[ 'description' ])
+                            @set($reduction_name, $seatObject_value[ 'reduction' ][ 'description' ])
+							@set($ticket_string , trim($seat_desc).' ('.trim($reduction_name).') ')
+                            
+                            <tr>
+								<td style="padding-bottom: 0;">
+									<img src="@asset('images/ticket.png')" alt="Biglietto" width="24" height="24" class="icona"> 
+									<!--[if (gte mso 9)|(IE)]><span style="color: white">s</span><![endif]-->
+									<span>{{ $ticket_string }}</span>
+								</td>
+							</tr>
+                            
+                        @endforeach
+						@endif
+
+                    @endforeach
+                @endforeach
                 
 		</tbody>
 	</table>
