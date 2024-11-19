@@ -152,9 +152,140 @@ add_action( 'save_post', 'save_spettacoli_meta' );
 // add_action( 'woocommerce_admin_order_data_after_order_details', 'custom_woocommerce_admin_order_data_after_order_details', 10, 1 );
 
 function custom_woocommerce_admin_order_data_after_order_details( $order ){
-    // Order meta data
-    $ordermeta = get_post_meta( $order->get_id() );
+    $orderdata = $order->get_data();
+
     echo '<pre>';
-    var_dump($ordermeta);
+    var_dump(json_encode($orderdata));
     echo '</pre>';
+}
+
+// Cerco un post per ID con shortcode
+function get_post_by_id_func( $atts ) {
+    $a = shortcode_atts( array(
+        'id' => '',
+    ), $atts );
+
+    $post = get_post($a['id']);
+    
+    if ($post) {
+        echo '<pre>';
+        var_dump($post);
+        echo '</pre>';
+    } else {
+        return 'Post non trovato';
+    }
+}
+add_shortcode( 'get_post_by_id', 'get_post_by_id_func' );
+
+// Shortcode per check form scuola incanto
+function check_scuola_callback() {
+    global $wpdb;
+    $cfdb        = apply_filters( 'cfdb7_database', $wpdb );
+    $table_name  = $cfdb->prefix.'db7_forms';
+
+    // $string = 'a:46:{s:12:"cfdb7_status";s:4:"read";s:6:"scuola";s:6:"scuola";s:6:"plesso";s:6:"plesso";s:9:"indirizzo";s:9:"via Prova";s:3:"cap";s:4:"1234";s:5:"citta";s:6:"Padova";s:9:"provincia";s:8:"Cagliari";s:8:"telefono";s:14:"00393453455011";s:11:"emailscuola";s:21:"g7a99d0km@mozmail.com";s:19:"dirigentescolastico";s:11:"Mario Rossi";s:13:"codiceunivoco";s:5:"24567";s:13:"codicefiscale";s:5:"jsjjs";s:3:"cig";s:0:"";s:7:"fattura";a:1:{i:0;s:2:"SI";}s:11:"nomedocente";s:5:"Sarah";s:14:"cognomedocente";s:5:"Pinna";s:12:"emaildocente";s:17:"sarah@befamily.it";s:9:"cellulare";s:10:"3453455092";s:16:"totalunnipaganti";s:1:"3";s:32:"totdocentiaccompagnatoristudenti";s:1:"5";s:17:"totdocentipaganti";s:1:"2";s:17:"totalunnigratuiti";s:1:"5";s:18:"totdocentisostegno";s:1:"3";s:21:"totalepartecipantitot";s:2:"18";s:6:"classe";s:1:"4";s:7:"sezione";s:1:"B";s:11:"ordinegrado";s:8:"primaria";s:6:"alunni";s:1:"5";s:14:"alunnigratuiti";s:1:"3";s:21:"docentiaccompagnatori";s:1:"2";s:15:"docentisostegno";s:1:"1";s:13:"nomereferente";s:0:"";s:16:"cognomereferente";s:0:"";s:14:"emailreferente";s:0:"";s:13:"cellreferente";s:0:"";s:10:"spettacolo";s:51:"Scuola InCanto - Il barbiere di Siviglia - 24 marzo";s:23:"prima_data_spettacolo_1";s:20:"24&#047;03&#047;2025";s:19:"orario_spettacolo_1";s:5:"10:00";s:12:"spettacolo-2";s:51:"Scuola InCanto - Il barbiere di Siviglia - 25 marzo";s:25:"prima_data_spettacolo_2_2";s:20:"25&#047;03&#047;2025";s:27:"terzo_orario_spettacolo_2_2";s:5:"11:30";s:10:"iscrizione";a:1:{i:0;s:1:"1";}s:7:"privacy";a:1:{i:0;s:1:"1";}s:10:"SCUOLEINCA";s:10:"SCUOLEINCA";s:10:"consensonl";s:0:"";s:4:"NLOK";a:0:{}}';
+    // $unserialized = unserialize($string);
+    
+    $fid = '5264'; //(int)$_REQUEST['fid'];
+    $heading_row = $cfdb->get_results("SELECT form_id, form_value, form_date FROM $table_name
+        WHERE form_post_id = '$fid' ORDER BY form_id DESC LIMIT 1",OBJECT);
+
+    $heading_row    = reset( $heading_row );
+    $heading_row    = isset($heading_row->form_value) ? unserialize( $heading_row->form_value ) : array();
+    $heading_key    = array_keys( $heading_row );
+    $rm_underscore  = apply_filters('cfdb7_remove_underscore_data', true); 
+
+
+    $total_rows  = $cfdb->get_var("SELECT COUNT(*) FROM $table_name WHERE form_post_id = '$fid' "); 
+    $per_query    = 1000;
+    $total_query  = ( $total_rows / $per_query );
+
+    // $this->download_send_headers( "cfdb7-" . date("Y-m-d") . ".csv" );
+    // $df = fopen("php://output", 'w');
+    // ob_start();
+
+    for( $p = 0; $p <= $total_query; $p++ ){
+
+        $offset  = $p * $per_query;
+        $results = $cfdb->get_results("SELECT form_id, form_value, form_date FROM $table_name
+        WHERE form_post_id = '$fid' ORDER BY form_id DESC  LIMIT $offset, $per_query",OBJECT);
+        
+        $data  = array();
+        $i     = 0;
+        foreach ($results as $result) :
+            
+            $i++;
+            $data['form_id'][$i]    = $result->form_id;
+            $data['form_date'][$i]  = $result->form_date;
+            $resultTmp              = unserialize( $result->form_value );
+            $upload_dir             = wp_upload_dir();
+            $cfdb7_dir_url          = $upload_dir['baseurl'].'/cfdb7_uploads';
+
+            foreach ($resultTmp as $key => $value):
+                $matches = array();
+
+                if ( ! in_array( $key, $heading_key ) ) continue;
+                if( $rm_underscore ) preg_match('/^_.*$/m', $key, $matches);
+                if( ! empty($matches[0]) ) continue;
+
+                $value = str_replace( 
+                            array('&quot;','&#039;','&#047;','&#092;'),
+                            array('"',"'",'/','\\'), $value 
+                        );
+
+                if (strpos($key, 'cfdb7_file') !== false ){
+                    $data[$key][$i] = empty( $value ) ? '' : $cfdb7_dir_url.'/'.$value;
+                    continue;
+                }
+                if ( is_array($value) ){
+
+                    $data[$key][$i] = implode(', ', $value);
+                    continue;
+                }
+                $data[$key][$i] = $value;
+                // $data[$key][$i] = escape_data( $data[$key][$i] );
+
+            endforeach;
+
+        endforeach;
+    
+    }
+
+    echo '<pre>';
+    print_r($data);
+    echo '</pre>';
+}
+// add_shortcode( 'check_scuola', 'check_scuola_callback' );
+
+/**
+* Escape a string to be used in a CSV context
+* @param string $data CSV field to escape.
+* @return string    
+*/
+function escape_data( $data ) {
+    $active_content_triggers = array( '=', '+', '-', '@', ';' );
+
+    if ( in_array( mb_substr( $data, 0, 1 ), $active_content_triggers, true ) ) {
+        $data = '"'. $data.'"';
+    }
+
+    return $data;
+}
+
+// Aggiungo l'orario di creazione dell'ordine nella colonna pubblicazione in admin
+add_filter('manage_edit-shop_order_columns', 'add_order_date_column');
+function add_order_date_column($columns)
+{
+    $columns['order_date'] = 'Data Ordine';
+    return $columns;
+}
+
+// Cambio il formato della data
+add_action('manage_shop_order_posts_custom_column', 'add_order_date_column_content', 10, 2);
+function add_order_date_column_content($column, $post_id)
+{
+    if ($column == 'order_date') {
+        $order = wc_get_order($post_id);
+        echo 'ore '.$order->get_date_created()->format('H:i'). ' ';
+    }
 }
