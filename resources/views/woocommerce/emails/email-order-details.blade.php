@@ -33,6 +33,8 @@ $totalQty       = 0;
 $tickets_array = array();
 $tickets_name_array = array();
 $seatObject = array();
+$abbonamento = false;
+$pdf_abbonamento = get_field('istruzioni_abbonamento', 'option');
 // echo "<pre>";
 // print_r($transaction_ids);
 // echo "</pre>";
@@ -44,36 +46,43 @@ if (is_array($transaction_ids) && !empty($transaction_ids)) {
             $ticketName = $transaction_ids_value['ticketName'];
             $zoneName = $transaction_ids_value['zoneName'];
             $seatObject = $transaction_ids_value['seatObject'];
+			$showDate = $transaction_ids_value['showDate'];
 
             if(!empty($ticketName)){
                 $tickets_name_array[] = $ticketName;
             }
-            $tickets_array[$ticketName][] = array(
-                    'zoneId' => $transaction_ids_key,
-                    'zoneName' => $zoneName,
-                    'seatObject' => $seatObject,
+            $tickets_array[] = array(
+				'ticketName' => $ticketName,
+				'zoneId' => $transaction_ids_key,
+				'zoneName' => $zoneName,
+				'seatObject' => $seatObject,
+				'showDate' => $showDate,
             );
         } else {
+			$abbonamento = true;
             foreach ( $transaction_ids_value[ 'subscription_seat' ] as $subscription_seat_key => $subscription_seat_value ) {
                 $ticketName     = $subscription_seat_value[ 'ticketName' ];
                 $zoneName       = $subscription_seat_value[ 'zoneName' ];
                 $seatObject     = $subscription_seat_value[ 'seatObject' ];
                 $subscription   = $subscription_seat_value[ 'subscription' ];
                 $transaction_id = $subscription_seat_value[ 'transaction_id' ];
+				$showDate       = $subscription_seat_value[ 'showDate' ];
 
                 if(!empty($ticketName)){
                     $tickets_name_array[] = $ticketName;
                 }
-                $tickets_array[$ticketName][] = array(
-                        'zoneId' => $transaction_ids_key,
-                        'zoneName' => $zoneName,
-                        'seatObject' => $seatObject,
+                $tickets_array[] = array(
+					'ticketName' => $ticketName,
+					'zoneId' => $transaction_ids_key,
+					'zoneName' => $zoneName,
+					'seatObject' => $seatObject,
+					'showDate' => $showDate,
                 );
             }
         }     
     }
 }
-$tickets_name_list = implode(",",$tickets_name_array);
+$tickets_name_list = implode(", ",array_unique($tickets_name_array));
 
 // echo "<pre>";
 // print_r($tickets_array);
@@ -98,48 +107,58 @@ $tickets_name_list = implode(",",$tickets_name_array);
 					<span>Teatro San Carlo</span>
 				</td>
 			</tr>
-			<tr>
+			{{-- <tr>
 				<td style="padding-bottom: 0;">
 					<img src="@asset('images/calendar.png')" alt="Data evento" width="24" height="24" class="icona"> 
 					<!--[if (gte mso 9)|(IE)]><span style="color: white">s</span><![endif]-->
 					<span>{{ $order->get_date_created()->format( 'd-m-Y' ) }}</span>
 				</td>
-			</tr>
+			</tr> --}}
 
             
-                @foreach($tickets_array as $ticketName => $ticketArray)
-                    @foreach ( $ticketArray as $ticketArray_key => $ticketArray_value )
-                        @set($zoneName, $ticketArray_value[ 'zoneName' ])
-						@set($ticketSeatObject, $ticketArray_value[ 'seatObject' ])
-						@set($seatObject_new, [])
+			@foreach($tickets_array as $ticket)
 
-                        @if(is_array($ticketSeatObject) && !empty($ticketSeatObject))
-                            @if( array_key_first( $ticketSeatObject ) == '0' )
-                                @set($seatObject_new, $ticketSeatObject)
-                            @else
-                                @set($seatObject_new, array($ticketSeatObject))            
-                            @endif
-                        @endif
-                        
-						@if(!empty($seatObject_new))
-						@foreach ( $seatObject_new as $seatObject_key => $seatObject_value )
-                            @set($seat_desc, 	  $seatObject_value[ 'description' ])
-                            @set($reduction_name, $seatObject_value[ 'reduction' ][ 'description' ])
-							@set($ticket_string , trim($seat_desc).' ('.trim($reduction_name).') ')
-                            
-                            <tr>
-								<td style="padding-bottom: 0;">
-									<img src="@asset('images/ticket.png')" alt="Biglietto" width="24" height="24" class="icona"> 
-									<!--[if (gte mso 9)|(IE)]><span style="color: white">s</span><![endif]-->
-									<span>{{ $ticket_string }}</span>
-								</td>
-							</tr>
-                            
-                        @endforeach
+			<hr>
+				<tr style="border-top: 1px solid;">
+					<td style="padding-bottom: 0;">
+						<img src="@asset('images/calendar.png')" alt="Data evento" width="24" height="24" class="icona"> 
+						<!--[if (gte mso 9)|(IE)]><span style="color: white">s</span><![endif]-->
+						<span>{{ $ticket['ticketName'] }} {{ $ticket['showDate'] }}</span>
+					</td>
+				</tr>
+
+				{{-- @foreach ( $ticket as $ticketArray_key => $ticketArray_value ) --}}
+					@set($zoneName, $ticket[ 'zoneName' ])
+					@set($ticketSeatObject, $ticket[ 'seatObject' ])
+					@set($seatObject_new, [])
+
+					@if(is_array($ticketSeatObject) && !empty($ticketSeatObject))
+						@if( array_key_first( $ticketSeatObject ) == '0' )
+							@set($seatObject_new, $ticketSeatObject)
+						@else
+							@set($seatObject_new, array($ticketSeatObject))            
 						@endif
+					@endif
+					
+					@if(!empty($seatObject_new))
+					@foreach ( $seatObject_new as $seatObject_key => $seatObject_value )
+						@set($seat_desc, 	  $seatObject_value[ 'description' ])
+						@set($reduction_name, $seatObject_value[ 'reduction' ][ 'description' ])
+						@set($ticket_string , trim($seat_desc).' ('.trim($reduction_name).') ')
+						
+						<tr>
+							<td style="padding-bottom: 0;">
+								<img src="@asset('images/ticket.png')" alt="Biglietto" width="24" height="24" class="icona"> 
+								<!--[if (gte mso 9)|(IE)]><span style="color: white">s</span><![endif]-->
+								<span>{{ $ticket_string }}</span>
+							</td>
+						</tr>
+						
+					@endforeach
+					@endif
 
-                    @endforeach
-                @endforeach
+				{{-- @endforeach --}}
+			@endforeach
                 
 		</tbody>
 	</table>
@@ -163,7 +182,7 @@ $tickets_name_list = implode(",",$tickets_name_array);
 				<td style="width: 69%;">
 					<table border="0" cellpadding="10" cellspacing="0">
 						@set($tiket_name_array, explode(",",$tickets_name_list))
-						@if (is_array($tiket_name_array) && !empty($tiket_name_array))
+						{{-- @if (is_array($tiket_name_array) && !empty($tiket_name_array))
 							@foreach ($tiket_name_array as $tiket_name_array_key => $tiket_name_array_value)
 								<tr>
 									<td style="padding-left: 0; padding-bottom: 0;">
@@ -173,7 +192,7 @@ $tickets_name_list = implode(",",$tickets_name_array);
 									</td>
 								</tr>
 							@endforeach
-						@else
+						@else --}}
 							<tr>
 								<td style="padding-left: 0; padding-bottom: 0;">
 									<img src="@asset('images/bag.png')" alt="Show" width="24" height="24" class="icona"> 
@@ -181,7 +200,7 @@ $tickets_name_list = implode(",",$tickets_name_array);
 									<span>{{ $tickets_name_list }}</span>
 								</td>
 							</tr>
-						@endif
+						{{-- @endif --}}
 						
 						<tr>
 							<td style="padding-left: 0; padding-bottom: 0;">
@@ -210,6 +229,13 @@ $tickets_name_list = implode(",",$tickets_name_array);
 								<span>{!! sprintf(__( 'Cart total: %1$s%2$s', 'san-carlo-theme' ), $order->get_total(), get_woocommerce_currency_symbol($order->get_currency()) ) !!}</span>
 							</td>
 						</tr>
+						@if($abbonamento)
+						<tr>
+							<td style="padding-left: 0; padding-top: 0;">
+								<a href="{{ $pdf_abbonamento }}" style="font-size: 10px;font-weight: 400;letter-spacing: 1px;padding: 15px 14px;text-decoration: none;text-transform: uppercase;background: #df3b3c;color: white;">{{ _e('Download instructions', 'san-carlo-theme') }}</a>
+							</td>
+						</tr>
+						@endif
 						<tr>
 							<td style="padding-left: 0;">
 								<a href="{{ site_url() }}/mio-account/view-order/{{ $order_id }}">
