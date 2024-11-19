@@ -77,11 +77,13 @@
 				if ( $terms && ! is_wp_error( $terms ) ) {
 					$cats = join( ", ", array_map( function( $t ) { return $t->name; }, $terms ) );
 				}
-				// Aggiungo le date precedenti se esistono
+				// Adding past dates to the array if any
 				$past_dates = get_post_meta($post->ID, 'spettacolo_date', true);
 				if (isset($past_dates) && is_array($past_dates) && !empty($past_dates)) {
 					foreach ($past_dates as $key => $value) {
-						$evento = $value[$post->ID];
+						$evento = isset($value[$post->ID]) ? $value[$post->ID] : null;
+						// Check if the event exists
+						if ($evento == null) return;
 						$data = date('Y/m/d', strtotime($key));
 						$past['date'][$data][$post->ID]['ID'] = $post->ID;
 						$past['date'][$data][$post->ID]['titolo'] = get_the_title( $post );
@@ -120,7 +122,8 @@
 
 			// merge past and future events and sort by date
 			$output = $pair + $past;
-			ksort($output['date']);
+			if(is_array($output) && isset($output['date']))
+				ksort($output['date']);
 
 			$result = new WP_REST_Response($output, 200);
 			// $result->set_headers(array('Cache-Control' => 'max-age=3600'));
