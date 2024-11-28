@@ -48,6 +48,10 @@ if (is_array($transaction_ids) && !empty($transaction_ids)) {
             $seatObject = $transaction_ids_value['seatObject'];
 			$showDate = $transaction_ids_value['showDate'];
 
+			if ( $transaction_ids_value['regData'] == 0 ) {
+				$abbonamento = true;
+			}
+
             if(!empty($ticketName)){
                 $tickets_name_array[] = $ticketName;
             }
@@ -59,7 +63,7 @@ if (is_array($transaction_ids) && !empty($transaction_ids)) {
 				'showDate' => $showDate,
             );
         } else {
-			$abbonamento = true;
+			// $abbonamento = true;
             foreach ( $transaction_ids_value[ 'subscription_seat' ] as $subscription_seat_key => $subscription_seat_value ) {
                 $ticketName     = $subscription_seat_value[ 'ticketName' ];
                 $zoneName       = $subscription_seat_value[ 'zoneName' ];
@@ -232,12 +236,13 @@ $tickets_name_list = implode(", ",array_unique($tickets_name_array));
 						@if($abbonamento)
 						<tr>
 							<td style="padding-left: 0; padding-top: 0;">
-								<a href="{{ $pdf_abbonamento }}" style="font-size: 10px;font-weight: 400;letter-spacing: 1px;padding: 15px 14px;text-decoration: none;text-transform: uppercase;background: #df3b3c;color: white;">{{ _e('Download instructions', 'san-carlo-theme') }}</a>
+								<a href="{{ $pdf_abbonamento }}" style="font-size: 12px;  font-weight: 500;  letter-spacing: 0;  padding: 15px 0;  text-decoration: none;  text-transform: uppercase;  background: #df3b3c;  color: white;  width: 94%;  display: block;  text-align: center;">{{ _e('Download instructions', 'san-carlo-theme') }}</a>
 							</td>
 						</tr>
 						@endif
 						<tr>
 							<td style="padding-left: 0;">
+								@if(!$abbonamento)
 								<a href="{{ site_url() }}/mio-account/view-order/{{ $order_id }}">
 									@if (ICL_LANGUAGE_CODE == 'it')
 										<img src="@asset('images/stampa.png')" alt="Stampa biglietti" style="max-width: 200px">
@@ -245,6 +250,9 @@ $tickets_name_list = implode(", ",array_unique($tickets_name_array));
 										<img src="@asset('images/print.png')" alt="Print Tickets" style="max-width: 200px">
 									@endif
 								</a>
+								@else
+								<a href="{{ site_url() }}/mio-account/view-order/{{ $order_id }}" style="font-size: 12px;  font-weight: 500;  letter-spacing: 0;  padding: 15px 0;  text-decoration: none;  text-transform: uppercase;  background: #df3b3c;  color: white;  width: 94%;  display: block;  text-align: center;">{{ _e('More details', 'san-carlo-theme') }}</a>
+								@endif
 							</td>
 						</tr>
 					</table>
