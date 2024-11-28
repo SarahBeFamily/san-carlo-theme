@@ -100,6 +100,7 @@ add_filter( 'body_class', 'theme_body_classes' );
  include __DIR__.'/app/Theme/walker.php';
  include __DIR__.'/app/Theme/widget.php';
  include __DIR__.'/app/Theme/functions/spettacoli_functions.php';
+ include __DIR__.'/app/Theme/functions/rimborsi_functions.php';
 
 // Check if constant is defined
 if ( ! defined( 'ICL_LANGUAGE_CODE' ) ) {
@@ -717,139 +718,6 @@ function encrypt_url($string) {
 }
 add_action ( 'wp_ajax_nopriv_upload_file', 'upload_file', 10 );
 add_action ( 'wp_ajax_upload_file', 'upload_file', 10 );
-
-function invia_mail_rimborso() {
-    $data = $_POST['formData'];
-    $post = array();
-
-    if(isset($data)) :
-        foreach ($data as $object) {
-            $obj_name = $object['name'];
-            $obj_val = $object['value'];
-
-            if (stripos($obj_name, 'file-') !== false) {
-                if ($obj_val !== '') {
-                    // $tokens = explode('/rimborsi/', $obj_val);
-                    $tokens = explode('/uploads/', $obj_val);
-                    $str = trim(end($tokens));
-                    $index = intval(str_replace('file-', '', $obj_name));
-                    // $post['uploads'][]['path'] = WP_CONTENT_DIR . '/uploads/rimborsi/'.$str;
-                    $post['uploads'][]['path'] = WP_CONTENT_DIR . '/uploads/'.$str;
-                    $post['uploads'][]['url'] = $obj_val;
-                }
-            } else if (stripos($obj_name, 'fileRemove') !== false) {
-                $post['file_remove'][$index] = $obj_val;
-            } else if (stripos($obj_name, 'qty-') !== false) {
-                $index = intval(str_replace('qty-', '', $obj_name));
-                $post['tickets'][$index]['qty'] = $obj_val;
-            } else if (stripos( $obj_name, 'sector-' ) !== false) {
-                $index = intval(str_replace('sector-', '', $obj_name));
-                $post['tickets'][$index]['sector'] = $obj_val;
-            } else {
-                $post[$obj_name] = $obj_val;
-            }
-        }
-    endif;
-
-    if ( isset($post['nonce']) && ! wp_verify_nonce( $post['nonce'], 'invia_form_rimborso' ) ) {
-        exit();
-    }
-
-    if (!empty($post)) {
-        // Recipient
-        $destinatari = get_field('form_rimborsi', 'option') ? explode(',', get_field('form_rimborsi', 'option')) : array('teamweb@kidea.net');
-        $to = $destinatari;
-        
-        // Sender 
-        $from = $post['email']; 
-        $fromName = $post['first-name'].' '.$post['last-name']; 
-        
-        // Headers
-        $headers[] = 'Content-Type: text/html; charset=UTF-8';
-        $headers[] = 'From: '.$fromName.' <'.$from.'>';
-        // $headers[] = 'Cc: John Q Codex <jqc@wordpress.org>';
-        // $headers[] = 'Cc: iluvwp@wordpress.org';
-
-
-        // Email subject 
-        $subject = 'Richiesta di rimborso';  
-        
-        // Attachment file
-        $attachments = array();
-
-        $content = array();
-        $content[] = 'Nome: '.$post['first-name'];
-        $content[] = 'Cognome: '.$post['last-name'];
-        $content[] = 'Email: '.$post['email'];
-        $content[] = 'Indirizzo: '.$post['address'];
-        $content[] = 'Tel.: '.$post['phone'];
-        $content[] = 'Spettacolo: '.$post['show-name'];
-        $content[] = 'Data: '.$post['show-date'];
-
-        foreach ($post['tickets'] as $key => $value) {
-            $content[] = 'Quantità biglietti: '.$value['qty'].' x '.$value['sector'];
-        }
-
-        $content[] = 'Importo: '.$post['importo'].'€';
-        $content[] = 'Banca: '.$post['bank-name'];
-        $content[] = 'IBAN: '.$post['iban'];
-
-        if (isset($post['swift']))
-            $content[] = 'SWIFT/BIC: '.$post['swift'];
-
-        if (isset($post['bsb']))
-            $content[] = 'BSB: '.$post['bsb'];
-
-        if (isset($post['uploads']) && !empty($post['uploads'])) {
-            foreach ($post['uploads'] as $file) {
-                if ($file['path'] != '') {
-                    $attachments[] = $file['path'];
-                }
-            }
-        }
-
-        $message = implode('<br>', $content);
-        
-        // Send email 
-        $mail = wp_mail( $to, $subject, $message, $headers, $attachments );
-
-        $response_ok = array(
-            'message_ok' => __('We received your request, thank you', 'san-carlo-theme'),
-            'uploads' => isset($post['file_remove']) ? $post['file_remove'] : ''
-        );
-
-        $response_ko = array(
-            'message_ko' => __('Error sending email', 'san-carlo-theme'),
-            'uploads' => isset($post['file_remove']) ? $post['file_remove'] : ''
-        );
-
-        // wp_send_json_success( $data, 200);
-
-        if ($mail) {
-            wp_send_json_success($response_ok, 200);
-        } else {
-            wp_send_json_error($response_ko, 002 );
-        }
-
-    } else {
-        wp_send_json_error( __('Error with data', 'san-carlo-theme'), 001 );
-    }
-}
-add_action ( 'wp_ajax_nopriv_invia_mail_rimborso', 'invia_mail_rimborso', 10 );
-add_action ( 'wp_ajax_invia_mail_rimborso', 'invia_mail_rimborso', 10 );
-
-function elimina_allegati_rimborsi() {
-    $delete = $_POST['uploads'];
-
-    foreach ($delete as $file) {
-        if ($file !== '') {
-            $filepath = decrypt_url(wp_unslash($file));
-            return is_file($filepath) ? unlink($filepath) : 'error';
-        }
-    }
-}
-add_action ( 'wp_ajax_nopriv_elimina_allegati_rimborsi', 'elimina_allegati_rimborsi', 10 );
-add_action ( 'wp_ajax_elimina_allegati_rimborsi', 'elimina_allegati_rimborsi', 10 );
 
 function invia_mail_prenotazione() {
     $data = $_POST['formData'];
