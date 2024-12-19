@@ -24,18 +24,27 @@
 		// Ottiene il primo evento attivo e i suoi dettagli.
 		let activeEvent = $('.calendar .event.active').first(),
 			moreActiveArray = $('.calendar .event.active'),
-			activeEventDetails = activeEvent.siblings('.dettaglio-evento');
+			activeEventDetails = activeEvent.siblings('.dettaglio-evento'),
+			moreActiveArraySiblings = moreActiveArray.siblings('.event.active');
 
 		$('.total-slide').html(activeEventDetails.length);
-		$('#active-slide').attr('max-value', activeEventDetails.length+1);
-		activeEvent.siblings('.dettaglio-evento:not([index="0"])').hide();
+		if (activeEventDetails.length > 1) {
+			$('#active-slide').attr('max-value', activeEventDetails.length); // +1?
+			activeEvent.siblings('.dettaglio-evento:not([index="1"])').hide();
+			activeEvent.siblings('.dettaglio-evento[index="1"]').show();
+		} else {
+			activeEvent.siblings('.dettaglio-evento:not([index="0"])').hide();
+			activeEvent.siblings('.dettaglio-evento[index="0"]').show();
+		}		
 
 		// Se esistono più eventi attivi (cioè due eventi in mesi diversi), nascondo quello del mese successivo al corrente.
-		for (let i = 0; i < moreActiveArray.length; i++) {
-			let event = moreActiveArray[i];
+		if (moreActiveArray.length > 1 && moreActiveArraySiblings.length == 0) {
+			for (let i = 0; i < moreActiveArray.length; i++) {
+				let event = moreActiveArray[i];
 
-			if (moreActiveArray.length > 1 && i > 0) {
-				$(event).siblings('.dettaglio-evento').hide();
+				if (moreActiveArray.length > 1 && i > 0) {
+					$(event).siblings('.dettaglio-evento').hide();
+				}
 			}
 		}
 	}

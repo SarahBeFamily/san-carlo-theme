@@ -226,7 +226,7 @@ class Calendar {
 
                                 $n++;
                                 $n_event = $n-1;
-                                $current = $n_event+1;
+                                $current = $n_event == 0 ? 1 : $n_event;
 
                                 $event_code .= '<div class="event event-'.$n_event.' '.strtolower(str_replace(' ', '-',$event['cat'])).' evento-'.$event['ID'].'  '.$next_event_class.'" data-id="evento-'.$event['ID'].'" event-date="'.$event['data'].'">'.$giorno_evento.'</div>';
                                 

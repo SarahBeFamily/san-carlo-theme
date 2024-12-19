@@ -289,3 +289,72 @@ function add_order_date_column_content($column, $post_id)
         echo 'ore '.$order->get_date_created()->format('H:i'). ' ';
     }
 }
+
+/**
+ * Add relationship between spettacoli and vivaticket in quick edit panel
+ * 
+ * @param string $column_name
+ * @param string $post_type
+ * @param int $post_id
+ * @return void
+ */
+function add_vivaticket_quick_edit($column_name, $post_type, $post_id)
+{
+    if ($column_name !== 'vivaticket') {
+        return;
+    }
+
+    $vivaticket_id = get_post_meta($post_id, 'prodotto_relazionato', true);
+    $vivaticket = is_plugin_active('stc-tickets/stc-tickets.php') && function_exists('stcticket_spettacolo_data') ? stcticket_spettacolo_data($vivaticket_id) : null;
+    $vivaticket_title = $vivaticket !== null ? $vivaticket['titolo'] : 'Nessun prodotto relazionato';
+
+    ?>
+    <fieldset class="inline-edit-col-right">
+        <div class="inline-edit-col">
+            <label class="inline-edit-group">
+                <span class="title">Prodotto relazionato</span>
+                <!-- add select -->
+                <select name="prodotto_relazionato">
+                    <option value="">Nessun prodotto relazionato</option>
+                    <?php
+                    $args = array(
+                        'post_type' => 'spettacolo',
+                        'posts_per_page' => -1,
+                        'orderby' => 'title',
+                        'order' => 'ASC'
+                    );
+                    $vivatickets = get_posts($args);
+                    foreach ($vivatickets as $vivaticket) {
+                        $selected = $vivaticket_id == $vivaticket->ID ? 'selected' : '';
+                        echo '<option value="' . $vivaticket->ID . '" ' . $selected . '>' . $vivaticket->post_title . '</option>';
+                    }
+                    ?>
+                </select>
+            </label>
+            <label class="inline-edit-group">
+                <span class="title">Titolo</span>
+                <span><?php echo $vivaticket_title; ?></span>
+            </label>
+        </div>
+    </fieldset>
+    <?php
+}
+add_action('quick_edit_custom_box', 'add_vivaticket_quick_edit', 10, 3);
+
+/**
+ * Save relationship between spettacoli and vivaticket in quick edit and bulk edit panel
+ * 
+ * @param int $post_id
+ * @return void
+ */
+function save_vivaticket_quick_edit($post_id)
+{
+    if (!isset($_REQUEST['prodotto_relazionato'])) {
+        return;
+    }
+
+    $vivaticket_id = sanitize_text_field($_REQUEST['prodotto_relazionato']);
+    update_post_meta($post_id, 'prodotto_relazionato', $vivaticket_id);
+}
+add_action('save_post', 'save_vivaticket_quick_edit');
+
