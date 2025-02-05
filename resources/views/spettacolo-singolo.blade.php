@@ -26,14 +26,14 @@ $spt_img            = get_the_post_thumbnail_url($spe_id) ? get_the_post_thumbna
 //echo "</pre>";
 
 @endphp
-
+aaaaaaaaaaaaa
 <div class="spettacolo-single-wrap">
     <div class="container">
         <div class="spettacolo-single-wrapper">
             <div class="spe-half-wrap">
 
                 <div class="spettacolo-single-img">
-                    <img src="<?php echo $spt_img; ?>" alt="alt"/>
+                    <img src="{{ $spt_img }}" alt="alt"/>
                 </div>
             </div>
             <div class="spe-half-wrap">
@@ -56,6 +56,11 @@ $spt_img            = get_the_post_thumbnail_url($spe_id) ? get_the_post_thumbna
                             <h4>Seleziona una data</h4>
                         </div>
                         @shortcode('[spettacolo_event_listing id="'.$spe_id.'"]')
+aaaaaaaaaaaa
+                        @if (isset($_GET['print']) && $_GET['print'] == '1')
+                            {{ var_dump(get_post_meta(get_the_ID(),'spettacolo_date')) }}
+                            
+                        @endif
                     </div>
                 </div>
             </div>

@@ -56,8 +56,8 @@ msgstr "Ore %s"
 msgid "Buy tickets"
 msgstr "Acquista biglietti"
 
-#: resources/views/partials/content-single-spettacoli.blade.php:262
-#: resources/views/partials/content-single-spettacoli.blade.php:271
+#: resources/views/partials/content-single-spettacoli.blade.php:304
+#: resources/views/partials/content-single-spettacoli.blade.php:317
 msgid "Fees"
 msgstr "Tariffe"
 
@@ -257,6 +257,7 @@ msgstr "Spettacolo"
 
 #. translators: 1: formatted order total 2: total order items
 #: resources/views/woocommerce/myaccount/orders.blade.php:61
+#: resources/views/woocommerce/myaccount/orders.blade.php:76
 msgid "%1$s for %2$s show"
 msgid_plural "%1$s for %2$s shows"
 msgstr[0] "%1$s per %2$s spettacolo"
@@ -620,6 +621,6 @@ msgstr "modificare la tua password e i dettagli account"
 msgid "Please enter your username or email address. You will receive a link to create a new password via email."
 msgstr "Inserisci il tuo nome utente o l'indirizzo email. Riceverai tramite email un link per generarne la tua nuova password."
 
-#: resources/views/woocommerce/myaccount/view-order.blade.php:25
+#: resources/views/woocommerce/myaccount/view-order.blade.php:24
 msgid "WARNING: If you use Mozilla or Safari, in case of problems with tickets download or printing, please check the popup blocking settings in your browser"
 msgstr "ATTENZIONE: Se usi Mozilla o Safari e hai difficoltà con il download o la stampa dei biglietti, verifica le impostazioni del blocco popup del tuo browser"

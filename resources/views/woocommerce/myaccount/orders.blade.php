@@ -34,9 +34,24 @@ if ( $has_orders ) : @endphp
 
 		<tbody>
 			<?php
+			// test
+			if( isset($_GET['print']) && $_GET['print'] == '1' ) {
+				echo '<pre>';
+					print_r(get_user_meta( get_current_user_id(  ), 'finalConfirmedOrder', true ));
+				echo '</pre>';
+			}
+
 			foreach ( $customer_orders->orders as $customer_order ) {
 				$order      = wc_get_order( $customer_order ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 				$item_count = $order->get_item_count() - $order->get_item_count_refunded();
+				$order_id 	= $order->get_id();
+
+				// test
+				if( isset($_GET['print']) && $_GET['print'] == '2' ) {
+					echo '<pre>';
+						print_r(get_post_meta( $order_id, 'preOrderObject', true ));
+					echo '</pre>';
+				}
 				?>
 				<tr class="woocommerce-orders-table__row woocommerce-orders-table__row--status-<?php echo esc_attr( $order->get_status() ); ?> order">
 					<?php foreach ( wc_get_account_orders_columns() as $column_id => $column_name ) : ?>
@@ -58,7 +73,7 @@ if ( $has_orders ) : @endphp
 							<?php elseif ( 'order-total' === $column_id ) : ?>
 								<?php
 								/* translators: 1: formatted order total 2: total order items */
-								echo wp_kses_post( sprintf( _n( '%1$s for %2$s item', '%1$s for %2$s items', $item_count, 'woocommerce' ), $order->get_formatted_order_total(), $item_count ) );
+								echo wp_kses_post( sprintf( _n( '%1$s for %2$s show', '%1$s for %2$s shows', $item_count, 'san-carlo-theme' ), $order->get_formatted_order_total(), $item_count ) );
 								?>
 
 							<?php elseif ( 'order-actions' === $column_id ) : ?>
@@ -72,7 +87,13 @@ if ( $has_orders ) : @endphp
 										$action_url = esc_url($action['url']);
 
 										if ($key == 'view') {
+											if (!$order_id) continue;
 											$action_url = $endpoint_url.'view-order/'.$order->get_id();
+										}
+
+										// hide action pay
+										if ($key == 'pay' || $key == 'cancel') {
+											$key = 'hidden';
 										}
 										
 										echo '<a href="' . $action_url . '" data-url="'.$action_url.'" class="woocommerce-button' . esc_attr( $wp_button_class ) . ' button ' . sanitize_html_class( $key ) . '">' . esc_html( $action['name'] ) . '</a>';
@@ -91,17 +112,33 @@ if ( $has_orders ) : @endphp
 
 	@action( 'woocommerce_before_account_orders_pagination' )
 
-	<?php if ( 1 < $customer_orders->max_num_pages ) : ?>
+	@if ( 1 < $customer_orders->max_num_pages )
+		@php
+		$endpoint_url = get_permalink( get_option('woocommerce_myaccount_page_id') );
+		$current_url = $_SERVER['REQUEST_URI'];
+		$current_page = explode('/', $current_url);
+		// remove last element
+		array_pop($current_page);
+		$current_page = (int)end($current_page) == 0 ? 1 : (int)end($current_page);
+		@endphp
 		<div class="woocommerce-pagination woocommerce-pagination--without-numbers woocommerce-Pagination">
-			<?php if ( 1 !== $current_page ) : ?>
-				<a class="woocommerce-button woocommerce-button--previous woocommerce-Button woocommerce-Button--previous button" href="<?php echo esc_url( wc_get_endpoint_url( 'orders', $current_page - 1 ) ); ?>"><?php esc_html_e( 'Previous', 'woocommerce' ); ?></a>
-			<?php endif; ?>
-
-			<?php if ( intval( $customer_orders->max_num_pages ) !== $current_page ) : ?>
-				<a class="woocommerce-button woocommerce-button--next woocommerce-Button woocommerce-Button--next button" href="<?php echo esc_url( wc_get_endpoint_url( 'orders', $current_page + 1 ) ); ?>"><?php esc_html_e( 'Next', 'woocommerce' ); ?></a>
-			<?php endif; ?>
+			@if ( 1 > $current_page  )
+				@php
+				$previous_page = $current_page - 1;
+				$previous_url = $current_url.'/'.$previous_page.'/';
+				@endphp
+				<a class="woocommerce-button woocommerce-button--previous woocommerce-Button woocommerce-Button--previous button" href="{{ $previous_url }}">{{ esc_html__( 'Previous', 'woocommerce' ) }}</a>
+			@endif
+				
+			@if ( intval( $customer_orders->max_num_pages ) !== $current_page )
+				@php
+				$next_page = $current_page + 1;
+				$next_url = $current_url.'/'.$next_page.'/';
+				@endphp
+				<a class="woocommerce-button woocommerce-button--next woocommerce-Button woocommerce-Button--next button" href="{{ $next_url }}">{{ esc_html__( 'Next', 'woocommerce' ) }}</a>
+			@endif
 		</div>
-	<?php endif; ?>
+	@endif
 
 <?php else : ?>
 	<div class="woocommerce-message woocommerce-message--info woocommerce-Message woocommerce-Message--info woocommerce-info">

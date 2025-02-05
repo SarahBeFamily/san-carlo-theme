@@ -80,6 +80,7 @@ function add_vivaticket_column_content($column, $post_id)
 	}
 }
 
+
 /**
  * Save dates in meta for spettacoli when saving post
  */
@@ -94,15 +95,16 @@ function save_spettacoli_meta( $post_id ) {
         $date = array();
 
         $cats = '';
-        $terms = get_the_terms( $post_id, 'spettacoli_cat' );
+        $terms = get_the_terms( $post_id, 'categoria-spettacoli' );
         if ( $terms && ! is_wp_error( $terms ) ) {
             $cats = join( ", ", array_map( function( $t ) { return $t->name; }, $terms ) );
         }
-
+        
         if (isset($spettacolo_data['date']) && is_array($spettacolo_data['date'])) :
             foreach ($spettacolo_data['date'] as $dettaglio) {
                 $data_ora_array = explode(' ', $dettaglio['date']);
 				$data = date('Y/m/d', strtotime($data_ora_array[0])); // 2023/09/16
+                $orario = $data_ora_array[1];
                 $ticket = isset($dettaglio['url']) ? $dettaglio['url'] : '';
                 $location = isset($spettacolo_data['location']) ? $spettacolo_data['location'] : '';
 
@@ -113,16 +115,30 @@ function save_spettacoli_meta( $post_id ) {
                 $date[$data][$post_id]['featured_image'] = get_the_post_thumbnail_url( $post_id, 'large' );
                 $date[$data][$post_id]['featured_vertical'] = is_plugin_active('advanced-custom-fields-pro/acf.php') ? get_field( 'immagine_verticale', $post_id ) : '';
                 $date[$data][$post_id]['data'] = date('d/m/Y', strtotime($data_ora_array[0])); // 16/09/2023
-                $date[$data][$post_id]['orario'] = $data_ora_array[1];
+                $date[$data][$post_id]['orario'] = $orario;
                 $date[$data][$post_id]['location'] = $location;
                 $date[$data][$post_id]['ticket_link'] = $ticket;
             }
         endif;
+
+        $spettacolo_date_db = get_post_meta( $post_id, 'spettacolo_date', true );
         
-        if ( ! empty( $date ) && $spettacolo_data !== '' ) {
+        if ( ! empty( $date ) && $spettacolo_data !== '' && empty($spettacolo_date_db) ) {
             update_post_meta( $post_id, 'spettacolo_date', $date );
-			
         } 
+
+        // Saving acf field date_passate to post meta
+        $date_passate = get_field('date_passate', $post_id);
+        $date_past_arr = array();
+        if ( is_array($date_passate) && ! empty( $date_passate ) ) {
+            foreach ($date_passate as $key => $value) {
+                $date_past_arr[$post_id]['date'][] = $value['data_passata'];
+            }
+            update_post_meta( $post_id, 'date_passate_cal', $date_past_arr );
+        } else if( empty( $date_passate ) ) {
+            update_post_meta( $post_id, 'date_passate_cal', array() );
+        }
+
         // Test fake dates
         // else {
         //     $data = '2024/05/31';

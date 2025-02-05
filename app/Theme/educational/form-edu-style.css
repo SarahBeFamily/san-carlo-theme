@@ -1,0 +1,356 @@
+
+
+	.orari-wrapper, .date p, .date-wrapper {
+  display: flex;
+  color: var(--text);
+  align-items: center;
+}
+	.hide-input {
+		display: none !important;
+	}
+.educational-form .dati-istituto .column-first, .educational-form .dati-istituto .column-second, .educational-form .dati-docente, .educational-form .info-spettacoli {
+display: flex;
+flex-flow: wrap;
+/*justify-content: space-between;*/
+}
+
+	.educational-form {
+	text-align: center;
+	max-width: 1440px;
+    margin: auto;
+}
+	
+	.educational-form .edu-form h4 {	
+	text-align: left;
+	font-size: 15px;
+	text-transform: uppercase;
+}
+	
+.educational-form .column-last label {
+text-transform: uppercase;
+font-size: 13px;
+}
+	.educational-form .content-tab {
+		display: none;
+	}
+.educational-form .content-tab.aperto {
+		
+		display: block;
+	}
+
+.educational-form h2 {
+text-align: left;
+padding-bottom: 10px;
+border-bottom: 2px solid;
+}
+
+.educational-form h3 {
+font-size: 20px;
+text-transform: uppercase;
+text-align: left;
+padding: 20px 0;
+border-bottom: 2px solid;
+}
+
+.educational-form .edu-form p, .educational-form .edu-form .wrapper-docente p  {
+width: 100%;
+margin: 12px 10px;
+max-width: 380px;
+}
+	
+	.educational-form .edu-form .wrapper-docente, .educational-form .edu-form .wrapper-iscrizioni.spettacoli {
+		display: flex;
+		flex-flow: wrap;
+		justify-content: flex-start;
+	}
+	 .educational-form .edu-form.partecipanti .wrapper-iscrizioni.spettacoli {
+		display: flex;
+		flex-flow: wrap;
+		justify-content: flex-start;
+		 align-items: flex-start;
+	}
+	.educational-form .edu-form.partecipanti .wrapper-iscrizioni.spettacoli p {
+		text-align: left;
+	}
+
+	.educational-form .edu-form label {
+		display: flex;
+		flex-flow: column;
+		text-align: left;
+	}
+	
+	.educational-form .edu-form label span {
+		font-size: 17px;
+	}
+	
+	.educational-form .edu-form input:not([type=checkbox]):not(.bf-btn):not(.woocommerce-Button.button.wp-element-button), textarea {
+		padding: 6px;
+	}
+	
+	/*
+.educational-form .edu-form .wrapper-docente p {
+	width: auto;
+	display: flex;
+	max-width: 100%;
+	flex-flow: wrap;
+}	
+	.educational-form .edu-form .wrapper-docente label {
+		margin: 0 5px;
+	}
+	*/
+	.educational-form .edu-form .column-last p {
+		max-width: 100%;
+		max-width: 100%;
+		display: flex;
+		align-items: center;
+	}
+	.educational-form .edu-form .wrapper-iscrizioni {
+		display: flex;
+		flex-flow: wrap;
+		justify-content: space-between;
+		align-items: flex-end;
+}
+	
+	.educational-form .edu-form .wrapper-iscrizioni label input[type=number] {
+		width: 100%;
+	}
+	
+	
+	/* INFO INSCRIZIONI SCUOLE */
+/*.wrapper-informazioni-iscrizioni {
+width: 100%;
+display: flex;
+flex-flow: wrap;
+justify-content: space-between;
+}*/
+	
+	.wrapper-iscrizioni h5 {
+		text-align: left;
+		text-transform: uppercase;
+		margin: 0;
+		padding-bottom: 15px;
+	
+	}
+	
+	.info-iscrizioni .blocco-bottom button {
+		background: #df3b3c;
+		color: #fff;
+		border: 0;
+padding: 10px 15px;
+font-size: 16px;
+margin-right: 10px;
+		cursor: pointer;
+}
+	
+	.info-iscrizioni .blocco-bottom, .info-iscrizioni .blocco-bottom p {
+		display: flex;
+	}
+
+.open-tab{
+cursor: pointer;
+}
+.educational-form .column-last {
+display: block;
+justify-content: center;
+padding: 20px 0;
+text-align: justify;
+}
+	
+	.educational-form .edu-form input[type=radio]:not([type=checkbox]):not(.bf-btn):not(.woocommerce-Button.button.wp-element-button):not([type=text]) {
+		-webkit-appearance: radio;
+		-moz-appearance: radio;
+		appearance: radio;
+	}
+
+	.educational-form .edu-form .wrapper-spettacoli .opzione {
+		display: flex;
+		justify-content: flex-start;
+		flex-flow: wrap;
+		position: relative;
+		margin-bottom: 22px;
+		padding: 0;
+	}
+	
+	.educational-form .edu-form .wrapper-spettacoli .opzione p {
+		padding-right: 30px;
+	}
+	
+	
+	/*.educational-form .edu-form .wrapper-spettacoli .opzione:after {
+		content: "";
+		display: block;
+		width: 90%;
+		height: 2px;
+		background: #000;
+		position: absolute;
+		bottom: 0;
+	}
+	.educational-form .edu-form .wrapper-spettacoli .opzione:before {
+		position: absolute;
+		bottom: -18px;
+		left: 5%;
+		text-transform: uppercase;
+		font-size: 12px;
+		font-weight: bold;
+		color: #999;
+	}
+	
+	.educational-form .edu-form .wrapper-spettacoli .opzione.prima:before {
+		content: "(prima scelta)";
+	}
+	.educational-form .edu-form .wrapper-spettacoli .opzione.seconda:before {
+		content: "(seconda scelta)";
+	}*/
+	
+	.educational-form .edu-form .wrapper-spettacoli .inner-spettacoli:first-child {
+		padding-bottom: 10px;
+	}
+	
+	.educational-form .edu-form .wrapper-spettacoli .inner-spettacoli:last-child {
+		border-top: 1px solid #ccc;
+		padding-top: 10px;
+}
+	
+	.educational-form .edu-form .wrapper-spettacoli p {
+		margin: 0;
+	}
+
+	.educational-form input.bf-btn.primary {
+		border: 0;
+	}
+	
+	.educational-form .disclaimer {
+		text-align: left;
+		padding-top: 30px;
+	}
+	.educational-form .disclaimer p span.wpcf7-list-item-label {
+		font-size: 16px;
+	}
+	.educational-form .disclaimer input[type=checkbox] {
+		margin-right: 12px;
+	}
+	
+	@media screen and (max-width: 767px) {
+		.educational-form .column-last {
+		display: block;
+		}
+		.educational-form .column-last p {
+			padding: 20px 0;
+			text-align: center;
+			justify-content: center;
+		}
+		.educational-form .dati-istituto .column-first, .educational-form .dati-istituto .column-second {
+			display: flex;
+			justify-content: center;
+		}
+	}
+
+	
+	/* NEWSLETTER DOCENTI */
+	
+	.educational-form .wrapper-form {
+		display: flex;
+		flex-flow: wrap;
+	}
+	.educational-form .wrapper-form .wrapper-input {
+		padding: 0 20px;
+	}
+	.educational-form .wrapper-form .wrapper-input.interesse p {
+		display: flex;
+		flex-flow: row;
+	}
+
+	.educational-form .wrapper-form input {
+		text-transform: uppercase;
+	}
+	.educational-form .bottone {
+		text-align: center;
+	}
+	
+	/* SPETTACOLI SCUOLE */
+	.educational-form .edu-form .info-files .wrapper-files p {
+		max-width: 100%;
+		text-align: left;
+	}
+	.educational-form .edu-form .info-files .wrapper-files p.riga-file.half {
+		display: flex;
+	justify-content: space-between;
+	max-width: 800px;
+	padding-bottom: 12px;
+	}
+	.educational-form .edu-form .info-files .wrapper-files p input:not([type=checkbox]):not(.bf-btn):not(.woocommerce-Button.button.wp-element-button) {
+		max-width: 380px;
+		width: 100%;
+	}
+	.wrapper-info-classe-partecipante {
+		padding: 24px;
+	border-bottom: 1px solid #ccc;
+	}
+.info-classe-partecipante {
+	display: flex;
+	
+	justify-content: start;
+	align-items: flex-end;
+	flex-flow: wrap;
+}
+	p.dicitura {
+		max-width: 100% !important;
+	text-align: left;
+
+	}
+	.wrapper-info-classe-partecipante small {
+		font-size: 11px;
+	}
+	
+	.educational-form .edu-form .wrapper-spettacoli .inner-spettacoli p {
+		max-width: 100%;
+	}
+	.educational-form .edu-form .wrapper-spettacoli .inner-spettacoli .opzione {
+		display: block;
+		text-align: left;
+	}
+	
+	.educational-form .edu-form .wrapper-spettacoli .inner-spettacoli label {
+		flex-flow: nowrap;
+	}
+	
+	.educational-form .edu-form .wrapper-spettacoli .inner-spettacoli .wpcf7-checkbox label span, .wrapper-spettacoli .inner-spettacoli .wpcf7-checkbox span {
+		font-size: 15px;
+	}
+	
+	.educational-form .edu-form .wrapper-spettacoli .inner-spettacoli .opzione .select-show p, .educational-form .edu-form .wrapper-spettacoli .inner-spettacoli .opzione .date p, .educational-form .edu-form .wrapper-spettacoli .inner-spettacoli .opzione .orari p, .educational-form .edu-form .wrapper-spettacoli .inner-spettacoli .opzione .select-show p, .educational-form .edu-form .wrapper-spettacoli .inner-spettacoli .opzione .date p:not(.bf-title),  .educational-form .edu-form .wrapper-spettacoli .inner-spettacoli .opzione .select-show p, .educational-form .edu-form .wrapper-spettacoli .inner-spettacoli .opzione .orari p:not(.bf-title), .educational-form .edu-form .wrapper-spettacoli .inner-spettacoli .opzione .select-show p:not(.bf-title) {
+		max-width: none;
+		width: auto;
+		font-size: 15px;
+	}
+	 
+	.educational-form .edu-form .wrapper-spettacoli .inner-spettacoli .opzione .select-show p, .educational-form .edu-form .wrapper-spettacoli .inner-spettacoli .opzione .date p label, .educational-form .edu-form .wrapper-spettacoli .inner-spettacoli .opzione .orari p label {
+		font-size: 17px;
+	}
+	.educational-form .edu-form .wrapper-spettacoli .inner-spettacoli label {
+		min-width: 150px;
+	}
+	
+	.educational-form .edu-form .wrapper-spettacoli .inner-spettacoli .opzione .select-show, .educational-form .edu-form .wrapper-spettacoli .inner-spettacoli .opzione .date, .educational-form .edu-form .wrapper-spettacoli .inner-spettacoli .opzione .orari {
+		display: flex;
+		flex-flow: nowrap;
+	}
+	.inner-spettacoli small {
+    color: #999;
+    text-transform: none;
+    font-weight: normal;
+    padding-left: 10px;
+}
+	
+	.opzione .date {
+		padding: 20px 0;
+	}
+	
+	.opzione .date div p {
+    display: flex;
+    flex-wrap: wrap;
+}
+	.opzione .date div p input {
+		margin-left: 28px;
+	}
+	

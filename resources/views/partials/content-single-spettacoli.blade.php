@@ -33,7 +33,7 @@
 	}
 
 	// echo '<pre>';
-	// var_dump($options);
+	// var_dump(get_post_meta( get_the_ID(), 'spettacolo_date', true ));
 	// echo '</pre>';
 @endphp
 
@@ -236,6 +236,15 @@
 					@endif
 				</div>
 				<div class="col-6"></div>
+				@if (isset($_GET['print']) && $_GET['print'] == '1')
+					<pre>
+						{{ print_r(stcticket_spettacolo_data(get_field('prodotto_relazionato', get_the_ID()))) }}
+						{{ var_dump(empty(get_post_meta(get_the_ID(),'spettacolo_date'))) }}
+						spettacolo date: {{ print_r(get_post_meta(get_the_ID(),'spettacolo_date')) }}
+						date passate postmeta: {{ print_r(get_post_meta(get_the_ID(),'date_passate_cal')) }}
+						date passate field: {{ print_r(get_field('date_passate')) }}
+					</pre>                            
+                @endif
 			</div>
 
 			<div class="pad-t-5">

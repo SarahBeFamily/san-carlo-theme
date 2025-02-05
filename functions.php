@@ -94,13 +94,31 @@ add_filter( 'body_class', 'theme_body_classes' );
  * @san-carlo-theme
  */
 
- include __DIR__.'/app/Theme/cpt.php';
- include __DIR__.'/app/Theme/Classes/rest_api.php';
- include __DIR__.'/app/Theme/Calendar/calendar_class.php';
- include __DIR__.'/app/Theme/walker.php';
- include __DIR__.'/app/Theme/widget.php';
- include __DIR__.'/app/Theme/functions/spettacoli_functions.php';
- include __DIR__.'/app/Theme/functions/rimborsi_functions.php';
+ function load_theme_files() {
+     include __DIR__.'/app/Theme/cpt.php';
+     include __DIR__.'/app/Theme/Classes/rest_api.php';
+     include __DIR__.'/app/Theme/Calendar/calendar_class.php';
+     include __DIR__.'/app/Theme/walker.php';
+     include __DIR__.'/app/Theme/widget.php';
+     include __DIR__.'/app/Theme/functions/spettacoli_functions.php';
+     include __DIR__.'/app/Theme/functions/rimborsi_functions.php';
+ }
+ add_action('after_setup_theme', 'load_theme_files');
+
+//  include __DIR__.'/app/Theme/cpt.php';
+//  include __DIR__.'/app/Theme/Classes/rest_api.php';
+//  include __DIR__.'/app/Theme/Calendar/calendar_class.php';
+//  include __DIR__.'/app/Theme/walker.php';
+//  include __DIR__.'/app/Theme/widget.php';
+//  include __DIR__.'/app/Theme/functions/spettacoli_functions.php';
+//  include __DIR__.'/app/Theme/functions/rimborsi_functions.php';
+
+// Include educational style and scripts
+function educational_scripts() {
+    wp_enqueue_style( 'educational-style', get_template_directory_uri() . '/app/Theme/educational/form-edu-style.css', array(), '1.0.0', 'all' );
+    wp_enqueue_script( 'educational-script', get_template_directory_uri() . '/app/Theme/educational/form-edu.js', array(), '1.0.0', true );
+}
+add_action( 'wp_enqueue_scripts', 'educational_scripts' );
 
 // Check if constant is defined
 if ( ! defined( 'ICL_LANGUAGE_CODE' ) ) {
@@ -1234,4 +1252,3 @@ function render_hours_field_in_contact_form($tag) {
     }
     return $output;
 }
-    

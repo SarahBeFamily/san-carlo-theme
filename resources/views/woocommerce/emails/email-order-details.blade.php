@@ -123,7 +123,7 @@ $tickets_name_list = implode(", ",array_unique($tickets_name_array));
 			@foreach($tickets_array as $ticket)
 
 			<hr>
-				<tr style="border-top: 1px solid;">
+				<tr>
 					<td style="padding-bottom: 0;">
 						<img src="@asset('images/calendar.png')" alt="Data evento" width="24" height="24" class="icona"> 
 						<!--[if (gte mso 9)|(IE)]><span style="color: white">s</span><![endif]-->
@@ -236,7 +236,7 @@ $tickets_name_list = implode(", ",array_unique($tickets_name_array));
 						@if($abbonamento)
 						<tr>
 							<td style="padding-left: 0; padding-top: 0;">
-								<a href="{{ $pdf_abbonamento }}" style="font-size: 12px;  font-weight: 500;  letter-spacing: 0;  padding: 15px 0;  text-decoration: none;  text-transform: uppercase;  background: #df3b3c;  color: white;  width: 94%;  display: block;  text-align: center;">{{ _e('Download instructions', 'san-carlo-theme') }}</a>
+								<a href="{{ $pdf_abbonamento }}" style="font-size: 12px;  font-weight: 500;  letter-spacing: 0;  padding: 15px 0;  text-decoration: none;  text-transform: uppercase;  background: #df3b3c;  color: white;  width: 94%;   display: block !important;  text-align: center;">{{ _e('Download instructions', 'san-carlo-theme') }}</a>
 							</td>
 						</tr>
 						@endif
@@ -251,7 +251,7 @@ $tickets_name_list = implode(", ",array_unique($tickets_name_array));
 									@endif
 								</a>
 								@else
-								<a href="{{ site_url() }}/mio-account/view-order/{{ $order_id }}" style="font-size: 12px;  font-weight: 500;  letter-spacing: 0;  padding: 15px 0;  text-decoration: none;  text-transform: uppercase;  background: #df3b3c;  color: white;  width: 94%;  display: block;  text-align: center;">{{ _e('More details', 'san-carlo-theme') }}</a>
+								<a href="{{ site_url() }}/mio-account/view-order/{{ $order_id }}" style="font-size: 12px;  font-weight: 500;  letter-spacing: 0;  padding: 15px 0;  text-decoration: none;  text-transform: uppercase;  background: #df3b3c;  color: white;  width: 94%;  display: block !important;  text-align: center;">{{ _e('More details', 'san-carlo-theme') }}</a>
 								@endif
 							</td>
 						</tr>

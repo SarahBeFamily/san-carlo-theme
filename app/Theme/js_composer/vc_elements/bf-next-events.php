@@ -119,8 +119,7 @@ class BF_Next_Events extends WPBakeryShortCode {
 
 						$html .= '<div class="info-wrap">';
 							$html .= '<span class="info"><i class="bf-icon icon-pin"></i> '.$evento['location'].'</span>';
-							/* translators: %s è l'orario dello spettacolo */
-							$html .= '<span class="info"><i class="bf-icon icon-clock"></i> '.sprintf(__('%s', 'san-carlo-theme'), $evento['orario']).'</span>';
+							$html .= '<span class="info"><i class="bf-icon icon-clock"></i> '.$evento['orario'].'</span>';
 						$html .= '</div>';
 						
 						$html .= '<div class="buttons-area">';

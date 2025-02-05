@@ -18,7 +18,6 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-
 $notes = $order->get_customer_order_notes();
 @endphp
 <div class="messaggio-popup-block">

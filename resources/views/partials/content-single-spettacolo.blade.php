@@ -52,6 +52,13 @@ if($my_current_lang == 'it') {
                             <h4>Seleziona una data</h4>
                         </div>
                         @shortcode('[spettacolo_event_listing id="'.$spe_id.'"]')
+                        
+                        @php
+                            // Get the slug of the current post
+                            $slug = get_post_field( 'post_name', get_post() );
+                            $id_show = get_post_meta($spe_id, 'spt_id_show', true);
+                        @endphp
+                        <a href="https://www.vivaticket.com/it/ticket/{{ $slug }}/{{ $id_show }}">Event</a>
                     </div>
                 </div>
             </div>

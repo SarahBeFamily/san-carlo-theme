@@ -12,7 +12,7 @@
 			  'permission_callback' => '__return_true',
 		  ));
 	  }
-  
+
 	  public function get_all_terms($object)
 	  {
 		  $return = array();
@@ -37,7 +37,7 @@
 		  return $result;
 	  }
   }
-  
+
 
   class Array_Events_By_Datetime
   {
@@ -52,7 +52,7 @@
 			  'permission_callback' => '__return_true',
 		  ));
 	  }
-  
+
 	  public function get_events_by_datetime($object)
 	  {
 			$args = array(
@@ -67,10 +67,15 @@
 			$pair = array();
 			$earr = array();
 			$past = array();
+			$manual = array();
 
 			foreach ($posts as $post) {
-				$prodotto_id = is_plugin_active('advanced-custom-fields-pro/acf.php') ? get_field('prodotto_relazionato', $post) : '';
+				$prodotto_id = is_plugin_active('advanced-custom-fields-pro/acf.php') && function_exists('get_field') ? get_field('prodotto_relazionato', $post) : '';
 				$spettacolo_data = is_plugin_active('stc-tickets/stc-tickets.php') && function_exists('stcticket_spettacolo_data') ? stcticket_spettacolo_data($prodotto_id) : [];
+
+				$location = '';
+				$fetured_image = get_the_post_thumbnail_url( $post->ID, 'large' );
+				$fetured_vertical = is_plugin_active('advanced-custom-fields-pro/acf.php') ? get_field( 'immagine_verticale', $post->ID ) : '';
 
 				$cats = '';
 				$terms = get_the_terms( $post->ID, 'categoria-spettacoli' );
@@ -84,6 +89,7 @@
 						$evento = isset($value[$post->ID]) ? $value[$post->ID] : null;
 						// Check if the event exists
 						if ($evento == null) return;
+						$location = $evento['location'];
 						$data = date('Y/m/d', strtotime($key));
 						$past['date'][$data][$post->ID]['ID'] = $post->ID;
 						$past['date'][$data][$post->ID]['titolo'] = get_the_title( $post );
@@ -95,6 +101,35 @@
 						$past['date'][$data][$post->ID]['orario'] = $evento['orario'];
 						$past['date'][$data][$post->ID]['location'] = $evento['location'];
 						$past['date'][$data][$post->ID]['ticket_link'] = $evento['ticket_link'];
+					}
+				}
+
+				// Add manual past dates from date_passate ACF field
+				$manual_past_dates = get_post_meta($post->ID, 'date_passate_cal', true);
+				if (isset($manual_past_dates) && is_array($manual_past_dates) && !empty($manual_past_dates)) {
+					foreach ($manual_past_dates as $key => $value) {
+						// Check if the event exists
+						if ((int)$key !== $post->ID) return;
+
+						if( isset($value['date']) && is_array($value['date'])){
+							foreach ($value['date'] as $data) {
+								$data_array = explode(' ', $data);
+								$data_manual = date('Y/m/d', strtotime($data_array[0]));
+								$dataa = str_replace('-', '/', $data_array[0]); // 16/09/2023
+
+								$past['date'][$data_manual][$post->ID]['ID'] = $post->ID;
+								$past['date'][$data_manual][$post->ID]['titolo'] = get_the_title( $post );
+								$past['date'][$data_manual][$post->ID]['cat'] = $cats;
+								$past['date'][$data_manual][$post->ID]['permalink'] = get_permalink( $post );
+								$past['date'][$data_manual][$post->ID]['featured_image'] = $fetured_image;
+								$past['date'][$data_manual][$post->ID]['featured_vertical'] = $fetured_vertical;
+								$past['date'][$data_manual][$post->ID]['data'] = $dataa;
+								$past['date'][$data_manual][$post->ID]['dataa'] = $data_manual;
+								$past['date'][$data_manual][$post->ID]['orario'] = isset($data_array[1]) ? $data_array[1] : '';
+								$past['date'][$data_manual][$post->ID]['location'] = $location;
+								$past['date'][$data_manual][$post->ID]['ticket_link'] = '';
+							}
+						}
 					}
 				}
 
@@ -121,7 +156,9 @@
 			}
 
 			// merge past and future events and sort by date
-			$output = $pair + $past;
+			$output = array_combine(array_keys($pair), array_map(function($a, $b) {
+				return array_merge($a, $b);
+			}, $pair, $past));
 			if(is_array($output) && isset($output['date']))
 				ksort($output['date']);
 
@@ -129,7 +166,7 @@
 			// $result->set_headers(array('Cache-Control' => 'max-age=3600'));
 		  	return $result;
 	  }
-	 
+
   }
 
   class Array_Spettacoli
@@ -145,7 +182,7 @@
 			  'permission_callback' => '__return_true',
 		  ));
 	  }
-  
+
 	  public function get_spettacoli($object)
 	  {
 		$ids 	  = $object->get_param( 'id' );
@@ -156,7 +193,7 @@
 
 		//data 1 gennaio di quest'anno
 		// $today = date('Y') . '0101';
-	 
+
 		$tax_query = array();
 		if (isset($cat)) {
 			$tax_query[] = array(
@@ -173,7 +210,7 @@
 			'post_status' => 'publish',
 			'numberposts' => -1,
 			'suppress_filters' => false,
-			'meta_query' => array( 
+			'meta_query' => array(
 				'data_inizio__order_by' => array(
 					'key' => 'data_inizio',
 					'value' => date('Ymd', strtotime($date)),
@@ -206,7 +243,7 @@
 				$acf_fields = get_fields($post->ID);
 				$id = $post->ID;
 				$cats = array();
-				$terms = get_the_terms( $id, 'categoria-spettacoli' ); 
+				$terms = get_the_terms( $id, 'categoria-spettacoli' );
 				foreach($terms as $term) {
 					$cats[] = $term->term_id;
 				}
@@ -230,8 +267,8 @@
 			}
 
 			$page = $page ? (int) $page : 1;
-			$total = count( $output ); //total items in array    
-			$limit = $per_page ? (int) $per_page : 12; //per page    
+			$total = count( $output ); //total items in array
+			$limit = $per_page ? (int) $per_page : 12; //per page
 			$totalPages = ceil( $total/ $limit ); //calculate total pages
 			$page = max($page, 1); //get 1 page when $_GET['page'] <= 0
 			$page = min($page, $totalPages); //get last page when $_GET['page'] > $totalPages
@@ -239,16 +276,16 @@
 			if( $offset < 0 ) $offset = 0;
 
 			$output = array_slice( $output, $offset, $limit );
-			$data = new WP_REST_Response( $output, 200 );   
+			$data = new WP_REST_Response( $output, 200 );
 			$data->set_headers(array(
 				'X-WP-Total' => $total,
 				'X-WP-TotalPages' => $totalPages,
 				'Cache-Control' => 'max-age=3600'
 			));
-			
+
 			return $data;
 	  }
-	 
+
   }
 
   class Array_Vivaticket_Events
@@ -264,7 +301,7 @@
 			  'permission_callback' => '__return_true',
 		  ));
 	  }
-  
+
 	  public function vivaticket_events($object)
 	  {
 			$args = array(
@@ -280,7 +317,7 @@
 
 			foreach ($posts as $post) {
 				$spettacolo_id = is_plugin_active('advanced-custom-fields-pro/acf.php') ? get_field('prodotto_relazionato', $post) : '';
-				$spettacolo_data = is_plugin_active('stc-tickets/stc-tickets.php') ? stcticket_spettacolo_data($spettacolo_id) : [];				$day_field = is_array($spettacolo_data['date']) ? $spettacolo_data['date'] : '';
+				$spettacolo_data = is_plugin_active('stc-tickets/stc-tickets.php') ? stcticket_spettacolo_data($spettacolo_id) : [];
 				$day_field = is_array($spettacolo_data['date']) ? $spettacolo_data['date'] : '';
 				$options = array();
 
@@ -309,16 +346,16 @@
 			$result->set_headers(array('Cache-Control' => 'max-age=3600'));
 		  	return $result;
 	  }
-	 
+
   }
 
   /**
    * Get all published events in english in date order
-   * 
+   *
    * @param array $object
    * @return WP_REST_Response
    */
-  class Get_Events_En 
+  class Get_Events_En
   {
 	public function __construct()
 	  {
@@ -337,7 +374,7 @@
 		$per_page = $object->get_param( 'per_page' );
 		$page = $object->get_param( 'page' );
 		$date = $object->get_param( 'data_inizio' ) ? $object->get_param( 'data_inizio' ) : 'now';
-	 
+
 		// $array = json_decode(do_shortcode( '[events_en categoria_spettacoli="'.$cat.'" data_inizio="'.$date.'"]' ));
 		$tax_query = array();
 		if (isset($cat)) {
@@ -355,7 +392,7 @@
 			'post_status' => 'publish',
 			'numberposts' => -1,
 			'suppress_filters' => false,
-			'meta_query' => array( 
+			'meta_query' => array(
 				'data_inizio__order_by' => array(
 					'key' => 'data_inizio',
 					'value' => date('Ymd', strtotime($date)),
@@ -374,13 +411,13 @@
 		foreach ($query as $post) {
 			$id = $post->ID;
 			$cats = array();
-			$terms = get_the_terms( $id, 'categoria-spettacoli' ); 
+			$terms = get_the_terms( $id, 'categoria-spettacoli' );
 			foreach($terms as $term) {
 				$cats[] = $term->term_id;
 			}
 
 			$eng_id = apply_filters( 'wpml_object_id', $id, 'spettacoli', FALSE, 'en' );
-	
+
 			if (! is_null($eng_id)) {
 				$eng_post = get_post($eng_id);
 				$output[] = (object) [
@@ -403,8 +440,8 @@
 		}
 
 		$page = $page ? (int) $page : 1;
-		$total = count( $output ); //total items in array    
-		$limit = $per_page ? (int) $per_page : 12; //per page    
+		$total = count( $output ); //total items in array
+		$limit = $per_page ? (int) $per_page : 12; //per page
 		$totalPages = ceil( $total/ $limit ); //calculate total pages
 		$page = max($page, 1); //get 1 page when $_GET['page'] <= 0
 		$page = min($page, $totalPages); //get last page when $_GET['page'] > $totalPages
@@ -419,14 +456,14 @@
 			'X-WP-TotalPages' => $totalPages,
 			'Cache-Control' => 'max-age=3600'
 		));
-		
+
         return $data;
 	  }
   }
 
   /**
    * Get all published events which are cancelled
-   * 
+   *
    * @param array $object
    * @return WP_REST_Response
    */
@@ -453,7 +490,7 @@
 			'post_status' => 'publish',
 			'numberposts' => -1,
 			'suppress_filters' => false,
-			'meta_query' => array( 
+			'meta_query' => array(
 				'annullato' => array(
 					'key' => 'annullato',
 					'value' => '1',
@@ -493,7 +530,7 @@
 
   /**
    * Get all published events despite the date
-   * 
+   *
    * @param array $object
    * @return WP_REST_Response
    */
@@ -553,8 +590,8 @@
 		return new WP_REST_Response( $output, 200 );
 	  }
   }
-		
-  
+
+
   add_action('rest_api_init', function () {
 	  $all_terms = new all_terms;
 	  $events_datetime = new Array_Events_By_Datetime;
@@ -573,12 +610,12 @@
 	 * @param WP_Rest_Rquest $request
 	 * @return array $args
 	 */
-	function filter_rest_spettacoli_query( $args, $request ) { 
-		$params = $request->get_params(); 
+	function filter_rest_spettacoli_query( $args, $request ) {
+		$params = $request->get_params();
 		if(isset($params['id'])){
 			$args['post__in'] = explode(',', $params['id']);
 		}
 		return $args;
-	}   
-	// add the filter 
+	}
+	// add the filter
 	add_filter( "rest_spettacoli_query", 'filter_rest_spettacoli_query', 10, 2 );

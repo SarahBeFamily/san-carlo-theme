@@ -46,6 +46,10 @@ body {
     &.loading {
         opacity: 1;
     }
+	&.loading-block {
+		opacity: 0.2;
+		pointer-events: none;
+	}
 }
 
 /* Page Loader */
