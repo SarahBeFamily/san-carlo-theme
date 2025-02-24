@@ -25,7 +25,29 @@ $allowed_html = array(
 	'a' => array(
 		'href' => array(),
 	),
-)
+);
+$user_id = get_current_user_id();
+
+// test per preordine
+if( isset( $_GET['print'] ) && $_GET['print'] == '1' ) {
+	$preOrderObject		= get_user_meta( $user_id, 'preOrder', true );
+	$addToCartObject	= get_user_meta( $user_id, 'addToCartObject', true );
+    $transactionIds		= get_user_meta( $user_id, 'transactionIds', true );
+	echo '<pre>';
+	echo 'preordine:';
+	print_r( $preOrderObject );
+	echo '</pre>';
+
+	echo '<pre>';
+	echo 'addToCartObject:';
+	print_r( $addToCartObject );
+	echo '</pre>';
+
+	echo '<pre>';
+	echo 'transactionIds:';
+	print_r( $transactionIds );
+	echo '</pre>';
+}
 @endphp
 
 <p>

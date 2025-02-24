@@ -232,7 +232,7 @@ class Calendar {
                                 
                                 // aggiungo il popup visibile al click
                                 $pos = ($n_event-1) != 0 ? '-'.(($n_event-1)*100).'%' : '0';
-                                $hide_link = $event['ticket_link'] == '' ? 'style="opacity: 0;"' : '';
+                                $hide_link = $event['ticket_link'] == '' ? 'style="opacity: 0; pointer-events:none;"' : '';
                                 // $pos = $n != 0 ? '-'.($n * 100).'%' : '0';
                                 // $event_code .= '<div class="dettaglio-evento" index="'.$n.'" data-pos="'.$pos.'" data-id="evento-'.$event['ID'].'" event-date="'.$_toDate.'" style="'.$next_event_display.' right:'.$pos.'">';
                                 $event_code .= '<div class="dettaglio-evento '.$status.'" index="'.$n_event.'" data-pos="'.$pos.'" data-id="evento-'.$event['ID'].'" event-date="'.$event['data'].'" style="'.$next_event_display.'">';

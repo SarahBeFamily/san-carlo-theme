@@ -26,7 +26,11 @@ if ( $has_orders ) : @endphp
 	<table class="woocommerce-orders-table woocommerce-MyAccount-orders shop_table shop_table_responsive my_account_orders account-orders-table">
 		<thead>
 			<tr>
-				<?php foreach ( wc_get_account_orders_columns() as $column_id => $column_name ) : ?>
+				<?php foreach ( wc_get_account_orders_columns() as $column_id => $column_name ) : 
+				 	if ($column_id == 'order-date') {
+						$column_name = is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) && ICL_LANGUAGE_CODE == 'it' ? 'Data Ordine' : 'Order Date';
+					}
+				?>
 					<th class="woocommerce-orders-table__header woocommerce-orders-table__header-<?php echo esc_attr( $column_id ); ?>"><span class="nobr"><?php echo esc_html( $column_name ); ?></span></th>
 				<?php endforeach; ?>
 			</tr>
@@ -120,22 +124,27 @@ if ( $has_orders ) : @endphp
 		// remove last element
 		array_pop($current_page);
 		$current_page = (int)end($current_page) == 0 ? 1 : (int)end($current_page);
+		$current_url = $endpoint_url.'?orders/';
 		@endphp
 		<div class="woocommerce-pagination woocommerce-pagination--without-numbers woocommerce-Pagination">
-			@if ( 1 > $current_page  )
+			@if ( 1 < $current_page  )
 				@php
-				$previous_page = $current_page - 1;
-				$previous_url = $current_url.'/'.$previous_page.'/';
+				$page = $current_page - 1;
+				$previous_url = $current_url.$page.'/';
+				$classes = 'pag-button woocommerce-button woocommerce-button--previous woocommerce-Button woocommerce-Button--previous button';
 				@endphp
-				<a class="woocommerce-button woocommerce-button--previous woocommerce-Button woocommerce-Button--previous button" href="{{ $previous_url }}">{{ esc_html__( 'Previous', 'woocommerce' ) }}</a>
+				<button class="{{ $classes }}" data-url="{{ $previous_url }}">{{ esc_html__( 'Previous', 'woocommerce' ) }}</button>
+				{{-- <a class="{{ $classes }}" href="{{ $previous_url }}" data-url="{{ $previous_url }}">{{ esc_html__( 'Previous', 'woocommerce' ) }}</a> --}}
 			@endif
 				
 			@if ( intval( $customer_orders->max_num_pages ) !== $current_page )
 				@php
-				$next_page = $current_page + 1;
-				$next_url = $current_url.'/'.$next_page.'/';
+				$page = $current_page + 1;
+				$next_url = $current_url.$page.'/';
+				$classes = 'pag-button woocommerce-button woocommerce-button--next woocommerce-Button woocommerce-Button--next button';
 				@endphp
-				<a class="woocommerce-button woocommerce-button--next woocommerce-Button woocommerce-Button--next button" href="{{ $next_url }}">{{ esc_html__( 'Next', 'woocommerce' ) }}</a>
+				<button class="{{ $classes }}" data-url="{{ $next_url }}">{{ esc_html__( 'Next', 'woocommerce' ) }}</button>
+				{{-- <a class="{{ $classes }}" href="{{ esc_url($next_url) }}">{{ esc_html__( 'Next', 'woocommerce' ) }}</a> --}}
 			@endif
 		</div>
 	@endif
@@ -148,3 +157,15 @@ if ( $has_orders ) : @endphp
 <?php endif; ?>
 
 @action( 'woocommerce_after_account_orders', $has_orders )
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		const buttons = document.querySelectorAll('.pag-button');
+		buttons.forEach(button => {
+			button.addEventListener('click', function() {
+				const url = button.getAttribute('data-url');
+				window.location.href = url;
+			});
+		});
+	});
+</script>

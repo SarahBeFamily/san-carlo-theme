@@ -122,10 +122,41 @@ function save_spettacoli_meta( $post_id ) {
         endif;
 
         $spettacolo_date_db = get_post_meta( $post_id, 'spettacolo_date', true );
-        
-        if ( ! empty( $date ) && $spettacolo_data !== '' && empty($spettacolo_date_db) ) {
+
+            // Test fake dates
+            // update_post_meta( $post_id, 'spettacolo_date', '' );
+            // $data = '2024/05/30';
+            // $ora = '19:30';
+            // $ticket = '';
+            // $location = 'Teatro di San Carlo';
+            // $cats = 'Musica';
+    
+            // $date[$data][$post_id]['ID'] = $post_id;
+            // $date[$data][$post_id]['titolo'] = get_the_title( $post_id );
+            // $date[$data][$post_id]['cat'] = $cats;
+            // $date[$data][$post_id]['permalink'] = get_permalink( $post_id );
+            // $date[$data][$post_id]['featured_image'] = get_the_post_thumbnail_url( $post_id, 'large' );
+            // $date[$data][$post_id]['featured_vertical'] = is_plugin_active('advanced-custom-fields-pro/acf.php') ? get_field( 'immagine_verticale', $post_id ) : '';
+            // $date[$data][$post_id]['data'] = date('d/m/Y', strtotime($data)); // 16/09/2023
+            // $date[$data][$post_id]['orario'] = $ora;
+            // $date[$data][$post_id]['location'] = $location;
+            // $date[$data][$post_id]['ticket_link'] = $ticket;
+
+
+        // Check in $spettacolo_data['date'] if there is a match with $spettacolo_date_db['date']
+        if ( ! empty( $date ) && $spettacolo_data !== '' && ! empty($spettacolo_date_db) ) {
+            foreach ($date as $key => $value) {
+                if ( ! array_key_exists($key, $spettacolo_date_db) ) {
+                    $spettacolo_date_db[$key] = $value;
+                } else {
+                    // $spettacolo_date_db[$key] = array_merge($spettacolo_date_db[$key], $value);
+                }
+            }
+            update_post_meta( $post_id, 'spettacolo_date', $spettacolo_date_db );
+        } else if ( ! empty( $date ) && $spettacolo_data !== '' && empty($spettacolo_date_db) ) {
             update_post_meta( $post_id, 'spettacolo_date', $date );
         } 
+
 
         // Saving acf field date_passate to post meta
         $date_passate = get_field('date_passate', $post_id);
@@ -139,27 +170,8 @@ function save_spettacoli_meta( $post_id ) {
             update_post_meta( $post_id, 'date_passate_cal', array() );
         }
 
-        // Test fake dates
-        // else {
-        //     $data = '2024/05/31';
-        //     $ora = '19:30';
-        //     $ticket = '';
-        //     $location = 'Teatro di San Carlo';
-        //     $cats = 'Musica';
-
-        //     $date[$data][$post_id]['ID'] = $post_id;
-        //     $date[$data][$post_id]['titolo'] = get_the_title( $post_id );
-        //     $date[$data][$post_id]['cat'] = $cats;
-        //     $date[$data][$post_id]['permalink'] = get_permalink( $post_id );
-        //     $date[$data][$post_id]['featured_image'] = get_the_post_thumbnail_url( $post_id, 'large' );
-        //     $date[$data][$post_id]['featured_vertical'] = is_plugin_active('advanced-custom-fields-pro/acf.php') ? get_field( 'immagine_verticale', $post_id ) : '';
-        //     $date[$data][$post_id]['data'] = date('d/m/Y', strtotime($data)); // 16/09/2023
-        //     $date[$data][$post_id]['orario'] = $ora;
-        //     $date[$data][$post_id]['location'] = $location;
-        //     $date[$data][$post_id]['ticket_link'] = $ticket;
-
-        //     update_post_meta( $post_id, 'spettacolo_date', $date );
-        // }
+        // Saving acf field prodotto_relazionato to post meta
+        update_post_meta($post_id, 'prodotto_relazionato', $spettacolo_VT);
     }
 }
 add_action( 'save_post', 'save_spettacoli_meta' );
@@ -307,6 +319,49 @@ function add_order_date_column_content($column, $post_id)
 }
 
 /**
+ * Get post_id in spettacoli posts list admin panel
+ * 
+ * @param string $column_name
+ * @param int $post_id
+ */
+function get_post_id_in_quick_edit() {
+    ?>
+    <script>
+    jQuery( function( $ ){
+
+        const wp_inline_edit_function = inlineEditPost.edit;
+    
+        // we overwrite the it with our own
+        inlineEditPost.edit = function( post_id ) {
+    
+            // let's merge arguments of the original function
+            wp_inline_edit_function.apply( this, arguments );
+    
+            // get the post ID from the argument
+            if ( typeof( post_id ) == 'object' ) { // if it is object, get the ID number
+                post_id = parseInt( this.getId( post_id ) );
+            }
+    
+            // add rows to variables
+            const edit_row = $( '#edit-' + post_id )
+            const post_row = $( '#post-' + post_id )
+    
+            const prodottoRelazionato = post_row.find( '.column-vivaticket' ).text();
+            
+            // select option with the value
+            edit_row.find( 'select[name="prodotto_relazionato"] option' ).each( function() {
+                if ( $( this ).text() === prodottoRelazionato ) {
+                    $( this ).prop( 'selected', true );
+                }
+            });
+        }
+    });
+    </script>
+    <?php
+}
+add_action('admin_footer-edit.php', 'get_post_id_in_quick_edit');
+
+/**
  * Add relationship between spettacoli and vivaticket in quick edit panel
  * 
  * @param string $column_name
@@ -314,15 +369,11 @@ function add_order_date_column_content($column, $post_id)
  * @param int $post_id
  * @return void
  */
-function add_vivaticket_quick_edit($column_name, $post_type, $post_id)
+function add_vivaticket_quick_edit($column_name, $post_type, $taxonomy)
 {
     if ($column_name !== 'vivaticket') {
         return;
     }
-
-    $vivaticket_id = get_post_meta($post_id, 'prodotto_relazionato', true);
-    $vivaticket = is_plugin_active('stc-tickets/stc-tickets.php') && function_exists('stcticket_spettacolo_data') ? stcticket_spettacolo_data($vivaticket_id) : null;
-    $vivaticket_title = $vivaticket !== null ? $vivaticket['titolo'] : 'Nessun prodotto relazionato';
 
     ?>
     <fieldset class="inline-edit-col-right">
@@ -341,15 +392,10 @@ function add_vivaticket_quick_edit($column_name, $post_type, $post_id)
                     );
                     $vivatickets = get_posts($args);
                     foreach ($vivatickets as $vivaticket) {
-                        $selected = $vivaticket_id == $vivaticket->ID ? 'selected' : '';
-                        echo '<option value="' . $vivaticket->ID . '" ' . $selected . '>' . $vivaticket->post_title . '</option>';
+                        echo '<option value="' . $vivaticket->ID . '">' . $vivaticket->post_title . '</option>';
                     }
                     ?>
                 </select>
-            </label>
-            <label class="inline-edit-group">
-                <span class="title">Titolo</span>
-                <span><?php echo $vivaticket_title; ?></span>
             </label>
         </div>
     </fieldset>
@@ -365,12 +411,25 @@ add_action('quick_edit_custom_box', 'add_vivaticket_quick_edit', 10, 3);
  */
 function save_vivaticket_quick_edit($post_id)
 {
-    if (!isset($_REQUEST['prodotto_relazionato'])) {
+    // check if it is a spettacoli single post
+    if (get_post_type($post_id) !== 'spettacoli') {
         return;
     }
 
-    $vivaticket_id = sanitize_text_field($_REQUEST['prodotto_relazionato']);
-    update_post_meta($post_id, 'prodotto_relazionato', $vivaticket_id);
+    // check if it is a quick edit
+    if ( isset( $_POST[ '_inline_edit' ] ) ) {
+        // check inlint edit nonce
+        if ( ! wp_verify_nonce( $_POST[ '_inline_edit' ], 'inlineeditnonce' ) ) {
+            return;
+        }
+    }
+
+	// update the price
+	$vivaticket_id = ! empty( $_POST[ 'prodotto_relazionato' ] ) ? $_POST[ 'prodotto_relazionato' ] : '';
+    
+    if( ! empty( $vivaticket_id ) ) {
+        update_post_meta( $post_id, 'prodotto_relazionato', $vivaticket_id );
+    }
 }
 add_action('save_post', 'save_vivaticket_quick_edit');
 
