@@ -1056,8 +1056,80 @@ function bf_set_default_user_orderby( $query ) {
 }
 add_action( 'pre_get_posts', 'bf_set_default_user_orderby' );
 
+/**
+ * 
+ * add turnstile div to login form
+ *
+ * @return void
+ */
+ add_filter('login_form_bottom','my_added_login_field');
+ function my_added_login_field(){
+     //Output your HTML
+     $additional_field = '<div id="ts-container" class="cf-turnstile" data-sitekey="'. TS_CAPTCHA_DEV_SITE_KEY .'"></div> ';
 
+     return $additional_field;
+ }
+ 
+/**
+ * pre login action on  form submit
+ * This function is used to check if the user is logged in and redirect them to the home page
+ * 
+ */
+function pre_login_action() {
+    //verify turnstile recaptcha
+    if ( isset( $_POST['cf-turnstile-response'] ) && ! empty( $_POST['cf-turnstile-response'] ) ) {
+        $response = wp_remote_post( 'https://challenges.cloudflare.com/turnstile/v0/siteverify', array(
+            'body' => array(
+                'secret' => TS_CAPTCHA_DEV_SECRET_KEY,
+                'response' => sanitize_text_field( $_POST['cf-turnstile-response'] ),
+                'remoteip' => $_SERVER['REMOTE_ADDR'],
+            ),
+        ) );
+        // Check for errors in the response
+        if ( is_wp_error( $response ) ) {
+            wp_redirect( home_url() . '/accedi?login=failed&reason=invalid-recaptcha' );
+            exit;
+        }
+        // Check the response code
+        $response_body = wp_remote_retrieve_body( $response );
+        $response_data = json_decode( $response_body, true );
+        // If the response is not successful, redirect to the login page with an error message
+        if ( ! isset( $response_data['success'] ) || ! $response_data['success'] ) {
+            wp_redirect( home_url() . '/accedi?login=failed&reason=invalid-recaptcha' );
+            exit;
+        }
+    } else {
+        wp_redirect( home_url() . '/accedi?login=failed&reason=missed-recaptcha' );
+        exit;
+    }
+}
+add_action( 'login_form_login', 'pre_login_action' );
 
+/**
+ * Add a log event when a user logs in
+ * @param WP_User $user
+ * @return WP_User
+ */
+function log_user_login( $user ) {
+    if ( ! is_wp_error( $user ) && $user instanceof WP_User ) {
+        // Log the user login event
+        // write log to a file or database
+        $log_message = sprintf( 'User %s (ID: %d) logged in at %s', $user->user_login, $user->ID, current_time( 'mysql' ) );
+        // You can use error_log, or write to a custom log file
+        $log_file = WP_CONTENT_DIR . '/user_login.log';
+        file_put_contents( $log_file, $log_message . PHP_EOL, FILE_APPEND );
+
+        do_action( 'user_login', $user );
+    } else if ( is_wp_error( $user ) ) {
+        // Handle the error if needed
+        $error_message = $user->get_error_message();
+        // Log the error message
+        $log_file = WP_CONTENT_DIR . '/user_login_errors.log';
+        file_put_contents( $log_file, sprintf( 'Login error: %s at %s', $error_message, current_time( 'mysql' ) ) . PHP_EOL, FILE_APPEND );
+    }
+    return $user;
+}
+add_filter( 'wp_authenticate_user', 'log_user_login' );
 /**
  * Add custom button text to WooCommerce checkout page
  */

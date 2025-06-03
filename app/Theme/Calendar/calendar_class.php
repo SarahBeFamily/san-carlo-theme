@@ -207,6 +207,13 @@ class Calendar {
                     $data = $eventDataArray[2].'-'.$eventDataArray[1].'-'. $eventDataArray[0];
                     $status = date('Y-m-d', strtotime($data)) < date('Y-m-d', strtotime('today')) ? 'past' : 'future';
 
+                    if ( isset($_GET['print']) && $_GET['print'] == '1' ) {
+                        echo '<pre>';
+                            print_r($eventDataArray);
+                            print_r($data);
+                        echo '</pre>';
+                    }
+
                     if($calYear == $_toDay[2] && $calMonth == $_toDay[1]):
                     if ($calDay == $_toDay[0]) {
 
@@ -266,6 +273,12 @@ class Calendar {
             }
         }
 
+        // TEST
+        if (isset($_GET['print']) && $_GET['print'] == '1') {
+            echo '<pre>';
+                print_r($event_code);
+            echo '</pre>';
+        }
         return $event_code;
     }
 

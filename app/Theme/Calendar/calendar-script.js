@@ -3,9 +3,13 @@
 	let isTouch = (("ontouchstart" in window) || (navigator.msMaxTouchPoints > 0));
 	let clickhandler = isTouch ? "touchstart" : "click";
 
-	$(document).ready(function () {
-		checkActiveEvent();
-	});
+	console.log('Calendar script loaded');
+	// Controlla se il calendario è attivo e, in caso affermativo, esegue la funzione checkActiveEvent.
+	if ($('.calendar').length > 0) {
+		$(document).ready(function () {
+			checkActiveEvent();
+		});
+	}
 
 	// Calendar JS
 	// Questa funzione viene eseguita quando l'utente cambia il valore del menu a discesa del mese.
@@ -83,7 +87,7 @@
 			data = $(this).attr("event-date"),
 			id = $(this).attr("data-id"),
 			event_child = $(`.dettaglio-evento[data-id="${id}"][event-date="${data}"]`),
-			other_events = $(`.dettaglio-evento:not([data-id="${id}"][event-date="${data}"]):visible`),
+			other_events = $(`.dettaglio-evento:not([data-id="${id}"][event-date="${data}"])`).filter(':visible'),
 			calSlide = event_child.find('.cal-slide'),
 			day = $(this).siblings('span').text(),
             month = $('select#month').val(),

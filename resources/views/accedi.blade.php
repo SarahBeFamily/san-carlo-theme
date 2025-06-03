@@ -28,7 +28,9 @@
 								<p>{{ _e( 'Warning: Please insert a password', 'san-carlo-theme' ) }}</p>
 							@elseif (isset($_GET['reason']) && $_GET['reason'] == 'incorrect_password')
 								<p>{{ _e( 'Warning: Incorrect Password', 'san-carlo-theme' ) }}</p>
-							@else
+							@elseif (isset($_GET['reason']) && ($_GET['reason'] == 'invalid-recaptcha') || isset($_GET['reason']) && ($_GET['reason'] == 'missed-recaptcha'))
+								<p>{{ _e( 'Warning: Invalid reCAPTCHA', 'san-carlo-theme' ) }}</p>
+							@else 
 								<p>{{ _e( 'Authentication error: please retry', 'san-carlo-theme' ) }}</p>
 							@endif
 						</div>
