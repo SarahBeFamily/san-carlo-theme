@@ -36,6 +36,17 @@
 						</div>
 					@endif
 
+					{{-- In case of lost password error --}}
+					@if ( isset( $_GET['lostpassword'] ) && $_GET['lostpassword'] == 'failed' )
+						<div class="bf_error">
+							@if (isset($_GET['reason']) && $_GET['reason'] == 'invalid-recaptcha')
+								<p>{{ _e( 'Warning: Invalid reCAPTCHA', 'san-carlo-theme' ) }}</p>
+							@elseif (isset($_GET['reason']) && $_GET['reason'] == 'missed-recaptcha')
+								<p>{{ _e( 'Warning: reCAPTCHA is required', 'san-carlo-theme' ) }}</p>
+							@endif
+						</div>
+					@endif
+
 					{{-- If user is already logged in. --}}
 					@if ( is_user_logged_in() )
 

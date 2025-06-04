@@ -25,6 +25,17 @@ defined( 'ABSPATH' ) || exit;
 
 	<div class="woo-wrap">
 
+		{{-- In case of lost password error --}}
+		@if ( isset( $_GET['resetpassword'] ) && $_GET['resetpassword'] == 'failed' )
+			<div class="bf_error">
+				@if (isset($_GET['reason']) && $_GET['reason'] == 'invalid-recaptcha')
+					<p>{{ _e( 'Warning: Invalid reCAPTCHA', 'san-carlo-theme' ) }}</p>
+				@elseif (isset($_GET['reason']) && $_GET['reason'] == 'missed-recaptcha')
+					<p>{{ _e( 'Warning: reCAPTCHA is required', 'san-carlo-theme' ) }}</p>
+				@endif
+			</div>
+		@endif
+
 		<form method="post" class="woocommerce-ResetPassword lost_reset_password">
 
 			<p>@php echo apply_filters( 'woocommerce_reset_password_message', esc_html__( 'Enter a new password below.', 'woocommerce' ) ) @endphp</p>
@@ -44,6 +55,8 @@ defined( 'ABSPATH' ) || exit;
 			<div class="clear"></div>
 
 			@action( 'woocommerce_resetpassword_form' )
+
+			<div id="ts-container" class="cf-turnstile" data-sitekey="<?php echo TS_CAPTCHA_DEV_SITE_KEY; ?>"></div>
 
 			<p class="woocommerce-form-row form-row">
 				<input type="hidden" name="wc_reset_password" value="true" />

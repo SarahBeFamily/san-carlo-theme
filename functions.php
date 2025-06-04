@@ -1106,6 +1106,89 @@ function pre_login_action() {
 add_action( 'login_form_login', 'pre_login_action' );
 
 /**
+ * Check recaptcha before send form lost password submission
+ * * @return void
+ * 
+ */
+function pre_lost_password_action() {
+    //verify turnstile recaptcha
+    if ( isset( $_POST['cf-turnstile-response'] ) && ! empty( $_POST['cf-turnstile-response'] ) ) {
+        $response = wp_remote_post( 'https://challenges.cloudflare.com/turnstile/v0/siteverify', array(
+            'body' => array(
+                'secret' => TS_CAPTCHA_DEV_SECRET_KEY,
+                'response' => sanitize_text_field( $_POST['cf-turnstile-response'] ),
+                'remoteip' => $_SERVER['REMOTE_ADDR'],
+            ),
+        ) );
+        // Check for errors in the response
+        if ( is_wp_error( $response ) ) {
+            wp_redirect( home_url() . '/mio-account/lost-password?lostpassword=failed&reason=invalid-recaptcha' );
+            exit;
+        }
+        // Check the response code
+        $response_body = wp_remote_retrieve_body( $response );
+        $response_data = json_decode( $response_body, true );
+        // If the response is not successful, redirect to the login page with an error message
+        if ( ! isset( $response_data['success'] ) || ! $response_data['success'] ) {
+            wp_redirect( home_url() . '/mio-account/lost-password?lostpassword=failed&reason=invalid-recaptcha' );
+            exit;
+        }
+    } else {
+        wp_redirect( home_url() . '/mio-account/lost-password?lostpassword=failed&reason=missed-recaptcha' );
+        exit;
+    }
+}
+add_action( 'lostpassword_post', 'pre_lost_password_action' );
+
+/**
+ * Check recaptcha before send form reset password submission
+ * * @return void
+ */
+function pre_reset_password_action($user, $new_pass) {
+    //verify turnstile recaptcha
+    if ( isset( $_POST['cf-turnstile-response'] ) && ! empty( $_POST['cf-turnstile-response'] ) ) {
+        $response = wp_remote_post( 'https://challenges.cloudflare.com/turnstile/v0/siteverify', array(
+            'body' => array(
+                'secret' => TS_CAPTCHA_DEV_SECRET_KEY,
+                'response' => sanitize_text_field( $_POST['cf-turnstile-response'] ),
+                'remoteip' => $_SERVER['REMOTE_ADDR'],
+            ),
+        ) );
+        // Check for errors in the response
+        if ( is_wp_error( $response ) ) {
+            wp_redirect( home_url() . '/mio-account/lost-password/?show-reset-form=true&resetpassword=failed&reason=invalid-recaptcha' );
+            exit;
+        }
+        // Check the response code
+        $response_body = wp_remote_retrieve_body( $response );
+        $response_data = json_decode( $response_body, true );
+        // If the response is not successful, redirect to the login page with an error message
+        if ( ! isset( $response_data['success'] ) || ! $response_data['success'] ) {
+            wp_redirect( home_url() . '/mio-account/lost-password/?show-reset-form=true&resetpassword=failed&reason=invalid-recaptcha' );
+            exit;
+        } else {
+            // If the response is successful, proceed with the password reset
+            // You can add any additional logic here if needed
+            // user email. $user return full user info
+            $email = $user->data->user_email;
+            // new entered password (plain text)
+            $password = $new_pass;
+            // Save the new password for the user
+            wp_set_password( $password, $user->ID );
+            // Optionally, you can send a confirmation email to the user
+            wp_mail( $email, __( 'Password Reset Confirmation', 'san-carlo-theme' ), __( 'Your password has been successfully reset.', 'san-carlo-theme' ) );
+            // Redirect to the login page with a success message
+            wp_redirect( home_url() . '/accedi?resetpassword=success' );
+            exit;
+        }
+    } else {
+        wp_redirect( home_url() . '/mio-account/lost-password/?show-reset-form=true&resetpassword=failed&reason=missed-recaptcha' );
+        exit;
+    }
+}
+add_action( 'password_reset', 'pre_reset_password_action', 10, 2 );
+
+/**
  * Add a log event when a user logs in
  * @param WP_User $user
  * @return WP_User

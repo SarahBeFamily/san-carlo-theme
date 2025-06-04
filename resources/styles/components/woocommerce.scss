@@ -64,6 +64,11 @@ body:not(.woocommerce-cart, .mio-account, .my-account) {
 	}
 }
 
+body.woocommerce-lost-password .woo-wrap {
+	display: flex;
+	flex-direction: column;
+}
+
 .woocommerce {
 	background-color: var(--light-gray);
 
