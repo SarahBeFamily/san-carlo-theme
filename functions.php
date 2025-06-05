@@ -1422,11 +1422,11 @@ function sanitizedGet(): array {
 
 function sanitizeRequest(array $request): array {
 	return array_map(function ($s) {
-		return preg_replace("/[^A-Za-z0-9 ]/", '', sanitize_text_field($s));
+		return sanitizeParameter($s);
 	}, $request);
 }
 
 function sanitizeParameter(string $s): string {
-	return preg_replace("/[^A-Za-z0-9 ]/", '', sanitize_text_field($s));
+	return sanitize_text_field($s);
 }
 
