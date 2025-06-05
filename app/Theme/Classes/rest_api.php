@@ -86,6 +86,10 @@
 				$past_dates = get_post_meta($post->ID, 'spettacolo_date', true);
 				if (isset($past_dates) && is_array($past_dates) && !empty($past_dates)) {
 					foreach ($past_dates as $key => $value) {
+						// Check if value and post_id match
+						$id_evento = key($value);
+						if ((int)$id_evento !== $post->ID) continue;
+						
 						$evento = isset($value[$post->ID]) ? $value[$post->ID] : null;
 						// Check if the event exists
 						if ($evento == null) return;
@@ -163,7 +167,6 @@
 				ksort($output['date']);
 
 			$result = new WP_REST_Response($output, 200);
-			// $result->set_headers(array('Cache-Control' => 'max-age=3600'));
 		  	return $result;
 	  }
 
