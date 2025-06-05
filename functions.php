@@ -1407,3 +1407,26 @@ function render_hours_field_in_contact_form($tag) {
     }
     return $output;
 }
+
+/**
+ * XSS SECURITY FUNCTIONS - START
+ */
+add_action('init', function () {
+	// Global sanitize GET
+	$_GET = sanitizedGet();
+});
+
+function sanitizedGet(): array {
+	return sanitizeRequest($_GET ?? []);
+}
+
+function sanitizeRequest(array $request): array {
+	return array_map(function ($s) {
+		return preg_replace("/[^A-Za-z0-9 ]/", '', sanitize_text_field($s));
+	}, $request);
+}
+
+function sanitizeParameter(string $s): string {
+	return preg_replace("/[^A-Za-z0-9 ]/", '', sanitize_text_field($s));
+}
+
