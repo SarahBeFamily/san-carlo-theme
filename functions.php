@@ -1421,9 +1421,7 @@ function sanitizedGet(): array {
 }
 
 function sanitizeRequest(array $request): array {
-	return array_map(function ($s) {
-		return sanitizeParameter($s);
-	}, $request);
+	return array_map('sanitizeParameter', $request);
 }
 
 function sanitizeParameter(string $s): string {
