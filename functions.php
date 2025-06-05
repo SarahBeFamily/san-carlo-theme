@@ -1407,3 +1407,24 @@ function render_hours_field_in_contact_form($tag) {
     }
     return $output;
 }
+
+/**
+ * XSS SECURITY FUNCTIONS - START
+ */
+add_action('init', function () {
+	// Global sanitize GET
+	$_GET = sanitizedGet();
+});
+
+function sanitizedGet(): array {
+	return sanitizeRequest($_GET ?? []);
+}
+
+function sanitizeRequest(array $request): array {
+	return array_map('sanitizeParameter', $request);
+}
+
+function sanitizeParameter(string $s): string {
+	return sanitize_text_field($s);
+}
+
