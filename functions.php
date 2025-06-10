@@ -1424,7 +1424,11 @@ function sanitizeRequest(array $request): array {
 	return array_map('sanitizeParameter', $request);
 }
 
-function sanitizeParameter(string $s): string {
-	return sanitize_text_field($s);
+function sanitizeParameter(mixed $s): string|array {
+    if(is_array($s)) {
+	    return array_map('sanitizeParameter', $s);
+    } else {
+	    return sanitize_text_field($s);
+    }
 }
 
